@@ -3102,6 +3102,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     react-helmet-async: "npm:^2.0.5"
+    react-merge-refs: "npm:^2.1.1"
     react-router: "npm:^6.26.1"
     react-router-dom: "npm:^6.26.1"
     react-toastify: "npm:^10.0.5"
@@ -3292,6 +3293,13 @@ __metadata:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: 10c0/33977da7a5f1a287936a0c85639fec6ca74f4f15ef1e59a6bc20338fc73dc69555381e211f7a3529b8150a1f71e4225525b41b60b52965bda53ce7d47377ada1
+  languageName: node
+  linkType: hard
+
+"react-merge-refs@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "react-merge-refs@npm:2.1.1"
+  checksum: 10c0/b68cbc4ea51fd96f77247733388738630769d928f32958e63262ce43dff10c6b20f18a0483c6a640a1ffba48f32be26059d4ee9711881cacc63297b01311c8f6
   languageName: node
   linkType: hard
 

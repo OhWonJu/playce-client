@@ -26,6 +26,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
+    "react-merge-refs": "^2.1.1",
     "react-router": "^6.26.1",
     "react-router-dom": "^6.26.1",
     "react-toastify": "^10.0.5",
