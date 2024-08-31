@@ -6,8 +6,10 @@ import GlobalStyles from "@/styles/GlobalStyles";
 import "@/styles/tailwind.css";
 
 import { getTitleFromRoute } from "@/lib/utils";
+import ModalProvider from "@/components/providers/ModalProvider";
 
 import RootLayout from "./RootLayout";
+
 
 const AppContainer = () => {
   return (
@@ -19,6 +21,7 @@ const AppContainer = () => {
         <GlobalStyles />
         <BrowserRouter>
           <RootLayout>
+            <ModalProvider />
             <App />
           </RootLayout>
         </BrowserRouter>

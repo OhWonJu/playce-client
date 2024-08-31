@@ -12,12 +12,10 @@ const Styles = css`
 
   body {
     position: relative;
-
     box-sizing: border-box;
     touch-action: manipulation;
-
     overscroll-behavior-x: none;
-
+    background-color: var(--background);
     user-select: none;
   }
 `;

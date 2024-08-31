@@ -1,10 +1,12 @@
 import { Button } from "@/components";
+import { useModal } from "@/stores/useModalStore";
 import { useNavigate } from "react-router";
 import styled, { keyframes } from "styled-components";
 import tw from "twin.macro";
 
 const RootPage = () => {
   const navigate = useNavigate();
+  const onOpen = useModal(state => state.onOpen);
 
   return (
     <main className="flex flex-col h-full w-full sm:w-[420px] mx-auto px-4 sm:px-0 justify-center items-center pb-16">
@@ -14,7 +16,7 @@ const RootPage = () => {
       </section>
 
       <section className="__BUTTON_GROUP__ flex-1 flex flex-col w-full gap-y-4 justify-center">
-        <Button variant="flat" size="lg" onClick={() => {}}>
+        <Button variant="flat" size="lg" onClick={() => onOpen("login")}>
           <span>Log In</span>
         </Button>
         <Button variant="ghost" size="lg" onClick={() => navigate("/join")}>
