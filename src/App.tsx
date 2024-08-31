@@ -1,12 +1,20 @@
-import styled from "styled-components";
-import tw from "twin.macro";
+import { Routes, Route } from "react-router-dom";
+import { privateRoutes, publicRoutes } from "./routes";
 
 function App() {
-  return <Hello>Hello Playce</Hello>;
+  return (
+    <Routes>
+      {privateRoutes.map(route => (
+        //@ts-ignore
+        <Route key={route.path} path={route.path} element={route.element} />
+      ))}
+
+      {publicRoutes.map(route => (
+        //@ts-ignore
+        <Route key={route.path} path={route.path} element={route.element} />
+      ))}
+    </Routes>
+  );
 }
 
 export default App;
-
-const Hello = styled.div`
-  ${tw`font-bold text-2xl`}
-`;
