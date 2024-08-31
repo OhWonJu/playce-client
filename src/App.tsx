@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import { privateRoutes, publicRoutes } from "./routes";
 
-import SignUpPage from "./pages/(auth)/(routes)/signUp/Page";
+import JoinPage from "./pages/(auth)/(routes)/join/Page";
 import LoginPage from "./pages/(auth)/(routes)/login/Page";
 
 function App() {
@@ -21,8 +21,8 @@ function App() {
       ))}
 
       <Route
-        path="/signin"
-        element={currentUser ? <Navigate to="/" /> : <SignUpPage />}
+        path="/join"
+        element={currentUser ? <Navigate to="/" /> : <JoinPage />}
       />
 
       <Route
