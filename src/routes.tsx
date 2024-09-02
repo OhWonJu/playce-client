@@ -9,6 +9,7 @@ import MyAlbumsPage from "./pages/(my)/(routes)/albums/Page";
 import MyPlayListsPage from "./pages/(my)/(routes)/playlists/Page";
 import MyQueuePage from "./pages/(my)/(routes)/queue/Page";
 import JoinPage from "./pages/(auth)/(routes)/join/Page";
+import ExplorePage from "./pages/(explore)/(routes)/explore/Page";
 
 const AccessDenied = lazy(() => import("./pages/AccessDenied"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -49,6 +50,10 @@ export const publicRoutes: CustomRouteProps[] = [
   {
     path: "/home",
     element: <HomePage />,
+  },
+  {
+    path: "/explore",
+    element: <ExplorePage />,
   },
   {
     path: "/join",

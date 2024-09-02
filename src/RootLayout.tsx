@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useMemo } from "react";
+import { PropsWithChildren, useMemo } from "react";
 
 import ModalProvider from "./components/providers/ModalProvider";
 import ViewModeProvider from "./components/providers/ViewModeProvider";
@@ -12,6 +12,7 @@ import {
 import { useLocation } from "react-router";
 import useViewModeStore from "./stores/useViewMode";
 import { usePlayerToggle } from "./stores/usePlayerToggleStore";
+import Navigator from "./components/Navigator/Navigator";
 
 const NON_PLAYABLE_PATHS = ["/", "/join"];
 
@@ -34,12 +35,15 @@ const RootLayout = ({ children }: PropsWithChildren) => {
     <>
       <ViewModeProvider />
       <ModalProvider />
+      <Navigator pathName={location.pathname.split("/")[1]} />
       {isPlayablePaths ? (
-        <PlayableContainer isDesktop={viewMode === "DESKTOP" ? true : false}>
+        <PlayableContainer $isDesktop={viewMode === "DESKTOP" ? true : false}>
           {children}
         </PlayableContainer>
       ) : (
-        <NonPlayableContainer isDesktop={viewMode === "DESKTOP" ? true : false}>
+        <NonPlayableContainer
+          $isDesktop={viewMode === "DESKTOP" ? true : false}
+        >
           {children}
         </NonPlayableContainer>
       )}
@@ -49,7 +53,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
 
 export default RootLayout;
 
-const PlayableContainer = styled.div<any>`
+const PlayableContainer = styled.div<{ $isDesktop: boolean }>`
   position: relative;
   width: 100vw;
   max-width: 100vw;
@@ -57,19 +61,20 @@ const PlayableContainer = styled.div<any>`
   max-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding-top: ${props => (props.isDesktop ? NAV_HEIGHT * 2 : NAV_HEIGHT)}px;
+  padding-top: ${props => (props.$isDesktop ? NAV_HEIGHT * 2 : NAV_HEIGHT)}px;
   ${props =>
-    props.isDesktop
+    props.$isDesktop
       ? `padding-bottom: ${NAV_HEIGHT}px`
       : `padding-bottom: ${NAV_HEIGHT + PLAYER_HEADER_HEIGHT}px;`};
 
-  ${props => props.isDesktop && `padding-left: ${DESKTOP_PLAYER_WIDTH + 16}px;`}
   ${props =>
-    props.isDesktop && `padding-right: ${DESKTOP_PLAYER_WIDTH + 16}px;`}
+    props.$isDesktop && `padding-left: ${DESKTOP_PLAYER_WIDTH + 16}px;`}
+  ${props =>
+    props.$isDesktop && `padding-right: ${DESKTOP_PLAYER_WIDTH + 16}px;`}
   
 
   ${props => {
-    if (!props.isDesktop) {
+    if (!props.$isDesktop) {
       return css`
         ${tw`px-4 md:px-6`}
       `;
@@ -79,14 +84,14 @@ const PlayableContainer = styled.div<any>`
   ${tw`transition`}
 `;
 
-const NonPlayableContainer = styled.div<any>`
+const NonPlayableContainer = styled.div<{ $isDesktop: boolean }>`
   position: relative;
   width: 100vw;
   max-width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding-top: ${props => (props.isDesktop ? NAV_HEIGHT * 2 : NAV_HEIGHT)}px;
+  padding-top: ${props => (props.$isDesktop ? NAV_HEIGHT * 2 : NAV_HEIGHT)}px;
   padding-bottom: ${NAV_HEIGHT}px;
 
   ${tw`lg:max-w-[800px] xl:max-w-[1000px] 2xl:max-w-[1200px]`}

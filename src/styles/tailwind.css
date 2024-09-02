@@ -40,6 +40,9 @@
     --symbol-blue: #0066a0;
 
     --modal: 99999;
+    --search-bar: 300;
+    --player-mobile: 400;
+    --navigator: 500;
   }
 
   .dark {
