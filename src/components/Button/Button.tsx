@@ -1,4 +1,4 @@
-import React, {
+import {
   forwardRef,
   ButtonHTMLAttributes,
   useRef,
@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import LoadingDots from "../LoadingDots/LoadingDots";
 import {
   Flat,
+  Plain,
   Ghost,
   Link,
   Outline,
@@ -23,7 +24,7 @@ import rippleStyle from "./Button.module.css";
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
   className?: string;
-  variant?: "flat" | "ghost" | "outline" | "link" | "disabled";
+  variant?: "flat" | "plain" | "ghost" | "outline" | "link" | "disabled";
   active?: boolean;
   type?: "submit" | "reset" | "button";
   children: any;
@@ -33,11 +34,12 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   useRipple?: boolean;
   rippleColor?: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const ButtonType = {
   flat: Flat,
+  plain: Plain,
   ghost: Ghost,
   outline: Outline,
   link: Link,
@@ -98,7 +100,7 @@ const Button = forwardRef((props: ButtonProps, buttonRef) => {
       event.preventDefault();
 
       createRipple(event);
-      onClick();
+      onClick?.();
     },
     [onClick],
   );
@@ -112,7 +114,7 @@ const Button = forwardRef((props: ButtonProps, buttonRef) => {
         "relative overflow-hidden inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-0 transition-colors focus-visible:outline-none focus-visible:ring-0 disabled:pointer-events-none",
         size === "default" && "h-10 px-4 py-2",
         size === "sm" && "h-9 px-3",
-        size === "lg" && "h-14 rounded-md px-8 text-lg",
+        size === "lg" && "h-[54px] rounded-md px-8 text-base",
         size === "icon" && "h-10 w-10 rounded-full",
         className,
       )}

@@ -11,7 +11,7 @@ export const ModalOverlay = styled.div`
 
   z-index: var(--modal);
 
-  ${tw`outline-none focus:outline-none bg-neutral-800/20 backdrop-blur-sm`}
+  ${tw`outline-none focus:outline-none bg-neutral-800/10 backdrop-blur-sm`}
 `;
 
 export const ModalCotainer = styled.div`
@@ -27,7 +27,7 @@ export const ModalCotainer = styled.div`
 
   overflow: hidden;
 
-  ${tw`rounded-md shadow-md`}
+  ${tw`rounded-lg shadow-md`}
 `;
 
 export const ModalHeader = styled.section`
@@ -44,7 +44,7 @@ export const ModalContent = styled.section`
   display: flex;
   flex: 1;
 
-  padding: 1.5rem;
+  padding: 1.5rem 2rem;
 
   overflow-y: scroll;
 

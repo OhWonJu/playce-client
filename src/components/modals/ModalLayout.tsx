@@ -19,6 +19,7 @@ interface ModalLayoutProps {
   body?: React.ReactElement;
   footer?: React.ReactElement;
   disabled?: boolean;
+  onClose: () => void;
   containerClassName?: string;
   mode?: "slide" | "fade";
 }
@@ -28,10 +29,11 @@ const ModalLayout = ({
   footer,
   title,
   disabled,
+  onClose,
   containerClassName,
   mode = "fade",
 }: ModalLayoutProps) => {
-  const { onClose, isOpen } = useModal();
+  const isOpen = useModal(state => state.isOpen);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -83,7 +85,6 @@ const ModalLayout = ({
             showModal ? "opacity-100" : "opacity-0",
             showModal && mode === "slide" && "translate-y-0",
             !showModal && mode === "slide" && "translate-y-full",
-            // showModal && mode === "popup" ? "" : "scale-0",
             containerClassName,
           )}
         >

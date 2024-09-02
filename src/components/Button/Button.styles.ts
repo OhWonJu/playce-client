@@ -6,13 +6,14 @@ export const Flat = styled.button<any>`
   color: var(--secondary);
 `;
 
+export const Plain = styled.button<any>``;
+
 export const Ghost = styled.button<any>`
   color: ${props => props.theme.text_primary_color};
   display: flex;
   justify-content: center;
   align-items: center;
   border-width: 1px;
-  border-color: var(--primary-foreground);
 
   ${tw`shadow hover:shadow-inner transition-shadow`}
 `;
@@ -32,11 +33,11 @@ export const Disabled = styled.button`
   background-color: var(--primary-foreground);
   background-color: ${props => props.theme.gray_primary};
 
-  ${tw`text-neutral-500`}
+  ${tw`text-white`}
 `;
 
 export const RippleEffect = styled.span`
   span {
-    background-color: var(--primary-foreground);
+    background-color: hsl(var(--border));
   }
 `;

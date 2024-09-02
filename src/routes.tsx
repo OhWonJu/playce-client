@@ -8,14 +8,10 @@ import AlbumIdPage from "./pages/(albums)/(routes)/[albumId]/Page";
 import MyAlbumsPage from "./pages/(my)/(routes)/albums/Page";
 import MyPlayListsPage from "./pages/(my)/(routes)/playlists/Page";
 import MyQueuePage from "./pages/(my)/(routes)/queue/Page";
-import LoginPage from "./pages/(auth)/(routes)/login/Page";
 import JoinPage from "./pages/(auth)/(routes)/join/Page";
 
 const AccessDenied = lazy(() => import("./pages/AccessDenied"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-const KakaoCallBackPage = lazy(
-  () => import("./pages/(auth)/(routes)/kakao/Page"),
-);
 
 type CustomRouteProps = RouteProps & {
   path: string;
@@ -57,14 +53,6 @@ export const publicRoutes: CustomRouteProps[] = [
   {
     path: "/join",
     element: <JoinPage />,
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/auth/kakao",
-    element: <KakaoCallBackPage />,
   },
   {
     path: "/access-denied",
