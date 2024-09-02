@@ -51,3 +51,9 @@ export const getTitleFromRoute = (path: string): string => {
 
   return (title += `${SYMBOL_TITLE}`);
 };
+
+export const getExpiresAt = () => {
+  return document.cookie
+    .match("(^|;)\\s*playce_expires_at\\s*=\\s*([^;]+)")
+    ?.pop();
+};
