@@ -51,6 +51,7 @@ export default {
         },
         white: "var(--white)",
         black: "var(--black)",
+        "symbol-blue": "var(--symbol-blue)",
       },
     },
   },

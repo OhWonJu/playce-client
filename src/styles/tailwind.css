@@ -14,10 +14,10 @@
     --popover-foreground: 0 0% 3.9%;
 
     --primary: #212121;
-    --primary-foreground: #21212120;
+    --primary-foreground: #21212140;
 
     --secondary: #fbfbf9;
-    --secondary-foreground: #fbfbf020;
+    --secondary-foreground: #fbfbf040;
 
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
@@ -38,6 +38,8 @@
     --black: #212121;
 
     --modal: 99999;
+
+    --symbol-blue: #0066a0;
   }
 
   .dark {
@@ -51,10 +53,10 @@
     --popover-foreground: 0 0% 98%;
 
     --primary: #fefefd;
-    --primary-foreground: #fefefd20;
+    --primary-foreground: #fefefd40;
 
     --secondary: #1f1f1f;
-    --secondary-foreground: #1f1f1f20;
+    --secondary-foreground: #1f1f1f40;
 
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;

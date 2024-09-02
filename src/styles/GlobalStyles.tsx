@@ -16,6 +16,7 @@ const Styles = css`
     touch-action: manipulation;
     overscroll-behavior-x: none;
     background-color: var(--background);
+    color: var(--primary);
     user-select: none;
   }
 `;
