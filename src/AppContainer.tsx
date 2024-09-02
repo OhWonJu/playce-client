@@ -6,8 +6,6 @@ import { getExpiresAt, getTitleFromRoute } from "@/lib/utils";
 import { _GET } from "@/api/rootAPI";
 import { useAuthStore } from "@/stores/useAuthStore";
 
-import ModalProvider from "@/components/providers/ModalProvider";
-
 import GlobalStyles from "@/styles/GlobalStyles";
 import "@/styles/tailwind.css";
 
@@ -64,7 +62,6 @@ const AppContainer = () => {
         <GlobalStyles />
         <BrowserRouter>
           <RootLayout>
-            <ModalProvider />
             <App />
           </RootLayout>
         </BrowserRouter>

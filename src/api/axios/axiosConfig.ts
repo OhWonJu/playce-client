@@ -6,7 +6,7 @@ import axios, {
 } from "axios";
 import { MutationResponse } from "./axiosInstance.types";
 
-const { VITE_SERVER_BASE_URL } = import.meta.env;
+const { VITE_SERVER_BASE_URL, VITE_CLIENT_BASE_URL } = import.meta.env;
 
 export const axiosConfig = {
   baseURL: VITE_SERVER_BASE_URL,
@@ -45,6 +45,7 @@ export const onRequest = async (config: InternalAxiosRequestConfig) => {
       }
     } catch (error) {
       // 리프레시 토큰 요청 실패 시 처리
+      window.location.href = `${VITE_CLIENT_BASE_URL}/?error=true`;
       return Promise.reject(error);
     }
   }
