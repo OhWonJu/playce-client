@@ -1,10 +1,11 @@
-import { ERROR_CODE } from "@/lib/errorCode";
 import axios, {
   AxiosError,
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
+
 import { MutationResponse } from "./axiosInstance.types";
+import { ERROR_CODE } from "../errorCode";
 
 const { VITE_SERVER_BASE_URL, VITE_CLIENT_BASE_URL } = import.meta.env;
 
@@ -27,6 +28,12 @@ export const onError = (error: AxiosError) => {
 
   if (response?.data) {
     console.error(response.data);
+    // TODO : 에러 코드 매핑 작업
+    // return {
+    //   ok: false,
+    //   error: "로그인 문제",
+    //   errorCode: response.data.message === "Unauthorized" ? "401" : undefined,
+    // };
     return Promise.reject(response.data);
   }
 

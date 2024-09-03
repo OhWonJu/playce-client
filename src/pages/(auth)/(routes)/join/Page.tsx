@@ -4,7 +4,11 @@ import { useNavigate } from "react-router";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+
+import { _PUT } from "@/api/rootAPI";
+import { ERROR_CODE, ErrorCode } from "@/api/errorCode";
+import { userCreateConfirm, UserCreateConfirmRequest } from "@/api/users";
 
 import { useModal } from "@/stores/useModalStore";
 
@@ -21,7 +25,6 @@ import { Button, IntersectionLabel } from "@/components";
 import SymbolHeader from "@/components/SymbolHeader";
 
 import PolicyListSection from "../../_components/PolicyListSection";
-import { _PUT } from "@/api/rootAPI";
 
 const formSchema = z
   .object({
@@ -71,22 +74,44 @@ const JoinPage = () => {
     },
   });
 
+  // TODO: 일반 가입의 경우와 구분 되어야 함.
+  const { mutate: confirmUser } = useMutation({
+    mutationFn: async (data: UserCreateConfirmRequest) =>
+      userCreateConfirm(data),
+    onSuccess: data => {
+      console.log("S???", data);
+      form.reset();
+      navigate("/");
+    },
+    onError: error => {
+      console.log(error.message);
+      console.log(ERROR_CODE[error.message as ErrorCode]);
+    },
+  });
+
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      const res = await _PUT("/users/create/confirm", {
-        nickName: values.nickName,
-        email: values.email,
-        hashedPassword: values.password,
-      });
+    confirmUser({
+      nickName: values.nickName,
+      email: values.email,
+      hashedPassword: values.password,
+    });
 
-      // TODO: 계정 생성 완료시 자동 로그인
+    // try {
+    //   const res = await _PUT("/users/create/confirm", {
+    //     nickName: values.nickName,
+    //     email: values.email,
+    //     hashedPassword: values.password,
+    //   });
 
-      form.reset();
-    } catch (error) {
-      console.log(error);
-    }
+    //   // TODO: 계정 생성 완료시 자동 로그인
+
+    //   form.reset();
+    //   navigate("/");
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
