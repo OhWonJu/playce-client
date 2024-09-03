@@ -1,7 +1,9 @@
+import Image from "../Image";
+
 interface MusicCardProps {
   title: string;
   subTitle?: string;
-  imageSrc?: string;
+  imageUrl?: string;
   clickBlocking?: boolean;
   playable?: boolean;
   onClick?: () => void;
@@ -10,7 +12,7 @@ interface MusicCardProps {
 
 export const MusicCard = ({
   title,
-  imageSrc,
+  imageUrl,
   clickBlocking,
   onClick,
   subTitle,
@@ -27,7 +29,9 @@ export const MusicCard = ({
       onClick={handleClick}
       {...rest}
     >
-      <div className="w-[120px] aspect-square rounded-md mb-1 bg-neutral-400"></div>
+      <div className="w-[120px] aspect-square rounded-md mb-1 bg-neutral-200 dark:bg-neutral-600 overflow-hidden">
+        {imageUrl && <Image alt="albumArt" imageUrl={imageUrl} />}
+      </div>
       <span className="font-semibold truncate">{title}</span>
       {subTitle && (
         <span className="font-semibold text-sm text-primary-foreground truncate">

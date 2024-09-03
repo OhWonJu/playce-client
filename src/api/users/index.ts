@@ -2,7 +2,8 @@ import { queryOptions } from "@tanstack/react-query";
 
 import { _GET, _POST, _PUT } from "@/api/rootAPI";
 import { MutationResponse } from "@/api/axios/axiosInstance.types";
-import { ERROR_CODE } from "../errorCode";
+
+import { Queue } from "@/types";
 
 export interface CurrentUserResponse {
   id: string;
@@ -11,6 +12,22 @@ export interface CurrentUserResponse {
   currentPlayListId?: string;
   currentPlayTime: number;
   currentTrackId?: string;
+}
+
+export interface GetSummaryResponse {
+  queue: Queue;
+  myAlbums: {
+    id: string;
+    albumName: string;
+    albumArtURL: string;
+    artist: {
+      artistName: string;
+    };
+  }[];
+  myPlayList: {
+    id: string;
+    playListName: string;
+  }[];
 }
 
 export interface LogOutResponse extends MutationResponse {}
@@ -24,12 +41,30 @@ export interface UserCreateConfirmRequest {
 export const usersQueryKeys = {
   currentUser: ["users", "currentUser"] as const,
   logout: ["users", "logout"] as const,
+  getSummary: ["users", "summary"] as const,
+  getQueue: ["users", "queue"] as const,
 };
 
-export function getCurrentUser(flag: boolean) {
+export function getCurrentUser(flag: boolean | undefined) {
   return queryOptions({
     queryKey: usersQueryKeys.currentUser,
     queryFn: async () => _GET<CurrentUserResponse>("/users/me"),
+    enabled: flag,
+  });
+}
+
+export function getSummary(flag: boolean | undefined) {
+  return queryOptions({
+    queryKey: usersQueryKeys.getSummary,
+    queryFn: async () => _GET<GetSummaryResponse | undefined>("/users/summary"),
+    enabled: flag,
+  });
+}
+
+export function getQueue(flag: boolean | undefined) {
+  return queryOptions({
+    queryKey: usersQueryKeys.getQueue,
+    queryFn: async () => _GET<Queue>("/users/queue"),
     enabled: flag,
   });
 }

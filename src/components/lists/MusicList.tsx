@@ -9,7 +9,7 @@ interface MusicListProps {
   exceptionGuide?: string;
   exceptionAction?: () => void;
   singleLine?: boolean;
-  renderer?: () => JSX.Element[];
+  renderer?: () => JSX.Element[] | undefined;
   className?: string;
 }
 
@@ -44,7 +44,7 @@ export const MusicList = ({
   return (
     <section className={cn("flex flex-col w-full", className)}>
       <div className="flex flex-row w-full justify-between items-center">
-        <strong className="text-4xl font-bold mb-4">{title}</strong>
+        <strong className="text-2xl sm:text-4xl font-bold mb-4">{title}</strong>
         {hasMore && (
           <span
             role="button"
@@ -59,7 +59,7 @@ export const MusicList = ({
         ref={listRef}
         onClick={handleItemClick}
         className={cn(
-          "flex content-start w-full max-h-[400px] overflow-x-scroll scrollbar-hide gap-2",
+          "flex content-start w-full max-h-[400px] overflow-x-scroll scrollbar-hide gap-2 cursor-pointer",
           singleLine ? "flex-row" : "flex-col flex-wrap",
         )}
       >
