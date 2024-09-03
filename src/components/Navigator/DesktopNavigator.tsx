@@ -1,11 +1,13 @@
+import { NavigateFunction } from "react-router";
+
+import Avatar from "../Avatar";
+import ButtonGroup from "./ButtonGroup";
+
 import {
   DesktopNavigatorWrapper,
   NavButtonArea,
   ProfileArea,
 } from "./desktopNavigator.styles";
-import { NavigateFunction } from "react-router";
-import Avatar from "../Avatar";
-import ButtonGroup from "./ButtonGroup";
 
 interface DesktopNavigatorProps {
   id?: string;
@@ -29,7 +31,9 @@ const DesktopNavigator = ({
         <Avatar
           imageUrl={image}
           size="icon"
-          onClick={() => navigate(`/profile/${id}`)}
+          active={pathName === "my"}
+          className="cursor-pointer"
+          onClick={() => navigate(`/my`)}
         />
       </ProfileArea>
     </DesktopNavigatorWrapper>

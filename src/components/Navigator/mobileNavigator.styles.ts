@@ -4,7 +4,7 @@ import tw from "twin.macro";
 
 import { NAV_HEIGHT } from "@/constants/uiSizes";
 
-export const MobileNavigatorWrapper = styled(motion.div)`
+export const MobileNavigatorWrapper = styled(motion.nav)`
   position: fixed;
   bottom: 0px;
   display: flex;

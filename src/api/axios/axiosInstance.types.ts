@@ -1,5 +1,6 @@
-import { ERROR_CODE } from "@/lib/errorCode";
 import { AxiosInstance, AxiosRequestConfig } from "axios";
+
+import { ErrorCode, ErrorMessage } from "../errorCode";
 
 export interface CustomInstance extends AxiosInstance {
   get<T>(url: string, config?: AxiosRequestConfig): Promise<T>;
@@ -15,6 +16,6 @@ export type CustomResponseFormat<T = unknown> = {
 
 export type MutationResponse = {
   ok: boolean;
-  error?: (typeof ERROR_CODE)[keyof typeof ERROR_CODE];
-  errorCode?: keyof typeof ERROR_CODE;
+  error?: ErrorMessage;
+  errorCode?: ErrorCode;
 };

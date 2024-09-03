@@ -1,9 +1,10 @@
+import { useNavigate } from "react-router";
+
 import useViewModeStore from "@/stores/useViewMode";
+import useMeStore from "@/stores/useMeStore";
 
 import DesktopNavigator from "./DesktopNavigator";
 import MobileNavigator from "./MobileNavigator";
-import { useNavigate } from "react-router";
-import useMeStore from "@/stores/useMeStore";
 
 interface NavigatorProps {
   pathName: string;

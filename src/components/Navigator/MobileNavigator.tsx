@@ -41,7 +41,9 @@ const MobileNavigator = ({
         <Avatar
           imageUrl={image}
           size="icon"
-          onClick={() => navigate(`/profile/${id}`)}
+          className="cursor-pointer"
+          active={pathName === "my"}
+          onClick={() => navigate(`/my`)}
         />
       </NavButtonArea>
     </MobileNavigatorWrapper>

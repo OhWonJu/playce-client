@@ -9,22 +9,22 @@ interface ButtonGroupProps {
 const ButtonGroup = ({ pathName, navigate }: ButtonGroupProps) => {
   return (
     <>
-      <a onClick={() => navigate("/home")}>
+      <a className="cursor-pointer" onClick={() => navigate("/home")}>
         {pathName === "home" ? (
           <HomeFill className="w-7 h-7 fill-primary" />
         ) : (
-          <Home className="w-7 h-7" />
+          <Home className="w-7 h-7 stroke-primary" />
         )}
       </a>
-      <a onClick={() => navigate("/explore")}>
+      <a className="cursor-pointer" onClick={() => navigate("/explore")}>
         {pathName === "explore" ? (
           <ExploreFill className="w-7 h-7 fill-primary" />
         ) : (
-          <Explore className="w-7 h-7" />
+          <Explore className="w-7 h-7 stroke-primary" />
         )}
       </a>
-      <button onClick={() => {}}>
-        <Search className="w-7 h-7" />
+      <button className="cursor-pointer" onClick={() => {}}>
+        <Search className="w-7 h-7 stroke-primary" />
       </button>
     </>
   );

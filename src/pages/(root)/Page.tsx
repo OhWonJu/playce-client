@@ -8,7 +8,7 @@ const RootPage = () => {
   const onOpen = useModal(state => state.onOpen);
 
   return (
-    <main className="flex flex-col h-full w-full sm:w-[420px] mx-auto px-4 sm:px-0 justify-center items-center pb-16">
+    <main className="flex flex-col flex-1 h-full w-full sm:w-[420px] mx-auto px-4 sm:px-0 justify-center items-center pb-16">
       <section className="__TITLES__ flex-1 flex flex-col justify-end items-center">
         <SymbolHeader />
       </section>
