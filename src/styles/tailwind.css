@@ -31,11 +31,14 @@
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
+    --puls: #21212150;
 
     --radius: 0.5rem;
 
     --white: #fbfbf9;
     --black: #212121;
+
+
 
     --symbol-blue: #0066a0;
     --symbol-indigo: #0e1b40;
@@ -74,6 +77,7 @@
     --border: 0 0% 24.9%;
     --input: 0 0% 24.9%;
     --ring: 0 0% 83.1%;
+    --puls: #fefefd50;
   }
 }
 

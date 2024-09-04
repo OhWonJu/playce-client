@@ -48,7 +48,7 @@ const AlbumIdPage = () => {
 
       {/* TRACK LIST */}
       <AlbumTrackList tracks={album.tracks} isOwn={own} />
-      
+
       {/* <ul className="flex flex-col w-full space-y-2">
         {album?.tracks?.map((track, index) => (
           <TrackLi
