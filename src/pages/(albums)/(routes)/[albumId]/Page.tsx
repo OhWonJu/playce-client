@@ -18,11 +18,6 @@ const AlbumIdPage = () => {
 
   const { data, isLoading } = useQuery(getAlbumInfo(albumId));
 
-  const totalTimes = useMemo(
-    () => data?.album.tracks?.reduce((acc, cur) => acc + cur.trackTime, 0),
-    [data],
-  );
-
   if (isLoading) return null;
 
   if (!data) return null;
@@ -42,7 +37,7 @@ const AlbumIdPage = () => {
             genres={album.genres}
             tracks={album.tracks}
           />
-          <AlbumActions isOwn={own} />
+          <AlbumActions album={album} isOwn={own} />
         </AlbumUtilsWrapper>
       </AlbumInfoWrapper>
 
