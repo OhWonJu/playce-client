@@ -6,8 +6,8 @@ const Play = ({ ...props }) => {
       height="24"
       viewBox="0 0 24 24"
       fill="currentColors"
-      stroke="currentColor"
-      strokeWidth="1.5"
+      // stroke="currentColor"
+      // strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
       {...props}

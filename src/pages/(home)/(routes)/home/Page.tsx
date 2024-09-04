@@ -27,6 +27,8 @@ const HomePage = () => {
       subTitle={`${queueData?.songCount} songs • ${queueData?.totalPlayTime} mins`}
       size="md"
       playable
+      playAction={() => console.log("queue play")}
+      onClick={() => console.log("just click")}
     />,
     <MusicCard key={"recent"} title={"최근 들었던 곡1"} size="md" playable />,
     <MusicCard key={"recent2"} title={"최근 들었던 곡2"} size="md" playable />,
@@ -45,7 +47,7 @@ const HomePage = () => {
         title={album.albumName}
         imageUrl={album.albumArtURL}
         subTitle={album.artist.artistName}
-        onClick={() => navigate(`/albums/${album.id}`)}
+        onClick={() => navigate(`/albums/${album.albumName}?albumId=${album.id}`)}
       />
     ));
 

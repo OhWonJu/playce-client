@@ -38,6 +38,6 @@ export const Disabled = styled.button`
 
 export const RippleEffect = styled.span`
   span {
-    background-color: hsl(var(--border));
+    background-color: var(--primary-foreground);
   }
 `;

@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+
 import Image from "../Image";
 import { Play } from "../icons";
 
@@ -20,7 +21,7 @@ const IMAGE_SIZE = {
   lg: 200,
 };
 
-export const MusicCard = ({
+const MusicCard = ({
   title,
   imageUrl,
   size = "sm",
@@ -33,12 +34,16 @@ export const MusicCard = ({
 }: MusicCardProps) => {
   const handleClick = () => {
     if (clickBlocking) return;
+
     onClick?.();
   };
 
-  const handlePlayClick = () => {
+  const handlePlayClick = (
+    event: React.MouseEvent<HTMLSpanElement, MouseEvent>,
+  ) => {
     if (clickBlocking) return;
 
+    event.stopPropagation();
     playAction?.();
   };
 
@@ -65,11 +70,15 @@ export const MusicCard = ({
           <Image alt="albumArt" width={IMAGE_SIZE[size]} imageUrl={imageUrl} />
         )}
         {playable && (
-          <span className="absolute flex items-center justify-center bottom-2 right-2 p-1 bg-primary-foreground/95 hover:bg-primary-foreground shadow-md rounded-full ">
+          <span
+            onClick={event => handlePlayClick(event)}
+            className="absolute flex items-center justify-center bottom-2 right-2 p-1 bg-primary-foreground/95 hover:bg-primary-foreground shadow-md rounded-full "
+          >
             <Play className="pl-[3px]" />
           </span>
         )}
       </div>
+
       <span className="font-semibold truncate">{title}</span>
       {subTitle && (
         <span className="font-semibold text-sm text-primary-foreground truncate">
@@ -80,4 +89,4 @@ export const MusicCard = ({
   );
 };
 
-// export default AlbumCard;
+export default MusicCard;

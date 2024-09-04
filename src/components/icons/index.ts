@@ -25,6 +25,7 @@ export { default as Moon } from "./Moon";
 export { default as Pause } from "./Pause";
 export { default as Play } from "./Play";
 export { default as Plus } from "./Plus";
+export { default as Profile } from "./Profile";
 export { default as QueueList } from "./QueueList";
 export { default as Repeat } from "./Repeat";
 export { default as Search } from "./Search";

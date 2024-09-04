@@ -1,6 +1,8 @@
 import React from "react";
 
 import { cn } from "@/lib/utils";
+import { useModal } from "@/stores/useModalStore";
+import { Profile } from "./icons";
 
 interface AvatarProps {
   imageUrl?: string;
@@ -17,6 +19,8 @@ const Avatar = ({
   active = false,
   className,
 }: AvatarProps) => {
+  const openModal = useModal(state => state.onOpen);
+
   return (
     <div
       className={cn(
@@ -34,14 +38,24 @@ const Avatar = ({
           className,
         )}
       >
-        <img
-          src={imageUrl}
-          alt="avatar"
-          width={"100%"}
-          style={{ height: "auto", objectFit: "cover" }}
-          draggable={false}
-          onClick={onClick}
-        />
+        {imageUrl ? (
+          <img
+            src={imageUrl}
+            alt="avatar"
+            width={"100%"}
+            style={{ height: "auto", objectFit: "cover" }}
+            draggable={false}
+            onClick={onClick}
+          />
+        ) : (
+          <div
+            role="button"
+            className="w-full h-full bg-primary-foreground flex items-center justify-center"
+            onClick={() => openModal("login")}
+          >
+            <Profile className="w-4 h-4 fill-secondary" />
+          </div>
+        )}
       </i>
     </div>
   );

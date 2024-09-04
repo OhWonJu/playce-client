@@ -4,6 +4,7 @@ interface ImageProps {
   width?: string | number;
   lazy?: boolean;
   className?: string;
+  [key: string]: any;
 }
 
 const IMAGE_SET_WIDTH = [200, 400, 800];
@@ -14,6 +15,7 @@ const Image = ({
   width,
   lazy = false,
   className,
+  ...rest
 }: ImageProps) => {
   let options: any = {
     srcSet: `${imageUrl}_200w.webp 200w,
@@ -31,13 +33,15 @@ const Image = ({
 
     options = { src: selectedImageUrl };
   }
+
   return (
     <img
       alt={alt}
-      {...options}
       width={width}
       className={className}
       loading={lazy ? "lazy" : undefined}
+      {...options}
+      {...rest}
     />
   );
 };

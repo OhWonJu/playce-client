@@ -35,19 +35,25 @@ const RootLayout = ({ children }: PropsWithChildren) => {
     <>
       <ViewModeProvider />
       <ModalProvider />
-      {isPlayablePaths && (
-        <Navigator pathName={location.pathname.split("/")[1]} />
-      )}
-      {isPlayablePaths ? (
-        <PlayableContainer $isDesktop={viewMode === "DESKTOP" ? true : false}>
-          {children}
-        </PlayableContainer>
-      ) : (
-        <NonPlayableContainer
-          $isDesktop={viewMode === "DESKTOP" ? true : false}
-        >
-          {children}
-        </NonPlayableContainer>
+      {viewMode !== "INIT" && (
+        <>
+          {isPlayablePaths && (
+            <Navigator pathName={location.pathname.split("/")[1]} />
+          )}
+          {isPlayablePaths ? (
+            <PlayableContainer
+              $isDesktop={viewMode === "DESKTOP" ? true : false}
+            >
+              {children}
+            </PlayableContainer>
+          ) : (
+            <NonPlayableContainer
+              $isDesktop={viewMode === "DESKTOP" ? true : false}
+            >
+              {children}
+            </NonPlayableContainer>
+          )}
+        </>
       )}
     </>
   );

@@ -30,7 +30,6 @@ export const getTitleFromRoute = (path: string): string => {
     // return `${userName} | ${SYMBOL_TITLE}`;
   } else if (albumsRegex.test(path)) {
     const albumName = path.split("/").pop();
-    console.log(albumName);
     title += `${albumName} | `;
     // return `앨범 | ${SYMBOL_TITLE}`;
   } else if (myRegex.test(path)) {
@@ -56,4 +55,13 @@ export const getExpiresAt = () => {
   return document.cookie
     .match("(^|;)\\s*playce_expires_at\\s*=\\s*([^;]+)")
     ?.pop();
+};
+
+export const convertTime = (time: number, mode: "number" | "string") => {
+  const min = Math.floor(time / 60);
+  const sec = Math.floor(time - min * 60);
+
+  if (mode === "number") {
+    return [min, sec];
+  } else return `${min}:${sec.toString().padStart(2, "0")}`;
 };

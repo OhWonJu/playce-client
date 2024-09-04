@@ -44,7 +44,7 @@ const AppContainer = () => {
       try {
         await preload();
       } catch (e) {
-        console.warn(e);
+        console.warn("PRELOAD_ERROR", e);
       } finally {
       }
     };

@@ -50,6 +50,7 @@ export function getCurrentUser(flag: boolean | undefined) {
     queryKey: usersQueryKeys.currentUser,
     queryFn: async () => _GET<CurrentUserResponse>("/users/me"),
     enabled: flag,
+    retry: 3,
   });
 }
 
@@ -57,7 +58,7 @@ export function getSummary(flag: boolean | undefined) {
   return queryOptions({
     queryKey: usersQueryKeys.getSummary,
     queryFn: async () => _GET<GetSummaryResponse | undefined>("/users/summary"),
-    enabled: flag,
+    enabled: !!flag,
   });
 }
 
@@ -65,7 +66,7 @@ export function getQueue(flag: boolean | undefined) {
   return queryOptions({
     queryKey: usersQueryKeys.getQueue,
     queryFn: async () => _GET<Queue>("/users/queue"),
-    enabled: flag,
+    enabled: !!flag,
   });
 }
 
