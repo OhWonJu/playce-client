@@ -1,20 +1,33 @@
+import { cn } from "@/lib/utils";
 import Image from "../Image";
+import { Play } from "../icons";
 
 interface MusicCardProps {
   title: string;
   subTitle?: string;
   imageUrl?: string;
+  size?: "sm" | "md" | "lg";
   clickBlocking?: boolean;
   playable?: boolean;
+  playAction?: () => void;
   onClick?: () => void;
   [key: string]: any;
 }
 
+const IMAGE_SIZE = {
+  sm: 120,
+  md: 160,
+  lg: 200,
+};
+
 export const MusicCard = ({
   title,
   imageUrl,
+  size = "sm",
   clickBlocking,
   onClick,
+  playable,
+  playAction,
   subTitle,
   ...rest
 }: MusicCardProps) => {
@@ -23,14 +36,39 @@ export const MusicCard = ({
     onClick?.();
   };
 
+  const handlePlayClick = () => {
+    if (clickBlocking) return;
+
+    playAction?.();
+  };
+
   return (
     <div
-      className="flex flex-col w-[120px] min-h-[120px] snap-center"
+      className={cn(
+        "flex flex-col snap-center",
+        size === "sm" && "w-[120px] min-h-[120px]",
+        size === "md" && "w-[160px] min-h-[140px]",
+        size === "lg" && "w-[200px] min-h-[160px]",
+      )}
       onClick={handleClick}
       {...rest}
     >
-      <div className="w-[120px] aspect-square rounded-md mb-1 bg-neutral-200 dark:bg-neutral-600 overflow-hidden">
-        {imageUrl && <Image alt="albumArt" imageUrl={imageUrl} />}
+      <div
+        className={cn(
+          "relative aspect-square rounded-md mb-1 bg-neutral-200 dark:bg-neutral-600 overflow-hidden",
+          size === "sm" && "w-[120px]",
+          size === "md" && "w-[160px]",
+          size === "lg" && "w-[200px]",
+        )}
+      >
+        {imageUrl && (
+          <Image alt="albumArt" width={IMAGE_SIZE[size]} imageUrl={imageUrl} />
+        )}
+        {playable && (
+          <span className="absolute flex items-center justify-center bottom-2 right-2 p-1 bg-primary-foreground/95 hover:bg-primary-foreground shadow-md rounded-full ">
+            <Play className="pl-[3px]" />
+          </span>
+        )}
       </div>
       <span className="font-semibold truncate">{title}</span>
       {subTitle && (

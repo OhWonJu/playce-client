@@ -25,10 +25,17 @@ const HomePage = () => {
       key={queueData?.id}
       title={"My queue"}
       subTitle={`${queueData?.songCount} songs • ${queueData?.totalPlayTime} mins`}
+      size="md"
+      playable
     />,
-    <MusicCard key={"recent"} title={"최근 들었던 곡1"} />,
-    <MusicCard key={"recent2"} title={"최근 들었던 곡2"} />,
-    <MusicCard key={"recent-playlist"} title={"최근 플레이리스트"} />,
+    <MusicCard key={"recent"} title={"최근 들었던 곡1"} size="md" playable />,
+    <MusicCard key={"recent2"} title={"최근 들었던 곡2"} size="md" playable />,
+    <MusicCard
+      key={"recent-playlist"}
+      title={"최근 플레이리스트"}
+      size="md"
+      playable
+    />,
   ];
 
   const myAlbumsRenderer = () =>
