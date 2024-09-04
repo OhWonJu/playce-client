@@ -21,7 +21,19 @@ const AppContainer = () => {
   const { isLogin, setIsLogin } = useAuthStore();
   const { initMe, setMe } = useMeStore();
 
-  const flag = !!getExpiresAt();
+  const {
+    data: connectCheck,
+    isLoading: connectChecking,
+    isError,
+  } = useQuery({
+    queryKey: ["connect"],
+    queryFn: async () => await _GET("/"),
+    refetchOnMount: true,
+    refetchOnReconnect: true,
+    refetchOnWindowFocus: true,
+  });
+
+  const flag = !!getExpiresAt() && !!connectCheck;
 
   const { refetch, isLoading } = useQuery(getCurrentUser(!!flag));
 
@@ -53,7 +65,17 @@ const AppContainer = () => {
     prepare();
   }, [isLogin, flag]);
 
-  if (isLoading) return null;
+  if (connectChecking || isLoading) return null;
+
+  if (isError) {
+    // TODO : 서버 연결이 불가능하다는 안내 출력
+    console.log("SERVER CONNECT FAILED");
+    return (
+      <div className="w-screen h-screen grid content-center text-center">
+        서버와의 연결에 실패했습니다.
+      </div>
+    );
+  }
 
   return (
     <>
