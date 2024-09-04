@@ -47,7 +47,9 @@ const HomePage = () => {
         title={album.albumName}
         imageUrl={album.albumArtURL}
         subTitle={album.artist.artistName}
-        onClick={() => navigate(`/albums/${album.albumName}?albumId=${album.id}`)}
+        onClick={() =>
+          navigate(`/albums/${album.albumName}?albumId=${album.id}`)
+        }
       />
     ));
 

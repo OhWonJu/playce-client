@@ -89,6 +89,8 @@ const PlayableContainer = styled.div<{ $isDesktop: boolean }>`
     }
   }}
 
+  // 음...
+  /* ${tw`transition overflow-scroll scrollbar-hide`} */
   ${tw`transition`}
 `;
 
