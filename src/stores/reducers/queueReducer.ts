@@ -6,10 +6,14 @@ import { QUEUE_ACTION } from "../reduxTypes/queueType";
 
 export type QueueStateType = {
   queue: Track[];
+  songCount: number;
+  totalPlayTime: number;
 };
 
 const initialState: QueueStateType = {
   queue: [],
+  songCount: 0,
+  totalPlayTime: 0,
 };
 
 const queueSlice = createSlice({
@@ -21,6 +25,11 @@ const queueSlice = createSlice({
         case "SET_QUEUE": {
           return {
             queue: action.payload.queue,
+            songCount: action.payload.queue.length,
+            totalPlayTime: action.payload.queue.reduce(
+              (acc, cur) => acc + cur.trackTime,
+              0,
+            ),
           };
         }
         case "ADD_TRACK": {
@@ -33,7 +42,11 @@ const queueSlice = createSlice({
 
           if (existTrack === -1) {
             newQueue.push(newTrack);
-            return { queue: newQueue };
+            return {
+              queue: newQueue,
+              songCount: state.songCount + 1,
+              totalPlayTime: state.totalPlayTime + newTrack.trackTime,
+            };
           } else {
             return {
               ...state,
@@ -48,9 +61,11 @@ const queueSlice = createSlice({
 
           if (deletedTrackIndex !== -1) {
             const newQueue = [...state.queue];
-            newQueue.splice(deletedTrackIndex, 1);
+            const deletedTrack = newQueue.splice(deletedTrackIndex, 1);
             return {
               queue: newQueue,
+              songCount: state.songCount - 1,
+              totalPlayTime: state.totalPlayTime - deletedTrack[0].trackTime,
             };
           } else {
             return {
@@ -61,6 +76,8 @@ const queueSlice = createSlice({
         case "INIT_QUEUE": {
           return {
             queue: [],
+            songCount: 0,
+            totalPlayTime: 0,
           };
         }
       }

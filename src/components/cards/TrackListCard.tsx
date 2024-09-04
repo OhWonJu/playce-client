@@ -5,6 +5,8 @@ import { Track } from "@/types";
 import Button from "../Button/Button";
 import { DotMenu, Play, QueueList } from "../icons";
 import { QueuePlayIconBox } from "./trackListCard.styles";
+import { usePlayerControl } from "@/hooks/usePlayerControl";
+import { useQueue } from "@/hooks/useQueue";
 
 interface TrackLIComponentProps {
   index: number;
@@ -17,14 +19,14 @@ const TrackListCard: React.FC<TrackLIComponentProps> = ({
   index,
   data,
   isOwn,
-  trackListType,
+  // trackListType,
 }) => {
-  // const { addTrack: addPlayListTrack } = usePlayerControl();
-  // const { addTrack: addQueueList } = useQueue();
+  const { addTrack: addPlayListTrack, playListType } = usePlayerControl();
+  const { addTrack: addQueueList } = useQueue();
 
-  const handleClick = () => {
-    // addPlayListTrack(data);
-    // addQueueList(data);
+  const handleQueueAddActionClick = () => {
+    playListType === "QUEUE" && addPlayListTrack(data);
+    addQueueList(data);
   };
 
   return (
@@ -51,7 +53,7 @@ const TrackListCard: React.FC<TrackLIComponentProps> = ({
             useRipple
             size="icon"
             className="relative p-2 rounded-full"
-            onClick={handleClick}
+            onClick={handleQueueAddActionClick}
           >
             <QueueList className="w-4 h-4" />
             <QueuePlayIconBox className="group-hover:bg-neutral-100 dark:group-hover:bg-neutral-600">

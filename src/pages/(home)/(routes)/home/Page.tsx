@@ -1,30 +1,36 @@
+import { useMemo } from "react";
 import { useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 
 import { _POST } from "@/api/rootAPI";
-import { getQueue, getSummary } from "@/api/users";
+import { getSummary } from "@/api/users";
 
 import { MusicCard, MusicList } from "@/components";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { useQueue } from "@/hooks/useQueue";
+import { convertTime } from "@/lib/utils";
 
 const HomePage = () => {
   const { isLogin } = useAuthStore();
   const navigate = useNavigate();
+  const { songCount, totalPlayTime } = useQueue();
 
   const { data: summaryData, isLoading: summaryLoading } = useQuery(
     getSummary(isLogin),
   );
-  const { data: queueData, isLoading: queueLoading } = useQuery(
-    getQueue(isLogin),
+
+  const totalMin = useMemo(
+    () => convertTime(totalPlayTime, "number")[0],
+    [totalPlayTime],
   );
 
-  if (summaryLoading || queueLoading) return null;
+  if (summaryLoading) return null;
 
   const replayListRenderer = () => [
     <MusicCard
-      key={queueData?.id}
+      key={"my-queu"}
       title={"My queue"}
-      subTitle={`${queueData?.songCount} songs • ${queueData?.totalPlayTime} mins`}
+      subTitle={`${songCount} songs • ${totalMin} mins`}
       size="md"
       playable
       playAction={() => console.log("queue play")}

@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getExpiresAt, getTitleFromRoute } from "@/lib/utils";
 
-import { getCurrentUser } from "@/api/users";
+import { getCurrentUser, getQueue } from "@/api/users";
 import { _GET } from "@/api/rootAPI";
 
 import { useAuthStore } from "@/stores/useAuthStore";
@@ -16,10 +16,12 @@ import "@/styles/tailwind.css";
 import App from "./App";
 import RootLayout from "./RootLayout";
 import useMeStore from "./stores/useMeStore";
+import { useQueue } from "./hooks/useQueue";
 
 const AppContainer = () => {
   const { isLogin, setIsLogin } = useAuthStore();
   const { initMe, setMe } = useMeStore();
+  const { setQueue } = useQueue();
 
   const {
     data: connectCheck,
@@ -36,6 +38,8 @@ const AppContainer = () => {
   const flag = !!getExpiresAt() && !!connectCheck;
 
   const { refetch, isLoading } = useQuery(getCurrentUser(!!flag));
+
+  const { data: queueData } = useQuery(getQueue(isLogin));
 
   const preload = async () => {
     if (flag) {
@@ -64,6 +68,10 @@ const AppContainer = () => {
     };
     prepare();
   }, [isLogin, flag]);
+
+  useEffect(() => {
+    if (queueData) setQueue(queueData.tracks);
+  }, [queueData]);
 
   if (connectChecking || isLoading) return null;
 
