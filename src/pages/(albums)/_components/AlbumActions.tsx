@@ -17,6 +17,7 @@ const AlbumActions = ({ album, isOwn }: AlbumActionsProps) => {
   const { displayPlayer, onOpen } = usePlayerToggle();
   const { handlePlayListClick, setPlay } = usePlayerControl();
 
+  // TODO: 공통 기능으로 분리 가능하다면 분리
   const albumClickHandler = (album: AlbumInfo) => {
     if (!displayPlayer) {
       onOpen();
@@ -37,7 +38,7 @@ const AlbumActions = ({ album, isOwn }: AlbumActionsProps) => {
           className="flex justify-around items-center h-full text-base w-28"
         >
           <Play width="22" height="22" fill={"#FFFFFF"} stroke={"#FFFFFF"} />
-          <a className="font-semibold text-white">Play</a>
+          <span className="font-semibold text-white">Play</span>
         </Button>
       ) : (
         <>
@@ -46,14 +47,14 @@ const AlbumActions = ({ album, isOwn }: AlbumActionsProps) => {
             useRipple
             className="grid place-content-center w-28 h-full px-2 py-3 rounded-md bg-black"
           >
-            <a className="font-semibold text-white">Buy</a>
+            <span className="font-semibold text-white">Buy</span>
           </Button>
           <Button
             variant="flat"
             useRipple
             className="grid place-content-center w-28 h-full px-2 py-3 rounded-md bg-black"
           >
-            <a className="font-semibold text-sm text-white">Add To Cart</a>
+            <span className="font-semibold text-sm text-white">Add To Cart</span>
           </Button>
         </>
       )}
