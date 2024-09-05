@@ -45,12 +45,14 @@ const RootLayout = ({ children }: PropsWithChildren) => {
           )}
           {isPlayablePaths ? (
             <PlayableContainer
+              id="root-layout"
               $isDesktop={viewMode === "DESKTOP" ? true : false}
             >
               {children}
             </PlayableContainer>
           ) : (
             <NonPlayableContainer
+              id="root-layout"
               $isDesktop={viewMode === "DESKTOP" ? true : false}
             >
               {children}
@@ -58,6 +60,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
           )}
         </>
       )}
+      {/* {displayPlayer && viewMode !=="DESKTOP" && } */}
     </>
   );
 };
