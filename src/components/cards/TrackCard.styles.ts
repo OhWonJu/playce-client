@@ -4,7 +4,6 @@ import tw from "twin.macro";
 
 import { TRACK_CARD_HEIGHT } from "@/constants/uiSizes";
 
-
 export const TrackWrapper = styled(motion.div)`
   position: relative;
   display: flex;
@@ -14,8 +13,7 @@ export const TrackWrapper = styled(motion.div)`
   align-items: center;
   overflow: "hidden";
   will-change: "transform";
-  /* cursor: "grab"; */
-  /* background-color: ${props => props.theme.background_color}; */
+  cursor: pointer;
 `;
 
 export const TrackMotion = styled(motion.div)<{ $focused: boolean }>`
@@ -29,14 +27,11 @@ export const TrackMotion = styled(motion.div)<{ $focused: boolean }>`
       ? props.theme.gray_extra_light
       : props.theme.background_color};
 
-  /* transform: translateZ(0); */
-
   ${tw`p-1 rounded-md z-20`}
 `;
 
 export const TrackDeleteButton = styled(motion.div)`
   background-color: ${props => props.theme.red_primary};
-  /* transform: translateZ(0); */
   a {
     color: ${props => props.theme.text_secondary_color};
     ${tw`font-semibold`}

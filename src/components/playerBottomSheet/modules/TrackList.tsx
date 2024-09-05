@@ -25,7 +25,7 @@ const TrackList = () => {
           data={track}
           trackListType={playListType}
           focused={currentTrack.trackTitle === track.trackTitle}
-          clickHandler={() => clickHanlder(track)}
+          onClick={() => clickHanlder(track)}
         />
       ))}
     </section>
