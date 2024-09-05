@@ -14,6 +14,7 @@ import useViewModeStore from "./stores/useViewMode";
 import { usePlayerToggle } from "./stores/usePlayerToggleStore";
 import Navigator from "./components/Navigator/Navigator";
 import { Player } from "./components";
+import { PlayerBottomSheet } from "./components/playerBottomSheet";
 
 const NON_PLAYABLE_PATHS = ["/", "/join"];
 
@@ -60,7 +61,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
           )}
         </>
       )}
-      {/* {displayPlayer && viewMode !=="DESKTOP" && } */}
+      {displayPlayer && viewMode !== "DESKTOP" && <PlayerBottomSheet />}
     </>
   );
 };
