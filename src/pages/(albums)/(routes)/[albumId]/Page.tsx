@@ -3,7 +3,11 @@ import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import { getAlbumInfo } from "@/api/album";
+
+import { NAV_HEIGHT } from "@/constants/uiSizes";
+
 import { AlbumInfoWrapper, AlbumUtilsWrapper } from "./page.styles";
+
 import {
   AlbumActions,
   AlbumArt,
@@ -25,7 +29,13 @@ const AlbumIdPage = () => {
   const { album, own } = data;
 
   return (
-    <div className="flex flex-col max-h-full overflow-scroll scrollbar-hide">
+    <div
+      className="flex flex-col max-h-full  overflow-scroll scrollbar-hide"
+      style={{
+        paddingTop: NAV_HEIGHT * 2,
+        paddingBottom: NAV_HEIGHT,
+      }}
+    >
       <AlbumInfoWrapper>
         <AlbumArt imageUrl={album.albumArtURL} />
 

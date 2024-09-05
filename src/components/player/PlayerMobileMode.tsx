@@ -132,7 +132,7 @@ const PlayerMobileView = () => {
         // }
         style={{ zIndex: PLAYER_MOBILE_Z }}
       >
-        <Sheet.Container isMain={true}>
+        <Sheet.Container isMain={true} className="shadow-top">
           <Sheet.Content isMain={true} style={{ maxHeight: "90%" }}>
             <div
               id="player-container"

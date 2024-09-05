@@ -81,17 +81,17 @@ const PlayableContainer = styled.div<{ $isDesktop: boolean }>`
   max-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding-top: ${props => (props.$isDesktop ? NAV_HEIGHT * 2 : NAV_HEIGHT)}px;
+
   ${props =>
-    props.$isDesktop
-      ? `padding-bottom: ${NAV_HEIGHT}px`
-      : `padding-bottom: ${NAV_HEIGHT + PLAYER_HEADER_HEIGHT}px;`};
+    !props.$isDesktop &&
+    `padding-bottom: ${NAV_HEIGHT + PLAYER_HEADER_HEIGHT}px;`};
 
   ${props =>
     props.$isDesktop && `padding-left: ${DESKTOP_PLAYER_WIDTH + 16}px;`}
   ${props =>
     props.$isDesktop && `padding-right: ${DESKTOP_PLAYER_WIDTH + 16}px;`}
-  
+        
+  /* padding-top: ${props => (props.$isDesktop ? 0 : NAV_HEIGHT)}px; */
 
   ${props => {
     if (!props.$isDesktop) {
