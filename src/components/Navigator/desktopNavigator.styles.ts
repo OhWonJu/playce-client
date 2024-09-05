@@ -9,7 +9,8 @@ export const DesktopNavigatorWrapper = styled.nav`
   width: 100vw;
   height: ${NAV_HEIGHT}px;
   z-index: var(--navigator);
-  background-color: var(--background);
+
+  ${tw`backdrop-blur-xl`}
 `;
 
 export const NavButtonArea = styled.div`
