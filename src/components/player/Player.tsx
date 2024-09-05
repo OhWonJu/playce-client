@@ -6,6 +6,7 @@ import useViewModeStore from "@/stores/useViewMode";
 import InputModeStore from "@/stores/inputModeSotre";
 import MainSheetProgressStore from "@/stores/mainSheetProgress";
 import PlayerDesktopMode from "./PlayerDesktopMode";
+import PlayerMobileView from "./PlayerMobileMode";
 
 const Player = () => {
   const { viewMode } = useViewModeStore();
@@ -34,7 +35,9 @@ const Player = () => {
     };
   }, [inputMode, play]);
 
-  return <>{viewMode !== "DESKTOP" ? <></> : <PlayerDesktopMode />}</>;
+  return (
+    <>{viewMode !== "DESKTOP" ? <PlayerMobileView /> : <PlayerDesktopMode />}</>
+  );
 };
 
 export default Player;

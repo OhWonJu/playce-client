@@ -19,3 +19,6 @@ export const ALBUM_CARD_HEIGHT: number = 180;
 export const ALBUM_CARD_WIDTH: number = 130;
 export const TRACK_CARD_HEIGHT: number = 60;
 // -------------------------------------------------------- CARDS //
+
+// Z-INDEX
+export const PLAYER_MOBILE_Z: number = 40;
