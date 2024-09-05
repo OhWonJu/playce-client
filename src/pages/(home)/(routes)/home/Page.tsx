@@ -9,35 +9,21 @@ import { NAV_HEIGHT, PLAYER_HEADER_HEIGHT } from "@/constants/uiSizes";
 
 import { MusicCard, MusicList } from "@/components";
 import { useAuthStore } from "@/stores/useAuthStore";
-import { useQueue } from "@/hooks/useQueue";
-import { convertTime } from "@/lib/utils";
+
+import { QueueCard } from "../../_components";
 
 const HomePage = () => {
   const { isLogin } = useAuthStore();
   const navigate = useNavigate();
-  const { songCount, totalPlayTime } = useQueue();
 
   const { data: summaryData, isLoading: summaryLoading } = useQuery(
     getSummary(isLogin),
   );
 
-  const totalMin = useMemo(
-    () => convertTime(totalPlayTime, "number")[0],
-    [totalPlayTime],
-  );
-
   if (summaryLoading) return null;
 
   const replayListRenderer = () => [
-    <MusicCard
-      key={"my-queu"}
-      title={"My queue"}
-      subTitle={`${songCount} songs • ${totalMin} mins`}
-      size="md"
-      playable
-      playAction={() => console.log("queue play")}
-      onClick={() => console.log("just click")}
-    />,
+    <QueueCard />,
     <MusicCard key={"recent"} title={"최근 들었던 곡1"} size="md" playable />,
     <MusicCard key={"recent2"} title={"최근 들었던 곡2"} size="md" playable />,
     <MusicCard

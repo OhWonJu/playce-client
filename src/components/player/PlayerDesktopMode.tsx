@@ -39,7 +39,7 @@ const PlayerDesktopMode = () => {
 
   return (
     <div
-      className="__WRAPPER__ fixed right-0 flex flex-col px-4 shadow-inner"
+      className="__WRAPPER__ fixed right-0 flex flex-col shadow-inner"
       style={{
         width: DESKTOP_PLAYER_WIDTH,
         minHeight: 667,
@@ -50,7 +50,7 @@ const PlayerDesktopMode = () => {
     >
       {/* HEADER */}
       <section
-        className="__HEADER__ relative flex w-full justify-end items-center mb-1"
+        className="__HEADER__ relative flex w-full justify-end items-center px-4  mb-1"
         style={{ minHeight: 50 }}
       >
         <div className="flex justify-center items-center h-full aspect-square rounded-full">
@@ -60,7 +60,7 @@ const PlayerDesktopMode = () => {
 
       {/* CONTENT */}
       <section
-        className="__CONTENT__ flex flex-col w-full h-full items-center"
+        className="__CONTENT__ flex flex-col w-full h-full items-center px-4 "
         style={{ height: `calc(50vh) - ${25}px` }}
       >
         <div className="__ALBUM__ w-full aspect-square p-1">

@@ -23,21 +23,13 @@ export const TrackMotion = styled(motion.div)<{ $focused: boolean }>`
   height: 100%;
   align-items: center;
   background-color: ${props =>
-    props.$focused
-      ? props.theme.gray_extra_light
-      : props.theme.background_color};
+    props.$focused ? "hsl(var(--accent))" : "var(--background)"};
 
-  ${tw`p-1 rounded-md z-20`}
+  ${tw`pr-4 rounded-md z-20`}
 `;
 
 export const TrackDeleteButton = styled(motion.div)`
-  background-color: ${props => props.theme.red_primary};
-  a {
-    color: ${props => props.theme.text_secondary_color};
-    ${tw`font-semibold`}
-  }
-
-  ${tw`absolute grid place-content-center right-0 w-[90px] h-full rounded-md z-10`}
+  ${tw`absolute grid place-content-center right-0 w-[90px] h-full rounded-md z-10 bg-red-500`}
 `;
 
 export const ArtWrapper = styled.section`
@@ -46,5 +38,5 @@ export const ArtWrapper = styled.section`
   min-width: ${TRACK_CARD_HEIGHT - 8}px;
   overflow: hidden;
 
-  ${tw`rounded-full mr-2`}
+  ${tw`rounded-full ml-4 mr-2`}
 `;
