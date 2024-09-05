@@ -13,12 +13,14 @@ import { useLocation } from "react-router";
 import useViewModeStore from "./stores/useViewMode";
 import { usePlayerToggle } from "./stores/usePlayerToggleStore";
 import Navigator from "./components/Navigator/Navigator";
+import { Player } from "./components";
 
 const NON_PLAYABLE_PATHS = ["/", "/join"];
 
 const RootLayout = ({ children }: PropsWithChildren) => {
   const location = useLocation();
   const { viewMode } = useViewModeStore();
+  const { displayPlayer } = usePlayerToggle();
   const closePlayer = usePlayerToggle(state => state.onClose);
 
   const isPlayablePaths = useMemo(() => {
@@ -34,6 +36,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <ViewModeProvider />
+      {displayPlayer && <Player />}
       <ModalProvider />
       {viewMode !== "INIT" && (
         <>
