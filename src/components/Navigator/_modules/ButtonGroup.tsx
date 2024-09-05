@@ -1,5 +1,6 @@
 import { NavigateFunction } from "react-router";
-import { Explore, ExploreFill, Home, HomeFill, Search } from "../icons";
+
+import { Explore, ExploreFill, Home, HomeFill, Search } from "@/components/icons";
 
 interface ButtonGroupProps {
   pathName: string;

@@ -1,7 +1,8 @@
 import { NavigateFunction } from "react-router";
 
 import Avatar from "../Avatar";
-import ButtonGroup from "./ButtonGroup";
+
+import { ButtonGroup } from "./_modules";
 
 import {
   DesktopNavigatorWrapper,
@@ -17,7 +18,6 @@ interface DesktopNavigatorProps {
 }
 
 const DesktopNavigator = ({
-  id,
   image,
   pathName,
   navigate,
