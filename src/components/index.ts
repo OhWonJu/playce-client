@@ -7,3 +7,4 @@ export { default as IntersectionLabel } from "./IntersectionLabel";
 export { MusicList } from "./lists/MusicList";
 export { default as SymbolHeader } from "./SymbolHeader";
 export { Player } from "./player";
+export { Tab, TabSection } from "./Tab";
