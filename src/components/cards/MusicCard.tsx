@@ -50,7 +50,7 @@ const MusicCard = ({
   return (
     <div
       className={cn(
-        "flex flex-col snap-center",
+        "flex flex-col snap-center hover:cursor-pointer",
         size === "sm" && "w-[120px] min-h-[120px]",
         size === "md" && "w-[160px] min-h-[140px]",
         size === "lg" && "w-[200px] min-h-[160px]",

@@ -59,7 +59,7 @@ export const MusicList = ({
         ref={listRef}
         onClick={handleItemClick}
         className={cn(
-          "flex content-start w-full max-h-[400px] overflow-x-scroll scrollbar-hide gap-2 cursor-pointer",
+          "flex content-start w-full max-h-[400px] overflow-x-scroll scrollbar-hide gap-2",
           singleLine ? "flex-row" : "flex-col flex-wrap",
         )}
       >

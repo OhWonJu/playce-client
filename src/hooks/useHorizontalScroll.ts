@@ -58,7 +58,7 @@ export const useHorizontalScroll = (
         }, 1);
       }
 
-      ref.current.style.cursor = "pointer";
+      ref.current.style.cursor = "auto";
       ref.current.style.removeProperty("user-select");
 
       document.removeEventListener("mousemove", mouseMoveHandler);

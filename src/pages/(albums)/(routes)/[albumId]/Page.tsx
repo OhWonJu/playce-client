@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getAlbumInfo } from "@/api/album";
 
-import { NAV_HEIGHT } from "@/constants/uiSizes";
+import { NAV_HEIGHT, PLAYER_HEADER_HEIGHT } from "@/constants/uiSizes";
 
 import { AlbumInfoWrapper, AlbumUtilsWrapper } from "./page.styles";
 
@@ -33,7 +33,7 @@ const AlbumIdPage = () => {
       className="flex flex-col max-h-full  overflow-scroll scrollbar-hide"
       style={{
         paddingTop: NAV_HEIGHT * 2,
-        paddingBottom: NAV_HEIGHT,
+        paddingBottom: NAV_HEIGHT * 2 + PLAYER_HEADER_HEIGHT,
       }}
     >
       <AlbumInfoWrapper>

@@ -82,9 +82,9 @@ const PlayableContainer = styled.div<{ $isDesktop: boolean }>`
   display: flex;
   flex-direction: column;
 
-  ${props =>
+  /* ${props =>
     !props.$isDesktop &&
-    `padding-bottom: ${NAV_HEIGHT + PLAYER_HEADER_HEIGHT}px;`};
+    `padding-bottom: ${NAV_HEIGHT + PLAYER_HEADER_HEIGHT}px;`}; */
 
   ${props =>
     props.$isDesktop && `padding-left: ${DESKTOP_PLAYER_WIDTH + 16}px;`}
