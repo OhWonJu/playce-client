@@ -1,10 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { animate, useMotionValue, useTransform } from "framer-motion";
 
-import useWindowSize from "@/hooks/useWindowSize";
 import { usePlayerControl } from "@/hooks/usePlayerControl";
 
-import useViewModeStore from "@/stores/useViewMode";
 import MainSheetProgressStore from "@/stores/mainSheetProgress";
 import SubSheetProgressStore from "@/stores/subSheetProgress";
 
@@ -36,14 +34,12 @@ import {
 import Waveform from "./_modules/Waveform";
 
 const PlayerMobileView = () => {
-  const { viewMode } = useViewModeStore();
-  const { height } = useWindowSize();
   const { play, currentTrack } = usePlayerControl();
 
   const ref = useRef<SheetRef>();
   // const snapTo = (i: number) => ref.current?.snapTo(i);
 
-  const { progress, setProgress } = MainSheetProgressStore();
+  const { progress } = MainSheetProgressStore();
   const { progress: subProgress, setProgress: setSubProgress } =
     SubSheetProgressStore();
 
@@ -115,17 +111,19 @@ const PlayerMobileView = () => {
         isOpen={true}
         modalMode={false}
         onClose={() => null}
-        fixedHeight={
-          viewMode !== "DESKTOP"
-            ? NAV_HEIGHT + PLAYER_HEADER_HEIGHT
-            : PLAYER_HEADER_HEIGHT // PLAYER_HEADER_HEIGHT + 34
-        }
-        snapPoints={[
-          viewMode !== "DESKTOP" ? 1 : height - NAV_HEIGHT,
-          viewMode !== "DESKTOP"
-            ? NAV_HEIGHT + PLAYER_HEADER_HEIGHT
-            : PLAYER_HEADER_HEIGHT,
-        ]}
+        // fixedHeight={
+        //   viewMode !== "DESKTOP"
+        //     ? NAV_HEIGHT + PLAYER_HEADER_HEIGHT
+        //     : PLAYER_HEADER_HEIGHT // PLAYER_HEADER_HEIGHT + 34
+        // }
+        fixedHeight={NAV_HEIGHT + PLAYER_HEADER_HEIGHT}
+        // snapPoints={[
+        //   viewMode !== "DESKTOP" ? 1 : height - NAV_HEIGHT,
+        //   viewMode !== "DESKTOP"
+        //     ? NAV_HEIGHT + PLAYER_HEADER_HEIGHT
+        //     : PLAYER_HEADER_HEIGHT,
+        // ]}
+        snapPoints={[1, NAV_HEIGHT + PLAYER_HEADER_HEIGHT]}
         disableDrag={subProgress > 99 ? true : false}
         // onSnap={snapIndex =>
         //   console.log("> Current snap point index:", snapIndex)

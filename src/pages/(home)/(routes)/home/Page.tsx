@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 
@@ -23,7 +22,7 @@ const HomePage = () => {
   if (summaryLoading) return null;
 
   const replayListRenderer = () => [
-    <QueueCard />,
+    <QueueCard key={"my-queue"}/>,
     <MusicCard key={"recent"} title={"최근 들었던 곡1"} size="md" playable />,
     <MusicCard key={"recent2"} title={"최근 들었던 곡2"} size="md" playable />,
     <MusicCard

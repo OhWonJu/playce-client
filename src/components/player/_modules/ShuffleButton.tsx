@@ -2,19 +2,24 @@ import Button from "@/components/Button/Button";
 import { Shuffle } from "@/components/icons";
 import { usePlayerControl } from "@/hooks/usePlayerControl";
 import { cn } from "@/lib/utils";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 const ShuffleButton = () => {
+  // 리랜더링시 셔플이 다시되는 현상 발생
   const { shuffle, setShuffle, doShuffle, originTrackList } =
     usePlayerControl();
 
+  const prevSuffleState = useRef(shuffle);
+
   useEffect(() => {
+    if (prevSuffleState.current && shuffle) return;
+    prevSuffleState.current = shuffle;
     doShuffle(originTrackList);
   }, [shuffle]);
 
   return (
     <Button
-        variant="plain"
+      variant="plain"
       useRipple
       className="p-2 rounded-full"
       onClick={() => setShuffle(!shuffle)}

@@ -1,12 +1,14 @@
 import React, { useMemo } from "react";
 
-import { MusicCard } from "@/components";
 import { convertTime } from "@/lib/utils";
-import { useQueue } from "@/hooks/useQueue";
 import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
 import { usePlayerControl } from "@/hooks/usePlayerControl";
 
-const QueueCard = () => {
+import { useQueue } from "@/hooks/useQueue";
+
+import { MusicCard } from "@/components";
+
+const QueueCard = ({ key }: { key: string }) => {
   const { displayPlayer, onOpen } = usePlayerToggle();
   const { songCount, totalPlayTime, queue } = useQueue();
   const {
@@ -47,7 +49,6 @@ const QueueCard = () => {
 
   return (
     <MusicCard
-      key={"my-queu"}
       title={"My queue"}
       subTitle={`${songCount} songs • ${totalMin} mins`}
       size="md"
