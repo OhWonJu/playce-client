@@ -25,7 +25,6 @@ export const usePlayerControl = () => {
     playList,
     playListType,
     currentTrack,
-    totalTime,
   } = useSelector(({ playerControl }: RootState) => playerControl);
 
   const setPlay = useCallback(
@@ -135,17 +134,6 @@ export const usePlayerControl = () => {
     [dispatch],
   );
 
-  const setTotalTime = useCallback(
-    (totalTime: number) =>
-      dispatch(
-        playerControlActions.playerControlReducer({
-          type: "SET_TOTAL_TIME",
-          totalTime,
-        }),
-      ),
-    [dispatch],
-  );
-
   const doShuffle = useCallback(
     (list: Track[]) => {
       if (shuffle) {
@@ -214,23 +202,19 @@ export const usePlayerControl = () => {
     playList,
     playListType,
     currentTrack,
-    totalTime,
     setPlay: (play: boolean) => setPlay(play),
     setShuffle: (shuffle: boolean) => setShuffle(shuffle),
     setRepeatMode: (repeatMode: PLAYER_REPEAT_MODE) =>
       setRepeatMode(repeatMode),
     setForwardTrigger: () => setForwardTrigger(),
-    setOriginTrackList: (
-      originTrackId: string,
-      originTrackList: Track[],
-    ) => setOriginTrackList(originTrackId, originTrackList),
+    setOriginTrackList: (originTrackId: string, originTrackList: Track[]) =>
+      setOriginTrackList(originTrackId, originTrackList),
     setPlayList: (playList: Track[]) => setPlayList(playList),
     addTrack: (track: Track) => addTrack(track),
     deleteTrack: (track: Track) => deleteTrack(track),
     setPlayListType: (playListType: PLAY_LIST_TYPE) =>
       setPlayListType(playListType),
     setCurrentTrack: (currentTrack: Track) => setCurrentTrack(currentTrack),
-    setTotalTime: (totalTime: number) => setTotalTime(totalTime),
     doShuffle: (list: Track[]) => doShuffle(list),
     handlePlayListClick: (playListType: PLAY_LIST_TYPE, album: AlbumInfo) =>
       handlePlayListClick(playListType, album),

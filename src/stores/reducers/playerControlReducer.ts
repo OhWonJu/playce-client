@@ -21,7 +21,6 @@ export type PlayerControlStateType = {
   playList: Track[];
   playListType: PLAY_LIST_TYPE;
   currentTrack: Track;
-  totalTime: number;
 };
 
 const initialState: PlayerControlStateType = {
@@ -35,7 +34,6 @@ const initialState: PlayerControlStateType = {
   currentTrack: null,
   playList: [],
   playListType: "ALBUM",
-  totalTime: 0,
 };
 
 const playerControlSlice = createSlice({
@@ -62,7 +60,7 @@ const playerControlSlice = createSlice({
             repeatMode: aciton.payload.repeatMode,
           };
         }
-       // 트랙 변경 요쳥이 이전 변경 요청과 다름을 명시하기 위한 트리거
+        // 트랙 변경 요쳥이 이전 변경 요청과 다름을 명시하기 위한 트리거
         case "SET_FORWARD_TRIGGER": {
           const newForwardTrigger = state.forwardTrigger === 0 ? 1 : 0;
           return {
@@ -135,19 +133,13 @@ const playerControlSlice = createSlice({
 
             newOriginPlayList.splice(deletedOriginTrackIndex, 1);
             newPlayList.splice(deletedTrackIndex, 1);
-            
+
             return {
               ...state,
               originTrackList: newOriginPlayList,
               playList: newPlayList,
             };
           } else return { ...state };
-        }
-        case "SET_TOTAL_TIME": {
-          return {
-            ...state,
-            totalTime: aciton.payload.totalTime,
-          };
         }
       }
     },

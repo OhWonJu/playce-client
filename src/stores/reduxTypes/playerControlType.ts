@@ -20,5 +20,4 @@ export type PLAYER_CONTROL_ACTION =
   | { type: "SET_PLAY_LIST_TYPE"; playListType: PLAY_LIST_TYPE }
   | { type: "ADD_TRACK"; track: Track }
   | { type: "DELETE_TRACK"; track: Track }
-  | { type: "SET_CURRENT_TRACK"; currentTrack: Track }
-  | { type: "SET_TOTAL_TIME"; totalTime: number };
+  | { type: "SET_CURRENT_TRACK"; currentTrack: Track };
