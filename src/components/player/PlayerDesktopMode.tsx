@@ -22,6 +22,7 @@ import {
   ShuffleButton,
 } from "./_modules";
 import Waveform from "./_modules/Waveform";
+import { TrackCard } from "../cards";
 
 const PlayerDesktopMode = () => {
   const { play, currentTrack, playList, playListType, setCurrentTrack } =
@@ -106,15 +107,15 @@ const PlayerDesktopMode = () => {
         className="__TRACK_LIST__ flex flex-col w-full mt-4 pb-4 space-y-1 overflow-y-scroll scrollbar-hide"
         style={{ height: `calc(50vh - ${25}px)` }}
       >
-        {/* {playList.map((track: Track, index: number) => (
+        {playList.map((track: Track, index: number) => (
           <TrackCard
             key={index + track.trackTitle + playListType} // list 간의 전환이 있는 경우 index + track 조합이 같으면 같은 컴포넌트라 생각하는 것 같음.
             data={track}
             trackListType={playListType}
             focused={currentTrack.trackTitle === track.trackTitle}
-            clickHandler={() => clickHanlder(track)}
+            onClick={() => clickHanlder(track)}
           />
-        ))} */}
+        ))}
       </section>
     </div>
   );
