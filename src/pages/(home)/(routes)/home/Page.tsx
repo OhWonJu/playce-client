@@ -60,7 +60,7 @@ const HomePage = () => {
     ));
 
   return (
-    <div className="flex flex-col space-y-16">
+    <div className="flex flex-col space-y-16 max-h-full overflow-scroll scrollbar-hide">
       {/* <Heading title={`반가워요 ${nickName}님`} align="center" /> */}
       {isLogin && (
         <>

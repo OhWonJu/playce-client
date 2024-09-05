@@ -25,7 +25,7 @@ const AlbumIdPage = () => {
   const { album, own } = data;
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col max-h-full overflow-scroll scrollbar-hide">
       <AlbumInfoWrapper>
         <AlbumArt imageUrl={album.albumArtURL} />
 

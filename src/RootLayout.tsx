@@ -96,8 +96,6 @@ const PlayableContainer = styled.div<{ $isDesktop: boolean }>`
     }
   }}
 
-  // 음...
-  /* ${tw`transition overflow-scroll scrollbar-hide`} */
   ${tw`transition`}
 `;
 
@@ -105,7 +103,8 @@ const NonPlayableContainer = styled.div<{ $isDesktop: boolean }>`
   position: relative;
   width: 100vw;
   max-width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   padding-top: ${props => (props.$isDesktop ? NAV_HEIGHT * 2 : NAV_HEIGHT)}px;
