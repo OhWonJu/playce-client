@@ -2368,6 +2368,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hls.js@npm:^1.5.15":
+  version: 1.5.15
+  resolution: "hls.js@npm:1.5.15"
+  checksum: 10c0/e04d7b7e5e318cf10914bb7ab0e6607fcc3f0e8d5cd89c25c699736b3206a4791a85fd55b62fe4120897fc6bcb848760b4797df288deede8dbc050810503fe89
+  languageName: node
+  linkType: hard
+
 "hoist-non-react-statics@npm:^3.3.0":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
@@ -3233,6 +3240,7 @@ __metadata:
     eslint-plugin-react-refresh: "npm:^0.4.9"
     framer-motion: "npm:^11.3.31"
     globals: "npm:^15.9.0"
+    hls.js: "npm:^1.5.15"
     js-cookie: "npm:^3.0.5"
     lodash: "npm:^4.17.21"
     lodash.debounce: "npm:^4.0.8"
