@@ -1,12 +1,15 @@
-import React, { useEffect } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 
 import { usePlayerControl } from "@/hooks/usePlayerControl";
 
 import useViewModeStore from "@/stores/useViewMode";
 import InputModeStore from "@/stores/inputModeSotre";
 import MainSheetProgressStore from "@/stores/mainSheetProgress";
-import PlayerDesktopMode from "./PlayerDesktopMode";
-import PlayerMobileView from "./PlayerMobileMode";
+// import PlayerDesktopMode from "./PlayerDesktopMode";
+// import PlayerMobileView from "./PlayerMobileMode";
+
+const PlayerDesktopMode = lazy(() => import("./PlayerDesktopMode"));
+const PlayerMobileView = lazy(() => import("./PlayerMobileMode"));
 
 const Player = () => {
   const { viewMode } = useViewModeStore();
@@ -36,7 +39,9 @@ const Player = () => {
   }, [inputMode, play]);
 
   return (
-    <>{viewMode !== "DESKTOP" ? <PlayerMobileView /> : <PlayerDesktopMode />}</>
+    <Suspense>
+      {viewMode !== "DESKTOP" ? <PlayerMobileView /> : <PlayerDesktopMode />}
+    </Suspense>
   );
 };
 

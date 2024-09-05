@@ -1,8 +1,10 @@
-
 import styled from "styled-components";
 import tw from "twin.macro";
 
-import { NAV_HEIGHT, PLAYER_BOTTOM_SHEET_HEADER_HEIGHT } from "@/constants/uiSizes";
+import {
+  NAV_HEIGHT,
+  PLAYER_BOTTOM_SHEET_HEADER_HEIGHT,
+} from "@/constants/uiSizes";
 
 export const PBSHandleWrapper = styled.section`
   width: 100%;
@@ -20,7 +22,7 @@ export const PBSHandle = styled.div`
   ${tw`shadow-inner bg-opacity-60`}
 `;
 
-export const PBSHeaderWrapper = styled.nav`
+export const PBSHeaderWrapper = styled.section`
   width: 100%;
   height: ${NAV_HEIGHT}px;
   box-sizing: border-box;

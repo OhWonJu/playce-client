@@ -1,4 +1,4 @@
-import { PropsWithChildren, useMemo } from "react";
+import { lazy, PropsWithChildren, Suspense, useMemo } from "react";
 
 import ModalProvider from "./components/providers/ModalProvider";
 import ViewModeProvider from "./components/providers/ViewModeProvider";
@@ -14,7 +14,10 @@ import useViewModeStore from "./stores/useViewMode";
 import { usePlayerToggle } from "./stores/usePlayerToggleStore";
 import Navigator from "./components/Navigator/Navigator";
 import { Player } from "./components";
-import { PlayerBottomSheet } from "./components/playerBottomSheet";
+
+const PlayerBottomSheet = lazy(
+  () => import("./components/playerBottomSheet/PlayerBottomSheet"),
+);
 
 const NON_PLAYABLE_PATHS = ["/", "/join"];
 
@@ -61,7 +64,9 @@ const RootLayout = ({ children }: PropsWithChildren) => {
           )}
         </>
       )}
-      {displayPlayer && viewMode !== "DESKTOP" && <PlayerBottomSheet />}
+      <Suspense>
+        {displayPlayer && viewMode !== "DESKTOP" && <PlayerBottomSheet />}
+      </Suspense>
     </>
   );
 };

@@ -29,7 +29,7 @@ const TabComponent = ({
     >
       {tabContents.map((item, index) => (
         <Tab key={index} onClick={() => tabClickHandler(index)}>
-          <TabText focused={index === focusedTab}>{item}</TabText>
+          <TabText $focused={index === focusedTab}>{item}</TabText>
           {index === focusedTab ? (
             <motion.span
               layoutId="tab-underline"

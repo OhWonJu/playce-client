@@ -19,7 +19,7 @@ const PlayIndicator = () => {
 
   return (
     <PlayIndicatorBackGround>
-      <PlayIndicatorBar percent={getPercent(playTime, totalTime)} />
+      <PlayIndicatorBar $percent={getPercent(playTime, totalTime)} />
     </PlayIndicatorBackGround>
   );
 };

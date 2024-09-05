@@ -34,9 +34,9 @@ export const Tab = styled.li`
   }
 `;
 
-export const TabText = styled.a<any>`
+export const TabText = styled.a<{ $focused?: boolean }>`
   color: ${props =>
-    props.focused ? props.theme.text_primary_color : props.theme.gray_primary};
+    props.$focused ? "var(--primary)" : "var(--primary-foreground)"};
 
   ${tw`w-full text-center text-sm font-bold`};
 `;

@@ -1,22 +1,26 @@
+import { lazy, Suspense, useEffect } from "react";
 import { NavigateFunction } from "react-router";
-import { useMotionValue, motion, animate } from "framer-motion";
+import { useMotionValue, animate } from "framer-motion";
+
+import { NAV_HEIGHT } from "@/constants/uiSizes";
 
 import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
+import useViewModeStore from "@/stores/useViewMode";
 import MainSheetProgressStore from "@/stores/mainSheetProgress";
+import SubSheetProgressStore from "@/stores/subSheetProgress";
 
 import Avatar from "../Avatar";
 
-import { ButtonGroup, PlayIndicator } from "./_modules";
+import { ButtonGroup } from "./_modules";
 
 import {
   MobileNavigatorWrapper,
   NavButtonArea,
 } from "./mobileNavigator.styles";
-import { NAV_HEIGHT } from "@/constants/uiSizes";
-import useViewModeStore from "@/stores/useViewMode";
-import SubSheetProgressStore from "@/stores/subSheetProgress";
-import { useEffect } from "react";
+
 import { DEFAULT_TWEEN_CONFIG } from "../BottomSheet/constants";
+
+const PlayIndicator = lazy(() => import("./_modules/PlayIndicator"));
 
 interface MobileNavigatorProps {
   id?: string;
@@ -64,7 +68,9 @@ const MobileNavigator = ({
       }}
       initial={progress <= 0 ? { y: 0 } : false}
     >
-      {displayPlayer && progress < 1 ? <PlayIndicator /> : null}
+      <Suspense>
+        {displayPlayer && progress < 1 ? <PlayIndicator /> : null}
+      </Suspense>
       <NavButtonArea>
         <ButtonGroup navigate={navigate} pathName={pathName} />
         <Avatar

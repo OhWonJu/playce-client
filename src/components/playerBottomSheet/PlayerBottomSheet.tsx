@@ -1,12 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { animate, useMotionValue, motion, useTransform } from "framer-motion";
 
 import { NAV_HEIGHT } from "@/constants/uiSizes";
 
 import SubSheetProgressStore from "@/stores/subSheetProgress";
 import MainSheetProgressStore from "@/stores/mainSheetProgress";
-
-import { Tab, TabSection } from "@/components";
 
 import { Content, Lyrics, TrackList } from "./modules";
 
@@ -19,6 +17,9 @@ import {
   PBSHandleWrapper,
   PBSHeaderWrapper,
 } from "./playerBottomSheet.styles";
+
+const Tab = lazy(() => import("@/components/Tab/Tab"));
+const TabSection = lazy(() => import("@/components/Tab/TabSection"));
 
 const HEADER_BAR_HEIGHT = 20;
 
@@ -161,20 +162,24 @@ const PlayerBottomSheet = () => {
                 <PBSHandle />
               </PBSHandleWrapper>
               <PBSHeaderWrapper>
-                <Tab
-                  focusedTab={focusedTab}
-                  tabClickHandler={tabClickHandler}
-                  tabContents={TAB_NAMES}
-                />
+                <Suspense>
+                  <Tab
+                    focusedTab={focusedTab}
+                    tabClickHandler={tabClickHandler}
+                    tabContents={TAB_NAMES}
+                  />
+                </Suspense>
               </PBSHeaderWrapper>
             </Sheet.Header>
             <Sheet.Content isMain={false} disableDrag={true}>
               <PBSContentWrapper>
-                <TabSection
-                  focusedTab={focusedTab}
-                  prevFocusedTab={prevFocusedTab.current}
-                  tabViews={tabViews}
-                />
+                <Suspense>
+                  <TabSection
+                    focusedTab={focusedTab}
+                    prevFocusedTab={prevFocusedTab.current}
+                    tabViews={tabViews}
+                  />
+                </Suspense>
               </PBSContentWrapper>
             </Sheet.Content>
           </Sheet.Container>
