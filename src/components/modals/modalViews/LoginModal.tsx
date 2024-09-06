@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Button from "@/components/Button/Button";
-import GooglAuthButton from "@/pages/(root)/_components/GooglAuthButton";
+import GoogleAuthButton from "@/pages/(root)/_components/GoogleAuthButton";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -122,7 +122,7 @@ const LoginModal = () => {
       </Form>
       <IntersectionLabel label="PLAYCE 간편 인증하기" className="mt-12" />
       <section className="__SNS_LOGIN__ flex flex-col mt-4 space-y-4">
-        <GooglAuthButton />
+        <GoogleAuthButton />
       </section>
       <div className="sm:mt-5">
         <Button

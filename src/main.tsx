@@ -6,7 +6,9 @@ import { Provider } from "react-redux";
 import AppContainer from "./AppContainer";
 import reduxStore from "./stores/reduxStore";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { staleTime: 5 * 60 * 1000 } },
+});
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

@@ -12,7 +12,7 @@ const MainSheetProgressStore = create<MainSheetProgressStoreProps>(set => ({
 
   //  ACTION
   setProgress: (progress: number) => {
-    set(state => ({ progress }));
+    set(() => ({ progress }));
   },
 }));
 

@@ -10,7 +10,7 @@ export const DesktopNavigatorWrapper = styled.nav`
   height: ${NAV_HEIGHT}px;
   z-index: var(--navigator);
 
-  ${tw`backdrop-blur-xl`}
+  ${tw`backdrop-blur-xl bg-secondary-foreground`}
 `;
 
 export const NavButtonArea = styled.div`

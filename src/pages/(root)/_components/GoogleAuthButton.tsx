@@ -3,7 +3,7 @@ import GoogleIcon from "@/components/icons/Google";
 
 const { VITE_OAUTH_REQUEST_URI } = import.meta.env;
 
-const GooglAuthButton = () => {
+const GoogleAuthButton = () => {
   const handleLGoogleOauth2 = () => {
     window.location.href = VITE_OAUTH_REQUEST_URI as string;
   };
@@ -23,4 +23,4 @@ const GooglAuthButton = () => {
   );
 };
 
-export default GooglAuthButton;
+export default GoogleAuthButton;

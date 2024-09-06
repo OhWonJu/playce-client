@@ -51,6 +51,7 @@ export function getCurrentUser(flag: boolean | undefined) {
     queryFn: async () => _GET<CurrentUserResponse>("/users/me"),
     enabled: flag,
     retry: 3,
+    staleTime: 0,
   });
 }
 

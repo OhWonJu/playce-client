@@ -5,8 +5,6 @@ import { usePlayerControl } from "@/hooks/usePlayerControl";
 import useViewModeStore from "@/stores/useViewMode";
 import InputModeStore from "@/stores/inputModeSotre";
 import MainSheetProgressStore from "@/stores/mainSheetProgress";
-// import PlayerDesktopMode from "./PlayerDesktopMode";
-// import PlayerMobileView from "./PlayerMobileMode";
 
 const PlayerDesktopMode = lazy(() => import("./PlayerDesktopMode"));
 const PlayerMobileView = lazy(() => import("./PlayerMobileMode"));
