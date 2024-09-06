@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { animate, useMotionValue, useTransform } from "framer-motion";
 
+import { usePlaylist } from "@/hooks/usePlaylist";
 import { usePlayerControl } from "@/hooks/usePlayerControl";
 
 import MainSheetProgressStore from "@/stores/mainSheetProgress";
@@ -32,7 +33,6 @@ import {
   ShuffleButton,
   Waveform,
 } from "./_modules";
-import { usePlaylist } from "@/hooks/usePlaylist";
 
 const PlayerMobileView = () => {
   const { play } = usePlayerControl();

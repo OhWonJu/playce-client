@@ -15,15 +15,15 @@ const PlayButton = ({ className }: { className?: string }) => {
       variant="plain"
       useRipple
       className={cn(
-        "w-16 h-16 rounded-full flex justify-center items-center",
+        "w-[4rem] h-[4rem] rounded-full flex justify-center items-center",
         className,
       )}
       onClick={() => setPlay(!play)}
     >
       {play === true ? (
-        <Pause width="30" height="30" className="fill-primary" />
+        <Pause width="64" height="64" className="fill-primary" />
       ) : (
-        <Play width="30" height="30" className="fill-primary" />
+        <Play width="64" height="64" className="fill-primary" />
       )}
     </Button>
   );

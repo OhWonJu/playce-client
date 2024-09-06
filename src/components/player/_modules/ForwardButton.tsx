@@ -73,12 +73,16 @@ const ForwardButton = ({
       variant="plain"
       useRipple
       className={cn(
-        "w-12 h-12 rounded-full flex justify-center items-center",
+        "w-14 h-14 rounded-full flex justify-center items-center",
         className,
       )}
       onClick={() => debouncedHandleForwardButton(isForward)}
     >
-      {isForward ? <Forward /> : <Forward className="rotate-180" />}
+      {isForward ? (
+        <Forward width="64" height="64" />
+      ) : (
+        <Forward width="64" height="64" className="rotate-180" />
+      )}
     </Button>
   );
 };

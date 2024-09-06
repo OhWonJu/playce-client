@@ -12,21 +12,48 @@ interface AlbumArtProps {
 }
 
 const AlbumArt = ({ artURL, isPlay, pinOpacity }: AlbumArtProps) => {
+  // const { originTrackId } = usePlayerControl();
   const { originTrackId } = usePlaylist();
 
-  const [playing, setPlaying] = useState(undefined);
-  const angleRef = useRef(0);
+  const [rotation, setRotation] = useState(0);
+  const [speed, setSpeed] = useState(0.8);
+  const prevIsPlayRef = useRef(isPlay);
 
   useEffect(() => {
-    if (!isPlay && typeof playing === "undefined") return;
-    if (isPlay === playing) return;
-
-    setPlaying(isPlay);
-  }, [isPlay]);
+    if (isPlay) {
+      prevIsPlayRef.current = false;
+    }
+  }, []);
 
   useEffect(() => {
-    angleRef.current = 0;
+    setRotation(0);
   }, [originTrackId]);
+
+  useEffect(() => {
+    if (isPlay && !prevIsPlayRef.current) {
+      // Play가 false에서 true로 변경되었을 때
+      const interval = setInterval(() => {
+        setRotation(prevRotation => (prevRotation + speed) % 360);
+      }, 16); // 60fps로 애니메이션 실행 (16ms 간격)
+      return () => {
+        clearInterval(interval);
+      }; // 컴포넌트가 언마운트되면 setInterval 해제
+    } else if (!isPlay && prevIsPlayRef.current) {
+      // Play가 true에서 false로 변경되었을 때
+
+      console.log("STOP!");
+      const stopRotation = () => {
+        if (speed > 0) {
+          setSpeed(prevSpeed => prevSpeed - 0.001); // 감속 효과를 위해 회전 속도 감소
+          setRotation(prevRotation => prevRotation + speed);
+          requestAnimationFrame(stopRotation);
+        }
+      };
+      requestAnimationFrame(stopRotation);
+    }
+
+    prevIsPlayRef.current = isPlay;
+  }, [isPlay, speed]);
 
   if (artURL) {
     return (
@@ -37,21 +64,8 @@ const AlbumArt = ({ artURL, isPlay, pinOpacity }: AlbumArtProps) => {
         <div className="relative w-full aspect-square rounded-full overflow-hidden flex items-center justify-center shadow-album">
           <motion.div
             className="relative w-full aspect-square rounded-full overflow-hidden"
-            animate={
-              typeof playing === "undefined"
-                ? { rotate: 0 }
-                : playing
-                ? { rotate: 360 + angleRef.current }
-                : { rotate: angleRef.current + 45 }
-            }
-            initial={{ rotateX: angleRef.current }}
-            transition={{
-              repeat: playing ? Infinity : 0, // 재생 중일 때만 무한 회전
-              duration: playing ? 8 : 2,
-              ease: playing ? "linear" : "easeOut",
-              onUpdate: (latest: number) => {
-                angleRef.current = latest;
-              },
+            style={{
+              transform: `rotate(${rotation}deg)`,
             }}
           >
             <Image
