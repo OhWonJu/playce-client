@@ -8,18 +8,10 @@ import { useQueue } from "@/hooks/useQueue";
 
 import { MusicCard } from "@/components";
 
-const QueueCard = ({ key }: { key: string }) => {
+const QueueCard = ({}: { key: string }) => {
   const { displayPlayer, onOpen } = usePlayerToggle();
   const { songCount, totalPlayTime, queue } = useQueue();
-  const {
-    setPlay,
-    setOriginTrackList,
-    setCurrentTrack,
-    setPlayListType,
-    doShuffle,
-    setPlayList,
-    shuffle,
-  } = usePlayerControl();
+  const { handlePlayListClick } = usePlayerControl();
 
   const totalMin = useMemo(
     () => convertTime(totalPlayTime, "number")[0],
@@ -33,18 +25,7 @@ const QueueCard = ({ key }: { key: string }) => {
       onOpen();
     }
 
-    setPlayListType("QUEUE");
-
-    setOriginTrackList("queue", queue);
-    setCurrentTrack(queue[0]);
-
-    if (shuffle) {
-      doShuffle(queue);
-    } else {
-      setPlayList(queue);
-    }
-
-    setTimeout(() => setPlay(true), 800);
+    handlePlayListClick("QUEUE", { id: "queue", tracks: queue });
   };
 
   return (

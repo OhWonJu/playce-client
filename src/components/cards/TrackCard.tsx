@@ -5,17 +5,21 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import { usePlayerControl } from "@/hooks/usePlayerControl";
+
+import { Track } from "@/types";
+import { TRACK_CARD_HEIGHT } from "@/constants/uiSizes";
+
 import { useQueue } from "@/hooks/useQueue";
+import { usePlaylist } from "@/hooks/usePlaylist";
+
+import Image from "../Image";
+
 import {
   ArtWrapper,
   TrackDeleteButton,
   TrackMotion,
   TrackWrapper,
 } from "./TrackCard.styles";
-import Image from "../Image";
-import { Track } from "@/types";
-import { TRACK_CARD_HEIGHT } from "@/constants/uiSizes";
 
 interface TrackCardProps {
   data: Track;
@@ -35,7 +39,7 @@ const TrackCard = ({
   const { style } = rest;
 
   const { addTrack: addPlayListTrack, deleteTrack: delPlayListTrack } =
-    usePlayerControl();
+    usePlaylist();
   const { addTrack: addQueueList, deleteTrack: delQueuList } = useQueue();
 
   const [scope, animate] = useAnimate();

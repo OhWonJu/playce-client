@@ -1,27 +1,22 @@
 import React from "react";
 
-import { convertTime } from "@/lib/utils";
 import { Track } from "@/types";
+import { convertTime } from "@/lib/utils";
+import { useQueue } from "@/hooks/useQueue";
+import { usePlaylist } from "@/hooks/usePlaylist";
+
 import Button from "../Button/Button";
 import { DotMenu, Play, QueueList } from "../icons";
 import { QueuePlayIconBox } from "./trackListCard.styles";
-import { usePlayerControl } from "@/hooks/usePlayerControl";
-import { useQueue } from "@/hooks/useQueue";
 
-interface TrackLIComponentProps {
+interface TrackListCardProps {
   index: number;
   data: Track;
   isOwn: boolean;
-  trackListType: "ALBUM" | "LIST" | "QUEUE";
 }
 
-const TrackListCard: React.FC<TrackLIComponentProps> = ({
-  index,
-  data,
-  isOwn,
-  // trackListType,
-}) => {
-  const { addTrack: addPlayListTrack, playListType } = usePlayerControl();
+const TrackListCard = ({ index, data, isOwn }: TrackListCardProps) => {
+  const { addTrack: addPlayListTrack, playListType } = usePlaylist();
   const { addTrack: addQueueList } = useQueue();
 
   const handleQueueAddActionClick = () => {

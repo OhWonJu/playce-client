@@ -1,12 +1,12 @@
 import { AlbumInfo } from "@/types";
 
+import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
 import { usePlayerControl } from "@/hooks/usePlayerControl";
 
 import { Button } from "@/components";
 import { Play } from "@/components/icons";
 
 import { AlbumActionBox } from "./albumActions.styles";
-import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
 
 interface AlbumActionsProps {
   album: AlbumInfo;
@@ -15,7 +15,7 @@ interface AlbumActionsProps {
 
 const AlbumActions = ({ album, isOwn }: AlbumActionsProps) => {
   const { displayPlayer, onOpen } = usePlayerToggle();
-  const { handlePlayListClick, setPlay } = usePlayerControl();
+  const { handlePlayListClick } = usePlayerControl();
 
   // TODO: 공통 기능으로 분리 가능하다면 분리
   const albumClickHandler = (album: AlbumInfo) => {
@@ -24,8 +24,6 @@ const AlbumActions = ({ album, isOwn }: AlbumActionsProps) => {
     }
 
     handlePlayListClick("ALBUM", album);
-
-    setTimeout(() => setPlay(true), 800);
   };
 
   return (
@@ -54,7 +52,9 @@ const AlbumActions = ({ album, isOwn }: AlbumActionsProps) => {
             useRipple
             className="grid place-content-center w-28 h-full px-2 py-3 rounded-md bg-black"
           >
-            <span className="font-semibold text-sm text-white">Add To Cart</span>
+            <span className="font-semibold text-sm text-white">
+              Add To Cart
+            </span>
           </Button>
         </>
       )}

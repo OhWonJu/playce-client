@@ -14,4 +14,5 @@ export const AlbumInfoWrapper = styled.section`
 
 export const AlbumUtilsWrapper = styled.section`
   ${tw`grid grid-rows-4`}
+  ${tw`mt-4 sm:mt-0 lg:mt-4 xl:mt-0`}
 `;

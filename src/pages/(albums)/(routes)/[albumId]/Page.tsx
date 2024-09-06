@@ -52,19 +52,7 @@ const AlbumIdPage = () => {
       </AlbumInfoWrapper>
 
       {/* TRACK LIST */}
-      <AlbumTrackList tracks={album.tracks} isOwn={own} />
-
-      {/* <ul className="flex flex-col w-full space-y-2">
-        {album?.tracks?.map((track, index) => (
-          <TrackLi
-            key={index}
-            index={index}
-            data={track}
-            isOwn={isOwn}
-            trackListType="ALBUM"
-          />
-        ))}
-      </ul> */}
+      <AlbumTrackList tracks={album.tracks} isOwn={own} className="mt-8" />
     </div>
   );
 };

@@ -11,21 +11,20 @@ import {
   PLAYER_REPEAT_MODE,
 } from "@/stores/reduxTypes/playerControlType";
 
+import { usePlaylist } from "./usePlaylist";
+
 export const usePlayerControl = () => {
   const dispatch = useDispatch();
 
-  const {
-    play,
-    shuffle,
-    repeatMode,
-    forwardMode,
-    forwardTrigger,
-    originTrackId,
-    originTrackList,
-    playList,
-    playListType,
-    currentTrack,
-  } = useSelector(({ playerControl }: RootState) => playerControl);
+  const { play, shuffle, repeatMode, forwardMode, forwardTrigger } =
+    useSelector(({ playerControl }: RootState) => playerControl);
+
+  const { currentTrack, originTrackList } = useSelector(
+    ({ playlist }: RootState) => playlist,
+  );
+
+  const { setCurrentTrack, setOriginTrackList, setPlayList, setPlayListType } =
+    usePlaylist();
 
   const setPlay = useCallback(
     (play: boolean) =>
@@ -70,70 +69,6 @@ export const usePlayerControl = () => {
     [dispatch],
   );
 
-  const setOriginTrackList = useCallback(
-    (originTrackId: string, originTrackList: Array<Track>) =>
-      dispatch(
-        playerControlActions.playerControlReducer({
-          type: "SET_ORIGIN_TRACK_LIST",
-          originTrackId,
-          originTrackList,
-        }),
-      ),
-    [dispatch],
-  );
-
-  const setPlayList = useCallback(
-    (playList: Track[]) =>
-      dispatch(
-        playerControlActions.playerControlReducer({
-          type: "SET_PLAY_LIST",
-          playList,
-        }),
-      ),
-    [dispatch],
-  );
-
-  const addTrack = useCallback(
-    (track: Track) =>
-      dispatch(
-        playerControlActions.playerControlReducer({ type: "ADD_TRACK", track }),
-      ),
-    [dispatch],
-  );
-
-  const deleteTrack = useCallback(
-    (track: Track) =>
-      dispatch(
-        playerControlActions.playerControlReducer({
-          type: "DELETE_TRACK",
-          track,
-        }),
-      ),
-    [dispatch],
-  );
-
-  const setPlayListType = useCallback(
-    (playListType: PLAY_LIST_TYPE) =>
-      dispatch(
-        playerControlActions.playerControlReducer({
-          type: "SET_PLAY_LIST_TYPE",
-          playListType,
-        }),
-      ),
-    [dispatch],
-  );
-
-  const setCurrentTrack = useCallback(
-    (currentTrack: Track) =>
-      dispatch(
-        playerControlActions.playerControlReducer({
-          type: "SET_CURRENT_TRACK",
-          currentTrack,
-        }),
-      ),
-    [dispatch],
-  );
-
   const doShuffle = useCallback(
     (list: Track[]) => {
       if (shuffle) {
@@ -168,7 +103,7 @@ export const usePlayerControl = () => {
 
   const handlePlayListClick = (
     playListType: PLAY_LIST_TYPE,
-    album: AlbumInfo,
+    album: AlbumInfo | { id: string; tracks: Track[] },
   ) => {
     setPlayListType(playListType);
 
@@ -189,6 +124,8 @@ export const usePlayerControl = () => {
     } else {
       setPlayList(TrackList);
     }
+
+    setTimeout(() => setPlay(true), 800);
   };
 
   const context = {
@@ -197,27 +134,16 @@ export const usePlayerControl = () => {
     repeatMode,
     forwardMode,
     forwardTrigger,
-    originTrackId,
-    originTrackList,
-    playList,
-    playListType,
-    currentTrack,
     setPlay: (play: boolean) => setPlay(play),
     setShuffle: (shuffle: boolean) => setShuffle(shuffle),
     setRepeatMode: (repeatMode: PLAYER_REPEAT_MODE) =>
       setRepeatMode(repeatMode),
     setForwardTrigger: () => setForwardTrigger(),
-    setOriginTrackList: (originTrackId: string, originTrackList: Track[]) =>
-      setOriginTrackList(originTrackId, originTrackList),
-    setPlayList: (playList: Track[]) => setPlayList(playList),
-    addTrack: (track: Track) => addTrack(track),
-    deleteTrack: (track: Track) => deleteTrack(track),
-    setPlayListType: (playListType: PLAY_LIST_TYPE) =>
-      setPlayListType(playListType),
-    setCurrentTrack: (currentTrack: Track) => setCurrentTrack(currentTrack),
     doShuffle: (list: Track[]) => doShuffle(list),
-    handlePlayListClick: (playListType: PLAY_LIST_TYPE, album: AlbumInfo) =>
-      handlePlayListClick(playListType, album),
+    handlePlayListClick: (
+      playListType: PLAY_LIST_TYPE,
+      album: AlbumInfo | { id: string; tracks: Track[] },
+    ) => handlePlayListClick(playListType, album),
   };
 
   return context;

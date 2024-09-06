@@ -1,13 +1,16 @@
+import React, { useEffect, useRef } from "react";
+
+import { cn } from "@/lib/utils";
+import { usePlayerControl } from "@/hooks/usePlayerControl";
+import { usePlaylist } from "@/hooks/usePlaylist";
+
 import Button from "@/components/Button/Button";
 import { Shuffle } from "@/components/icons";
-import { usePlayerControl } from "@/hooks/usePlayerControl";
-import { cn } from "@/lib/utils";
-import React, { useEffect, useRef } from "react";
 
 const ShuffleButton = () => {
   // 리랜더링시 셔플이 다시되는 현상 발생
-  const { shuffle, setShuffle, doShuffle, originTrackList } =
-    usePlayerControl();
+  const { shuffle, setShuffle, doShuffle } = usePlayerControl();
+  const { originTrackList } = usePlaylist();
 
   const prevSuffleState = useRef(shuffle);
 

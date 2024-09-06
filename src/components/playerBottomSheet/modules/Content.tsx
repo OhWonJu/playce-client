@@ -1,9 +1,9 @@
 import React from "react";
 
-import { usePlayerControl } from "@/hooks/usePlayerControl";
+import { usePlaylist } from "@/hooks/usePlaylist";
 
 const Content = () => {
-  const { currentTrack } = usePlayerControl();
+  const { currentTrack } = usePlaylist();
 
   return (
     <section className="flex flex-col w-full h-full box-border">

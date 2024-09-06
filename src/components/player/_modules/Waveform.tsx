@@ -2,21 +2,15 @@ import { useCallback, useEffect, useMemo, useRef } from "react";
 import WaveSurfer from "wavesurfer.js";
 import Hls from "hls.js";
 import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
-import { usePlayerControl } from "@/hooks/usePlayerControl";
 import usePlayTimeStore from "@/stores/usePlayTimeStore";
+import { usePlayerControl } from "@/hooks/usePlayerControl";
+import { usePlaylist } from "@/hooks/usePlaylist";
 
 const Waveform = () => {
   const { displayPlayer } = usePlayerToggle();
-  const {
-    setCurrentTrack,
-    play,
-    repeatMode,
-    forwardTrigger,
-    currentTrack,
-    playList,
-    setPlay,
-    originTrackId,
-  } = usePlayerControl();
+  const { play, repeatMode, forwardTrigger, setPlay } = usePlayerControl();
+  const { setCurrentTrack, currentTrack, playList, originTrackId } =
+    usePlaylist();
   const { playTime, setPlayTime, setTotalTime } = usePlayTimeStore();
 
   const waveformRef = useRef<HTMLDivElement>(null);
@@ -29,10 +23,10 @@ const Waveform = () => {
     () => window.getComputedStyle(document.documentElement),
     [window],
   );
-  const waveColor = useMemo(
-    () => rootStyles.getPropertyValue("--primary-foreground"),
-    [rootStyles],
-  );
+  // const waveColor = useMemo(
+  //   () => rootStyles.getPropertyValue("--primary-foreground"),
+  //   [rootStyles],
+  // );
   const progressColor = useMemo(
     () => rootStyles.getPropertyValue("--primary"),
     [rootStyles],

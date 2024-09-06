@@ -28,7 +28,7 @@ const ViewModeProvider = () => {
     }
   }, [width]);
 
-  return null;
+  return <></>;
 };
 
 export default ViewModeProvider;

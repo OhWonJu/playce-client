@@ -20,13 +20,15 @@ import {
   PlayTimer,
   RepeatButton,
   ShuffleButton,
+  Waveform,
 } from "./_modules";
-import Waveform from "./_modules/Waveform";
 import { TrackCard } from "../cards";
+import { usePlaylist } from "@/hooks/usePlaylist";
 
 const PlayerDesktopMode = () => {
-  const { play, currentTrack, playList, playListType, setCurrentTrack } =
-    usePlayerControl();
+  const { play } = usePlayerControl();
+  const { currentTrack, playList, playListType, setCurrentTrack } =
+    usePlaylist();
 
   const setPlayTime = usePlayTimeStore(state => state.setPlayTime);
 

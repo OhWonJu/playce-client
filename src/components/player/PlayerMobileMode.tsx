@@ -30,11 +30,13 @@ import {
   PlayTimer,
   RepeatButton,
   ShuffleButton,
+  Waveform,
 } from "./_modules";
-import Waveform from "./_modules/Waveform";
+import { usePlaylist } from "@/hooks/usePlaylist";
 
 const PlayerMobileView = () => {
-  const { play, currentTrack } = usePlayerControl();
+  const { play } = usePlayerControl();
+  const { currentTrack } = usePlaylist();
 
   const ref = useRef<SheetRef>();
   // const snapTo = (i: number) => ref.current?.snapTo(i);
