@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, MotionValue } from "framer-motion";
 
-import { usePlaylist } from "@/hooks/usePlaylist";
+import { usePlayerControl } from "@/stores/usePlayerControl";
 
 import Image from "@/components/Image";
 
@@ -12,8 +12,7 @@ interface AlbumArtProps {
 }
 
 const AlbumArt = ({ artURL, isPlay, pinOpacity }: AlbumArtProps) => {
-  // const { originTrackId } = usePlayerControl();
-  const { originTrackId } = usePlaylist();
+  const originTrackId = usePlayerControl(state => state.originTrackId);
 
   const [rotation, setRotation] = useState(0);
   const [speed, setSpeed] = useState(0.8);

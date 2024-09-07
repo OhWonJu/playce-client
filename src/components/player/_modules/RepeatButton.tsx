@@ -1,12 +1,13 @@
 import React, { useCallback } from "react";
 
-import { usePlayerControl } from "@/hooks/usePlayerControl";
+import { usePlayerControl } from "@/stores/usePlayerControl";
 
 import Button from "@/components/Button/Button";
 import { Repeat } from "@/components/icons";
 
 const RepeatButton = () => {
-  const { repeatMode, setRepeatMode } = usePlayerControl();
+  const repeatMode = usePlayerControl(state => state.repeatMode);
+  const setRepeatMode = usePlayerControl(state => state.setRepeatMode);
 
   const handleClick = useCallback(() => {
     switch (repeatMode) {
@@ -23,7 +24,7 @@ const RepeatButton = () => {
         return;
       }
     }
-  }, [setRepeatMode]);
+  }, [repeatMode, setRepeatMode]);
 
   return (
     <Button

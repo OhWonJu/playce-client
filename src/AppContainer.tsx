@@ -1,18 +1,15 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { useQuery } from "@tanstack/react-query";
-import { useDispatch } from "react-redux";
-
 import { getExpiresAt, getTitleFromRoute } from "@/lib/utils";
-import { Track } from "@/types";
+import { useQuery } from "@tanstack/react-query";
 
 import { getCurrentUser, getQueue } from "@/api/users";
 import { _GET } from "@/api/rootAPI";
 
 import { useAuthStore } from "@/stores/useAuthStore";
 import useMeStore from "@/stores/useMeStore";
-import { queueActions } from "@/stores/reducers";
+import { useQueue } from "./stores/useQueue";
 
 import GlobalStyles from "@/styles/GlobalStyles";
 import "@/styles/tailwind.css";
@@ -23,20 +20,8 @@ import RootLayout from "./RootLayout";
 const AppContainer = () => {
   const { isLogin, setIsLogin } = useAuthStore();
   const { initMe, setMe } = useMeStore();
-  // const { setQueue } = useQueue();
 
-  const dispatch = useDispatch();
-
-  const setQueue = useCallback(
-    (queue: Array<Track>) =>
-      dispatch(
-        queueActions.queueReducer({
-          type: "SET_QUEUE",
-          queue,
-        }),
-      ),
-    [dispatch],
-  );
+  const setQueue = useQueue(state => state.setQueue);
 
   const {
     data: connectCheck,

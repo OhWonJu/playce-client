@@ -1,7 +1,7 @@
 import { AlbumInfo } from "@/types";
 
 import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
-import { usePlayerControl } from "@/hooks/usePlayerControl";
+import { usePlayerControl } from "@/stores/usePlayerControl";
 
 import { Button } from "@/components";
 import { Play } from "@/components/icons";
@@ -15,7 +15,9 @@ interface AlbumActionsProps {
 
 const AlbumActions = ({ album, isOwn }: AlbumActionsProps) => {
   const { displayPlayer, onOpen } = usePlayerToggle();
-  const { handlePlayListClick } = usePlayerControl();
+  const handlePlayListClick = usePlayerControl(
+    state => state.handlePlayListClick,
+  );
 
   // TODO: 공통 기능으로 분리 가능하다면 분리
   const albumClickHandler = (album: AlbumInfo) => {

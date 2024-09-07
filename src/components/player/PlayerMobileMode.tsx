@@ -1,11 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { animate, useMotionValue, useTransform } from "framer-motion";
 
-import { usePlaylist } from "@/hooks/usePlaylist";
-import { usePlayerControl } from "@/hooks/usePlayerControl";
-
 import MainSheetProgressStore from "@/stores/mainSheetProgress";
 import SubSheetProgressStore from "@/stores/subSheetProgress";
+import { usePlayerControl } from "@/stores/usePlayerControl";
 
 import Sheet, { SheetRef } from "../BottomSheet";
 import {
@@ -35,8 +33,7 @@ import {
 } from "./_modules";
 
 const PlayerMobileView = () => {
-  const { play } = usePlayerControl();
-  const { currentTrack } = usePlaylist();
+  const currentTrack = usePlayerControl(state => state.currentTrack);
 
   const ref = useRef<SheetRef>();
   // const snapTo = (i: number) => ref.current?.snapTo(i);
@@ -163,7 +160,6 @@ const PlayerMobileView = () => {
                   >
                     <AlbumArt
                       artURL={currentTrack?.albumArtURL}
-                      isPlay={play}
                       pinOpacity={pinOpacity}
                     />
                   </Album>

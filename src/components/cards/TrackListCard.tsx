@@ -2,8 +2,9 @@ import React from "react";
 
 import { Track } from "@/types";
 import { convertTime } from "@/lib/utils";
-import { useQueue } from "@/hooks/useQueue";
-import { usePlaylist } from "@/hooks/usePlaylist";
+import { usePlayerControl } from "@/stores/usePlayerControl";
+
+import { useQueue } from "@/stores/useQueue";
 
 import Button from "../Button/Button";
 import { DotMenu, Play, QueueList } from "../icons";
@@ -16,8 +17,9 @@ interface TrackListCardProps {
 }
 
 const TrackListCard = ({ index, data, isOwn }: TrackListCardProps) => {
-  const { addTrack: addPlayListTrack, playListType } = usePlaylist();
-  const { addTrack: addQueueList } = useQueue();
+  const addPlayListTrack = usePlayerControl(state => state.addTrack);
+  const playListType = usePlayerControl(state => state.playListType);
+  const addQueueList = useQueue(state => state.addTrack);
 
   const handleQueueAddActionClick = () => {
     playListType === "QUEUE" && addPlayListTrack(data);

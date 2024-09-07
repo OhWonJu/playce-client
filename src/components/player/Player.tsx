@@ -1,10 +1,9 @@
 import React, { lazy, Suspense, useEffect } from "react";
 
-import { usePlayerControl } from "@/hooks/usePlayerControl";
-
 import useViewModeStore from "@/stores/useViewMode";
-import InputModeStore from "@/stores/inputModeSotre";
 import MainSheetProgressStore from "@/stores/mainSheetProgress";
+
+import { KeyEventControler } from "./_modules";
 
 const PlayerDesktopMode = lazy(() => import("./PlayerDesktopMode"));
 const PlayerMobileView = lazy(() => import("./PlayerMobileMode"));
@@ -12,8 +11,6 @@ const PlayerMobileView = lazy(() => import("./PlayerMobileMode"));
 const Player = () => {
   const { viewMode } = useViewModeStore();
   const { setProgress } = MainSheetProgressStore();
-  const { play, setPlay } = usePlayerControl();
-  const { inputMode } = InputModeStore();
 
   useEffect(() => {
     if (viewMode === "DESKTOP") {
@@ -21,23 +18,9 @@ const Player = () => {
     }
   }, [viewMode]);
 
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (!inputMode && e.key === " ") {
-        e.preventDefault();
-        setPlay(!play);
-      }
-    };
-
-    document.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [inputMode, play]);
-
   return (
     <Suspense>
+      <KeyEventControler />
       {viewMode !== "DESKTOP" ? <PlayerMobileView /> : <PlayerDesktopMode />}
     </Suspense>
   );

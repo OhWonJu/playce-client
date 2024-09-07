@@ -3,14 +3,20 @@ import WaveSurfer from "wavesurfer.js";
 import Hls from "hls.js";
 import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
 import usePlayTimeStore from "@/stores/usePlayTimeStore";
-import { usePlayerControl } from "@/hooks/usePlayerControl";
-import { usePlaylist } from "@/hooks/usePlaylist";
+import { usePlayerControl } from "@/stores/usePlayerControl";
 
 const Waveform = () => {
   const { displayPlayer } = usePlayerToggle();
-  const { play, repeatMode, forwardTrigger, setPlay } = usePlayerControl();
-  const { setCurrentTrack, currentTrack, playList, originTrackId } =
-    usePlaylist();
+  const {
+    play,
+    repeatMode,
+    forwardTrigger,
+    setPlay,
+    setCurrentTrack,
+    currentTrack,
+    playList,
+    originTrackId,
+  } = usePlayerControl();
   const { playTime, setPlayTime, setTotalTime } = usePlayTimeStore();
 
   const waveformRef = useRef<HTMLDivElement>(null);

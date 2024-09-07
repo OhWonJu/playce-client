@@ -9,8 +9,8 @@ import {
 import { Track } from "@/types";
 import { TRACK_CARD_HEIGHT } from "@/constants/uiSizes";
 
-import { useQueue } from "@/hooks/useQueue";
-import { usePlaylist } from "@/hooks/usePlaylist";
+import { usePlayerControl } from "@/stores/usePlayerControl";
+import { useQueue } from "@/stores/useQueue";
 
 import Image from "../Image";
 
@@ -38,9 +38,11 @@ const TrackCard = ({
 }: TrackCardProps) => {
   const { style } = rest;
 
-  const { addTrack: addPlayListTrack, deleteTrack: delPlayListTrack } =
-    usePlaylist();
-  const { addTrack: addQueueList, deleteTrack: delQueuList } = useQueue();
+  const addPlayListTrack = usePlayerControl(state => state.addTrack);
+  const delePlayListTrack = usePlayerControl(state => state.deleteTrack);
+
+  const addQueueList = useQueue(state => state.addTrack);
+  const deleteQueueList = useQueue(state => state.deleteTrack);
 
   const [scope, animate] = useAnimate();
   const x = useMotionValue(0);
@@ -111,8 +113,8 @@ const TrackCard = ({
 
   function handleDeleteBtn() {
     if (trackListType === "QUEUE") {
-      delPlayListTrack(data);
-      delQueuList(data);
+      delePlayListTrack(data);
+      deleteQueueList(data);
     }
     if (trackListType === "LIST") null;
   }

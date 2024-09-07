@@ -8,7 +8,7 @@ import {
   WAVE_FORM_HEIGHT,
 } from "@/constants/uiSizes";
 
-import { usePlayerControl } from "@/hooks/usePlayerControl";
+import { usePlayerControl } from "@/stores/usePlayerControl";
 import usePlayTimeStore from "@/stores/usePlayTimeStore";
 
 import { DotMenu } from "@/components/icons";
@@ -23,12 +23,12 @@ import {
   Waveform,
 } from "./_modules";
 import { TrackCard } from "../cards";
-import { usePlaylist } from "@/hooks/usePlaylist";
 
 const PlayerDesktopMode = () => {
-  const { play } = usePlayerControl();
-  const { currentTrack, playList, playListType, setCurrentTrack } =
-    usePlaylist();
+  const currentTrack = usePlayerControl(state => state.currentTrack);
+  const playList = usePlayerControl(state => state.playList);
+  const playListType = usePlayerControl(state => state.playListType);
+  const setCurrentTrack = usePlayerControl(state => state.setCurrentTrack);
 
   const setPlayTime = usePlayTimeStore(state => state.setPlayTime);
 
@@ -68,7 +68,6 @@ const PlayerDesktopMode = () => {
         <div className="__ALBUM__ w-full aspect-square p-1">
           <AlbumArt
             artURL={currentTrack?.albumArtURL}
-            isPlay={play}
             pinOpacity={pinOpacity}
           />
         </div>

@@ -3,10 +3,8 @@ import _ from "lodash";
 
 import { cn } from "@/lib/utils";
 
-import { usePlayerControl } from "@/hooks/usePlayerControl";
-import { usePlaylist } from "@/hooks/usePlaylist";
-
 import usePlayTimeStore from "@/stores/usePlayTimeStore";
+import { usePlayerControl } from "@/stores/usePlayerControl";
 
 import Button from "@/components/Button/Button";
 import { Forward } from "@/components/icons";
@@ -18,8 +16,8 @@ const ForwardButton = ({
   isForward: boolean;
   className?: string;
 }) => {
-  const { setForwardTrigger } = usePlayerControl();
-  const { currentTrack, playList, setCurrentTrack } = usePlaylist();
+  const { currentTrack, playList, setCurrentTrack, setForwardTrigger } =
+    usePlayerControl();
 
   const getPlayTime = usePlayTimeStore(state => state.getPlayTime);
   const setPlayTime = usePlayTimeStore(state => state.setPlayTime);

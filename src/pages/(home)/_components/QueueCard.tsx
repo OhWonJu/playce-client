@@ -2,16 +2,18 @@ import React, { useMemo } from "react";
 
 import { convertTime } from "@/lib/utils";
 import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
-import { usePlayerControl } from "@/hooks/usePlayerControl";
+import { usePlayerControl } from "@/stores/usePlayerControl";
 
-import { useQueue } from "@/hooks/useQueue";
+import { useQueue } from "@/stores/useQueue";
 
 import { MusicCard } from "@/components";
 
 const QueueCard = ({}: { key: string }) => {
   const { displayPlayer, onOpen } = usePlayerToggle();
   const { songCount, totalPlayTime, queue } = useQueue();
-  const { handlePlayListClick } = usePlayerControl();
+  const handlePlayListClick = usePlayerControl(
+    state => state.handlePlayListClick,
+  );
 
   const totalMin = useMemo(
     () => convertTime(totalPlayTime, "number")[0],

@@ -1,18 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, MotionValue } from "framer-motion";
 
-import { usePlaylist } from "@/hooks/usePlaylist";
+import { usePlayerControl } from "@/stores/usePlayerControl";
 
 import Image from "@/components/Image";
 
 interface AlbumArtProps {
   artURL?: string;
-  isPlay: boolean;
   pinOpacity: MotionValue<number>;
 }
 
-const AlbumArt = ({ artURL, isPlay, pinOpacity }: AlbumArtProps) => {
-  const { originTrackId } = usePlaylist();
+const AlbumArt = ({ artURL, pinOpacity }: AlbumArtProps) => {
+  const isPlay = usePlayerControl(state => state.play);
+  const originTrackId = usePlayerControl(state => state.originTrackId);
 
   const [playing, setPlaying] = useState(undefined);
   const angleRef = useRef(0);

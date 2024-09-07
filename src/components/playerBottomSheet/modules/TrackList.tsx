@@ -2,15 +2,14 @@ import React from "react";
 
 import { Track } from "@/types";
 
-import { usePlaylist } from "@/hooks/usePlaylist";
+import { usePlayerControl } from "@/stores/usePlayerControl";
 import usePlayTimeStore from "@/stores/usePlayTimeStore";
 
 import { TrackCard } from "@/components/cards";
 
 const TrackList = () => {
-  // const {} = usePlayerControl();
   const { playList, playListType, currentTrack, setCurrentTrack } =
-    usePlaylist();
+    usePlayerControl();
   const { setPlayTime } = usePlayTimeStore();
 
   const clickHanlder = (track: Track) => {
