@@ -24,7 +24,8 @@ const NON_PLAYABLE_PATHS = ["/", "/join"];
 const RootLayout = ({ children }: PropsWithChildren) => {
   const location = useLocation();
   const { viewMode } = useViewModeStore();
-  const { displayPlayer, onClose: closePlayer } = usePlayerToggle();
+  const closePlayer = usePlayerToggle(state => state.onClose);
+  const displayPlayer = usePlayerToggle(state => state.displayPlayer);
 
   const isPlayablePaths = useMemo(() => {
     const isAble = NON_PLAYABLE_PATHS.includes(location.pathname)
@@ -39,7 +40,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <ViewModeProvider />
-      {displayPlayer && <Player />}
+      <Player />
       <ModalProvider />
       {viewMode !== "INIT" && (
         <>
