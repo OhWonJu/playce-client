@@ -10,7 +10,7 @@ import { TrackCard } from "@/components/cards";
 const TrackList = () => {
   const { playList, playListType, currentTrack, setCurrentTrack } =
     usePlayerControl();
-  const { setPlayTime } = usePlayTimeStore();
+  const setPlayTime = usePlayTimeStore(state => state.setPlayTime);
 
   const clickHanlder = (track: Track) => {
     setPlayTime(0);
