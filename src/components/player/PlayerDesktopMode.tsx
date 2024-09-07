@@ -1,7 +1,6 @@
 import React from "react";
 import { useMotionValue } from "framer-motion";
 
-import { Track } from "@/types";
 import {
   DESKTOP_PLAYER_WIDTH,
   NAV_HEIGHT,
@@ -9,7 +8,6 @@ import {
 } from "@/constants/uiSizes";
 
 import { usePlayerControl } from "@/stores/usePlayerControl";
-import usePlayTimeStore from "@/stores/usePlayTimeStore";
 
 import { DotMenu } from "@/components/icons";
 import {
@@ -17,27 +15,17 @@ import {
   ForwardButton,
   PlayButton,
   PlayerMarquee,
+  PlayList,
   PlayTimer,
   RepeatButton,
   ShuffleButton,
   Waveform,
 } from "./_modules";
-import { TrackCard } from "../cards";
 
 const PlayerDesktopMode = () => {
   const currentTrack = usePlayerControl(state => state.currentTrack);
-  const playList = usePlayerControl(state => state.playList);
-  const playListType = usePlayerControl(state => state.playListType);
-  const setCurrentTrack = usePlayerControl(state => state.setCurrentTrack);
-
-  const setPlayTime = usePlayTimeStore(state => state.setPlayTime);
 
   const pinOpacity = useMotionValue(1);
-
-  const clickHanlder = (track: Track) => {
-    setPlayTime(0);
-    setCurrentTrack(track);
-  };
 
   return (
     <div
@@ -108,15 +96,7 @@ const PlayerDesktopMode = () => {
         className="__TRACK_LIST__ flex flex-col w-full mt-4 pb-4 space-y-1 overflow-y-scroll scrollbar-hide"
         style={{ height: `calc(50vh - ${25}px)` }}
       >
-        {playList.map((track: Track, index: number) => (
-          <TrackCard
-            key={index + track.trackTitle + playListType} // list 간의 전환이 있는 경우 index + track 조합이 같으면 같은 컴포넌트라 생각하는 것 같음.
-            data={track}
-            trackListType={playListType}
-            focused={currentTrack.trackTitle === track.trackTitle}
-            onClick={() => clickHanlder(track)}
-          />
-        ))}
+        <PlayList currentTrack={currentTrack} />
       </section>
     </div>
   );

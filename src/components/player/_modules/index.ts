@@ -7,3 +7,4 @@ export { default as RepeatButton } from "./RepeatButton";
 export { default as ShuffleButton } from "./ShuffleButton";
 export { default as Waveform } from "./Waveform";
 export { default as KeyEventControler } from "./KeyEventControler";
+export { default as PlayList } from "./PlayList";
