@@ -8,7 +8,7 @@ export const AlbumInfoWrapper = styled.section`
 
   ${tw`flex-col mb-4`}
   ${tw`sm:flex-row sm:h-[250px] sm:space-x-6`}
-  ${tw`lg:flex-col lg:h-full lg:space-x-0`}
+  ${tw`lg:flex-col lg:h-auto lg:space-x-0`}
   ${tw`xl:flex-row xl:h-[250px] xl:space-x-6`}
 `;
 
