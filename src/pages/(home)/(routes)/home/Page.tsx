@@ -65,7 +65,7 @@ const HomePage = () => {
           <MusicList
             title="나의 플레이리스트"
             exceptionGuide={`플레이리스트가 없어요. 새로운 플레이리스트를 만들어 볼까요?`}
-            exceptionAction={() => navigate("/my/playlists")}
+            exceptionAction={() => navigate("/cabinet/playlists")}
           />
         </>
       )}

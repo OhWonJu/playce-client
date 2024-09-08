@@ -1,17 +1,19 @@
 import { lazy, PropsWithChildren, Suspense, useMemo } from "react";
-
-import ModalProvider from "./components/providers/ModalProvider";
-import ViewModeProvider from "./components/providers/ViewModeProvider";
+import { useLocation } from "react-router";
 import styled, { css } from "styled-components";
 import tw from "twin.macro";
+
 import {
   DESKTOP_PLAYER_WIDTH,
   NAV_HEIGHT,
   PLAYER_HEADER_HEIGHT,
 } from "./constants/uiSizes";
-import { useLocation } from "react-router";
+
 import useViewModeStore from "./stores/useViewMode";
 import { usePlayerToggle } from "./stores/usePlayerToggleStore";
+
+import ModalProvider from "./components/providers/ModalProvider";
+import ViewModeProvider from "./components/providers/ViewModeProvider";
 import Navigator from "./components/Navigator/Navigator";
 import { Player } from "./components";
 
@@ -21,7 +23,7 @@ const PlayerBottomSheet = lazy(
 
 const NON_PLAYABLE_PATHS = ["/", "/join"];
 
-const RootLayout = ({ children }: PropsWithChildren) => {
+const Children = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const { viewMode } = useViewModeStore();
   const closePlayer = usePlayerToggle(state => state.onClose);
@@ -39,8 +41,6 @@ const RootLayout = ({ children }: PropsWithChildren) => {
 
   return (
     <>
-      <ViewModeProvider />
-      <Player />
       <ModalProvider />
       {viewMode !== "INIT" && (
         <>
@@ -67,6 +67,17 @@ const RootLayout = ({ children }: PropsWithChildren) => {
       <Suspense>
         {displayPlayer && viewMode !== "DESKTOP" && <PlayerBottomSheet />}
       </Suspense>
+    </>
+  );
+};
+
+const RootLayout = ({ children }: PropsWithChildren) => {
+  return (
+    <>
+      <ViewModeProvider />
+      <Player />
+      <ModalProvider />
+      <Children children={children} />
     </>
   );
 };
@@ -107,7 +118,6 @@ const PlayableContainer = styled.div<{ $isDesktop: boolean }>`
 const NonPlayableContainer = styled.div<{ $isDesktop: boolean }>`
   position: relative;
   width: 100vw;
-  max-width: 100vw;
   height: 100vh;
   max-height: 100vh;
   display: flex;

@@ -24,17 +24,12 @@ const AlbumInfo = ({
   genres,
   tracks,
 }: AlbumInfoProps) => {
-  const boxRef = useRef(null);
-
   const totalTimes = useMemo(
     () => tracks.reduce((acc, cur) => acc + cur.trackTime, 0),
     [tracks],
   );
 
-  const genresContent = useMemo(
-    () => genres.reduce((acc, cur) => acc + `${cur.genre}`, ""),
-    [genres],
-  );
+  const genresContent = useMemo(() => genres.map(item => item.genre), [genres]);
 
   return (
     <AlbumInfoBox>
@@ -44,10 +39,12 @@ const AlbumInfo = ({
         {albumType}
         {releasedAt && `• ${format(releasedAt, DATE_FORMAT)}`}
       </a>
-      <a className="text-zinc-400 font-semibold text-sm">{genresContent}</a>
+      <a className="text-zinc-400 font-semibold text-sm">
+        {genresContent.join(" • ")}
+      </a>
       <div className="flex space-x-2">
         <a className="text-zinc-400 font-semibold text-sm">
-          {tracks?.length} 곡 • {Math.round(totalTimes / 60)} 분
+          {tracks?.length}곡 • {Math.round(totalTimes / 60)}분
         </a>
       </div>
     </AlbumInfoBox>

@@ -115,7 +115,7 @@ const JoinPage = () => {
   };
 
   return (
-    <main className="flex flex-col overflow-y-scroll w-full sm:w-[350px] mx-auto px-4 sm:px-0 justify-start items-center py-16">
+    <main className="flex flex-col w-full sm:w-[350px] mx-auto px-4 sm:px-0 justify-start items-center py-16">
       <section className="__TITLES__ flex flex-col items-center">
         <SymbolHeader description="JOIN US! FOR MORE BENEFIT" />
       </section>

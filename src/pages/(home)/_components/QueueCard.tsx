@@ -33,7 +33,7 @@ const QueueCard = ({}: { key: string }) => {
   return (
     <MusicCard
       title={"My queue"}
-      subTitle={`${songCount} songs • ${totalMin} mins`}
+      subTitle={`${songCount}곡 • ${totalMin}분`}
       size="md"
       playable
       playAction={queueClickHandler}
