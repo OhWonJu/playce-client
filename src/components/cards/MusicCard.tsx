@@ -74,6 +74,7 @@ const MusicCard = ({
           <div className="grid grid-cols-2 grid-rows-2">
             {imageUrl.map(url => (
               <Image
+                key={url}
                 alt="albumArt"
                 width={IMAGE_SIZE[size] / 2}
                 imageUrl={url}
