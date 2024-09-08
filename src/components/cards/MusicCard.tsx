@@ -6,7 +6,7 @@ import { Play } from "../icons";
 interface MusicCardProps {
   title: string;
   subTitle?: string;
-  imageUrl?: string;
+  imageUrl?: string | string[];
   size?: "sm" | "md" | "lg";
   clickBlocking?: boolean;
   playable?: boolean;
@@ -66,8 +66,20 @@ const MusicCard = ({
           size === "lg" && "w-[200px]",
         )}
       >
-        {imageUrl && (
+        {typeof imageUrl === "string" && imageUrl && (
           <Image alt="albumArt" width={IMAGE_SIZE[size]} imageUrl={imageUrl} />
+        )}
+
+        {Array.isArray(imageUrl) && (
+          <div className="grid grid-cols-2 grid-rows-2">
+            {imageUrl.map(url => (
+              <Image
+                alt="albumArt"
+                width={IMAGE_SIZE[size] / 2}
+                imageUrl={url}
+              />
+            ))}
+          </div>
         )}
         {playable && (
           <span

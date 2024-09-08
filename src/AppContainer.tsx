@@ -22,6 +22,7 @@ const AppContainer = () => {
   const { initMe, setMe } = useMeStore();
 
   const setQueue = useQueue(state => state.setQueue);
+  const setQueueThumbNail = useQueue(state => state.setQueueThumbNail);
 
   const {
     data: connectCheck,
@@ -70,7 +71,10 @@ const AppContainer = () => {
   }, [isLogin, flag]);
 
   useEffect(() => {
-    if (queueData) setQueue(queueData.tracks);
+    if (queueData) {
+      setQueue(queueData.tracks);
+      setQueueThumbNail(queueData.queueThumbNail);
+    }
   }, [queueData]);
 
   if (connectChecking || isLoading) return null;

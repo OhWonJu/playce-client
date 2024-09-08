@@ -124,7 +124,7 @@ const TrackCard = ({
     if (trackListType === "QUEUE") {
       delePlayListTrack(data);
       deleteQueueList(data);
-      mutation.mutate({ isAdd: true, trackId: data.id });
+      mutation.mutate({ isAdd: false, trackId: data.id });
     }
     if (trackListType === "LIST") null;
   }

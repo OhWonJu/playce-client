@@ -10,7 +10,7 @@ import { MusicCard } from "@/components";
 
 const QueueCard = ({}: { key: string }) => {
   const { displayPlayer, onOpen } = usePlayerToggle();
-  const { songCount, totalPlayTime, queue } = useQueue();
+  const { songCount, totalPlayTime, queue, queueThumbNail } = useQueue();
   const handlePlayListClick = usePlayerControl(
     state => state.handlePlayListClick,
   );
@@ -34,6 +34,9 @@ const QueueCard = ({}: { key: string }) => {
     <MusicCard
       title={"My queue"}
       subTitle={`${songCount}곡 • ${totalMin}분`}
+      imageUrl={
+        queueThumbNail.length === 4 ? queueThumbNail : queueThumbNail[0]
+      }
       size="md"
       playable
       playAction={queueClickHandler}

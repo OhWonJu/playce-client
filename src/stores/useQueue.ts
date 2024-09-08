@@ -12,17 +12,20 @@ interface QueueStore {
   queue: Track[];
   songCount: number;
   totalPlayTime: number;
+  queueThumbNail: string[];
 
   setQueue: (queue: Track[]) => void;
   addTrack: (track: Track) => void;
   deleteTrack: (track: Track) => void;
   initQueue: () => void;
+  setQueueThumbNail: (thumbnail: string[]) => void;
 }
 
 export const useQueue = create<QueueStore>((set, get) => ({
   queue: [],
   songCount: 0,
   totalPlayTime: 0,
+  queueThumbNail: [],
 
   setQueue: (queue: Track[]) =>
     set({
@@ -73,4 +76,8 @@ export const useQueue = create<QueueStore>((set, get) => ({
   },
 
   initQueue: () => set({ queue: [], songCount: 0, totalPlayTime: 0 }),
+
+  setQueueThumbNail: thumbnail => {
+    return set({ queueThumbNail: thumbnail });
+  },
 }));
