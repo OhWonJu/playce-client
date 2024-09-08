@@ -23,6 +23,7 @@ const Waveform = () => {
   const wavesurfer = useRef(null);
   const video = useRef<HTMLVideoElement>(null);
   const prevOriginTrackIdRef = useRef(originTrackId);
+  const prevSec = useRef(0);
 
   // TODO : 개선 필요
   const rootStyles = useMemo(
@@ -72,9 +73,10 @@ const Waveform = () => {
         });
 
         wavesurfer.current.on("timeupdate", (currentTime: number) => {
-          const threshhold = Number(currentTime.toString().split(".")[1]);
+          const curentSec = Math.floor(currentTime);
 
-          if (threshhold < 20000) {
+          if (prevSec.current !== curentSec) {
+            prevSec.current = curentSec;
             setPlayTime(currentTime);
           }
         });
