@@ -8,12 +8,8 @@ export const _GET = async <T>(endPoint: string) => {
 };
 
 export const _PATCH = async <T>(endPoint: string, params?: any) => {
-  try {
-    const response = await rootAPI.patch<T>(endPoint, params);
-    return response;
-  } catch (error) {
-    console.error(error);
-  }
+  const response = await rootAPI.patch<T>(endPoint, params);
+  return response;
 };
 
 export const _POST = async <T>(endPoint: string, params?: any) => {

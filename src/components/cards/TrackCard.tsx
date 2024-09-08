@@ -5,6 +5,10 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
+import { useMutation } from "@tanstack/react-query";
+
+import { updateQueue, UpdateQueueRequest } from "@/api/queue";
+import { _PATCH } from "@/api/rootAPI";
 
 import { Track } from "@/types";
 import { TRACK_CARD_HEIGHT } from "@/constants/uiSizes";
@@ -43,6 +47,10 @@ const TrackCard = ({
 
   const addQueueList = useQueue(state => state.addTrack);
   const deleteQueueList = useQueue(state => state.deleteTrack);
+
+  const mutation = useMutation({
+    mutationFn: updateQueue,
+  });
 
   const [scope, animate] = useAnimate();
   const x = useMotionValue(0);
@@ -98,6 +106,7 @@ const TrackCard = ({
         setTimeout(() => {
           addPlayListTrack(data);
           addQueueList(data);
+          mutation.mutate({ isAdd: true, trackId: data.id });
         }, 200);
       }
     }
@@ -115,6 +124,7 @@ const TrackCard = ({
     if (trackListType === "QUEUE") {
       delePlayListTrack(data);
       deleteQueueList(data);
+      mutation.mutate({ isAdd: true, trackId: data.id });
     }
     if (trackListType === "LIST") null;
   }

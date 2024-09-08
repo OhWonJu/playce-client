@@ -1,5 +1,7 @@
 import React from "react";
 
+import { _PATCH } from "@/api/rootAPI";
+
 import { Track } from "@/types";
 import { convertTime } from "@/lib/utils";
 import { usePlayerControl } from "@/stores/usePlayerControl";
@@ -9,6 +11,8 @@ import { useQueue } from "@/stores/useQueue";
 import Button from "../Button/Button";
 import { DotMenu, Play, QueueList } from "../icons";
 import { QueuePlayIconBox } from "./trackListCard.styles";
+import { useMutation } from "@tanstack/react-query";
+import { updateQueue } from "@/api/queue";
 
 interface TrackListCardProps {
   index: number;
@@ -21,9 +25,14 @@ const TrackListCard = ({ index, data, isOwn }: TrackListCardProps) => {
   const playListType = usePlayerControl(state => state.playListType);
   const addQueueList = useQueue(state => state.addTrack);
 
+  const mutation = useMutation({
+    mutationFn: updateQueue,
+  });
+
   const handleQueueAddActionClick = () => {
     playListType === "QUEUE" && addPlayListTrack(data);
     addQueueList(data);
+    mutation.mutate({ isAdd: true, trackId: data.id });
   };
 
   return (

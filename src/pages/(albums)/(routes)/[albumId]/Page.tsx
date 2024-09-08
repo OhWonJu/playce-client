@@ -1,10 +1,10 @@
 import React from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import { getAlbumInfo } from "@/api/album";
 
-import { NAV_HEIGHT, PLAYER_HEADER_HEIGHT } from "@/constants/uiSizes";
+import { PlayableContainer } from "@/styles/GlobalStyles";
 
 import { AlbumInfoWrapper, AlbumUtilsWrapper } from "./page.styles";
 
@@ -16,26 +16,29 @@ import {
 } from "../../_components";
 
 const AlbumIdPage = () => {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   const albumId = searchParams.get("albumId");
+
+  if (!albumId) {
+    navigate("/not-found");
+    return;
+  }
 
   const { data, isLoading } = useQuery(getAlbumInfo(albumId));
 
   if (isLoading) return null;
 
-  if (!data) return null;
+  if (!data) {
+    navigate("/not-found");
+    return;
+  }
 
   const { album, own } = data;
 
   return (
-    <div
-      className="flex flex-col max-h-full  overflow-scroll scrollbar-hide"
-      style={{
-        paddingTop: NAV_HEIGHT * 2,
-        paddingBottom: NAV_HEIGHT * 2 + PLAYER_HEADER_HEIGHT,
-      }}
-    >
+    <PlayableContainer>
       <AlbumInfoWrapper>
         <AlbumArt imageUrl={album.albumArtURL} />
 
@@ -44,6 +47,7 @@ const AlbumIdPage = () => {
             albumName={album.albumName}
             albumType={album.albumType}
             artistName={album.artist.artistName}
+            releasedAt={album.releasedAt}
             genres={album.genres}
             tracks={album.tracks}
           />
@@ -53,7 +57,7 @@ const AlbumIdPage = () => {
 
       {/* TRACK LIST */}
       <AlbumTrackList tracks={album.tracks} isOwn={own} className="mt-8" />
-    </div>
+    </PlayableContainer>
   );
 };
 

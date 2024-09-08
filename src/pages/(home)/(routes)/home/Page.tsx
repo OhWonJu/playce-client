@@ -4,10 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import { _POST } from "@/api/rootAPI";
 import { getSummary } from "@/api/users";
 
-import { NAV_HEIGHT, PLAYER_HEADER_HEIGHT } from "@/constants/uiSizes";
-
 import { MusicCard, MusicList } from "@/components";
 import { useAuthStore } from "@/stores/useAuthStore";
+
+import { PlayableContainer } from "@/styles/GlobalStyles";
 
 import { QueueCard } from "../../_components";
 
@@ -22,7 +22,7 @@ const HomePage = () => {
   if (summaryLoading) return null;
 
   const replayListRenderer = () => [
-    <QueueCard key={"my-queue"}/>,
+    <QueueCard key={"my-queue"} />,
     <MusicCard key={"recent"} title={"최근 들었던 곡1"} size="md" playable />,
     <MusicCard key={"recent2"} title={"최근 들었던 곡2"} size="md" playable />,
     <MusicCard
@@ -47,13 +47,7 @@ const HomePage = () => {
     ));
 
   return (
-    <div
-      className="flex flex-col space-y-16 max-h-full pb-14 overflow-scroll scrollbar-hide"
-      style={{
-        paddingTop: NAV_HEIGHT * 2,
-        paddingBottom: NAV_HEIGHT * 2 + PLAYER_HEADER_HEIGHT,
-      }}
-    >
+    <PlayableContainer className="pb-14 space-y-20">
       {/* <Heading title={`반가워요 ${nickName}님`} align="center" /> */}
       {isLogin && (
         <>
@@ -77,7 +71,7 @@ const HomePage = () => {
       )}
       <MusicList title="최신 앨범" exceptionGuide={`작업중`} />
       <MusicList title="추천 앨범" exceptionGuide={`작업중`} />
-    </div>
+    </PlayableContainer>
   );
 };
 

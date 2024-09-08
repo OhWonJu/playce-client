@@ -41,4 +41,5 @@ export interface AlbumInfo {
   };
   createdAt: string;
   updatedAt: string;
+  releasedAt?: Date;
 }

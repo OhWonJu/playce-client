@@ -77,8 +77,8 @@ const MobileNavigator = ({
           imageUrl={image}
           size="icon"
           className="cursor-pointer"
-          active={pathName === "my"}
-          onClick={() => navigate(`/my`)}
+          active={pathName === "cabinet"}
+          onClick={() => navigate(`/cabinet`)}
         />
       </NavButtonArea>
     </MobileNavigatorWrapper>

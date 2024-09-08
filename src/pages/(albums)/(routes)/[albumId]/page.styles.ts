@@ -5,6 +5,7 @@ export const AlbumInfoWrapper = styled.section`
   position: relative;
   display: flex;
   width: 100%;
+  max-width: 100%;
 
   ${tw`flex-col mb-4`}
   ${tw`sm:flex-row sm:h-[250px] sm:space-x-6`}
@@ -13,6 +14,6 @@ export const AlbumInfoWrapper = styled.section`
 `;
 
 export const AlbumUtilsWrapper = styled.section`
-  ${tw`grid grid-rows-4`}
-  ${tw`mt-4 sm:mt-0 lg:mt-4 xl:mt-0`}
+  ${tw`grid grid-rows-4`};
+  ${tw`mt-4 sm:mt-0 lg:mt-4 xl:mt-0`};
 `;

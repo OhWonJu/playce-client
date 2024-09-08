@@ -1,7 +1,7 @@
-import React from "react";
+import { PlayableContainer } from "@/styles/GlobalStyles";
 
 const UserIdPage = () => {
-  return <div>UserIdPage</div>;
+  return <PlayableContainer>UserIdPage</PlayableContainer>;
 };
 
 export default UserIdPage;

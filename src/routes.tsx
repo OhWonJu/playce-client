@@ -5,12 +5,12 @@ import RootPage from "./pages/(root)/Page";
 import HomePage from "./pages/(home)/(routes)/home/Page";
 import UserIdPage from "./pages/(profile)/(routes)/[userId]/Page";
 import AlbumIdPage from "./pages/(albums)/(routes)/[albumId]/Page";
-import MyAlbumsPage from "./pages/(my)/(routes)/albums/Page";
-import MyPlayListsPage from "./pages/(my)/(routes)/playlists/Page";
-import MyQueuePage from "./pages/(my)/(routes)/queue/Page";
 import JoinPage from "./pages/(auth)/(routes)/join/Page";
 import ExplorePage from "./pages/(explore)/(routes)/explore/Page";
-import MyPage from "./pages/(my)/(routes)/page";
+import CabinetPage from "./pages/(cabinet)/(routes)/page";
+import CabinetAlbumsPage from "./pages/(cabinet)/(routes)/albums/Page";
+import CabinetPlayListsPage from "./pages/(cabinet)/(routes)/playlists/Page";
+import CabinetQueuePage from "./pages/(cabinet)/(routes)/queue/Page";
 
 const AccessDenied = lazy(() => import("./pages/AccessDenied"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -22,24 +22,24 @@ type CustomRouteProps = RouteProps & {
 
 export const privateRoutes: CustomRouteProps[] = [
   {
-    path: "/albums/:albumId",
+    path: "/albums/:albumName",
     element: <AlbumIdPage />,
   },
   {
-    path: "/my",
-    element: <MyPage />,
+    path: "/cabinet",
+    element: <CabinetPage />,
   },
   {
-    path: "/my/albums",
-    element: <MyAlbumsPage />,
+    path: "/cabinet/albums",
+    element: <CabinetAlbumsPage />,
   },
   {
-    path: "/my/playlists",
-    element: <MyPlayListsPage />,
+    path: "/cabinet/playlists",
+    element: <CabinetPlayListsPage />,
   },
   {
-    path: "/my/queue",
-    element: <MyQueuePage />,
+    path: "/cabinet/queue",
+    element: <CabinetQueuePage />,
   },
 ];
 
@@ -59,6 +59,10 @@ export const publicRoutes: CustomRouteProps[] = [
   {
     path: "/join",
     element: <JoinPage />,
+  },
+  {
+    path: "/profile/:userId",
+    element: <UserIdPage />,
   },
   {
     path: "/access-denied",

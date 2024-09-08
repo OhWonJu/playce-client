@@ -67,10 +67,14 @@ const Waveform = () => {
           wavesurfer.current.play();
         }
 
-        wavesurfer.current.on("timeupdate", (currentTime: number) => {
-          let threshhold = Number(currentTime.toString().split(".")[1]);
+        wavesurfer.current.on("seeking", (currentTime: number) => {
+          setPlayTime(currentTime);
+        });
 
-          if (threshhold >= 980000) {
+        wavesurfer.current.on("timeupdate", (currentTime: number) => {
+          const threshhold = Number(currentTime.toString().split(".")[1]);
+
+          if (threshhold < 20000) {
             setPlayTime(currentTime);
           }
         });

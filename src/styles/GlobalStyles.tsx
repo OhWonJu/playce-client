@@ -1,5 +1,7 @@
-import { createGlobalStyle, css } from "styled-components";
-import { GlobalStyles as BaseStyles } from "twin.macro";
+import styled, { createGlobalStyle, css } from "styled-components";
+import tw, { GlobalStyles as BaseStyles } from "twin.macro";
+
+import { NAV_HEIGHT, PLAYER_HEADER_HEIGHT } from "@/constants/uiSizes";
 
 const Styles = css`
   html {
@@ -31,5 +33,12 @@ const GlobalStyles = () => (
     <CustomStyles />
   </>
 );
+
+export const PlayableContainer = styled.main`
+  padding-top: ${NAV_HEIGHT * 2}px;
+  padding-bottom: ${NAV_HEIGHT * 2 + PLAYER_HEADER_HEIGHT}px;
+
+  ${tw`flex flex-col max-h-full overflow-scroll scrollbar-hide`}
+`;
 
 export default GlobalStyles;

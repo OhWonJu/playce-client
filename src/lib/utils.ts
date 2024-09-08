@@ -20,7 +20,7 @@ export const getTitleFromRoute = (path: string): string => {
 
   const userProfileRegex = /^\/profile\/(\S+)$/;
   const albumsRegex = /^\/albums\/(\S+)$/;
-  const myRegex = /^\/(my\/)(playlists)|(albums)|(queue)$/;
+  const cabinetRegex = /^\/(cabinet\/)(playlists)|(albums)|(queue)$/;
 
   let title = "";
 
@@ -32,7 +32,7 @@ export const getTitleFromRoute = (path: string): string => {
     const albumName = path.split("/").pop();
     title += `${albumName} | `;
     // return `앨범 | ${SYMBOL_TITLE}`;
-  } else if (myRegex.test(path)) {
+  } else if (cabinetRegex.test(path)) {
     const endPoint = path.split("/").pop();
 
     switch (endPoint) {

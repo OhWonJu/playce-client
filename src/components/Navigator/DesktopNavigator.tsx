@@ -31,9 +31,9 @@ const DesktopNavigator = ({
         <Avatar
           imageUrl={image}
           size="icon"
-          active={pathName === "my"}
+          active={pathName === "cabinet"}
           className="cursor-pointer"
-          onClick={() => navigate(`/my`)}
+          onClick={() => navigate(`/cabinet`)}
         />
       </ProfileArea>
     </DesktopNavigatorWrapper>

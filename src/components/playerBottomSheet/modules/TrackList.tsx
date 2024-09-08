@@ -12,7 +12,7 @@ const TrackList = () => {
     usePlayerControl();
   const setPlayTime = usePlayTimeStore(state => state.setPlayTime);
 
-  const clickHanlder = (track: Track) => {
+  const clickHandler = (track: Track) => {
     setPlayTime(0);
     setCurrentTrack(track);
   };
@@ -25,7 +25,7 @@ const TrackList = () => {
           data={track}
           trackListType={playListType}
           focused={currentTrack.trackTitle === track.trackTitle}
-          onClick={() => clickHanlder(track)}
+          onClick={() => clickHandler(track)}
         />
       ))}
     </section>
