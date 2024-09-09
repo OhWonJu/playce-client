@@ -50,7 +50,6 @@ export interface PlaylistSimple {
   playListName: string;
   thumbNail: string[];
   count: number;
-  tracks: Track[];
   updatedAt: Date;
 }
 

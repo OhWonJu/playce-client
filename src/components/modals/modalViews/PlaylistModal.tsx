@@ -3,6 +3,7 @@ import { useInView } from "framer-motion";
 
 import {
   getPlaylist,
+  getTracksByPlaylist,
   playlistsQueryKeys,
   updatePlaylistTrack,
   UpdatePlaylistTrackRequest,
@@ -76,14 +77,40 @@ const PlaylistModal = () => {
     });
   };
 
-  const handleItemClick = (playlistId: string, tracks: Track[]) => {
+  const { mutate: getTrack } = useMutation({
+    mutationFn: async ({ playlistId }: { playlistId: string }) =>
+      await getTracksByPlaylist(playlistId),
+    onSuccess: data => {
+      queryClient.setQueryData<Track[]>(
+        playlistsQueryKeys.playlistTracks(data.playlistId),
+        data.tracks,
+      );
+      !displayPlayer && onPlayerOpen();
+      handlePlayListClick("LIST", { id: data.playlistId, tracks: data.tracks });
+      onClose();
+    },
+    onError: () => {
+      console.log("FAILED GE TRACKS");
+    },
+  });
+
+  const handleItemClick = (playlistId: string) => {
     if (data) {
       mutate({ playlistId, data: data.playlist });
       onClose();
     } else {
-      !displayPlayer && onPlayerOpen();
-      handlePlayListClick("LIST", { id: playlistId, tracks });
-      onClose();
+      const prevData = queryClient.getQueryData(
+        playlistsQueryKeys.playlistTracks(playlistId),
+      );
+
+      if (prevData) {
+        !displayPlayer && onPlayerOpen();
+        handlePlayListClick("LIST", {
+          id: playlistId,
+          tracks: prevData as Track[],
+        });
+        onClose();
+      } else getTrack({ playlistId });
     }
   };
 

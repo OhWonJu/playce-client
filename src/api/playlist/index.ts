@@ -1,6 +1,6 @@
-import { Playlist, PlaylistSimple } from "@/types";
+import { Playlist, PlaylistSimple, Track } from "@/types";
 import { MutationResponse } from "../axios/axiosInstance.types";
-import { _GET, _PATCH, _POST } from "../rootAPI";
+import { _GET, _PATCH, _POST, _PUT } from "../rootAPI";
 import { queryOptions } from "@tanstack/react-query";
 
 export interface GetPlaylistsResponse {
@@ -22,6 +22,10 @@ export interface UpdatePlaylistTrackRequest {
 export const playlistsQueryKeys = {
   playlists: (userId?: string | null) => ["playlists", userId],
   playlist: (playlistId?: string | null) => ["playlist", playlistId] as const,
+  playlistTracks: (playlistId?: string | null) => [
+    "playlistTracks",
+    playlistId,
+  ],
 };
 
 export function getPlaylist(playlistId: string | undefined) {
@@ -56,4 +60,12 @@ export async function updatePlaylistTrack({
 
   if (!res.ok) throw new Error(res.errorCode);
   else return res;
+}
+
+export async function getTracksByPlaylist(playlistId: string) {
+  const res = await _PUT<{ playlistId: string; tracks: Track[]; own: boolean }>(
+    `/users/playlist/tracks/${playlistId}`,
+  );
+
+  return res;
 }
