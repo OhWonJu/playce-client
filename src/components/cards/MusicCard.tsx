@@ -60,7 +60,7 @@ const MusicCard = ({
     >
       <div
         className={cn(
-          "relative aspect-square rounded-md mb-1 bg-neutral-200 dark:bg-neutral-600 overflow-hidden",
+          "relative aspect-square rounded-md mb-1 bg-neutral-200 dark:bg-neutral-600 overflow-hidden shadow-md",
           size === "sm" && "w-[120px]",
           size === "md" && "w-[160px]",
           size === "lg" && "w-[200px]",
