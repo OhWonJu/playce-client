@@ -92,7 +92,7 @@ const MusicCard = ({
           <span
             role="button"
             onClick={event => handlePlayClick(event)}
-            className="absolute flex items-center justify-center bottom-2 right-2 p-1 bg-primary-foreground/95 hover:bg-primary-foreground shadow-md rounded-full "
+            className="absolute flex items-center justify-center bottom-2 right-2 p-1 bg-neutral-100/80 hover:bg-neutral-100 shadow-md rounded-full "
           >
             <Play className="pl-[3px]" />
           </span>

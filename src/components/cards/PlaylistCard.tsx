@@ -1,7 +1,10 @@
-import { PlaylistSimple } from "@/types";
 import React from "react";
-import Button from "../Button/Button";
+
+import { PlaylistSimple } from "@/types";
+
 import { cn } from "@/lib/utils";
+
+import Button from "../Button/Button";
 import Image from "../Image";
 import { DotMenu } from "../icons";
 

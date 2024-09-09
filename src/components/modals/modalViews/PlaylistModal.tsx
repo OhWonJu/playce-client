@@ -1,17 +1,21 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import {
-  getPlaylist,
   getTracksByPlaylist,
   playlistsQueryKeys,
   updatePlaylistTrack,
   UpdatePlaylistTrackRequest,
 } from "@/api/playlist";
 
+import { Track } from "@/types";
+
 import usePlaylistsQuery from "@/hooks/usePlaylistsQuery";
 import { useModal } from "@/stores/useModalStore";
 import useMeStore from "@/stores/useMeStore";
+import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
+import { usePlayerControl } from "@/stores/usePlayerControl";
 
 import { Plus } from "@/components/icons";
 import Button from "@/components/Button/Button";
@@ -19,10 +23,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { PlaylistCard } from "@/components/cards";
 
 import ModalLayout from "../ModalLayout";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { usePlayerControl } from "@/stores/usePlayerControl";
-import { Track } from "@/types";
-import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
 
 const PlaylistModal = () => {
   const ref = useRef(null);
@@ -41,7 +41,7 @@ const PlaylistModal = () => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-    status,
+    // status,
     isLoading,
   } = usePlaylistsQuery({
     queryKey: playlistsQueryKeys.playlists(id),
@@ -90,7 +90,7 @@ const PlaylistModal = () => {
       onClose();
     },
     onError: () => {
-      console.log("FAILED GE TRACKS");
+      console.log("FAILED GET TRACKS");
     },
   });
 

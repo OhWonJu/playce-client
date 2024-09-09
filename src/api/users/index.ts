@@ -27,6 +27,7 @@ export interface GetSummaryResponse {
   myPlayList: {
     id: string;
     playListName: string;
+    thumbNail: string[];
   }[];
 }
 
