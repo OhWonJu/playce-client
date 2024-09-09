@@ -10,10 +10,12 @@ import { useAuthStore } from "@/stores/useAuthStore";
 import { PlayableContainer } from "@/styles/GlobalStyles";
 
 import { QueueCard } from "../../_components";
+import { useModal } from "@/stores/useModalStore";
 
 const HomePage = () => {
   const { isLogin } = useAuthStore();
   const navigate = useNavigate();
+  const openModal = useModal(state => state.onOpen);
 
   const { data: summaryData, isLoading: summaryLoading } = useQuery(
     getSummary(isLogin),
@@ -55,17 +57,20 @@ const HomePage = () => {
             title="다시 듣기"
             singleLine
             renderer={replayListRenderer}
+            hasMore={false}
           />
           <MusicList
             title="나의 앨범"
             renderer={myAlbumsRenderer}
             exceptionGuide="가지고 있는 앨범이 없어요. 멋진 앨범들을 구경해 볼까요?"
             exceptionAction={() => navigate("/explore")}
+            hasMoreAction={() => navigate("/cabinet/albums")}
           />
           <MusicList
             title="나의 플레이리스트"
             exceptionGuide={`플레이리스트가 없어요. 새로운 플레이리스트를 만들어 볼까요?`}
-            exceptionAction={() => navigate("/cabinet/playlists")}
+            exceptionAction={() => openModal("createPlaylist")}
+            hasMoreAction={() => openModal("playlist")}
           />
         </>
       )}

@@ -38,7 +38,7 @@ const TrackListCard = ({ index, data, isOwn }: TrackListCardProps) => {
   return (
     <li
       key={index}
-      className=" group relative flex items-center w-full h-[50px] hover:bg-neutral-100 dark:hover:bg-neutral-600"
+      className="group relative flex items-center w-full h-[50px] hover:bg-accent"
     >
       {/* COL-1 */}
       <div className="w-[45px] h-full grid place-items-center mr-4">

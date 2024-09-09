@@ -52,6 +52,7 @@ export function getCurrentUser(flag: boolean | undefined) {
     enabled: flag,
     retry: 3,
     staleTime: 0,
+    refetchOnWindowFocus: false,
   });
 }
 

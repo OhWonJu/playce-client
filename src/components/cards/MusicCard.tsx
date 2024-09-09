@@ -67,7 +67,12 @@ const MusicCard = ({
         )}
       >
         {typeof imageUrl === "string" && imageUrl && (
-          <Image alt="albumArt" width={IMAGE_SIZE[size]} imageUrl={imageUrl} />
+          <Image
+            alt="albumArt"
+            imageUrl={imageUrl}
+            width={IMAGE_SIZE[size]}
+            lazy
+          />
         )}
 
         {Array.isArray(imageUrl) && (
@@ -76,14 +81,16 @@ const MusicCard = ({
               <Image
                 key={url}
                 alt="albumArt"
-                width={IMAGE_SIZE[size] / 2}
                 imageUrl={url}
+                width={IMAGE_SIZE[size] / 2}
+                lazy
               />
             ))}
           </div>
         )}
         {playable && (
           <span
+            role="button"
             onClick={event => handlePlayClick(event)}
             className="absolute flex items-center justify-center bottom-2 right-2 p-1 bg-primary-foreground/95 hover:bg-primary-foreground shadow-md rounded-full "
           >

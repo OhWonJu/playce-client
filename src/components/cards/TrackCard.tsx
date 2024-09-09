@@ -7,7 +7,7 @@ import {
 } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
 
-import { updateQueue, UpdateQueueRequest } from "@/api/queue";
+import { updateQueue } from "@/api/queue";
 import { _PATCH } from "@/api/rootAPI";
 
 import { Track } from "@/types";

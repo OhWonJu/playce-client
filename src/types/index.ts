@@ -43,3 +43,11 @@ export interface AlbumInfo {
   updatedAt: string;
   releasedAt?: Date;
 }
+
+export interface PlaylistSimple {
+  id: string;
+  isPublic: boolean;
+  playListName: string;
+  thumbNail: any;
+  updatedAt: Date;
+}

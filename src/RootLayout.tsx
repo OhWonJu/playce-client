@@ -41,7 +41,6 @@ const Children = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <ModalProvider />
       {viewMode !== "INIT" && (
         <>
           {isPlayablePaths && (

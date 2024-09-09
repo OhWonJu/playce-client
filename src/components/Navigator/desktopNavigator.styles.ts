@@ -27,7 +27,7 @@ export const NavButtonArea = styled.div`
 export const ProfileArea = styled.div`
   position: absolute;
   top: 0px;
-  right: 0px;
+  right: 1rem;
   height: 100%;
   display: grid;
   place-items: center;

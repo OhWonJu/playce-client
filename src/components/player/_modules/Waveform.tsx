@@ -73,10 +73,10 @@ const Waveform = () => {
         });
 
         wavesurfer.current.on("timeupdate", (currentTime: number) => {
-          const curentSec = Math.floor(currentTime);
+          const currentSec = Math.floor(currentTime);
 
-          if (prevSec.current !== curentSec) {
-            prevSec.current = curentSec;
+          if (prevSec.current !== currentSec) {
+            prevSec.current = currentSec;
             setPlayTime(currentTime);
           }
         });
@@ -118,8 +118,9 @@ const Waveform = () => {
 
     if (!stopLast) {
       setCurrentTrack(playList[nextIdx]);
+      wavesurfer.current?.play();
     } else setPlay(false);
-  }, [currentTrack, playList, repeatMode, playList]);
+  }, [currentTrack, playList, repeatMode]);
 
   useEffect(() => {
     if (wavesurfer.current) {
@@ -154,13 +155,13 @@ const Waveform = () => {
     }
 
     prevOriginTrackIdRef.current = originTrackId;
-  }, [currentTrack, originTrackId, forwardTrigger]);
+  }, [originTrackId, forwardTrigger]);
 
   useEffect(() => {
     if (wavesurfer.current) {
       handleForwardTrigger();
     }
-  }, [wavesurfer.current, handleForwardTrigger]);
+  }, [handleForwardTrigger]);
   // ========================================= 트랙 변경 처리 //
 
   // 재생/정지 처리 ======================================================== //

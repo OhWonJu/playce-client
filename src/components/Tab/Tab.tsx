@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 
 import { Tab, TabText, Tabs } from "./Tab.styles";
 import { cn } from "@/lib/utils";
+import Button from "../Button/Button";
 
 interface TabComponentProps {
   tabContents: Array<string>;
@@ -28,8 +29,15 @@ const TabComponent = ({
       style={style}
     >
       {tabContents.map((item, index) => (
-        <Tab key={index} onClick={() => tabClickHandler(index)}>
-          <TabText $focused={index === focusedTab}>{item}</TabText>
+        <Tab key={index}>
+          <Button
+            useRipple
+            variant="plain"
+            className="w-full h-full rounded-none"
+            onClick={() => tabClickHandler(index)}
+          >
+            <TabText $focused={index === focusedTab}>{item}</TabText>
+          </Button>
           {index === focusedTab ? (
             <motion.span
               layoutId="tab-underline"

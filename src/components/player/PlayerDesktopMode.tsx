@@ -40,7 +40,7 @@ const PlayerDesktopMode = () => {
     >
       {/* HEADER */}
       <section
-        className="__HEADER__ relative flex w-full justify-end items-center px-4  mb-1"
+        className="__HEADER__ relative flex w-full justify-end items-center px-4 mb-1"
         style={{ minHeight: 50 }}
       >
         <div className="flex justify-center items-center h-full aspect-square rounded-full">
