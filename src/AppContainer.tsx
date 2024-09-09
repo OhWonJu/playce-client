@@ -16,6 +16,7 @@ import "@/styles/tailwind.css";
 
 import App from "./App";
 import RootLayout from "./RootLayout";
+import { InitalLoader } from "./components";
 
 const AppContainer = () => {
   const { isLogin, setIsLogin } = useAuthStore();
@@ -77,7 +78,7 @@ const AppContainer = () => {
     }
   }, [queueData]);
 
-  if (connectChecking || isLoading) return null;
+  if (connectChecking || isLoading) return <InitalLoader />;
 
   if (isError) {
     // TODO : 서버 연결이 불가능하다는 안내 출력
