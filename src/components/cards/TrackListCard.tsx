@@ -13,6 +13,7 @@ import { DotMenu, Play, QueueList } from "../icons";
 import { QueuePlayIconBox } from "./trackListCard.styles";
 import { useMutation } from "@tanstack/react-query";
 import { updateQueue } from "@/api/queue";
+import { useModal } from "@/stores/useModalStore";
 
 interface TrackListCardProps {
   index: number;
@@ -21,6 +22,7 @@ interface TrackListCardProps {
 }
 
 const TrackListCard = ({ index, data, isOwn }: TrackListCardProps) => {
+  const onOpen = useModal(state => state.onOpen);
   const addPlayListTrack = usePlayerControl(state => state.addTrack);
   const playListType = usePlayerControl(state => state.playListType);
   const addQueueList = useQueue(state => state.addTrack);
@@ -33,6 +35,15 @@ const TrackListCard = ({ index, data, isOwn }: TrackListCardProps) => {
     playListType === "QUEUE" && addPlayListTrack(data);
     addQueueList(data);
     mutation.mutate({ isAdd: true, trackId: data.id });
+  };
+
+  const handlePlaylistAddActionClick = () => {
+    onOpen("playlist", {
+      playlist: {
+        isAdd: true,
+        trackId: data.id,
+      },
+    });
   };
 
   return (
@@ -58,8 +69,8 @@ const TrackListCard = ({ index, data, isOwn }: TrackListCardProps) => {
             variant="plain"
             useRipple
             size="icon"
-            className="relative p-2 rounded-full"
             onClick={handleQueueAddActionClick}
+            className="relative p-2 rounded-full"
           >
             <QueueList className="w-4 h-4" />
             <QueuePlayIconBox className="group-hover:bg-neutral-100 dark:group-hover:bg-neutral-600">
@@ -70,6 +81,7 @@ const TrackListCard = ({ index, data, isOwn }: TrackListCardProps) => {
             variant="plain"
             useRipple
             size="icon"
+            onClick={handlePlaylistAddActionClick}
             className="p-2 rounded-full"
           >
             <DotMenu className="w-4 h-4" />

@@ -48,6 +48,20 @@ export interface PlaylistSimple {
   id: string;
   isPublic: boolean;
   playListName: string;
-  thumbNail: any;
+  thumbNail: string[];
+  count: number;
+  tracks: Track[];
   updatedAt: Date;
+}
+
+export interface Playlist {
+  id: string;
+  isPublic: boolean;
+  playListName: string;
+  thumbNail: string[];
+  count: number;
+  createdAt: Date;
+  updatedAt: Date;
+  userId: string;
+  tracks: Track[];
 }

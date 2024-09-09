@@ -1,19 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import { useModal } from "@/stores/useModalStore";
-
-import Button from "@/components/Button/Button";
-
-import ModalLayout from "../ModalLayout";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+
 import {
   createNewPlaylist,
   CreatePlaylistRequest,
   playlistsQueryKeys,
 } from "@/api/playlist";
+
+import { useModal } from "@/stores/useModalStore";
+import useMeStore from "@/stores/useMeStore";
+
 import {
   Form,
   FormControl,
@@ -23,7 +22,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import useMeStore from "@/stores/useMeStore";
+import Button from "@/components/Button/Button";
+
+import ModalLayout from "../ModalLayout";
+import InputModeStore from "@/stores/inputModeSotre";
 
 const formSchema = z.object({
   playListName: z.string().min(1).max(11),
@@ -33,6 +35,7 @@ const formSchema = z.object({
 const CreatePlaylistModal = () => {
   const { id } = useMeStore();
   const { onOpen, onClose, data } = useModal();
+  const { setInputMode } = InputModeStore();
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -44,7 +47,8 @@ const CreatePlaylistModal = () => {
 
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationFn: async (data: CreatePlaylistRequest) => createNewPlaylist(data),
+    mutationFn: async (data: CreatePlaylistRequest) =>
+      await createNewPlaylist(data),
     onSuccess: () => {
       console.log("SUCCESS");
       form.reset();
@@ -67,6 +71,14 @@ const CreatePlaylistModal = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     mutate(values);
   };
+
+  useEffect(() => {
+    setInputMode(true);
+
+    return () => {
+      setInputMode(false);
+    };
+  }, []);
 
   const bodyContent = (
     <div className=" w-full">

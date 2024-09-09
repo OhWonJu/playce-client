@@ -3,7 +3,11 @@ import { create } from "zustand";
 export type ModalType = "login" | "playlist" | "createPlaylist";
 
 interface ModalData {
-  createPlayListData: {
+  playlist?: {
+    isAdd?: boolean;
+    trackId?: string;
+  };
+  createPlayListData?: {
     fromPlaylist?: boolean;
   };
 }
