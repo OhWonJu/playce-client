@@ -48,7 +48,7 @@ const TrackCard = ({
   const addQueueList = useQueue(state => state.addTrack);
   const deleteQueueList = useQueue(state => state.deleteTrack);
 
-  const mutation = useMutation({
+  const qeueuMutation = useMutation({
     mutationFn: updateQueue,
   });
 
@@ -66,12 +66,12 @@ const TrackCard = ({
     x.set(0);
   }, []);
 
-  function handleOnDrag(event: any, info: PanInfo) {
+  function handleOnDrag(_: any, info: PanInfo) {
     const delta = info.delta;
 
     // left - Delete Action
     if (delta.x < 0) {
-      if (trackListType !== "ALBUM") {
+      if (trackListType === "QUEUE") {
         x.set(Math.max(x.get() + delta.x, -80));
       } else {
         // when ALBUM, blocking go to left
@@ -86,12 +86,12 @@ const TrackCard = ({
     }
   }
 
-  function handleOnDragEnd(event: any, info: PanInfo) {
+  function handleOnDragEnd(_: any, info: PanInfo) {
     const offset = info.offset.x;
     const velocity = info.velocity.x;
 
     // DELETE MOTION
-    if (trackListType !== "ALBUM") {
+    if (trackListType === "QUEUE") {
       if (offset < -100 || velocity < -500) {
         animate(x, -80, { duration: 0.5 });
       } else {
@@ -106,7 +106,7 @@ const TrackCard = ({
         setTimeout(() => {
           addPlayListTrack(data);
           addQueueList(data);
-          mutation.mutate({ isAdd: true, trackId: data.id });
+          qeueuMutation.mutate({ isAdd: true, trackId: data.id });
         }, 200);
       }
     }
@@ -124,9 +124,8 @@ const TrackCard = ({
     if (trackListType === "QUEUE") {
       delePlayListTrack(data);
       deleteQueueList(data);
-      mutation.mutate({ isAdd: false, trackId: data.id });
+      qeueuMutation.mutate({ isAdd: false, trackId: data.id });
     }
-    if (trackListType === "LIST") null;
   }
 
   return (

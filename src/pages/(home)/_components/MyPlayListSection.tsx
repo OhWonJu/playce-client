@@ -24,7 +24,10 @@ const MyPlayListSection = ({ myPlayList }: MyPlayListSectionProps) => {
   const { mutate: getTrack } = useMutation({
     mutationFn: async ({ playlistId }: { playlistId: string }) =>
       await getTracksByPlaylist(playlistId),
+
     onSuccess: data => {
+      if (!data || data.tracks.length < 1) return;
+
       queryClient.setQueryData<Track[]>(
         playlistsQueryKeys.playlistTracks(data.playlistId),
         data.tracks,
@@ -32,6 +35,7 @@ const MyPlayListSection = ({ myPlayList }: MyPlayListSectionProps) => {
       !displayPlayer && onPlayerOpen();
       handlePlayListClick("LIST", { id: data.playlistId, tracks: data.tracks });
     },
+
     onError: () => {
       console.log("FAILED GET TRACKS");
     },
@@ -51,15 +55,19 @@ const MyPlayListSection = ({ myPlayList }: MyPlayListSectionProps) => {
         playAction={() => {
           const prevData = queryClient.getQueryData(
             playlistsQueryKeys.playlistTracks(playlist.id),
-          );
+          ) as Track[];
+
+          if (!!prevData && prevData.length < 1) return;
 
           if (prevData) {
             !displayPlayer && onPlayerOpen();
             handlePlayListClick("LIST", {
               id: playlist.id,
-              tracks: prevData as Track[],
+              tracks: prevData,
             });
-          } else getTrack({ playlistId: playlist.id });
+          } else {
+            getTrack({ playlistId: playlist.id });
+          }
         }}
       />
     ));

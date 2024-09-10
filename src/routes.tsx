@@ -3,14 +3,27 @@ import { RouteProps } from "react-router";
 
 import RootPage from "./pages/(root)/Page";
 import HomePage from "./pages/(home)/(routes)/home/Page";
-import UserIdPage from "./pages/(profile)/(routes)/[userId]/Page";
-import AlbumIdPage from "./pages/(albums)/(routes)/[albumId]/Page";
-import JoinPage from "./pages/(auth)/(routes)/join/Page";
-import ExplorePage from "./pages/(explore)/(routes)/explore/Page";
-import CabinetPage from "./pages/(cabinet)/(routes)/page";
-import CabinetAlbumsPage from "./pages/(cabinet)/(routes)/albums/Page";
-import CabinetPlayListsPage from "./pages/(cabinet)/(routes)/playlists/Page";
-import CabinetQueuePage from "./pages/(cabinet)/(routes)/queue/Page";
+
+const UserIdPage = lazy(
+  () => import("./pages/(profile)/(routes)/[userId]/Page"),
+);
+const AlbumIdPage = lazy(
+  () => import("./pages/(albums)/(routes)/[albumId]/Page"),
+);
+const JoinPage = lazy(() => import("./pages/(auth)/(routes)/join/Page"));
+const ExplorePage = lazy(
+  () => import("./pages/(explore)/(routes)/explore/Page"),
+);
+const CabinetPage = lazy(() => import("./pages/(cabinet)/(routes)/page"));
+const CabinetAlbumsPage = lazy(
+  () => import("./pages/(cabinet)/(routes)/albums/Page"),
+);
+const CabinetPlayListsPage = lazy(
+  () => import("./pages/(cabinet)/(routes)/playlists/Page"),
+);
+const CabinetQueuePage = lazy(
+  () => import("./pages/(cabinet)/(routes)/queue/Page"),
+);
 
 const AccessDenied = lazy(() => import("./pages/AccessDenied"));
 const NotFound = lazy(() => import("./pages/NotFound"));

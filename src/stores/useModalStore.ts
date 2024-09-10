@@ -1,3 +1,4 @@
+import { Track } from "@/types";
 import { create } from "zustand";
 
 export type ModalType = "login" | "playlist" | "createPlaylist";
@@ -6,6 +7,7 @@ interface ModalData {
   playlist?: {
     isAdd?: boolean;
     trackId?: string;
+    track?: Track;
   };
   createPlayListData?: {
     fromPlaylist?: boolean;

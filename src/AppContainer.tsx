@@ -23,7 +23,6 @@ const AppContainer = () => {
   const { initMe, setMe } = useMeStore();
 
   const setQueue = useQueue(state => state.setQueue);
-  const setQueueThumbNail = useQueue(state => state.setQueueThumbNail);
 
   const {
     data: connectCheck,
@@ -73,8 +72,11 @@ const AppContainer = () => {
 
   useEffect(() => {
     if (queueData) {
-      setQueue(queueData.tracks);
-      setQueueThumbNail(queueData.queueThumbNail);
+      setQueue(
+        queueData.tracks,
+        queueData.totalPlayTime,
+        queueData.queueThumbNail,
+      );
     }
   }, [queueData]);
 

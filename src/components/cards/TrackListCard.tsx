@@ -42,6 +42,7 @@ const TrackListCard = ({ index, data, isOwn }: TrackListCardProps) => {
       playlist: {
         isAdd: true,
         trackId: data.id,
+        track: data,
       },
     });
   };

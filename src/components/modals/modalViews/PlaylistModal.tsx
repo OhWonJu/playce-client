@@ -29,12 +29,15 @@ const PlaylistModal = () => {
   const isInView = useInView(ref, {
     margin: "20%",
   });
+
   const { id } = useMeStore(); // 모달 data.id 대체 필요F
   const { onClose, onOpen, data } = useModal();
   const { displayPlayer, onOpen: onPlayerOpen } = usePlayerToggle();
+  const currentPlaylistId = usePlayerControl(state => state.originTrackId);
   const handlePlayListClick = usePlayerControl(
     state => state.handlePlayListClick,
   );
+  const addPlayListTrack = usePlayerControl(state => state.addTrack);
 
   const {
     data: playlistsData,
@@ -48,8 +51,14 @@ const PlaylistModal = () => {
     apiUrl: `/users/playlist/${id}`,
   });
 
+  useEffect(() => {
+    if (isInView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage, isInView]);
+
   const queryClient = useQueryClient();
-  const { mutate } = useMutation({
+  const { mutate: updatePlaylist } = useMutation({
     mutationFn: async ({
       playlistId,
       data,
@@ -57,16 +66,69 @@ const PlaylistModal = () => {
       playlistId: string;
       data: UpdatePlaylistTrackRequest;
     }) => await updatePlaylistTrack({ playlistId, data }),
+
     onSuccess: () => {
       console.log("SUCCESS");
       queryClient.invalidateQueries({
         queryKey: playlistsQueryKeys.playlists(id),
       });
     },
+
     onError: () => {
       console.log("FAILED");
     },
   });
+
+  const handleAddTrack = (playlistId: string) => {
+    if (!data) return;
+
+    playlistId === currentPlaylistId && addPlayListTrack(data.playlist.track);
+    updatePlaylist({
+      playlistId,
+      data: { isAdd: data.playlist.isAdd, trackId: data.playlist.trackId },
+    });
+    onClose();
+  };
+
+  const { mutate: getTrack } = useMutation({
+    mutationFn: async ({ playlistId }: { playlistId: string }) =>
+      await getTracksByPlaylist(playlistId),
+
+    onSuccess: data => {
+      if (data.tracks.length < 1) return;
+
+      queryClient.setQueryData<Track[]>(
+        playlistsQueryKeys.playlistTracks(data.playlistId),
+        data.tracks,
+      );
+      !displayPlayer && onPlayerOpen();
+      handlePlayListClick("LIST", { id: data.playlistId, tracks: data.tracks });
+      onClose();
+    },
+
+    onError: () => {
+      console.log("FAILED GET TRACKS");
+    },
+  });
+
+  const handleSetPlaylist = (playlistId: string) => {
+    const prevData = queryClient.getQueryData(
+      playlistsQueryKeys.playlistTracks(playlistId),
+    ) as Track[];
+
+    if (!!prevData && prevData.length < 1) return;
+
+    if (prevData) {
+      !displayPlayer && onPlayerOpen();
+      handlePlayListClick("LIST", {
+        id: playlistId,
+        tracks: prevData,
+      });
+      onClose();
+    } else {
+      getTrack({ playlistId });
+    }
+  };
 
   const handleCreateClick = () => {
     onClose();
@@ -76,49 +138,6 @@ const PlaylistModal = () => {
       },
     });
   };
-
-  const { mutate: getTrack } = useMutation({
-    mutationFn: async ({ playlistId }: { playlistId: string }) =>
-      await getTracksByPlaylist(playlistId),
-    onSuccess: data => {
-      queryClient.setQueryData<Track[]>(
-        playlistsQueryKeys.playlistTracks(data.playlistId),
-        data.tracks,
-      );
-      !displayPlayer && onPlayerOpen();
-      handlePlayListClick("LIST", { id: data.playlistId, tracks: data.tracks });
-      onClose();
-    },
-    onError: () => {
-      console.log("FAILED GET TRACKS");
-    },
-  });
-
-  const handleItemClick = (playlistId: string) => {
-    if (data) {
-      mutate({ playlistId, data: data.playlist });
-      onClose();
-    } else {
-      const prevData = queryClient.getQueryData(
-        playlistsQueryKeys.playlistTracks(playlistId),
-      );
-
-      if (prevData) {
-        !displayPlayer && onPlayerOpen();
-        handlePlayListClick("LIST", {
-          id: playlistId,
-          tracks: prevData as Track[],
-        });
-        onClose();
-      } else getTrack({ playlistId });
-    }
-  };
-
-  useEffect(() => {
-    if (isInView && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage, isInView]);
 
   const bodyContent = (
     <div className=" w-full overflow-y-scroll space-y-2 scrollbar-hide">
@@ -131,7 +150,7 @@ const PlaylistModal = () => {
                 key={playlist.id}
                 size="sm"
                 data={playlist}
-                onClick={handleItemClick}
+                onClick={!!data ? handleAddTrack : handleSetPlaylist}
               />
             ))}
           </Fragment>
