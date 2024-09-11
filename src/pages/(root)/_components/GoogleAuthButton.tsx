@@ -16,7 +16,7 @@ const GoogleAuthButton = () => {
       className="relative bg-white border border-primary-foreground flex flex-row items-center"
     >
       <GoogleIcon className="absolute w-5 h-5 left-6" />
-      <span>
+      <span className="text-black">
         <strong>Google</strong> 로 계속하기
       </span>
     </Button>

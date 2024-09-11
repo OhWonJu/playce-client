@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Button from "@/components/Button/Button";
+import Button from "@/components/buttons/Button";
 import GoogleAuthButton from "@/pages/(root)/_components/GoogleAuthButton";
 
 const formSchema = z.object({
@@ -81,7 +81,7 @@ const LoginModal = () => {
                       disabled={isLoading}
                       placeholder=""
                       {...field}
-                      className="bg-neutral-300/50 border-0 focus-visible:ring-1 text-black focus-visible:ring-offset-0"
+                      className="bg-neutral-300/50 border-0 focus-visible:ring-1 focus-visible:ring-offset-0"
                     />
                   </FormControl>
                 </FormItem>
@@ -102,7 +102,7 @@ const LoginModal = () => {
                       placeholder=""
                       type="password"
                       {...field}
-                      className="bg-neutral-300/50 border-0 focus-visible:ring-1 text-black focus-visible:ring-offset-0 placeholder:text-xs"
+                      className="bg-neutral-300/50 border-0 focus-visible:ring-1  focus-visible:ring-offset-0 placeholder:text-xs"
                     />
                   </FormControl>
                 </FormItem>

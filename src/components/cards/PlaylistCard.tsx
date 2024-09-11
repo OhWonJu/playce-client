@@ -4,7 +4,7 @@ import { PlaylistSimple } from "@/types";
 
 import { cn } from "@/lib/utils";
 
-import Button from "../Button/Button";
+import Button from "../buttons/Button";
 import Image from "../Image";
 import { DotMenu } from "../icons";
 
@@ -68,8 +68,14 @@ const PlaylistCard = ({
         </div>
 
         {/* COL-2 */}
-        <div className="flex flex-row">
-          <span className="font-semibold truncate mr-3">
+        <div
+          className={cn(
+            "flex",
+            size === "sm" && "flex-row space-x-3",
+            size === "md" && "flex-col space-y-1 items-start",
+          )}
+        >
+          <span className="font-semibold truncate">
             {data.playListName}
           </span>
           <span className="font-medium text-primary-foreground truncate">

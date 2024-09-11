@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 
 import { usePlayerControl } from "@/stores/usePlayerControl";
 
-import Button from "@/components/Button/Button";
+import Button from "@/components/buttons/Button";
 import { Repeat } from "@/components/icons";
 
 const RepeatButton = () => {

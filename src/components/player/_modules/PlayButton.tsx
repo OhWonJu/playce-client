@@ -3,7 +3,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { usePlayerControl } from "@/stores/usePlayerControl";
 
-import Button from "@/components/Button/Button";
+import Button from "@/components/buttons/Button";
 import { Pause, Play } from "@/components/icons";
 
 const PlayButton = ({ className }: { className?: string }) => {

@@ -132,7 +132,7 @@ const PolicyListSection = ({ setPolicyConfirm }: PolicyListSectionProps) => {
           <Check
             className={cn(
               "w-4 h-4",
-              checkAllPolicy ? "stroke-white" : "stroke-primary/50",
+              checkAllPolicy ? "stroke-secondary" : "stroke-primary/50",
             )}
             strokeWidth={3.5}
           />

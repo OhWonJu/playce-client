@@ -22,7 +22,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Button from "@/components/Button/Button";
+import Button from "@/components/buttons/Button";
 
 import ModalLayout from "../ModalLayout";
 import InputModeStore from "@/stores/inputModeSotre";
@@ -111,7 +111,7 @@ const CreatePlaylistModal = () => {
 
   const footerContent = (
     <div className="flex w-full justify-end space-x-2">
-      <Button variant="outline" useRipple>
+      <Button variant="outline" useRipple onClick={onClose}>
         <span className="pt-[2px] text-center content-center">취소</span>
       </Button>
       <Button

@@ -27,7 +27,7 @@ export const ModalCotainer = styled.div`
 
   overflow: hidden;
 
-  ${tw`rounded-lg shadow-md`}
+  ${tw`rounded-lg shadow-md border-neutral-300 dark:border-neutral-700`}
 `;
 
 export const ModalHeader = styled.section`

@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 import { usePlayerControl } from "@/stores/usePlayerControl";
 
-import Button from "@/components/Button/Button";
+import Button from "@/components/buttons/Button";
 import { Shuffle } from "@/components/icons";
 
 const ShuffleButton = () => {

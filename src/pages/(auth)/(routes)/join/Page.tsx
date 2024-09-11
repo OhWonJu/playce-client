@@ -138,7 +138,7 @@ const JoinPage = () => {
                         disabled={isLoading}
                         placeholder="영문, 한글, 숫자 조합 4-11자"
                         {...field}
-                        className="shadow focus:shadow-inner transition-shadowborder-1 border-primary-foreground/50 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                        className="shadow focus:shadow-inner transition-shadowborder-1 border-primary-foreground/50 focus-visible:ring-0 text-primary focus-visible:ring-offset-0"
                       />
                     </FormControl>
                   </FormItem>
@@ -159,7 +159,7 @@ const JoinPage = () => {
                         placeholder="영문 대소문자, 숫자, 특수문자(!@#$%) 8-11자"
                         type="password"
                         {...field}
-                        className="shadow focus:shadow-inner transition-shadowborder-1 border-primary-foreground/50 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                        className="shadow focus:shadow-inner transition-shadowborder-1 border-primary-foreground/50 focus-visible:ring-0 text-primary focus-visible:ring-offset-0"
                       />
                     </FormControl>
                   </FormItem>
@@ -180,7 +180,7 @@ const JoinPage = () => {
                         placeholder="비밀번호 확인"
                         type="password"
                         {...field}
-                        className="shadow focus:shadow-inner transition-shadowborder-1 border-primary-foreground/50 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                        className="shadow focus:shadow-inner transition-shadowborder-1 border-primary-foreground/50 focus-visible:ring-0 text-primary focus-visible:ring-offset-0"
                       />
                     </FormControl>
                   </FormItem>
@@ -199,7 +199,7 @@ const JoinPage = () => {
                         disabled={!!email || isLoading}
                         placeholder=""
                         {...field}
-                        className="shadow focus:shadow-inner transition-shadowborder-1 border-primary-foreground/50 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
+                        className="shadow focus:shadow-inner transition-shadowborder-1 border-primary-foreground/50 focus-visible:ring-0 text-primary focus-visible:ring-offset-0"
                       />
                     </FormControl>
                   </FormItem>

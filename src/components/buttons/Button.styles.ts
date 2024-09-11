@@ -15,7 +15,7 @@ export const Ghost = styled.button<any>`
   align-items: center;
   border-width: 1px;
 
-  ${tw`shadow hover:shadow-inner transition-shadow`}
+  ${tw`shadow hover:shadow-inner transition-shadow border-neutral-300 dark:border-neutral-700`}
 `;
 
 export const Outline = styled.button<any>`

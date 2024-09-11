@@ -18,7 +18,7 @@ import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
 import { usePlayerControl } from "@/stores/usePlayerControl";
 
 import { Plus } from "@/components/icons";
-import Button from "@/components/Button/Button";
+import Button from "@/components/buttons/Button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PlaylistCard } from "@/components/cards";
 
@@ -87,7 +87,7 @@ const PlaylistModal = () => {
       playlistId,
       data: { isAdd: data.playlist.isAdd, trackId: data.playlist.trackId },
     });
-    onClose();
+    setTimeout(() => onClose(), 300);
   };
 
   const { mutate: getTrack } = useMutation({
@@ -124,7 +124,7 @@ const PlaylistModal = () => {
         id: playlistId,
         tracks: prevData,
       });
-      onClose();
+      setTimeout(() => onClose(), 300);
     } else {
       getTrack({ playlistId });
     }

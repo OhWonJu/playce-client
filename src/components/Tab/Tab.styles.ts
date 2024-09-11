@@ -4,7 +4,7 @@ import tw from "twin.macro";
 export const Tabs = styled.ul`
   list-style: none;
   border-bottom-width: 1.5px;
-  border-color: ${props => props.theme.gray_light};
+  border-color: var(--primary-foreground);
 
   ${tw`bg-opacity-80`}
 `;

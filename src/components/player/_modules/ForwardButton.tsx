@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import usePlayTimeStore from "@/stores/usePlayTimeStore";
 import { usePlayerControl } from "@/stores/usePlayerControl";
 
-import Button from "@/components/Button/Button";
+import Button from "@/components/buttons/Button";
 import { Forward } from "@/components/icons";
 
 const ForwardButton = ({

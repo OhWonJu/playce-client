@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 import { Tab, TabText, Tabs } from "./Tab.styles";
 import { cn } from "@/lib/utils";
-import Button from "../Button/Button";
+import Button from "../buttons/Button";
 
 interface TabComponentProps {
   tabContents: Array<string>;

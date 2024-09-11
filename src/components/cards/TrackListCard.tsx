@@ -8,7 +8,7 @@ import { usePlayerControl } from "@/stores/usePlayerControl";
 
 import { useQueue } from "@/stores/useQueue";
 
-import Button from "../Button/Button";
+import Button from "../buttons/Button";
 import { DotMenu, Play, QueueList } from "../icons";
 import { QueuePlayIconBox } from "./trackListCard.styles";
 import { useMutation } from "@tanstack/react-query";
