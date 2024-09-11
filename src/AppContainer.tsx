@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import { getExpiresAt, getTitleFromRoute } from "@/lib/utils";
+import { HelmetProvider } from "react-helmet-async";
+import { getExpiresAt } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 
 import { getCurrentUser, getQueue } from "@/api/users";
@@ -16,7 +16,8 @@ import "@/styles/tailwind.css";
 
 import App from "./App";
 import RootLayout from "./RootLayout";
-import { InitalLoader } from "./components";
+import { HelmetHeader, InitalLoader } from "./components";
+import ThemeProvider from "./components/providers/ThemeProvider";
 
 const AppContainer = () => {
   const { isLogin, setIsLogin } = useAuthStore();
@@ -65,6 +66,7 @@ const AppContainer = () => {
       } catch (e) {
         console.warn("PRELOAD_ERROR", e);
       } finally {
+        sessionStorage.clear();
       }
     };
     prepare();
@@ -94,17 +96,16 @@ const AppContainer = () => {
 
   return (
     <>
-      <HelmetProvider>
-        <Helmet>
-          <title>{getTitleFromRoute(decodeURI(location.pathname))}</title>
-        </Helmet>
-        <GlobalStyles />
-        <BrowserRouter>
+      <BrowserRouter>
+        <HelmetProvider>
+          <HelmetHeader />
+          <ThemeProvider />
+          <GlobalStyles />
           <RootLayout>
             <App />
           </RootLayout>
-        </BrowserRouter>
-      </HelmetProvider>
+        </HelmetProvider>
+      </BrowserRouter>
     </>
   );
 };

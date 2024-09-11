@@ -12,7 +12,7 @@ interface NavigatorProps {
 
 const Navigator = ({ pathName }: NavigatorProps) => {
   const navigate = useNavigate();
-  const { viewMode } = useViewModeStore();
+  const viewMode = useViewModeStore(state => state.viewMode);
   const { id, image } = useMeStore();
 
   if (viewMode === "INIT") return null;

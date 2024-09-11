@@ -23,7 +23,7 @@ const PlayerBottomSheet = lazy(
 
 const NON_PLAYABLE_PATHS = ["/", "/join"];
 
-const Children = ({ children }: { children: React.ReactNode }) => {
+const Page = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const { viewMode } = useViewModeStore();
   const closePlayer = usePlayerToggle(state => state.onClose);
@@ -47,19 +47,19 @@ const Children = ({ children }: { children: React.ReactNode }) => {
             <Navigator pathName={location.pathname.split("/")[1]} />
           )}
           {isPlayablePaths ? (
-            <PlayableContainer
+            <PlayableLayout
               id="root-layout"
               $isDesktop={viewMode === "DESKTOP" ? true : false}
             >
               {children}
-            </PlayableContainer>
+            </PlayableLayout>
           ) : (
-            <NonPlayableContainer
+            <NonPlayableLayout
               id="root-layout"
               $isDesktop={viewMode === "DESKTOP" ? true : false}
             >
               {children}
-            </NonPlayableContainer>
+            </NonPlayableLayout>
           )}
         </>
       )}
@@ -76,18 +76,18 @@ const RootLayout = ({ children }: PropsWithChildren) => {
       <ViewModeProvider />
       <Player />
       <ModalProvider />
-      <Children children={children} />
+      <Page children={children} />
     </>
   );
 };
 
 export default RootLayout;
 
-const PlayableContainer = styled.div<{ $isDesktop: boolean }>`
+const PlayableLayout = styled.div<{ $isDesktop: boolean }>`
   position: relative;
   width: 100vw;
   max-width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   max-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -112,12 +112,13 @@ const PlayableContainer = styled.div<{ $isDesktop: boolean }>`
   }}
 
   ${tw`transition`}
+  /* ${tw`transition overflow-y-scroll`} */
 `;
 
-const NonPlayableContainer = styled.div<{ $isDesktop: boolean }>`
+const NonPlayableLayout = styled.div<{ $isDesktop: boolean }>`
   position: relative;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   max-height: 100vh;
   display: flex;
   flex-direction: column;

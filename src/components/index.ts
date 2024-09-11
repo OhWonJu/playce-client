@@ -1,4 +1,4 @@
-export { default as Button } from "./Button/Button";
+export { Button, ToggleButton } from "./buttons";
 export { default as Heading } from "./Heading";
 export { default as Image } from "./Image";
 export { MusicCard, TrackListCard, PlaylistCard } from "./cards";
@@ -9,3 +9,4 @@ export { default as SymbolHeader } from "./SymbolHeader";
 export { Player } from "./player";
 export { Tab, TabSection } from "./Tab";
 export { InitalLoader } from "./loaders";
+export { default as HelmetHeader } from "./HelmetHeader";

@@ -21,6 +21,10 @@ const CabinetAlbumsPage = lazy(
 const CabinetPlayListsPage = lazy(
   () => import("./pages/(cabinet)/(routes)/playlists/Page"),
 );
+const CabinetPlayListIdPage = lazy(
+  () => import("./pages/(cabinet)/(routes)/playlists/[playlistId]/page"),
+);
+
 const CabinetQueuePage = lazy(
   () => import("./pages/(cabinet)/(routes)/queue/Page"),
 );
@@ -51,16 +55,28 @@ export const privateRoutes: CustomRouteProps[] = [
     element: <CabinetPlayListsPage />,
   },
   {
+    path: "/cabinet/playlists/:playlistName",
+    element: <CabinetPlayListIdPage />,
+  },
+
+  {
     path: "/cabinet/queue",
     element: <CabinetQueuePage />,
   },
 ];
 
-export const publicRoutes: CustomRouteProps[] = [
+export const alternativeRoutes: CustomRouteProps[] = [
   {
     path: "/",
     element: <RootPage />,
   },
+  {
+    path: "/join",
+    element: <JoinPage />,
+  },
+];
+
+export const publicRoutes: CustomRouteProps[] = [
   {
     path: "/home",
     element: <HomePage />,
@@ -69,10 +85,7 @@ export const publicRoutes: CustomRouteProps[] = [
     path: "/explore",
     element: <ExplorePage />,
   },
-  {
-    path: "/join",
-    element: <JoinPage />,
-  },
+
   {
     path: "/profile/:userId",
     element: <UserIdPage />,

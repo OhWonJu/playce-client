@@ -19,8 +19,9 @@ export const getTitleFromRoute = (path: string): string => {
   }
 
   const userProfileRegex = /^\/profile\/(\S+)$/;
-  const albumsRegex = /^\/albums\/(\S+)$/;
-  const cabinetRegex = /^\/(cabinet\/)(playlists)|(albums)|(queue)$/;
+  const albumsRegex = /^\/albums\/.*?$/;
+  const cabinetRegex = /^\/cabinet(\/(playlists|albums|queue))?$/;
+  const exploreRegex = /^\/explore(\/.*)?$/;
 
   let title = "";
 
@@ -45,7 +46,12 @@ export const getTitleFromRoute = (path: string): string => {
       case "queue":
         title += "나의 큐 | ";
         break;
+      default:
+        title += "나의 캐비닛 | ";
+        break;
     }
+  } else if (exploreRegex.test(path)) {
+    title += `둘러보기 | `;
   }
 
   return (title += `${SYMBOL_TITLE}`);
