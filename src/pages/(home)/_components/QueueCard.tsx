@@ -7,8 +7,10 @@ import { usePlayerControl } from "@/stores/usePlayerControl";
 import { useQueue } from "@/stores/useQueue";
 
 import { MusicCard } from "@/components";
+import { useNavigate } from "react-router";
 
 const QueueCard = ({}: { key: string }) => {
+  const navigate = useNavigate();
   const { displayPlayer, onOpen } = usePlayerToggle();
   const { songCount, totalPlayTime, queue, queueThumbNail } = useQueue();
   const handlePlayListClick = usePlayerControl(
@@ -40,7 +42,7 @@ const QueueCard = ({}: { key: string }) => {
       size="md"
       playable
       playAction={queueClickHandler}
-      onClick={() => console.log("just click")}
+      onClick={() => navigate("/cabinet/queue")}
     />
   );
 };

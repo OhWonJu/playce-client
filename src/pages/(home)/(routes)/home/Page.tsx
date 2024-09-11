@@ -1,17 +1,23 @@
+import { useRef } from "react";
 import { useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 
 import { _POST } from "@/api/rootAPI";
 import { getSummary } from "@/api/users";
 
-import { MusicCard, MusicList } from "@/components";
 import { useAuthStore } from "@/stores/useAuthStore";
+import useInitScrollPosition from "@/hooks/useInitScrollPosition";
+
+import { MusicCard, MusicList } from "@/components";
 
 import { PlayableContainer } from "@/styles/GlobalStyles";
 
 import { MyPlayListSection, QueueCard } from "../../_components";
 
 const HomePage = () => {
+  const ref = useRef(null);
+  useInitScrollPosition("home", ref);
+
   const { isLogin } = useAuthStore();
   const navigate = useNavigate();
 
@@ -48,7 +54,7 @@ const HomePage = () => {
     ));
 
   return (
-    <PlayableContainer className="pb-14 space-y-20">
+    <PlayableContainer ref={ref} className="pb-14 space-y-20">
       {/* <Heading title={`반가워요 ${nickName}님`} align="center" /> */}
       {isLogin && (
         <>

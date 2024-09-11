@@ -8,12 +8,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getTracksByPlaylist, playlistsQueryKeys } from "@/api/playlist";
 import { Track } from "@/types";
 import { useModal } from "@/stores/useModalStore";
+import { useNavigate } from "react-router";
 
 interface MyPlayListSectionProps {
   myPlayList: GetSummaryResponse["myPlayList"];
 }
 
 const MyPlayListSection = ({ myPlayList }: MyPlayListSectionProps) => {
+  const navigate = useNavigate();
   const { displayPlayer, onOpen: onPlayerOpen } = usePlayerToggle();
   const handlePlayListClick = usePlayerControl(
     state => state.handlePlayListClick,
@@ -50,6 +52,11 @@ const MyPlayListSection = ({ myPlayList }: MyPlayListSectionProps) => {
           playlist.thumbNail.length < 4
             ? playlist.thumbNail[0]
             : playlist.thumbNail
+        }
+        onClick={() =>
+          navigate(
+            `/cabinet/playlists/${playlist.playListName}?playlistId=${playlist.id}`,
+          )
         }
         playable
         playAction={() => {
