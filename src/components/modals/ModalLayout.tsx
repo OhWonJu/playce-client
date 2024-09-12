@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router";
 import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 
 import { cn } from "@/lib/utils";
@@ -33,11 +34,13 @@ const ModalLayout = ({
   containerClassName,
   mode = "fade",
 }: ModalLayoutProps) => {
+  const location = useLocation();
   const isOpen = useModal(state => state.isOpen);
 
   const [showModal, setShowModal] = useState(false);
 
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const currentPath = useRef(location.pathname);
 
   const handleClose = useCallback(() => {
     if (disabled) return;
@@ -73,6 +76,10 @@ const ModalLayout = ({
       window.removeEventListener("keydown", handleKey);
     };
   }, [handleKey]);
+
+  useEffect(() => {
+    if (currentPath.current !== location.pathname) handleClose();
+  }, [currentPath.current, location.pathname]);
 
   if (!isOpen) return null;
 

@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useLocation } from "react-router";
 import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
 
 import { cn } from "@/lib/utils";
@@ -42,16 +43,16 @@ const SidebarLayout = ({
   containerClassName,
   align = "left",
 }: SidebarLayoutProps) => {
-  // const location = useLocation();
+  const location = useLocation();
   const isOpen = useSidebar(state => state.isOpen);
-  const { viewMode } = useViewModeStore();
+  const viewMode = useViewModeStore(state => state.viewMode);
 
   const [showSidebar, setShowSidebar] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
 
   const isResizeingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
-
-  const [isResetting, setIsResetting] = useState(false);
+  const currentPath = useRef(location.pathname);
 
   const collapse = () => {
     if (sidebarRef.current) {
@@ -151,9 +152,9 @@ const SidebarLayout = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [viewMode]);
 
-  // useEffect(() => {
-  //   return () => handleClose();
-  // }, [location.pathname]);
+  useEffect(() => {
+    if (currentPath.current !== location.pathname) handleClose();
+  }, [currentPath.current, location.pathname]);
 
   if (!isOpen) return null;
 

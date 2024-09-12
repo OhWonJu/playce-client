@@ -3,6 +3,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { useModal } from "@/stores/useModalStore";
 import { Profile } from "./icons";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 interface AvatarProps {
   imageUrl?: string;
@@ -19,6 +20,7 @@ const Avatar = ({
   active = false,
   className,
 }: AvatarProps) => {
+  const { isLogin } = useAuthStore();
   const openModal = useModal(state => state.onOpen);
 
   return (
@@ -39,7 +41,7 @@ const Avatar = ({
           className,
         )}
       >
-        {imageUrl ? (
+        {isLogin && imageUrl ? (
           <img
             src={imageUrl}
             alt="avatar"
