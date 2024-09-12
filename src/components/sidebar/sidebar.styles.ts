@@ -33,6 +33,7 @@ export const SidebarHeader = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 60px;
 
   padding: 1rem;
 `;

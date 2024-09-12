@@ -1,7 +1,9 @@
 import React from "react";
-import { ToggleButtonWrapper, ToggleHandle } from "./ToggleButton.styles";
-import useToggle from "@/hooks/useToggle";
+
 import { cn } from "@/lib/utils";
+import useToggle from "@/hooks/useToggle";
+
+import { ToggleButtonWrapper, ToggleHandle } from "./ToggleButton.styles";
 
 interface ToggleButtonProps {
   onFunc: () => void;
@@ -32,7 +34,7 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({
     <ToggleButtonWrapper
       $isOn={isOn}
       onClick={toggler}
-      className={cn("w-14 h-8 p-1", className)}
+      className={cn("w-[60px] h-8 p-1", className)}
     >
       <ToggleHandle layout transition={spring} className="h-full aspect-square"/>
     </ToggleButtonWrapper>

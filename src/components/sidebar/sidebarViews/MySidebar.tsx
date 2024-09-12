@@ -1,52 +1,116 @@
-import { useSidebar } from "@/stores/useSidebarStore";
 import React from "react";
-import SidebarLayout from "../SidebarLayout";
-import Avatar from "@/components/Avatar";
-import useMeStore from "@/stores/useMeStore";
 import { useNavigate } from "react-router";
-import { Button } from "@/components/buttons";
+import { useMutation } from "@tanstack/react-query";
+
+import { logOutMutate } from "@/api/users";
+
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useSidebar } from "@/stores/useSidebarStore";
+import useMeStore from "@/stores/useMeStore";
+
+import Avatar from "@/components/Avatar";
+import { Moon, Sun } from "@/components/icons";
+import { Button, ToggleButton } from "@/components/buttons";
+
+import SidebarLayout from "../SidebarLayout";
 
 const MySidebar = () => {
+  const [theme, setTheme] = useLocalStorage("theme");
   const onClose = useSidebar(state => state.onClose);
   const navigate = useNavigate();
   const { image, nickName } = useMeStore();
+
+  const { mutate: logOut } = useMutation({
+    mutationFn: async () => await logOutMutate(),
+    onSuccess: () => {
+      navigate("/");
+      navigate(0);
+    },
+  });
 
   const bodyContent = (
     <div className="w-full flex flex-col space-y-4">
       <div className="w-full flex flex-row space-x-2">
         <Avatar imageUrl={image} size="md" />
         <div className="flex flex-col justify-center">
-          <span className="text-xs">PLAYCE에 오신것을 환영해요</span>
           <span className="">
             <strong>{nickName}</strong> 님
           </span>
+          <span className="text-xs">PLAYCE에 오신것을 환영해요!</span>
         </div>
       </div>
       <hr />
+
       <div className="flex flex-col space-y-2">
         <Button
           variant="plain"
-          className="hover:bg-neutral-100 dark:bg-neutral-700"
+          className="justify-start hover:bg-neutral-200 hover:dark:bg-neutral-700"
           onClick={() => navigate("/cabinet")}
         >
-          나의 케비닛
+          <span className="pt-1">나의 케비닛</span>
         </Button>
         <Button
           variant="plain"
-          className="hover:bg-neutral-100 dark:bg-neutral-700"
+          className="justify-start hover:bg-neutral-200 hover:dark:bg-neutral-700"
+          onClick={() => navigate("/cabinet/albums")}
         >
-          나의 장바구니
+          <span className="pt-1">나의 앨범</span>
+        </Button>
+        <Button
+          variant="plain"
+          className="justify-start hover:bg-neutral-200 hover:dark:bg-neutral-700"
+          onClick={() => navigate("/cabinet/queue")}
+        >
+          <span className="pt-1">나의 큐</span>
+        </Button>
+        <Button
+          variant="plain"
+          className="justify-start hover:bg-neutral-200 hover:dark:bg-neutral-700"
+          onClick={() => navigate("/cabinet/playlists")}
+        >
+          <span className="pt-1">나의 플레이리스트</span>
         </Button>
       </div>
+      <hr />
+
+      <Button
+        variant="plain"
+        className="justify-start hover:bg-neutral-200 hover:dark:bg-neutral-700"
+      >
+        <span className="pt-1">나의 장바구니</span>
+      </Button>
+      <hr />
+
+      <div className="flex flex-row items-center justify-end space-x-2">
+        {theme === "dark" ? (
+          <Moon className="w-5 h-5" />
+        ) : (
+          <Sun className="w-5 h-5" />
+        )}
+        <ToggleButton
+          onFunc={() => setTheme("dark")}
+          offFunc={() => setTheme("light")}
+          initToggleState={theme === "light" ? false : true}
+        />
+      </div>
+    </div>
+  );
+
+  const footerContent = (
+    <div className="flex flex-col w-full space-y-4">
+      <Button variant="outline" onClick={logOut}>
+        로그아웃
+      </Button>
     </div>
   );
 
   return (
     <SidebarLayout
-      title="TEST"
+      title=""
       align="right"
       onClose={() => onClose()}
       body={bodyContent}
+      footer={footerContent}
     />
   );
 };

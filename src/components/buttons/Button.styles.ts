@@ -21,6 +21,8 @@ export const Ghost = styled.button<any>`
 export const Outline = styled.button<any>`
   border-width: 1px;
   border-color: var(--primary-foreground);
+
+  ${tw`hover:bg-neutral-200/50 dark:hover:bg-neutral-700`}
 `;
 
 export const Link = styled.button<any>`
