@@ -42,6 +42,7 @@
     --symbol-indigo: #0e1b40;
 
     --modal: 99999;
+    --sidebar: 500;
     --search-bar: 300;
     --player-mobile: 400;
     --navigator: 500;
@@ -87,3 +88,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* div::part(cursor) {
+  background-color: var(--primary) !important;
+} */

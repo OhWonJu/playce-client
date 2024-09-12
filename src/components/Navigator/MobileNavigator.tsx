@@ -19,6 +19,7 @@ import {
 } from "./mobileNavigator.styles";
 
 import { DEFAULT_TWEEN_CONFIG } from "../BottomSheet/constants";
+import { useSidebar } from "@/stores/useSidebarStore";
 
 const PlayIndicator = lazy(() => import("./_modules/PlayIndicator"));
 
@@ -38,6 +39,7 @@ const MobileNavigator = ({
   const { displayPlayer } = usePlayerToggle();
   const { progress } = MainSheetProgressStore();
   const { progress: subProgress } = SubSheetProgressStore();
+  const onOpen = useSidebar(state => state.onOpen);
 
   const y = useMotionValue(0);
 
@@ -78,7 +80,8 @@ const MobileNavigator = ({
           size="icon"
           className="cursor-pointer"
           active={pathName === "cabinet"}
-          onClick={() => navigate(`/cabinet`)}
+          // onClick={() => navigate(`/cabinet`)}
+          onClick={() => onOpen("my")}
         />
       </NavButtonArea>
     </MobileNavigatorWrapper>

@@ -39,10 +39,6 @@ const ModalLayout = ({
 
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
 
-  useEffect(() => {
-    setShowModal(isOpen);
-  }, [isOpen]);
-
   const handleClose = useCallback(() => {
     if (disabled) return;
 
@@ -60,6 +56,10 @@ const ModalLayout = ({
     },
     [onClose],
   );
+
+  useEffect(() => {
+    setShowModal(isOpen);
+  }, [isOpen]);
 
   useEffect(() => {
     const modal = ref.current;

@@ -6,7 +6,7 @@ import { Profile } from "./icons";
 
 interface AvatarProps {
   imageUrl?: string;
-  size?: "sm" | "md" | "lg" | "icon";
+  size?: "sm" | "md" | "lg" | "xl" | "icon";
   className?: string;
   active?: boolean;
   onClick?: () => void;
@@ -34,6 +34,7 @@ const Avatar = ({
           size === "sm" && "w-8 h-8",
           size === "md" && "w-10 h-10",
           size === "lg" && "w-14 h-14",
+          size === "xl" && "w-40 h-40",
           size === "icon" && "w-7 h-7",
           className,
         )}

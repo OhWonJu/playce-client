@@ -28,17 +28,7 @@ const HomePage = () => {
   // 스켈레톤 필요
   if (summaryLoading) return null;
 
-  const replayListRenderer = () => [
-    <QueueCard key={"my-queue"} />,
-    <MusicCard key={"recent"} title={"최근 들었던 곡1"} size="md" playable />,
-    <MusicCard key={"recent2"} title={"최근 들었던 곡2"} size="md" playable />,
-    <MusicCard
-      key={"recent-playlist"}
-      title={"최근 플레이리스트"}
-      size="md"
-      playable
-    />,
-  ];
+  const replayListRenderer = () => [<QueueCard key={"my-queue"} />];
 
   const myAlbumsRenderer = () =>
     summaryData?.myAlbums.map(album => (

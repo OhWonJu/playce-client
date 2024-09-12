@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import WaveSurfer from "wavesurfer.js";
 import Hls from "hls.js";
 import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
@@ -25,27 +25,14 @@ const Waveform = () => {
   const prevOriginTrackIdRef = useRef(originTrackId);
   const prevSec = useRef(0);
 
-  // TODO : 개선 필요
-  const rootStyles = useMemo(
-    () => window.getComputedStyle(document.documentElement),
-    [window],
-  );
-  // const waveColor = useMemo(
-  //   () => rootStyles.getPropertyValue("--primary-foreground"),
-  //   [rootStyles],
-  // );
-  const progressColor = useMemo(
-    () => rootStyles.getPropertyValue("--primary"),
-    [rootStyles],
-  );
-
   // CREATE WAVE FORM ============================== //
   useEffect(() => {
     if (waveformRef.current) {
       wavesurfer.current = WaveSurfer.create({
         container: waveformRef.current,
-        // waveColor: waveColor,
-        progressColor: progressColor,
+        progressColor: getComputedStyle(
+          document.documentElement,
+        ).getPropertyValue("--primary"), // 개선 필요
         barHeight: 0.75,
         barWidth: 3,
         barRadius: 5,

@@ -14,6 +14,7 @@ import { usePlayerToggle } from "./stores/usePlayerToggleStore";
 
 import ModalProvider from "./components/providers/ModalProvider";
 import ViewModeProvider from "./components/providers/ViewModeProvider";
+import SidebarProvider from "./components/providers/SidebarProvider";
 import Navigator from "./components/Navigator/Navigator";
 import { Player } from "./components";
 
@@ -76,6 +77,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
       <ViewModeProvider />
       <Player />
       <ModalProvider />
+      <SidebarProvider />
       <Page children={children} />
     </>
   );
@@ -111,8 +113,7 @@ const PlayableLayout = styled.div<{ $isDesktop: boolean }>`
     }
   }}
 
-  ${tw`transition`}
-  /* ${tw`transition overflow-y-scroll`} */
+  ${tw`transition`} /* ${tw`transition overflow-y-scroll`} */
 `;
 
 const NonPlayableLayout = styled.div<{ $isDesktop: boolean }>`

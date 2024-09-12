@@ -9,6 +9,7 @@ import {
   NavButtonArea,
   ProfileArea,
 } from "./desktopNavigator.styles";
+import { useSidebar } from "@/stores/useSidebarStore";
 
 interface DesktopNavigatorProps {
   id?: string;
@@ -22,6 +23,8 @@ const DesktopNavigator = ({
   pathName,
   navigate,
 }: DesktopNavigatorProps) => {
+  const onOpen = useSidebar(state => state.onOpen);
+
   return (
     <DesktopNavigatorWrapper>
       <NavButtonArea>
@@ -33,7 +36,8 @@ const DesktopNavigator = ({
           size="icon"
           active={pathName === "cabinet"}
           className="cursor-pointer"
-          onClick={() => navigate(`/cabinet`)}
+          // onClick={() => navigate(`/cabinet`)}
+          onClick={() => onOpen("my")}
         />
       </ProfileArea>
     </DesktopNavigatorWrapper>
