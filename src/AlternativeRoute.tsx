@@ -5,7 +5,6 @@ import { _GET } from "./api/rootAPI";
 const AlternativeRoute = () => {
   const { isLogin } = useAuthStore();
 
-  // TODO: LOADING NEEDED
   if (typeof isLogin === "undefined") return null;
 
   return !isLogin ? <Outlet /> : <Navigate to="/home" />;

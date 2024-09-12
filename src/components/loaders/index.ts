@@ -1,1 +1,1 @@
-export { default as InitalLoader } from "./InitalLoader";
+export { default as InitialLoader } from "./InitialLoader";

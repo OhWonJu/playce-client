@@ -1,7 +1,9 @@
 import React from "react";
 
 const AccessDenied = () => {
-  return <div>AccessDenied</div>;
+  return (
+    <div className="flex justify-center items-center mx-auto">AccessDenied</div>
+  );
 };
 
 export default AccessDenied;

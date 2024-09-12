@@ -33,6 +33,8 @@ interface SidebarLayoutProps {
   align?: "left" | "right";
 }
 
+const DURATION = 30;
+
 const SidebarLayout = ({
   body,
   footer,
@@ -60,7 +62,7 @@ const SidebarLayout = ({
 
       sidebarRef.current.style.width = "0";
 
-      setTimeout(() => setIsResetting(false), 300);
+      setTimeout(() => setIsResetting(false), DURATION);
     }
   };
 
@@ -69,7 +71,7 @@ const SidebarLayout = ({
 
     collapse();
     setShowSidebar(false);
-    setTimeout(() => onClose(), 300);
+    setTimeout(() => onClose(), DURATION);
   }, [disabled, onClose]);
 
   const handleKey = useCallback(
@@ -126,7 +128,7 @@ const SidebarLayout = ({
 
       sidebarRef.current.style.width = viewMode === "MOBILE" ? "100%" : "300px";
 
-      setTimeout(() => setIsResetting(false), 300);
+      setTimeout(() => setIsResetting(false), DURATION);
     }
   };
 

@@ -10,14 +10,12 @@ export const SidebarContainer = styled.aside<{
 }>`
   position: fixed;
   display: flex;
-  /* top: ${props => (props.$viewMode === "DESKTOP" ? NAV_HEIGHT : 0)}px; */
   top: 0px;
   bottom: ${props => (props.$viewMode !== "DESKTOP" ? NAV_HEIGHT : 0)}px;
   flex-direction: column;
-
-  height: ${props =>
-    props.$viewMode === "DESKTOP" ? "100vh" : `calc(100vh - ${NAV_HEIGHT}px)`};
-
+  height: 100vh;
+  padding-bottom: ${props =>
+    props.$viewMode === "DESKTOP" ? "0" : `${NAV_HEIGHT}px`};
   background-color: var(--background);
   z-index: ${props =>
     props.$viewMode === "DESKTOP"

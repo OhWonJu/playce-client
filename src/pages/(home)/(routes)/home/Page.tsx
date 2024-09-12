@@ -64,8 +64,8 @@ const HomePage = () => {
           <MyPlayListSection myPlayList={summaryData.myPlayList} />
         </>
       )}
-      <MusicList title="최신 앨범" exceptionGuide={`작업중`} />
       <MusicList title="추천 앨범" exceptionGuide={`작업중`} />
+      <MusicList title="최신 앨범" exceptionGuide={`작업중`} />
     </PlayableContainer>
   );
 };

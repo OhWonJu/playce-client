@@ -3,7 +3,7 @@ import { queryOptions } from "@tanstack/react-query";
 import { _GET, _POST, _PUT } from "@/api/rootAPI";
 import { MutationResponse } from "@/api/axios/axiosInstance.types";
 
-import { Queue } from "@/types";
+import { AlbumInfo, Queue } from "@/types";
 
 export interface CurrentUserResponse {
   id: string;
@@ -31,6 +31,12 @@ export interface GetSummaryResponse {
   }[];
 }
 
+export interface GetUserAlbumsResponse {
+  items: any;
+  albums: AlbumInfo[];
+  nextCursor?: string;
+}
+
 export interface LogOutResponse extends MutationResponse {}
 
 export interface UserCreateConfirmRequest {
@@ -44,6 +50,7 @@ export const usersQueryKeys = {
   logout: ["users", "logout"] as const,
   getSummary: ["users", "summary"] as const,
   getQueue: ["users", "queue"] as const,
+  getAlbums: (userId?: string | null) => ["users", "albums", userId],
 };
 
 export function getCurrentUser(flag: boolean | undefined) {

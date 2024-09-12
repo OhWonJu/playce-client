@@ -16,8 +16,8 @@ import "@/styles/tailwind.css";
 
 import App from "./App";
 import RootLayout from "./RootLayout";
-import { HelmetHeader, InitalLoader } from "./components";
 import ThemeProvider from "./components/providers/ThemeProvider";
+import { HelmetHeader, InitialLoader } from "./components";
 
 const AppContainer = () => {
   const { isLogin, setIsLogin } = useAuthStore();
@@ -40,7 +40,6 @@ const AppContainer = () => {
   const flag = !!getExpiresAt() && !!connectCheck;
 
   const { refetch, isLoading } = useQuery(getCurrentUser(!!flag));
-
   const { data: queueData } = useQuery(getQueue(isLogin));
 
   const preload = async () => {
@@ -82,7 +81,7 @@ const AppContainer = () => {
     }
   }, [queueData]);
 
-  if (connectChecking || isLoading) return <InitalLoader />;
+  if (connectChecking || isLoading) return <InitialLoader />;
 
   if (isError) {
     // TODO : 서버 연결이 불가능하다는 안내 출력

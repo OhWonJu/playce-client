@@ -1,12 +1,16 @@
-import { playlistsQueryKeys } from "@/api/playlist";
-import { PlaylistCard } from "@/components";
-import { Skeleton } from "@/components/ui/skeleton";
-import usePlaylistsQuery from "@/hooks/usePlaylistsQuery";
-import useMeStore from "@/stores/useMeStore";
-import { PlayableContainer } from "@/styles/GlobalStyles";
-import { useInView } from "framer-motion";
 import { Fragment, useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
+import { useInView } from "framer-motion";
+
+import { playlistsQueryKeys } from "@/api/playlist";
+
+import usePlaylistsQuery from "@/hooks/usePlaylistsQuery";
+import useMeStore from "@/stores/useMeStore";
+
+import { Heading, PlaylistCard } from "@/components";
+import { Skeleton } from "@/components/ui/skeleton";
+
+import { PlayableContainer } from "@/styles/GlobalStyles";
 
 const CabinetPlayListsPage = () => {
   const ref = useRef(null);
@@ -40,6 +44,7 @@ const CabinetPlayListsPage = () => {
 
   return (
     <PlayableContainer>
+      <Heading title="나의 플레이리스트" className="mb-14" />
       <div className=" w-full space-y-2 scrollbar-hide">
         {!isLoading &&
           playlistsData?.pages?.map((group, i) => (

@@ -79,8 +79,8 @@ const Pin = () => {
   return (
     <>
       <div className="grid place-items-center w-full aspect-square rounded-full bg-[#FBFBF9] bg-opacity-50 z-10">
-        <div className="grid place-items-center w-[85%] aspect-square rounded-full bg-white dark:bg-black">
-          <div className="relative grid place-items-center w-[85%] aspect-square rounded-full shadow-inner border-[1px] border-neutral-100 dark:border-neutral-800 bg-background" />
+        <div className="grid place-items-center w-[85%] aspect-square rounded-full bg-white dark:bg-neutral-700">
+          <div className="relative grid place-items-center w-[85%] aspect-square rounded-full shadow-inner border-[1px] border-neutral-100 dark:border-neutral-600 bg-background" />
           {/* <div className="relative w-[85%] aspect-square bg-zinc-700 rounded-full shadow-inner">
             <div className="absolute grid place-items-center inset-x-0 w-full h-full">
               <div className="absolute w-[10%] h-[35%] bg-zinc-400 bottom-0" />

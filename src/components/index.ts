@@ -8,5 +8,5 @@ export { MusicList } from "./lists/MusicList";
 export { default as SymbolHeader } from "./SymbolHeader";
 export { Player } from "./player";
 export { Tab, TabSection } from "./Tab";
-export { InitalLoader } from "./loaders";
+export { InitialLoader } from "./loaders";
 export { default as HelmetHeader } from "./HelmetHeader";

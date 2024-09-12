@@ -53,7 +53,8 @@ const MusicCard = ({
         "flex flex-col snap-center hover:cursor-pointer",
         size === "sm" && "w-[120px] min-h-[120px]",
         size === "md" && "w-[160px] min-h-[140px]",
-        size === "lg" && "w-[200px] min-h-[160px]",
+        size === "lg" && "w-full min-h-[160px]",
+        size === "lg" && "flex-row space-x-4 ",
       )}
       onClick={handleClick}
       {...rest}
@@ -99,12 +100,33 @@ const MusicCard = ({
         )}
       </div>
 
-      <span className="font-semibold truncate">{title}</span>
-      {subTitle && (
-        <span className="font-semibold text-sm text-primary-foreground truncate">
-          {subTitle}
+      <div
+        className={cn(
+          "max-w-full overflow-hidden flex flex-col",
+          size === "lg" && "min-h-full justify-center",
+        )}
+      >
+        <span
+          className={cn(
+            "font-semibold",
+            size !== "lg" && "truncate",
+            size === "lg" && "font-bold text-2xl",
+          )}
+        >
+          {title}
         </span>
-      )}
+        {subTitle && (
+          <span
+            className={cn(
+              "font-semibold text-sm",
+              size !== "lg" && "text-primary-foreground truncate",
+              size === "lg" && "font-semibold text-lg",
+            )}
+          >
+            {subTitle}
+          </span>
+        )}
+      </div>
     </div>
   );
 };

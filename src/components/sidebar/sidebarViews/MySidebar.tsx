@@ -30,13 +30,13 @@ const MySidebar = () => {
 
   const bodyContent = (
     <div className="w-full flex flex-col space-y-4">
-      <div className="w-full flex flex-row space-x-2">
+      <div className="w-full flex flex-row space-x-3">
         <Avatar imageUrl={image} size="md" />
         <div className="flex flex-col justify-center">
           <span className="">
             <strong>{nickName}</strong> 님
           </span>
-          <span className="text-xs">PLAYCE에 오신것을 환영해요!</span>
+          <span className="text-xs">PLAYCE에 오신 것을 환영해요!</span>
         </div>
       </div>
       <hr />
@@ -47,7 +47,7 @@ const MySidebar = () => {
           className="justify-start hover:bg-neutral-200 hover:dark:bg-neutral-700"
           onClick={() => navigate("/cabinet")}
         >
-          <span className="pt-1">나의 케비닛</span>
+          <span className="pt-1">나의 캐비닛</span>
         </Button>
         <Button
           variant="plain"
@@ -81,17 +81,20 @@ const MySidebar = () => {
       </Button>
       <hr />
 
-      <div className="flex flex-row items-center justify-end space-x-2">
-        {theme === "dark" ? (
-          <Moon className="w-5 h-5" />
-        ) : (
-          <Sun className="w-5 h-5" />
-        )}
-        <ToggleButton
-          onFunc={() => setTheme("dark")}
-          offFunc={() => setTheme("light")}
-          initToggleState={theme === "light" ? false : true}
-        />
+      <div className="flex flex-row items-center justify-between mx-4">
+        <span className="text-sm">화면 모드</span>
+        <div className="flex flex-row items-center justify-end space-x-2">
+          {theme === "dark" ? (
+            <Moon className="w-5 h-5" />
+          ) : (
+            <Sun className="w-5 h-5" />
+          )}
+          <ToggleButton
+            onFunc={() => setTheme("dark")}
+            offFunc={() => setTheme("light")}
+            initToggleState={theme === "light" ? false : true}
+          />
+        </div>
       </div>
     </div>
   );

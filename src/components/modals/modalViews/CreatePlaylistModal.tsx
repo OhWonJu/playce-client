@@ -98,7 +98,7 @@ const CreatePlaylistModal = () => {
                     disabled={isLoading}
                     placeholder=""
                     {...field}
-                    className="bg-neutral-300/50 border-0 focus-visible:ring-1 text-black focus-visible:ring-offset-0"
+                    className="bg-neutral-300/50 border-0 focus-visible:ring-1 focus-visible:ring-offset-0"
                   />
                 </FormControl>
               </FormItem>

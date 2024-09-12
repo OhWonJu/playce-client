@@ -34,7 +34,7 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({
     <ToggleButtonWrapper
       $isOn={isOn}
       onClick={toggler}
-      className={cn("w-[60px] h-8 p-1", className)}
+      className={cn("w-[60px] h-[30px] p-1", className)}
     >
       <ToggleHandle layout transition={spring} className="h-full aspect-square"/>
     </ToggleButtonWrapper>
