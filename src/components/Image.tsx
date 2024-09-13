@@ -40,6 +40,7 @@ const Image = ({
       width={width}
       className={className}
       loading={lazy ? "lazy" : undefined}
+      draggable={false}
       {...options}
       {...rest}
     />

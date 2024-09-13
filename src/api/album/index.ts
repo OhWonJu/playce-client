@@ -10,6 +10,7 @@ export interface AlbumInfoResponse {
 
 export const albumsQueryKeys = {
   albumInfo: (albumId?: string | null) => ["albums", albumId] as const,
+  recommendedAlbums: ["albums", "recommend"] as const,
 };
 
 export function getAlbumInfo(albumId?: string | null) {
@@ -18,5 +19,12 @@ export function getAlbumInfo(albumId?: string | null) {
     queryFn: async () =>
       _GET<AlbumInfoResponse | undefined>(`/albums/${albumId}`),
     enabled: !!albumId,
+  });
+}
+
+export function getRecommnededAlbums() {
+  return queryOptions({
+    queryKey: albumsQueryKeys.recommendedAlbums,
+    queryFn: async () => _GET<AlbumInfo[]>("/albums/recommend"),
   });
 }

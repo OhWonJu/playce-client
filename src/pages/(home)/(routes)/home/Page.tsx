@@ -13,6 +13,8 @@ import { MusicCard, MusicList } from "@/components";
 import { PlayableContainer } from "@/styles/GlobalStyles";
 
 import { MyPlayListSection, QueueCard } from "../../_components";
+import { getRecommnededAlbums } from "@/api/album";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const HomePage = () => {
   const ref = useRef(null);
@@ -23,6 +25,10 @@ const HomePage = () => {
 
   const { data: summaryData, isLoading: summaryLoading } = useQuery(
     getSummary(isLogin),
+  );
+
+  const { data: recommendedAlbums, isLoading: recommendedLoading } = useQuery(
+    getRecommnededAlbums(),
   );
 
   // 스켈레톤 필요
@@ -42,6 +48,22 @@ const HomePage = () => {
         }
       />
     ));
+
+  const recommendedAlbumsRenderer = () => {
+    if (recommendedLoading) return [<Skeleton />];
+    else
+      return recommendedAlbums.map(album => (
+        <MusicCard
+          key={`recommend-${album.id}`}
+          title={album.albumName}
+          imageUrl={album.albumArtURL}
+          subTitle={album.artist.artistName}
+          onClick={() =>
+            navigate(`/albums/${album.albumName}?albumId=${album.id}`)
+          }
+        />
+      ));
+  };
 
   return (
     <PlayableContainer ref={ref} className="pb-14 space-y-20">
@@ -64,7 +86,11 @@ const HomePage = () => {
           <MyPlayListSection myPlayList={summaryData.myPlayList} />
         </>
       )}
-      <MusicList title="추천 앨범" exceptionGuide={`작업중`} />
+      <MusicList
+        title="추천 앨범"
+        renderer={recommendedAlbumsRenderer}
+        exceptionGuide={`작업중`}
+      />
       <MusicList title="최신 앨범" exceptionGuide={`작업중`} />
     </PlayableContainer>
   );

@@ -10,7 +10,7 @@ const Heading = ({ title, align = "left", className }: HeadingProps) => {
   return (
     <h1
       className={cn(
-        "text-4xl sm:text-6xl font-bold",
+        "text-2xl sm:text-4xl font-bold",
         align === "left" && "",
         align === "center" && "text-center",
         align === "right" && "text-right",

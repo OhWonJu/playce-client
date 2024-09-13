@@ -53,6 +53,7 @@ const MyPlayListSection = ({ myPlayList }: MyPlayListSectionProps) => {
             ? playlist.thumbNail[0]
             : playlist.thumbNail
         }
+        size="md"
         onClick={() =>
           navigate(
             `/cabinet/playlists/${playlist.playListName}?playlistId=${playlist.id}`,
