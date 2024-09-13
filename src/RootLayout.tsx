@@ -17,6 +17,7 @@ import ViewModeProvider from "./components/providers/ViewModeProvider";
 import SidebarProvider from "./components/providers/SidebarProvider";
 import Navigator from "./components/Navigator/Navigator";
 import { Player } from "./components";
+import { StyledToastContainer } from "./components/Toastify";
 
 const PlayerBottomSheet = lazy(
   () => import("./components/playerBottomSheet/PlayerBottomSheet"),
@@ -79,6 +80,7 @@ const RootLayout = ({ children }: PropsWithChildren) => {
       <ModalProvider />
       <SidebarProvider />
       <Page children={children} />
+      <StyledToastContainer />
     </>
   );
 };

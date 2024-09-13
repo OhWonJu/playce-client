@@ -2,6 +2,8 @@ import { create } from "zustand";
 
 import { Track } from "@/types";
 
+import { TrackToast } from "@/components/Toastify";
+
 export type QUEUE_ACTION =
   | { type: "SET_QUEUE"; queue: Track[] }
   | { type: "ADD_TRACK"; track: Track }
@@ -51,6 +53,8 @@ export const useQueue = create<QueueStore>((set, get) => ({
       track => track.trackTitle === newTrack.trackTitle,
     );
 
+    TrackToast({ targetName: "큐", track, isAdd: true });
+
     if (existTrack === -1) {
       newQueue.push(newTrack);
 
@@ -69,6 +73,8 @@ export const useQueue = create<QueueStore>((set, get) => ({
     const deletedTrackIndex = queue.findIndex(
       track => track.trackTitle === deletedTrackId,
     );
+
+    TrackToast({ targetName: "큐", track, isAdd: false });
 
     if (deletedTrackIndex !== -1) {
       const newQueue = [...queue];

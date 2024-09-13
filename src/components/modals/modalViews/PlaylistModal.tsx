@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 import {
   getTracksByPlaylist,
@@ -21,6 +22,7 @@ import { Plus } from "@/components/icons";
 import Button from "@/components/buttons/Button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PlaylistCard } from "@/components/cards";
+import { TrackToast } from "@/components/Toastify";
 
 import ModalLayout from "../ModalLayout";
 
@@ -76,17 +78,26 @@ const PlaylistModal = () => {
 
     onError: () => {
       console.log("FAILED");
+      toast.error("실패함.")
     },
   });
 
-  const handleAddTrack = (playlistId: string) => {
+  const handleAddTrack = (playlistId: string, playlistName: string) => {
     if (!data) return;
 
     playlistId === currentPlaylistId && addPlayListTrack(data.playlist.track);
+
     updatePlaylist({
       playlistId,
       data: { isAdd: data.playlist.isAdd, trackId: data.playlist.trackId },
     });
+    
+    TrackToast({
+      targetName: `플레이리스트 - [${playlistName}]`,
+      isAdd: data.playlist.isAdd,
+      track: data.playlist.track,
+    });
+    
     setTimeout(() => onClose(), 300);
   };
 
