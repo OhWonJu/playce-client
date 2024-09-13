@@ -74,8 +74,8 @@ const TrackListCard = ({ index, data, isOwn }: TrackListCardProps) => {
             className="relative p-2 rounded-full"
           >
             <QueueList className="w-4 h-4" />
-            <QueuePlayIconBox className="group-hover:bg-neutral-100 dark:group-hover:bg-neutral-600">
-              <Play className="w-3 h-3" />
+            <QueuePlayIconBox className="group-hover:bg-accent">
+              <Play className="w-3 h-3 fill-primary stroke-primary" />
             </QueuePlayIconBox>
           </Button>
           <Button

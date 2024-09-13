@@ -12,6 +12,7 @@ import {
 
 import { useModal } from "@/stores/useModalStore";
 import useMeStore from "@/stores/useMeStore";
+import InputModeStore from "@/stores/inputModeStore";
 
 import {
   Form,
@@ -25,7 +26,6 @@ import { Input } from "@/components/ui/input";
 import Button from "@/components/buttons/Button";
 
 import ModalLayout from "../ModalLayout";
-import InputModeStore from "@/stores/inputModeSotre";
 
 const formSchema = z.object({
   playListName: z.string().min(1).max(11),

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import { usePlayerControl } from "@/stores/usePlayerControl";
-import InputModeStore from "@/stores/inputModeSotre";
+import InputModeStore from "@/stores/inputModeStore";
 
 const KeyEventControler = () => {
   const play = usePlayerControl(state => state.play);

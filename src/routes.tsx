@@ -39,10 +39,6 @@ type CustomRouteProps = RouteProps & {
 
 export const privateRoutes: CustomRouteProps[] = [
   {
-    path: "/albums/:albumName",
-    element: <AlbumIdPage />,
-  },
-  {
     path: "/cabinet",
     element: <CabinetPage />,
   },
@@ -85,7 +81,10 @@ export const publicRoutes: CustomRouteProps[] = [
     path: "/explore",
     element: <ExplorePage />,
   },
-
+  {
+    path: "/albums/:albumName",
+    element: <AlbumIdPage />,
+  },
   {
     path: "/profile/:userId",
     element: <UserIdPage />,

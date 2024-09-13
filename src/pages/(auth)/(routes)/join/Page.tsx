@@ -136,7 +136,7 @@ const JoinPage = () => {
                     <FormControl>
                       <Input
                         disabled={isLoading}
-                        placeholder="영문, 한글, 숫자 조합 4-11자"
+                        placeholder="영문, 한글, 숫자 조합 2~11자"
                         {...field}
                         className="shadow focus:shadow-inner transition-shadowborder-1 border-primary-foreground/50 focus-visible:ring-0 text-primary focus-visible:ring-offset-0"
                       />
@@ -156,7 +156,7 @@ const JoinPage = () => {
                     <FormControl>
                       <Input
                         disabled={isLoading}
-                        placeholder="영문 대소문자, 숫자, 특수문자(!@#$%) 8-11자"
+                        placeholder="영문 대소문자, 숫자, 특수문자(!@#$%) 8~11자"
                         type="password"
                         {...field}
                         className="shadow focus:shadow-inner transition-shadowborder-1 border-primary-foreground/50 focus-visible:ring-0 text-primary focus-visible:ring-offset-0"

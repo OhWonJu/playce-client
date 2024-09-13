@@ -11,7 +11,7 @@ import { DotMenu } from "../icons";
 interface PlaylistCardProps {
   data: PlaylistSimple;
   size?: "sm" | "md";
-  onClick?: (playlistId: string) => void;
+  onClick?: (playlistId: string, playlistName?: string) => void;
   [key: string]: any;
 }
 
@@ -32,7 +32,7 @@ const PlaylistCard = ({
     >
       <Button
         variant="plain"
-        onClick={() => onClick(data.id)}
+        onClick={() => onClick(data.id, data.playListName)}
         useRipple
         className="h-full flex w-full flex-row justify-start items-center space-x-3 p-0"
       >
@@ -75,9 +75,7 @@ const PlaylistCard = ({
             size === "md" && "flex-col space-y-1 items-start",
           )}
         >
-          <span className="font-semibold truncate">
-            {data.playListName}
-          </span>
+          <span className="font-semibold truncate">{data.playListName}</span>
           <span className="font-medium text-primary-foreground truncate">
             {data.count}곡
           </span>

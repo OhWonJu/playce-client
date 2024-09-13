@@ -4,10 +4,11 @@ import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
 import { usePlayerControl } from "@/stores/usePlayerControl";
 
 import { Button } from "@/components";
-import { Play } from "@/components/icons";
+import { CreditCard, Play, ShoppingBag } from "@/components/icons";
 
 import { AlbumActionBox } from "./albumActions.styles";
 import usePlayTimeStore from "@/stores/usePlayTimeStore";
+import { useAuthStore } from "@/stores/useAuthStore";
 
 interface AlbumActionsProps {
   album: AlbumInfo;
@@ -15,6 +16,7 @@ interface AlbumActionsProps {
 }
 
 const AlbumActions = ({ album, isOwn }: AlbumActionsProps) => {
+  const isLogin = useAuthStore(state => state.isLogin);
   const { displayPlayer, onOpen } = usePlayerToggle();
   const setPlayTime = usePlayTimeStore(state => state.setPlayTime);
   const handlePlayListClick = usePlayerControl(
@@ -30,38 +32,45 @@ const AlbumActions = ({ album, isOwn }: AlbumActionsProps) => {
     handlePlayListClick("ALBUM", album);
   };
 
+  if (!isLogin) return null;
+
   return (
     <AlbumActionBox>
-      {isOwn ? (
+      {isOwn && (
         <Button
           variant="flat"
           useRipple
           onClick={albumClickHandler}
-          className="flex justify-around items-center h-full text-base w-28"
+          className="flex justify-around items-center h-full px-4 py-2 min-w-28"
         >
-          <Play width="22" height="22" fill={"#FFFFFF"} stroke={"#FFFFFF"} />
-          <span className="font-semibold text-white">Play</span>
+          <Play
+            width="22"
+            height="22"
+            className="fill-secondary stroke-secondary"
+          />
+          <span className="font-semibold text-secondary pt-1">Play</span>
         </Button>
-      ) : (
-        <>
-          <Button
-            variant="flat"
-            useRipple
-            className="grid place-content-center w-28 h-full px-2 py-3 rounded-md bg-black"
-          >
-            <span className="font-semibold text-white">Buy</span>
-          </Button>
-          <Button
-            variant="flat"
-            useRipple
-            className="grid place-content-center w-28 h-full px-2 py-3 rounded-md bg-black"
-          >
-            <span className="font-semibold text-sm text-white">
-              Add To Cart
-            </span>
-          </Button>
-        </>
       )}
+
+      <Button
+        variant="flat"
+        useRipple
+        className="flex justify-around items-center h-full px-4 py-3 min-w-28"
+      >
+        <CreditCard width="22" height="22" className="stroke-secondary mr-2" />
+        <span className="font-semibold text-secondary pt-1">Buy</span>
+      </Button>
+
+      <Button
+        variant="flat"
+        useRipple
+        className="flex justify-around items-center h-full px-4 py-3 min-w-28"
+      >
+        <ShoppingBag width="22" height="22" className="stroke-secondary mr-2" />
+        <span className="font-semibold text-sm text-secondary pt-1">
+          Add to cart
+        </span>
+      </Button>
     </AlbumActionBox>
   );
 };

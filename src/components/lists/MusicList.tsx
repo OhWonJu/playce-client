@@ -44,7 +44,7 @@ export const MusicList = ({
   return (
     <section className={cn("flex flex-col w-full", className)}>
       <div className="flex flex-row w-full justify-between items-center mb-4">
-        <strong className="text-2xl sm:text-4xl font-bold">{title}</strong>
+        <strong className="text-3xl sm:text-4xl font-bold">{title}</strong>
         {hasMore && (
           <span
             role="button"
