@@ -5,11 +5,10 @@ import tw from "twin.macro";
 export const Container = styled(ToastContainer)`
   .Toastify__toast {
     font-size: 16px;
-    background-color: transparent;
     padding: 0px 10px 0px 10px;
     z-index: 9999999;
 
-    ${tw`flex items-center rounded-xl backdrop-blur-md border border-neutral-100 dark:border-neutral-700 shadow-md`};
+    ${tw`flex items-center rounded-xl bg-neutral-100/80 dark:bg-neutral-700/70 backdrop-blur-md border border-neutral-100 dark:border-neutral-700/70 shadow-md`};
   }
 
   .Toastify__toast-icon {

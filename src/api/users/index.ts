@@ -3,7 +3,7 @@ import { queryOptions } from "@tanstack/react-query";
 import { _GET, _POST, _PUT } from "@/api/rootAPI";
 import { MutationResponse } from "@/api/axios/axiosInstance.types";
 
-import { AlbumInfo, Queue } from "@/types";
+import { Queue, UserAlbumSummary } from "@/types";
 
 export interface CurrentUserResponse {
   id: string;
@@ -33,7 +33,7 @@ export interface GetSummaryResponse {
 
 export interface GetUserAlbumsResponse {
   items: any;
-  albums: AlbumInfo[];
+  albums: UserAlbumSummary[];
   nextCursor?: string;
 }
 
@@ -89,6 +89,15 @@ export async function logOutMutate() {
 
 export async function userCreateConfirm(data: UserCreateConfirmRequest) {
   const res = await _PUT<MutationResponse>("/users/create/confirm", data);
+
+  if (!res.ok) throw new Error(res.errorCode);
+  else return res;
+}
+
+export async function createUserAlbum(albumIds: string[]) {
+  const res = await _POST<MutationResponse>(`/users/create/userAlbum`, {
+    albumIds,
+  });
 
   if (!res.ok) throw new Error(res.errorCode);
   else return res;

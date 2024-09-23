@@ -1,8 +1,6 @@
 import { lazy, Suspense } from "react";
 import { useModal } from "@/stores/useModalStore";
 
-// import { LoginModal, PlaylistModal } from "@/components/modals/modalViews";
-
 const LoginModal = lazy(
   () => import("@/components/modals/modalViews/LoginModal"),
 );
@@ -11,6 +9,9 @@ const PlaylistModal = lazy(
 );
 const CreatePlaylistModal = lazy(
   () => import("@/components/modals/modalViews/CreatePlaylistModal"),
+);
+const CartModal = lazy(
+  () => import("@/components/modals/modalViews/CartModal"),
 );
 
 const ModalProvider = () => {
@@ -21,6 +22,7 @@ const ModalProvider = () => {
       {type === "login" && <LoginModal />}
       {type === "playlist" && <PlaylistModal />}
       {type === "createPlaylist" && <CreatePlaylistModal />}
+      {type === "cart" && <CartModal />}
     </Suspense>
   );
 };

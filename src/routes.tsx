@@ -29,6 +29,16 @@ const CabinetQueuePage = lazy(
   () => import("./pages/(cabinet)/(routes)/queue/Page"),
 );
 
+const KakaoPaymentSuccessPage = lazy(
+  () => import("./pages/(payment)/(routes)/kakako/success/page"),
+);
+const KakaoPaymentCancelPage = lazy(
+  () => import("./pages/(payment)/(routes)/kakako/cancel/page"),
+);
+const KakaoPaymentFailPage = lazy(
+  () => import("./pages/(payment)/(routes)/kakako/fail/page"),
+);
+
 const AccessDenied = lazy(() => import("./pages/AccessDenied"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -54,10 +64,21 @@ export const privateRoutes: CustomRouteProps[] = [
     path: "/cabinet/playlists/:playlistName",
     element: <CabinetPlayListIdPage />,
   },
-
   {
     path: "/cabinet/queue",
     element: <CabinetQueuePage />,
+  },
+  {
+    path: "/payment/kakao/success",
+    element: <KakaoPaymentSuccessPage />,
+  },
+  {
+    path: "/payment/kakao/cancel",
+    element: <KakaoPaymentCancelPage />,
+  },
+  {
+    path: "/payment/kakao/fail",
+    element: <KakaoPaymentFailPage />,
   },
 ];
 

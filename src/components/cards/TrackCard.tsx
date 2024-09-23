@@ -43,7 +43,7 @@ const TrackCard = ({
   const { style } = rest;
 
   const addPlayListTrack = usePlayerControl(state => state.addTrack);
-  const delePlayListTrack = usePlayerControl(state => state.deleteTrack);
+  const deletePlayListTrack = usePlayerControl(state => state.deleteTrack);
 
   const addQueueList = useQueue(state => state.addTrack);
   const deleteQueueList = useQueue(state => state.deleteTrack);
@@ -122,7 +122,7 @@ const TrackCard = ({
 
   function handleDeleteBtn() {
     if (trackListType === "QUEUE") {
-      delePlayListTrack(data);
+      deletePlayListTrack(data);
       deleteQueueList(data);
       qeueuMutation.mutate({ isAdd: false, trackId: data.id });
     }

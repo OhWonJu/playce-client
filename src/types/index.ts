@@ -39,9 +39,26 @@ export interface AlbumInfo {
     artistInfo: string;
     artistName: string;
   };
+  price?: number;
   createdAt: string;
   updatedAt: string;
   releasedAt?: Date;
+}
+
+export interface UserAlbumSummary {
+  id: string;
+  userAlbumId: string;
+  albumCode: string;
+  albumName: string;
+  albumArtURL: string;
+  albumType: string;
+  albumInfo?: string;
+  artist: {
+    artistName: string;
+  };
+  genres: GenrePreview[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface PlaylistSimple {

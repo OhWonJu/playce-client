@@ -13,12 +13,18 @@ import { Moon, Sun } from "@/components/icons";
 import { Button, ToggleButton } from "@/components/buttons";
 
 import SidebarLayout from "../SidebarLayout";
+import { useCartStore } from "@/stores/useCartStore";
+import { useModal } from "@/stores/useModalStore";
 
 const MySidebar = () => {
   const [theme, setTheme] = useLocalStorage("theme");
-  const onClose = useSidebar(state => state.onClose);
+
   const navigate = useNavigate();
+  const onClose = useSidebar(state => state.onClose);
+  const onOpen = useModal(state => state.onOpen);
+
   const { image, nickName } = useMeStore();
+  const { totalItems } = useCartStore();
 
   const { mutate: logOut } = useMutation({
     mutationFn: async () => await logOutMutate(),
@@ -44,29 +50,29 @@ const MySidebar = () => {
       <div className="flex flex-col space-y-2">
         <Button
           variant="plain"
-          className="justify-start hover:bg-neutral-200 hover:dark:bg-neutral-700"
           onClick={() => navigate("/cabinet")}
+          className="justify-start hover:bg-neutral-200 hover:dark:bg-neutral-700"
         >
           <span className="pt-1">나의 캐비닛</span>
         </Button>
         <Button
           variant="plain"
-          className="justify-start hover:bg-neutral-200 hover:dark:bg-neutral-700"
           onClick={() => navigate("/cabinet/albums")}
+          className="justify-start hover:bg-neutral-200 hover:dark:bg-neutral-700"
         >
           <span className="pt-1">나의 앨범</span>
         </Button>
         <Button
           variant="plain"
-          className="justify-start hover:bg-neutral-200 hover:dark:bg-neutral-700"
           onClick={() => navigate("/cabinet/queue")}
+          className="justify-start hover:bg-accent"
         >
           <span className="pt-1">나의 큐</span>
         </Button>
         <Button
           variant="plain"
-          className="justify-start hover:bg-neutral-200 hover:dark:bg-neutral-700"
           onClick={() => navigate("/cabinet/playlists")}
+          className="justify-start hover:bg-accent"
         >
           <span className="pt-1">나의 플레이리스트</span>
         </Button>
@@ -75,9 +81,11 @@ const MySidebar = () => {
 
       <Button
         variant="plain"
-        className="justify-start hover:bg-neutral-200 hover:dark:bg-neutral-700"
+        onClick={() => onOpen("cart")}
+        className="justify-start items-center gap-x-2 hover:bg-accent"
       >
-        <span className="pt-1">나의 장바구니</span>
+        <span className="pt-1">나의 장바구니 </span>
+        <span className="text-xs text-primary-foreground pt-1">{totalItems}개</span>
       </Button>
       <hr />
 
