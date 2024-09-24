@@ -10,6 +10,7 @@ import { useCartStore } from "@/stores/useCartStore";
 import { PlayableContainer } from "@/styles/GlobalStyles";
 
 import { Button } from "@/components";
+import { cofirmKakaoPayPayment } from "@/api/payment";
 
 const KakaoPaymentSuccessPage = () => {
   const [searchParams] = useSearchParams();
@@ -26,10 +27,7 @@ const KakaoPaymentSuccessPage = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: async () =>
-      await _POST("/payments/kakao-success", {
-        tid: orderToken,
-        pg_token,
-      }),
+      await cofirmKakaoPayPayment({ tid: orderToken, pg_token }),
     onSuccess: () => {
       initCart();
       setOrderToken(null);

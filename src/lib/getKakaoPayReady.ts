@@ -1,6 +1,11 @@
 import { _POST } from "@/api/rootAPI";
 
-const { VITE_SERVER_BASE_URL } = import.meta.env;
+const {
+  VITE_SERVER_BASE_URL,
+  VITE_KAKAOPAY_APPROVAL_URL,
+  VITE_KAKAOPAY_FAIL_URL,
+  VITE_KAKAOPAY_CANCEL_URL,
+} = import.meta.env;
 
 export const getkakoPayReady = async ({
   albumIds,
@@ -35,9 +40,9 @@ export const getkakoPayReady = async ({
         total_amount: totalAmount,
         vat_amount: vatAmount,
         tax_free_amount: textFreeAmount,
-        approval_url: "http://localhost:5173/payment/kakao/success",
-        fail_url: "http://localhost:5173/payment/kakao/fail",
-        cancel_url: "http://localhost:5173/payment/kakao/cancel",
+        approval_url: VITE_KAKAOPAY_APPROVAL_URL,
+        fail_url: VITE_KAKAOPAY_FAIL_URL,
+        cancel_url: VITE_KAKAOPAY_CANCEL_URL,
       },
     };
 

@@ -50,7 +50,8 @@ const HomePage = () => {
     ));
 
   const recommendedAlbumsRenderer = () => {
-    if (recommendedLoading) return [<Skeleton />];
+    //@ts-ignore
+    if (recommendedLoading) return [<Skeleton key="loading" />];
     else
       return recommendedAlbums.map(album => (
         <MusicCard
