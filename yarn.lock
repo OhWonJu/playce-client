@@ -973,6 +973,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/crypto-js@npm:^4":
+  version: 4.2.2
+  resolution: "@types/crypto-js@npm:4.2.2"
+  checksum: 10c0/760a2078f36f2a3a1089ef367b0d13229876adcf4bcd6e8824d00d9e9bfad8118dc7e6a3cc66322b083535e12be3a29044ccdc9603bfb12519ff61551a3322c6
+  languageName: node
+  linkType: hard
+
 "@types/debounce@npm:*":
   version: 3.0.0
   resolution: "@types/debounce@npm:3.0.0"
@@ -1725,6 +1732,13 @@ __metadata:
     shebang-command: "npm:^2.0.0"
     which: "npm:^2.0.1"
   checksum: 10c0/5738c312387081c98d69c98e105b6327b069197f864a60593245d64c8089c8a0a744e16349281210d56835bb9274130d825a78b2ad6853ca13cfbeffc0c31750
+  languageName: node
+  linkType: hard
+
+"crypto-js@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "crypto-js@npm:4.2.0"
+  checksum: 10c0/8fbdf9d56f47aea0794ab87b0eb9833baf80b01a7c5c1b0edc7faf25f662fb69ab18dc2199e2afcac54670ff0cd9607a9045a3f7a80336cccd18d77a55b9fdf0
   languageName: node
   linkType: hard
 
@@ -3254,6 +3268,7 @@ __metadata:
     "@tanstack/react-query": "npm:^5.53.1"
     "@types/babel-plugin-macros": "npm:^3"
     "@types/body-scroll-lock": "npm:^3.1.2"
+    "@types/crypto-js": "npm:^4"
     "@types/js-cookie": "npm:^3.0.6"
     "@types/lodash": "npm:^4"
     "@types/lodash.debounce": "npm:^4.0.9"
@@ -3273,6 +3288,7 @@ __metadata:
     body-scroll-lock: "npm:^4.0.0-beta.0"
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.1.1"
+    crypto-js: "npm:^4.2.0"
     date-fns: "npm:^3.6.0"
     eslint: "npm:^9.9.0"
     eslint-plugin-react-hooks: "npm:^5.1.0-rc.0"
