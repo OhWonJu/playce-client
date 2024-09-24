@@ -10,6 +10,7 @@ import { _PUT } from "@/api/rootAPI";
 import { ERROR_CODE, ErrorCode } from "@/api/errorCode";
 import { userCreateConfirm, UserCreateConfirmRequest } from "@/api/users";
 
+import { sha256Encrypt } from "@/lib/crypto";
 import { useModal } from "@/stores/useModalStore";
 
 import {
@@ -79,7 +80,6 @@ const JoinPage = () => {
     mutationFn: async (data: UserCreateConfirmRequest) =>
       userCreateConfirm(data),
     onSuccess: data => {
-      console.log("S???", data);
       form.reset();
       navigate("/");
     },
@@ -95,7 +95,7 @@ const JoinPage = () => {
     confirmUser({
       nickName: values.nickName,
       email: values.email,
-      hashedPassword: values.password,
+      hashedPassword: sha256Encrypt(values.password),
     });
 
     // try {
