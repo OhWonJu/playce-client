@@ -78,7 +78,8 @@ const LoginModal = () => {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      disabled={isLoading}
+                      // disabled={isLoading}
+                      disabled
                       placeholder=""
                       {...field}
                       className="bg-neutral-300/50 border-0 focus-visible:ring-1 focus-visible:ring-offset-0"
@@ -98,7 +99,8 @@ const LoginModal = () => {
                   </FormLabel>
                   <FormControl>
                     <Input
-                      disabled={isLoading}
+                      // disabled={isLoading}
+                      disabled
                       placeholder=""
                       type="password"
                       {...field}
@@ -113,7 +115,8 @@ const LoginModal = () => {
             variant="flat"
             type="submit"
             size="lg"
-            disabled={isLoading}
+            // disabled={isLoading}
+            disabled
             className="w-full"
           >
             로그인
@@ -128,10 +131,10 @@ const LoginModal = () => {
         <Button
           variant="plain"
           className="flex flex-row w-full justify-center mt-4"
-          onClick={() => {
-            navigate("/join");
-            onClose();
-          }}
+          // onClick={() => {
+          //   navigate("/join");
+          //   onClose();
+          // }}
         >
           <span className="text-xs font-semibold font-sansSrif border rounded-md px-1 py-1 border-symbol-blue text-symbol-blue">
             JOIN US!

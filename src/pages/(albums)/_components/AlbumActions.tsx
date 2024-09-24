@@ -60,14 +60,14 @@ const AlbumActions = ({ album, isOwn }: AlbumActionsProps) => {
         </Button>
       )}
 
-      <Button
+      {/* <Button
         variant="flat"
         useRipple
         className="flex justify-around items-center h-full px-4 py-3 min-w-28"
       >
         <CreditCard width="22" height="22" className="stroke-secondary mr-2" />
         <span className="font-semibold text-secondary pt-1">Buy</span>
-      </Button>
+      </Button> */}
 
       <Button
         variant="flat"

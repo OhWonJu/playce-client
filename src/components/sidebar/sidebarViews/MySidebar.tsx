@@ -48,17 +48,17 @@ const MySidebar = () => {
       <hr />
 
       <div className="flex flex-col space-y-2">
-        <Button
+        {/* <Button
           variant="plain"
           onClick={() => navigate("/cabinet")}
           className="justify-start hover:bg-neutral-200 hover:dark:bg-neutral-700"
         >
           <span className="pt-1">나의 캐비닛</span>
-        </Button>
+        </Button> */}
         <Button
           variant="plain"
           onClick={() => navigate("/cabinet/albums")}
-          className="justify-start hover:bg-neutral-200 hover:dark:bg-neutral-700"
+          className="justify-start hover:bg-accent"
         >
           <span className="pt-1">나의 앨범</span>
         </Button>
@@ -85,7 +85,9 @@ const MySidebar = () => {
         className="justify-start items-center gap-x-2 hover:bg-accent"
       >
         <span className="pt-1">나의 장바구니 </span>
-        <span className="text-xs text-primary-foreground pt-1">{totalItems}개</span>
+        <span className="text-xs text-primary-foreground pt-1">
+          {totalItems}개
+        </span>
       </Button>
       <hr />
 
