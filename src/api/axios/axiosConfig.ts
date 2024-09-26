@@ -41,22 +41,27 @@ export const onError = (error: AxiosError) => {
 };
 
 export const onRequest = async (config: InternalAxiosRequestConfig) => {
-  // const expiresAt = getExpiresAt();
-  const expiresAt = Number(localStorage.getItem("playce_expired_at"));
-
-  if (!!expiresAt && isTokenExpired()) {
+  if (isTokenExpired()) {
     try {
       const res = await refreshAccessToken();
 
       if (!res.ok && res.errorCode) {
         throw new Error(ERROR_CODE[res.errorCode]);
       }
+
+      if (res.data) {
+        localStorage.setItem("playce_expired_at", res.data);
+      } else {
+        localStorage.setItem("playce_expired_at", "");
+      }
     } catch (error) {
       // 리프레시 토큰 요청 실패 시 처리
       window.location.href = `${VITE_CLIENT_BASE_URL}/?error=true`;
+      localStorage.setItem("playce_expired_at", "");
       return Promise.reject(error);
     }
   }
+  
   return config;
 };
 
