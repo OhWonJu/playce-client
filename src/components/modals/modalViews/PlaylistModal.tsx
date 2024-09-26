@@ -201,7 +201,7 @@ const PlaylistModal = () => {
       footer={footerContent}
       onClose={onClose}
       // disabled={isLoading}
-      containerClassName="w-full sm:w-[420px] h-screen"
+      containerClassName="w-full sm:w-[420px] h-full"
       mode="slide"
     />
   );
