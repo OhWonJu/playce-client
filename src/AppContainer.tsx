@@ -21,7 +21,7 @@ import ThemeProvider from "./components/providers/ThemeProvider";
 import { HelmetHeader, InitialLoader } from "./components";
 
 const AppContainer = () => {
-  const [expiresAt, _] = useLocalStorage("playce_expired_at");
+  const [expiresAt, setExpiresAt] = useLocalStorage("playce_expired_at");
 
   const { isLogin, setIsLogin } = useAuthStore();
   const { initMe, setMe } = useMeStore();
@@ -52,12 +52,14 @@ const AppContainer = () => {
       if (!currentUser) {
         initMe();
         setIsLogin(false);
+        setExpiresAt("");
       } else {
         setMe(currentUser);
         setIsLogin(true);
       }
     } else {
       setIsLogin(false);
+      setExpiresAt("");
     }
   };
 
