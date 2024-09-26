@@ -10,6 +10,7 @@ import { _GET } from "@/api/rootAPI";
 import { useAuthStore } from "@/stores/useAuthStore";
 import useMeStore from "@/stores/useMeStore";
 import { useQueue } from "./stores/useQueue";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 import GlobalStyles from "@/styles/GlobalStyles";
 import "@/styles/tailwind.css";
@@ -20,6 +21,8 @@ import ThemeProvider from "./components/providers/ThemeProvider";
 import { HelmetHeader, InitialLoader } from "./components";
 
 const AppContainer = () => {
+  const [expiresAt, _] = useLocalStorage("playce_expired_at");
+
   const { isLogin, setIsLogin } = useAuthStore();
   const { initMe, setMe } = useMeStore();
 
@@ -37,7 +40,7 @@ const AppContainer = () => {
     refetchOnWindowFocus: true,
   });
 
-  const flag = !!getExpiresAt() && !!connectCheck;
+  const flag = !!expiresAt && !!connectCheck;
 
   const { refetch, isLoading } = useQuery(getCurrentUser(!!flag));
   const { data: queueData } = useQuery(getQueue(isLogin));

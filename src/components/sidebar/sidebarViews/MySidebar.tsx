@@ -7,6 +7,7 @@ import { logOutMutate } from "@/api/users";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useSidebar } from "@/stores/useSidebarStore";
 import useMeStore from "@/stores/useMeStore";
+import { useModal } from "@/stores/useModalStore";
 
 import Avatar from "@/components/Avatar";
 import { Moon, Sun } from "@/components/icons";
@@ -14,10 +15,10 @@ import { Button, ToggleButton } from "@/components/buttons";
 
 import SidebarLayout from "../SidebarLayout";
 import { useCartStore } from "@/stores/useCartStore";
-import { useModal } from "@/stores/useModalStore";
 
 const MySidebar = () => {
   const [theme, setTheme] = useLocalStorage("theme");
+  const [_, setExpiredAt] = useLocalStorage("playce_expired_at");
 
   const navigate = useNavigate();
   const onClose = useSidebar(state => state.onClose);
@@ -29,6 +30,7 @@ const MySidebar = () => {
   const { mutate: logOut } = useMutation({
     mutationFn: async () => await logOutMutate(),
     onSuccess: () => {
+      setExpiredAt("");
       navigate("/");
       navigate(0);
     },

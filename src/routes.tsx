@@ -3,6 +3,7 @@ import { RouteProps } from "react-router";
 
 import RootPage from "./pages/(root)/Page";
 import HomePage from "./pages/(home)/(routes)/home/Page";
+import OAuthCallbackPage from "./pages/(auth)/(routes)/callback/page";
 
 const UserIdPage = lazy(
   () => import("./pages/(profile)/(routes)/[userId]/Page"),
@@ -90,6 +91,10 @@ export const alternativeRoutes: CustomRouteProps[] = [
   {
     path: "/join",
     element: <JoinPage />,
+  },
+  {
+    path: "/oauth/callback",
+    element: <OAuthCallbackPage />,
   },
 ];
 
