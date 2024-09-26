@@ -49,7 +49,7 @@ FrontEnd
 
 # Deploy
 
-[PLAYCE 채험하러가기](https://playce-client-mvp1-86cp9lvz7-ohwonjus-projects.vercel.app/)
+[PLAYCE 채험하러가기](https://playce-client-mvp1.vercel.app/)
 powered by Vercel, Koyeb
 
 <br />
