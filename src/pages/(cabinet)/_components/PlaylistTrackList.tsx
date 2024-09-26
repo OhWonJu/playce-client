@@ -5,7 +5,7 @@ import React from "react";
 
 interface PlaylistTrackListProps {
   tracks: Track[];
-  playlistId: string;
+  playlistId?: string;
   isOwn: boolean;
   className?: string;
   trackListType: "LIST" | "QUEUE";
