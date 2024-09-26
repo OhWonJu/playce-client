@@ -55,11 +55,9 @@ const AppContainer = () => {
       } else {
         setMe(currentUser);
         setIsLogin(true);
-       
       }
     } else {
       setIsLogin(false);
-      setExpiresAt("");
     }
   };
 
