@@ -41,7 +41,8 @@ export const onError = (error: AxiosError) => {
 };
 
 export const onRequest = async (config: InternalAxiosRequestConfig) => {
-  const expiresAt = getExpiresAt();
+  // const expiresAt = getExpiresAt();
+  const expiresAt = Number(localStorage.getItem("playce_expired_at"));
 
   if (!!expiresAt && isTokenExpired()) {
     try {
@@ -62,6 +63,7 @@ export const onRequest = async (config: InternalAxiosRequestConfig) => {
 function isTokenExpired() {
   // const expiresAt = getExpiresAt();
   const expiresAt = Number(localStorage.getItem("playce_expired_at"));
+
   if (!expiresAt) return true;
 
   const currentTime = Date.now();
