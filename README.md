@@ -24,7 +24,7 @@ Front End 토이 프로젝트 입니다. <br/>
 
 FrontEnd
 
-- React, Zustand, TanstackQuery, wavesurfer.js, StyledComponents, TailwindCSS
+- React, Zustand, TanstackQuery, wavesurfer.js, StyledComponents, TailwindCSS, FramerMotion
 
 <br/>
 
@@ -50,7 +50,7 @@ FrontEnd
 # Deploy
 
 [PLAYCE 채험하러가기](https://playce-client-mvp1.vercel.app/)
-powered by Vercel, Koyeb
+powered by Vercel, Railway
 
 <br />
 <br />
