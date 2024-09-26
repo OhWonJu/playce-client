@@ -131,6 +131,7 @@ const TrackCard = ({
 
     // ADD TO QUEUE
     if (trackListType !== "QUEUE") {
+      // TODO: 모바일환경에서는 너무 예민함
       if (offset > 100 || velocity > 500) {
         animate(scope.current, { x: 0 }, { duration: 0.5 });
         setTimeout(() => {

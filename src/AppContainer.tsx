@@ -27,7 +27,11 @@ const AppContainer = () => {
 
   const setQueue = useQueue(state => state.setQueue);
 
-  const { data: connectCheck, isError } = useQuery({
+  const {
+    data: connectCheck,
+    isLoading: connectChecking,
+    isError,
+  } = useQuery({
     queryKey: ["connect"],
     queryFn: async () => await _GET("/"),
     refetchOnMount: true,
@@ -37,7 +41,7 @@ const AppContainer = () => {
 
   const flag = !!expiresAt && !!connectCheck;
 
-  const { refetch } = useQuery(getCurrentUser(!!flag));
+  const { refetch, isLoading } = useQuery(getCurrentUser(!!flag));
   const { data: queueData } = useQuery(getQueue(isLogin));
 
   const preload = async () => {
@@ -80,7 +84,7 @@ const AppContainer = () => {
     }
   }, [queueData]);
 
-  // if (connectChecking || isLoading) return <InitialLoader />;
+  if (connectChecking || isLoading) return null;
 
   if (isError) {
     // TODO : 서버 연결이 불가능하다는 안내 출력
