@@ -84,7 +84,7 @@ const AppContainer = () => {
     }
   }, [queueData]);
 
-  if (connectChecking || isLoading) return <InitialLoader />;
+  // if (connectChecking || isLoading) return <InitialLoader />;
 
   if (isError) {
     // TODO : 서버 연결이 불가능하다는 안내 출력
