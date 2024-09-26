@@ -69,18 +69,6 @@ export const privateRoutes: CustomRouteProps[] = [
     path: "/cabinet/queue",
     element: <CabinetQueuePage />,
   },
-  {
-    path: "/payment/kakao/success",
-    element: <KakaoPaymentSuccessPage />,
-  },
-  {
-    path: "/payment/kakao/cancel",
-    element: <KakaoPaymentCancelPage />,
-  },
-  {
-    path: "/payment/kakao/fail",
-    element: <KakaoPaymentFailPage />,
-  },
 ];
 
 export const alternativeRoutes: CustomRouteProps[] = [
@@ -114,6 +102,18 @@ export const publicRoutes: CustomRouteProps[] = [
   {
     path: "/profile/:userId",
     element: <UserIdPage />,
+  },
+  {
+    path: "/payment/kakao/success",
+    element: <KakaoPaymentSuccessPage />,
+  },
+  {
+    path: "/payment/kakao/cancel",
+    element: <KakaoPaymentCancelPage />,
+  },
+  {
+    path: "/payment/kakao/fail",
+    element: <KakaoPaymentFailPage />,
   },
   {
     path: "/access-denied",

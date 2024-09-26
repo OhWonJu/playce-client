@@ -17,7 +17,7 @@ import "@/styles/tailwind.css";
 import App from "./App";
 import RootLayout from "./RootLayout";
 import ThemeProvider from "./components/providers/ThemeProvider";
-import { HelmetHeader, InitialLoader } from "./components";
+import { HelmetHeader } from "./components";
 
 const AppContainer = () => {
   const [expiresAt, setExpiresAt] = useLocalStorage("playce_expired_at");
@@ -27,11 +27,7 @@ const AppContainer = () => {
 
   const setQueue = useQueue(state => state.setQueue);
 
-  const {
-    data: connectCheck,
-    isLoading: connectChecking,
-    isError,
-  } = useQuery({
+  const { data: connectCheck, isError } = useQuery({
     queryKey: ["connect"],
     queryFn: async () => await _GET("/"),
     refetchOnMount: true,
@@ -41,7 +37,7 @@ const AppContainer = () => {
 
   const flag = !!expiresAt && !!connectCheck;
 
-  const { refetch, isLoading } = useQuery(getCurrentUser(!!flag));
+  const { refetch } = useQuery(getCurrentUser(!!flag));
   const { data: queueData } = useQuery(getQueue(isLogin));
 
   const preload = async () => {
