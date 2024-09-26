@@ -93,7 +93,7 @@ const MySidebar = () => {
       </Button>
       <hr />
 
-      <div className="flex flex-row items-center justify-between mx-4">
+      <div className="flex flex-row items-center justify-between mx-4 transition-colors">
         <span className="text-sm">화면 모드</span>
         <div className="flex flex-row items-center justify-end space-x-2">
           {theme === "dark" ? (

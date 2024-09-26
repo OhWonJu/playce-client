@@ -11,9 +11,8 @@ export const SidebarContainer = styled.aside<{
   position: fixed;
   display: flex;
   top: 0px;
-  bottom: ${props => (props.$viewMode !== "DESKTOP" ? NAV_HEIGHT : 0)}px;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   padding-bottom: ${props =>
     props.$viewMode === "DESKTOP" ? "0" : `${NAV_HEIGHT}px`};
   background-color: var(--background);
@@ -23,7 +22,7 @@ export const SidebarContainer = styled.aside<{
       : "var(--sidebar)"};
   overflow: hidden;
 
-  ${tw`shadow-lg dark:border-l dark:border-r border-neutral-100  dark:border-neutral-700`};
+  ${tw`shadow-lg dark:border-l dark:border-r border-neutral-100 dark:border-neutral-700`};
 `;
 
 export const SidebarHeader = styled.section`
