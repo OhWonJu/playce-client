@@ -10,7 +10,7 @@ interface QueueToastProps {
 
 const QueueToast = ({ targetName, track, isAdd }: QueueToastProps) => {
   return (
-    <div className="flex flex-col max-w-full h-full">
+    <div className="flex flex-col w-full h-full">
       <section>
         <span className="font-extrabold text-xs text-primary">
           {isAdd ? `${targetName}에 추가됨` : `${targetName}에서 제거됨`}
