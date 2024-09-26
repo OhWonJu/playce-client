@@ -12,7 +12,7 @@ interface PlayerControlStore {
   forwardMode: PLAYER_FORWARD_MODE;
   forwardTrigger: number;
 
-  originTrackId: string;
+  originTrackListId: string;
   originTrackList: Track[];
   playList: Track[];
   playListType: PLAY_LIST_TYPE;
@@ -28,7 +28,7 @@ interface PlayerControlStore {
     album: AlbumInfo | { id: string; tracks: Track[] },
   ) => void;
 
-  setOriginTrackList: (originTrackId: string, originTrackList: Track[]) => void;
+  setOriginTrackList: (originTrackListId: string, originTrackList: Track[]) => void;
   setPlayList: (playList: Track[]) => void;
   setPlayListType: (playListType: PLAY_LIST_TYPE) => void;
   setCurrentTrack: (currentTrack: Track) => void;
@@ -43,7 +43,7 @@ export const usePlayerControl = create<PlayerControlStore>((set, get) => ({
   forwardMode: "INIT",
   forwardTrigger: 0,
 
-  originTrackId: null,
+  originTrackListId: null,
   originTrackList: [],
   currentTrack: null,
   playList: [],
@@ -132,8 +132,8 @@ export const usePlayerControl = create<PlayerControlStore>((set, get) => ({
     setTimeout(() => get().setPlay(true), 800);
   },
 
-  setOriginTrackList: (originTrackId: string, originTrackList: Track[]) =>
-    set({ originTrackId, originTrackList }),
+  setOriginTrackList: (originTrackListId: string, originTrackList: Track[]) =>
+    set({ originTrackListId, originTrackList }),
 
   setPlayList: (playList: Track[]) => set({ playList }),
 

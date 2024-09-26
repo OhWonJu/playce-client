@@ -15,14 +15,14 @@ const Waveform = () => {
     setCurrentTrack,
     currentTrack,
     playList,
-    originTrackId,
+    originTrackListId,
   } = usePlayerControl();
   const { playTime, setPlayTime, setTotalTime } = usePlayTimeStore();
 
   const waveformRef = useRef<HTMLDivElement>(null);
   const wavesurfer = useRef(null);
   const video = useRef<HTMLVideoElement>(null);
-  const prevOriginTrackIdRef = useRef(originTrackId);
+  const prevOriginTrackListIdRef = useRef(originTrackListId);
   const prevSec = useRef(0);
 
   // CREATE WAVE FORM ============================== //
@@ -127,8 +127,8 @@ const Waveform = () => {
     // forward 버튼에 의해 currentTrack 이 바뀌거나
     // playList 의 변화에 따른 플레이타임 갱신
     if (
-      JSON.stringify(prevOriginTrackIdRef.current) ===
-      JSON.stringify(originTrackId)
+      JSON.stringify(prevOriginTrackListIdRef.current) ===
+      JSON.stringify(originTrackListId)
     ) {
       // 동일 playList의 경우
       // playTime 이 0 이상이라면 forward 액션이 아닌, 트랙 재호출 등의 액션일 수 있음
@@ -141,8 +141,8 @@ const Waveform = () => {
       wavesurfer.current.setTime(0);
     }
 
-    prevOriginTrackIdRef.current = originTrackId;
-  }, [originTrackId, forwardTrigger]);
+    prevOriginTrackListIdRef.current = originTrackListId;
+  }, [originTrackListId, forwardTrigger]);
 
   useEffect(() => {
     if (wavesurfer.current) {

@@ -64,6 +64,7 @@ const CabinetPlayListIdPage = () => {
       <PlaylistTrackList
         isOwn={own}
         tracks={playlist.tracks}
+        playlistId={playlist.id}
         trackListType={"LIST"}
         className="mt-8"
       />

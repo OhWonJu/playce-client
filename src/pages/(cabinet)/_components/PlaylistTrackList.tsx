@@ -5,6 +5,7 @@ import React from "react";
 
 interface PlaylistTrackListProps {
   tracks: Track[];
+  playlistId: string;
   isOwn: boolean;
   className?: string;
   trackListType: "LIST" | "QUEUE";
@@ -13,6 +14,7 @@ interface PlaylistTrackListProps {
 
 const PlaylistTrackList = ({
   isOwn,
+  playlistId,
   trackListType,
   tracks,
   className,
@@ -23,6 +25,7 @@ const PlaylistTrackList = ({
         <TrackCard
           //@ts-ignore
           key={track.id}
+          trackListId={playlistId}
           trackListType={trackListType}
           // onClick={}
           data={track}

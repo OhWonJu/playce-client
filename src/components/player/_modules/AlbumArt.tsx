@@ -12,7 +12,7 @@ interface AlbumArtProps {
 
 const AlbumArt = ({ artURL, pinOpacity }: AlbumArtProps) => {
   const isPlay = usePlayerControl(state => state.play);
-  const originTrackId = usePlayerControl(state => state.originTrackId);
+  const originTrackListId = usePlayerControl(state => state.originTrackListId);
 
   const [playing, setPlaying] = useState(undefined);
   const angleRef = useRef(0);
@@ -26,7 +26,7 @@ const AlbumArt = ({ artURL, pinOpacity }: AlbumArtProps) => {
 
   useEffect(() => {
     angleRef.current = 0;
-  }, [originTrackId]);
+  }, [originTrackListId]);
 
   if (artURL) {
     return (

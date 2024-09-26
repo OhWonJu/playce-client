@@ -35,7 +35,7 @@ const PlaylistModal = () => {
   const { id } = useMeStore(); // 모달 data.id 대체 필요F
   const { onClose, onOpen, data } = useModal();
   const { displayPlayer, onOpen: onPlayerOpen } = usePlayerToggle();
-  const currentPlaylistId = usePlayerControl(state => state.originTrackId);
+  const currentPlaylistId = usePlayerControl(state => state.originTrackListId);
   const handlePlayListClick = usePlayerControl(
     state => state.handlePlayListClick,
   );
@@ -69,16 +69,17 @@ const PlaylistModal = () => {
       data: UpdatePlaylistTrackRequest;
     }) => await updatePlaylistTrack({ playlistId, data }),
 
-    onSuccess: () => {
-      console.log("SUCCESS");
+    onSuccess: data => {
       queryClient.invalidateQueries({
         queryKey: playlistsQueryKeys.playlists(id),
+      });
+      queryClient.invalidateQueries({
+        queryKey: playlistsQueryKeys.playlist(data.data.playlistId),
       });
     },
 
     onError: () => {
-      console.log("FAILED");
-      toast.error("실패함.")
+      toast.error("해당 곡을 플레이리스트에 추가하지 못했습니다.");
     },
   });
 
@@ -91,13 +92,13 @@ const PlaylistModal = () => {
       playlistId,
       data: { isAdd: data.playlist.isAdd, trackId: data.playlist.trackId },
     });
-    
+
     TrackToast({
       targetName: `플레이리스트 - [${playlistName}]`,
       isAdd: data.playlist.isAdd,
       track: data.playlist.track,
     });
-    
+
     setTimeout(() => onClose(), 300);
   };
 

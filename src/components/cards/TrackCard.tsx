@@ -5,10 +5,16 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 import { updateQueue } from "@/api/queue";
 import { _PATCH } from "@/api/rootAPI";
+import {
+  playlistsQueryKeys,
+  updatePlaylistTrack,
+  UpdatePlaylistTrackRequest,
+} from "@/api/playlist";
 
 import { Track } from "@/types";
 import { TRACK_CARD_HEIGHT } from "@/constants/uiSizes";
@@ -24,9 +30,11 @@ import {
   TrackMotion,
   TrackWrapper,
 } from "./TrackCard.styles";
+import { TrackToast } from "../Toastify";
 
 interface TrackCardProps {
   data: Track;
+  trackListId?: string;
   trackListType: "ALBUM" | "LIST" | "QUEUE";
   focused?: boolean;
   onClick?: () => void;
@@ -35,6 +43,7 @@ interface TrackCardProps {
 
 const TrackCard = ({
   data,
+  trackListId,
   trackListType,
   focused = false,
   onClick = () => null,
@@ -50,6 +59,27 @@ const TrackCard = ({
 
   const qeueuMutation = useMutation({
     mutationFn: updateQueue,
+  });
+
+  const queryClient = useQueryClient();
+  const { mutate: playlistMutation } = useMutation({
+    mutationFn: async ({
+      playlistId,
+      data,
+    }: {
+      playlistId: string;
+      data: UpdatePlaylistTrackRequest;
+    }) => await updatePlaylistTrack({ playlistId, data }),
+
+    onSuccess: data => {
+      queryClient.invalidateQueries({
+        queryKey: playlistsQueryKeys.playlist(data.data.playlistId),
+      });
+    },
+
+    onError: () => {
+      toast.error("해당 곡을 플레이리스트에 추가하지 못했습니다.");
+    },
   });
 
   const [scope, animate] = useAnimate();
@@ -71,7 +101,7 @@ const TrackCard = ({
 
     // left - Delete Action
     if (delta.x < 0) {
-      if (trackListType === "QUEUE") {
+      if (trackListType !== "ALBUM") {
         x.set(Math.max(x.get() + delta.x, -80));
       } else {
         // when ALBUM, blocking go to left
@@ -91,7 +121,7 @@ const TrackCard = ({
     const velocity = info.velocity.x;
 
     // DELETE MOTION
-    if (trackListType === "QUEUE") {
+    if (trackListType !== "ALBUM") {
       if (offset < -100 || velocity < -500) {
         animate(x, -80, { duration: 0.5 });
       } else {
@@ -125,6 +155,20 @@ const TrackCard = ({
       deletePlayListTrack(data);
       deleteQueueList(data);
       qeueuMutation.mutate({ isAdd: false, trackId: data.id });
+    }
+
+    if (trackListType === "LIST" && !!trackListId) {
+      playlistMutation({
+        data: { isAdd: false, trackId: data.id },
+        playlistId: trackListId,
+      });
+      deletePlayListTrack(data);
+
+      TrackToast({
+        targetName: `플레이리스트`,
+        isAdd: false,
+        track: data,
+      });
     }
   }
 

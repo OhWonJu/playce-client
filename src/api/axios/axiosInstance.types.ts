@@ -21,6 +21,7 @@ export type CustomResponseFormat<T = unknown> = {
 
 export type MutationResponse = {
   ok: boolean;
+  data?: any;
   error?: ErrorMessage;
   errorCode?: ErrorCode;
 };

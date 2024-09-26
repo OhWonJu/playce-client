@@ -2,7 +2,7 @@ import React from "react";
 
 import { Track } from "@/types";
 
-import { PLAY_LIST_TYPE, usePlayerControl } from "@/stores/usePlayerControl";
+import { usePlayerControl } from "@/stores/usePlayerControl";
 import usePlayTimeStore from "@/stores/usePlayTimeStore";
 
 import { TrackCard } from "@/components/cards";
@@ -13,6 +13,7 @@ interface PlayListProps {
 
 const PlayList = ({ currentTrack }: PlayListProps) => {
   const playList = usePlayerControl(state => state.playList);
+  const playlistId = usePlayerControl(state => state.originTrackListId);
   const playListType = usePlayerControl(state => state.playListType);
   const setCurrentTrack = usePlayerControl(state => state.setCurrentTrack);
   const setPlay = usePlayerControl(state => state.setPlay);
@@ -27,11 +28,11 @@ const PlayList = ({ currentTrack }: PlayListProps) => {
 
   return (
     <>
-      {}
       {playList.map((track: Track, index: number) => (
         <TrackCard
           key={index + track.trackTitle + playListType} // list 간의 전환이 있는 경우 index + track 조합이 같으면 같은 컴포넌트라 생각하는 것 같음.
           data={track}
+          trackListId={playlistId}
           trackListType={playListType}
           focused={currentTrack.trackTitle === track.trackTitle}
           onClick={() => clickHanlder(track)}
