@@ -41,7 +41,9 @@ export const onError = (error: AxiosError) => {
 };
 
 export const onRequest = async (config: InternalAxiosRequestConfig) => {
-  if (isTokenExpired()) {
+  const expiresAt = Number(localStorage.getItem("playce_expired_at"));
+
+  if (!!expiresAt && isTokenExpired()) {
     try {
       const res = await refreshAccessToken();
 
@@ -61,7 +63,7 @@ export const onRequest = async (config: InternalAxiosRequestConfig) => {
       return Promise.reject(error);
     }
   }
-  
+
   return config;
 };
 
