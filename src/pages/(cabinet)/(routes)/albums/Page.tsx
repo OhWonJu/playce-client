@@ -62,13 +62,13 @@ const CabinetAlbumsPage = () => {
               ))}
             </Fragment>
           ))}
-        {isLoading &&
+        {/* {isLoading &&
           Array(8)
             .fill(0)
             .map((_, i) => (
               //@ts-ignore
               <Skeleton key={i} className="rounded-lg w-full h-[60px]" />
-            ))}
+            ))} */}
       </div>
       <div ref={ref} />
     </PlayableContainer>

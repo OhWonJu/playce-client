@@ -62,9 +62,9 @@ const MusicCard = ({
       <div
         className={cn(
           "relative aspect-square rounded-md mb-1 bg-neutral-200 dark:bg-neutral-600 overflow-hidden shadow-md",
-          size === "sm" && "w-[120px]",
-          size === "md" && "w-[160px]",
-          size === "lg" && "w-[200px]",
+          size === "sm" && "w-[120px] min-w-[120px]",
+          size === "md" && "w-[160px] min-w-[160px]",
+          size === "lg" && "w-[200px] min-w-[200px]",
         )}
       >
         {typeof imageUrl === "string" && imageUrl && (
