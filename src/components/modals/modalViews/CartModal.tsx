@@ -87,7 +87,7 @@ const CreatePlaylistModal = () => {
       footer={footerContent}
       onClose={onClose}
       mode="slide"
-      containerClassName="w-full sm:w-[420px] h-screen"
+      containerClassName="w-full sm:w-[420px] h-full"
     />
   );
 };
