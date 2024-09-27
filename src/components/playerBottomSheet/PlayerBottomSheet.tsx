@@ -22,6 +22,7 @@ const Tab = lazy(() => import("@/components/Tab/Tab"));
 const TabSection = lazy(() => import("@/components/Tab/TabSection"));
 
 const HEADER_BAR_HEIGHT = 20;
+const HEADER_FIXED_HEIGHT = NAV_HEIGHT + HEADER_BAR_HEIGHT - 1.5;
 
 const TAB_NAMES = ["Tracks", "Lyrics", "Content"];
 
@@ -95,15 +96,11 @@ const PlayerBottomSheet = () => {
 
   const y =
     progress <= 0
-      ? useTransform(
-          mainMotionProg,
-          [85, 100],
-          [NAV_HEIGHT + HEADER_BAR_HEIGHT, 0],
-        )
+      ? useTransform(mainMotionProg, [85, 100], [HEADER_FIXED_HEIGHT, 0])
       : useTransform(
           motionProg,
           [50, 100],
-          [0, NAV_HEIGHT + HEADER_BAR_HEIGHT], // [ OPEN , CLOSE ]
+          [0, HEADER_FIXED_HEIGHT], // [ OPEN , CLOSE ]
         );
 
   const trigger = useTransform(motionProg, [0, 100], [0, 1]); // 0: to OPEN | 1: to CLOSE
@@ -129,9 +126,9 @@ const PlayerBottomSheet = () => {
         isOpen={true}
         modalMode={false}
         onClose={() => null}
-        fixedHeight={NAV_HEIGHT + HEADER_BAR_HEIGHT}
+        fixedHeight={HEADER_FIXED_HEIGHT}
         // initialSnap={1}
-        snapPoints={[1, NAV_HEIGHT + HEADER_BAR_HEIGHT]} // sheet content + sheet header's heigth
+        snapPoints={[1, HEADER_FIXED_HEIGHT]} // sheet content + sheet header's heigth - tab border bottom
       >
         <motion.div
           id="player-bottom-sheet"

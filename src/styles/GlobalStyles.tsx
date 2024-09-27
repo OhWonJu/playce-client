@@ -5,7 +5,7 @@ import { NAV_HEIGHT, PLAYER_HEADER_HEIGHT } from "@/constants/uiSizes";
 
 const Styles = css`
   html {
-    font-family: "Noto Sans Korean", sans-serif;
+    font-family: "Noto Sans Korean", "Helvetica Neue", sans-serif;
     font-display: swap;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
