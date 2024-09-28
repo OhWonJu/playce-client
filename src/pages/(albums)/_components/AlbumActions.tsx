@@ -56,7 +56,7 @@ const AlbumActions = ({ album, isOwn }: AlbumActionsProps) => {
             height="22"
             className="fill-secondary stroke-secondary"
           />
-          <span className="font-semibold text-secondary pt-1">Play</span>
+          <span className="font-semibold text-secondary">Play</span>
         </Button>
       )}
 
@@ -76,7 +76,7 @@ const AlbumActions = ({ album, isOwn }: AlbumActionsProps) => {
         className="flex justify-around items-center h-full px-4 py-3 min-w-28"
       >
         <ShoppingBag width="22" height="22" className="stroke-secondary mr-2" />
-        <span className="font-semibold text-sm text-secondary pt-1">
+        <span className="font-semibold text-sm text-secondary">
           Add to cart
         </span>
       </Button>

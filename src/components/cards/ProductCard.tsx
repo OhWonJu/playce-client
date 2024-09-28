@@ -28,7 +28,7 @@ const ProductCard = ({ item }: ProductCardProps) => {
         />
         <div className="flex flex-col">
           <span className="font-bold">{item.product.albumName}</span>
-          <span className="text-sm text-primary-foreground font-semibold pb-1">
+          <span className="text-sm text-primary-foreground font-medium pb-1">
             {item.product.artist.artistName}
           </span>
           <span className="text-sm font-semibold">
@@ -50,7 +50,7 @@ const ProductCard = ({ item }: ProductCardProps) => {
               <Minus className="w-3 h-3" />
             )}
           </Button>
-          <span className="pt-1">{item.quantity}</span>
+          <span>{item.quantity}</span>
           <Button
             variant="plain"
             useRipple

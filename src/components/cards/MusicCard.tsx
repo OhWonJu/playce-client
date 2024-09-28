@@ -93,7 +93,7 @@ const MusicCard = ({
           <span
             role="button"
             onClick={event => handlePlayClick(event)}
-            className="absolute flex items-center justify-center bottom-2 right-2 p-1 bg-neutral-100/80 hover:bg-neutral-100 shadow-md rounded-full "
+            className="absolute flex items-center justify-center bottom-2 right-2 p-1 bg-neutral-100/80 hover:bg-neutral-100 shadow-md rounded-full"
           >
             <Play className="pl-[3px]" />
           </span>
@@ -108,9 +108,9 @@ const MusicCard = ({
       >
         <span
           className={cn(
-            "font-semibold",
+            "font-bold",
             size !== "lg" && "truncate",
-            size === "lg" && "font-bold text-2xl",
+            size === "lg" && "text-2xl",
           )}
         >
           {title}
@@ -118,9 +118,9 @@ const MusicCard = ({
         {subTitle && (
           <span
             className={cn(
-              "font-semibold text-sm",
+              "font-medium text-sm",
               size !== "lg" && "text-primary-foreground truncate",
-              size === "lg" && "font-semibold text-lg",
+              size === "lg" && "text-lg",
             )}
           >
             {subTitle}

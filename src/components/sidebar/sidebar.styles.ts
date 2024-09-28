@@ -22,7 +22,7 @@ export const SidebarContainer = styled.aside<{
       : "var(--sidebar)"};
   overflow: hidden;
 
-  ${tw`shadow-lg dark:border-l dark:border-r border-neutral-100 dark:border-neutral-700`};
+  ${tw`shadow-lg border-l border-r border-neutral-200/50 dark:border-neutral-700`};
 `;
 
 export const SidebarHeader = styled.section`

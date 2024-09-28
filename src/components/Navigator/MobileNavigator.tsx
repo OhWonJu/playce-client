@@ -10,6 +10,7 @@ import MainSheetProgressStore from "@/stores/mainSheetProgress";
 import SubSheetProgressStore from "@/stores/subSheetProgress";
 
 import Avatar from "../Avatar";
+import { Button } from "../buttons";
 
 import { ButtonGroup } from "./_modules";
 
@@ -75,14 +76,18 @@ const MobileNavigator = ({
       </Suspense>
       <NavButtonArea>
         <ButtonGroup navigate={navigate} pathName={pathName} />
-        <Avatar
-          imageUrl={image}
-          size="icon"
-          className="cursor-pointer"
-          active={pathName === "cabinet"}
-          // onClick={() => navigate(`/cabinet`)}
+        <Button
+          variant="plain"
+          useRipple
+          className="rounded-full h-full aspect-square p-0"
           onClick={() => onOpen("my")}
-        />
+        >
+          <Avatar
+            imageUrl={image}
+            size="icon"
+            active={pathName === "cabinet"}
+          />
+        </Button>
       </NavButtonArea>
     </MobileNavigatorWrapper>
   );
