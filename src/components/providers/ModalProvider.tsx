@@ -13,6 +13,9 @@ const CreatePlaylistModal = lazy(
 const CartModal = lazy(
   () => import("@/components/modals/modalViews/CartModal"),
 );
+const DeleteUserModal = lazy(
+  () => import("@/components/modals/modalViews/DeleteUserModal"),
+);
 
 const ModalProvider = () => {
   const type = useModal(state => state.type);
@@ -23,6 +26,7 @@ const ModalProvider = () => {
       {type === "playlist" && <PlaylistModal />}
       {type === "createPlaylist" && <CreatePlaylistModal />}
       {type === "cart" && <CartModal />}
+      {type === "deleteUser" && <DeleteUserModal />}
     </Suspense>
   );
 };

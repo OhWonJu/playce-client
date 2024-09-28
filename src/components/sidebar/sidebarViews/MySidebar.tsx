@@ -116,6 +116,7 @@ const MySidebar = () => {
       <Button variant="outline" onClick={logOut}>
         로그아웃
       </Button>
+      <Button variant="plain" onClick={() => onOpen("deleteUser")} className="bg-primary-foreground hover:bg-red-500 text-white">탈퇴</Button>
     </div>
   );
 

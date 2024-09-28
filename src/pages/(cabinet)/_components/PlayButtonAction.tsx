@@ -26,7 +26,10 @@ const PlayButtonAction = ({ playlistId, tracks }: PlayButtonActionProps) => {
       onOpen();
     }
     setPlayTime(0);
-    handlePlayListClick("LIST", { id: playlistId, tracks });
+    handlePlayListClick(playlistId === "queue" ? "QUEUE" : "LIST", {
+      id: playlistId,
+      tracks,
+    });
   };
   return (
     <div className="flex w-full space-x-2 row-start-4 row-span-1 sm:pt-3 lg:pt-1 xl:pt-3 ">
@@ -36,7 +39,11 @@ const PlayButtonAction = ({ playlistId, tracks }: PlayButtonActionProps) => {
         onClick={playClickHandler}
         className="flex justify-around items-center h-full text-base w-28"
       >
-        <Play width="22" height="22" className="fill-secondary stroke-secondary"/>
+        <Play
+          width="22"
+          height="22"
+          className="fill-secondary stroke-secondary"
+        />
         <span className="font-semibold text-secondary">Play</span>
       </Button>
     </div>

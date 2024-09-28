@@ -1,7 +1,12 @@
 import { Track } from "@/types";
 import { create } from "zustand";
 
-export type ModalType = "login" | "playlist" | "createPlaylist" | "cart";
+export type ModalType =
+  | "login"
+  | "playlist"
+  | "createPlaylist"
+  | "cart"
+  | "deleteUser";
 
 interface ModalData {
   playlist?: {
