@@ -35,7 +35,7 @@ export const Disabled = styled.button`
   background-color: var(--primary-foreground);
   background-color: ${props => props.theme.gray_primary};
 
-  ${tw`text-white`}
+  ${tw`text-white border border-transparent`}
 `;
 
 export const RippleEffect = styled.span`

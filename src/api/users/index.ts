@@ -87,6 +87,13 @@ export async function logOutMutate() {
   else return res;
 }
 
+export async function deleteUserMutate() {
+  const res = await _PUT<MutationResponse>("/users/delete/user");
+
+  if (!res.ok) throw new Error(res.errorCode);
+  else return res;
+}
+
 export async function userCreateConfirm(data: UserCreateConfirmRequest) {
   const res = await _PUT<MutationResponse>("/users/create/confirm", data);
 
