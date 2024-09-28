@@ -180,7 +180,7 @@ const PlaylistModal = () => {
 
   const footerContent = (
     <Button
-      variant="ghost"
+      variant="outline"
       width={"100%"}
       size="lg"
       useRipple

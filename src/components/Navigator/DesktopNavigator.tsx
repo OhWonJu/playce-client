@@ -1,6 +1,7 @@
 import { NavigateFunction } from "react-router";
 
 import Avatar from "../Avatar";
+import { Button } from "../buttons";
 
 import { ButtonGroup } from "./_modules";
 
@@ -31,14 +32,18 @@ const DesktopNavigator = ({
         <ButtonGroup navigate={navigate} pathName={pathName} />
       </NavButtonArea>
       <ProfileArea>
-        <Avatar
-          imageUrl={image}
-          size="icon"
-          active={pathName === "cabinet"}
-          className="cursor-pointer"
-          // onClick={() => navigate(`/cabinet`)}
+        <Button
+          variant="plain"
+          useRipple
+          className="rounded-full h-full aspect-square p-0"
           onClick={() => onOpen("my")}
-        />
+        >
+          <Avatar
+            imageUrl={image}
+            size="icon"
+            active={pathName === "cabinet"}
+          />
+        </Button>
       </ProfileArea>
     </DesktopNavigatorWrapper>
   );

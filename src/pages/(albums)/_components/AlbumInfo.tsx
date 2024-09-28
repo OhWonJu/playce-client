@@ -43,21 +43,21 @@ const AlbumInfo = ({
   return (
     <AlbumInfoBox>
       <span className="font-extrabold text-3xl">{albumName}</span>
-      <span className="font-semibold">{artistName}</span>
-      <a className="text-zinc-400 font-semibold text-sm">
+      <span className="font-bold">{artistName}</span>
+      <a className="text-zinc-400 font-medium text-sm">
         {albumType && `${albumType} • `}
         {releasedAt && `${format(releasedAt, DATE_FORMAT)}`}
       </a>
       {genres && (
-        <a className="text-zinc-400 font-semibold text-sm">
+        <a className="text-zinc-400 font-medium text-sm">
           {genresContent.join(" • ")}
         </a>
       )}
       <div className="flex space-x-2">
-        <a className="text-zinc-400 font-semibold text-sm">
+        <a className="text-zinc-400 font-medium text-sm">
           {tracks && `${tracks?.length}곡 • ${Math.round(totalTimes / 60)}분`}
           {songCount && `${songCount}곡`}
-          {totalPlayTime && `• ${convertTime(totalPlayTime, "number")[0]}분`}
+          {totalPlayTime && ` • ${convertTime(totalPlayTime, "number")[0]}분`}
         </a>
       </div>
     </AlbumInfoBox>

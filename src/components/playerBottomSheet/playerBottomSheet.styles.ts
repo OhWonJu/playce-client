@@ -19,7 +19,7 @@ export const PBSHandle = styled.div`
   border-radius: 2px;
   background-color: ${props => props.theme.gray_light};
 
-  ${tw`shadow-inner bg-opacity-60`}
+  ${tw`shadow-inner bg-neutral-200/50 dark:bg-neutral-700`}
 `;
 
 export const PBSHeaderWrapper = styled.section`

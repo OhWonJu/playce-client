@@ -27,7 +27,7 @@ const MySidebar = () => {
   const { image, nickName } = useMeStore();
   const { totalItems } = useCartStore();
 
-  const { mutate: logOut } = useMutation({
+  const { mutate: logOut, isPending } = useMutation({
     mutationFn: async () => await logOutMutate(),
     onSuccess: () => {
       setExpiredAt("");
@@ -62,21 +62,21 @@ const MySidebar = () => {
           onClick={() => navigate("/cabinet/albums")}
           className="justify-start hover:bg-accent"
         >
-          <span className="pt-1">나의 앨범</span>
+          <span>나의 앨범</span>
         </Button>
         <Button
           variant="plain"
           onClick={() => navigate("/cabinet/queue")}
           className="justify-start hover:bg-accent"
         >
-          <span className="pt-1">나의 큐</span>
+          <span>나의 큐</span>
         </Button>
         <Button
           variant="plain"
           onClick={() => navigate("/cabinet/playlists")}
           className="justify-start hover:bg-accent"
         >
-          <span className="pt-1">나의 플레이리스트</span>
+          <span>나의 플레이리스트</span>
         </Button>
       </div>
       <hr />
@@ -86,8 +86,8 @@ const MySidebar = () => {
         onClick={() => onOpen("cart")}
         className="justify-start items-center gap-x-2 hover:bg-accent"
       >
-        <span className="pt-1">나의 장바구니 </span>
-        <span className="text-xs text-primary-foreground pt-1">
+        <span>나의 장바구니 </span>
+        <span className="text-xs text-primary-foreground">
           {totalItems}개
         </span>
       </Button>
@@ -113,10 +113,16 @@ const MySidebar = () => {
 
   const footerContent = (
     <div className="flex flex-col w-full space-y-4">
-      <Button variant="outline" onClick={logOut}>
+      <Button variant="outline" onClick={logOut} disabled={isPending}>
         로그아웃
       </Button>
-      <Button variant="plain" onClick={() => onOpen("deleteUser")} className="bg-primary-foreground hover:bg-red-500 text-white">탈퇴</Button>
+      <Button
+        variant="plain"
+        onClick={() => onOpen("deleteUser")}
+        className="bg-primary-foreground hover:bg-red-500 text-white"
+      >
+        탈퇴
+      </Button>
     </div>
   );
 

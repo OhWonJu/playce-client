@@ -141,7 +141,7 @@ const PlayerBottomSheet = () => {
           <Sheet.Container
             isMain={false}
             style={{ height: "100%", maxHeight: "100%" }}
-            className="rounded-2xl shadow-top"
+            className="rounded-2xl shadow-top border-t border-t-neutral-200/50 dark:border-t-neutral-700"
           >
             <Sheet.Header
               isMain={false}

@@ -14,6 +14,8 @@ export const MobileNavigatorWrapper = styled(motion.nav)`
   height: ${NAV_HEIGHT}px;
   z-index: var(--navigator);
   background-color: var(--background);
+
+  ${tw`backdrop-blur-xl bg-secondary-foreground`}
 `;
 
 export const NavButtonArea = styled.div`
