@@ -8,9 +8,9 @@ import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
 import useViewModeStore from "@/stores/useViewMode";
 import MainSheetProgressStore from "@/stores/mainSheetProgress";
 import SubSheetProgressStore from "@/stores/subSheetProgress";
+import { useSidebar } from "@/stores/useSidebarStore";
 
 import Avatar from "../Avatar";
-import { Button } from "../buttons";
 
 import { ButtonGroup } from "./_modules";
 
@@ -20,7 +20,6 @@ import {
 } from "./mobileNavigator.styles";
 
 import { DEFAULT_TWEEN_CONFIG } from "../BottomSheet/constants";
-import { useSidebar } from "@/stores/useSidebarStore";
 
 const PlayIndicator = lazy(() => import("./_modules/PlayIndicator"));
 
@@ -38,9 +37,10 @@ const MobileNavigator = ({
 }: MobileNavigatorProps) => {
   const { viewMode } = useViewModeStore();
   const { displayPlayer } = usePlayerToggle();
+  const onOpen = useSidebar(state => state.onOpen);
+
   const { progress } = MainSheetProgressStore();
   const { progress: subProgress } = SubSheetProgressStore();
-  const onOpen = useSidebar(state => state.onOpen);
 
   const y = useMotionValue(0);
 
@@ -76,18 +76,13 @@ const MobileNavigator = ({
       </Suspense>
       <NavButtonArea>
         <ButtonGroup navigate={navigate} pathName={pathName} />
-        <Button
-          variant="plain"
-          useRipple
-          className="rounded-full h-full aspect-square p-0"
+        <Avatar
+          imageUrl={image}
+          size="icon"
+          active={pathName === "cabinet"}
+          className="cursor-pointer"
           onClick={() => onOpen("my")}
-        >
-          <Avatar
-            imageUrl={image}
-            size="icon"
-            active={pathName === "cabinet"}
-          />
-        </Button>
+        />
       </NavButtonArea>
     </MobileNavigatorWrapper>
   );
