@@ -43,7 +43,6 @@ const RepeatButton = () => {
           <span
             className="absolute inset-0 grid place-items-center w-full h-full font-extrabold"
             style={{
-              paddingTop: 2,
               fontSize: 9,
             }}
           >

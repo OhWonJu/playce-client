@@ -33,7 +33,7 @@ interface SidebarLayoutProps {
   align?: "left" | "right";
 }
 
-const DURATION = 30;
+const DURATION = 300;
 
 const SidebarLayout = ({
   body,
