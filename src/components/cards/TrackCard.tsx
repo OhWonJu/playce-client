@@ -53,6 +53,7 @@ const TrackCard = ({
 
   const addPlayListTrack = usePlayerControl(state => state.addTrack);
   const deletePlayListTrack = usePlayerControl(state => state.deleteTrack);
+  const originTrackListId = usePlayerControl(state => state.originTrackListId);
 
   const addQueueList = useQueue(state => state.addTrack);
   const deleteQueueList = useQueue(state => state.deleteTrack);
@@ -87,6 +88,7 @@ const TrackCard = ({
   const btnOpacity = useTransform(x, [-80, -15], [1, 0]);
 
   const dragStarted = useRef(false);
+  const deleteActive = useRef(false);
 
   function handleDragStart() {
     dragStarted.current = true;
@@ -99,20 +101,25 @@ const TrackCard = ({
   function handleOnDrag(_: any, info: PanInfo) {
     const delta = info.delta;
 
-    // left - Delete Action
+    // to left - Delete Action
     if (delta.x < 0) {
-      if (trackListType !== "ALBUM") {
-        x.set(Math.max(x.get() + delta.x, -80));
-      } else {
-        // when ALBUM, blocking go to left
+      // when ALBUM, blocking go to left
+      if (trackListType === "ALBUM") {
         x.set(0);
+        return;
       }
+
+      x.set(Math.max(x.get() + delta.x, -80));
     }
 
-    // right - Add Action
-    if (delta.x > 0) {
-      if (trackListType !== "QUEUE") x.set(Math.min(x.get() + delta.x, 100));
-      else x.set(Math.min(x.get() + delta.x, 0));
+    // to right - Add Action
+    if (delta.x >= 0) {
+      if (trackListType === "QUEUE") {
+        x.set(Math.min(x.get() + delta.x, 0));
+        return;
+      }
+
+      x.set(Math.min(x.get() + delta.x, 100));
     }
   }
 
@@ -123,8 +130,11 @@ const TrackCard = ({
     // DELETE MOTION
     if (trackListType !== "ALBUM") {
       if (offset < -100 || velocity < -500) {
+        // task queue 후순위로 동작하도록 하기 위해
+        setTimeout(() => (deleteActive.current = true), 1);
         animate(x, -80, { duration: 0.5 });
       } else {
+        setTimeout(() => (deleteActive.current = false), 1);
         animate(x, 0, { duration: 0.5 });
       }
     }
@@ -133,6 +143,8 @@ const TrackCard = ({
     if (trackListType !== "QUEUE") {
       // TODO: 모바일환경에서는 너무 예민함
       if (offset > 100 || velocity > 500) {
+        if (deleteActive.current) return;
+
         animate(scope.current, { x: 0 }, { duration: 0.5 });
         setTimeout(() => {
           addPlayListTrack(data);
@@ -163,7 +175,7 @@ const TrackCard = ({
         data: { isAdd: false, trackId: data.id },
         playlistId: trackListId,
       });
-      deletePlayListTrack(data);
+      trackListId === originTrackListId && deletePlayListTrack(data);
 
       TrackToast({
         targetName: `플레이리스트`,

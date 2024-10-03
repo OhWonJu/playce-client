@@ -8,8 +8,13 @@ import usePlayTimeStore from "@/stores/usePlayTimeStore";
 import { TrackCard } from "@/components/cards";
 
 const TrackList = () => {
-  const { playList, playListType, currentTrack, setCurrentTrack } =
-    usePlayerControl();
+  const {
+    playList,
+    playListType,
+    originTrackListId,
+    currentTrack,
+    setCurrentTrack,
+  } = usePlayerControl();
   const setPlayTime = usePlayTimeStore(state => state.setPlayTime);
 
   const clickHandler = (track: Track) => {
@@ -24,6 +29,7 @@ const TrackList = () => {
           key={index + track.trackTitle + playListType}
           data={track}
           trackListType={playListType}
+          trackListId={originTrackListId}
           focused={currentTrack.trackTitle === track.trackTitle}
           onClick={() => clickHandler(track)}
         />
