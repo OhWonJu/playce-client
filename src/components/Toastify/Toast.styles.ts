@@ -8,7 +8,7 @@ export const Container = styled(ToastContainer)`
     padding: 0px 10px 0px 10px;
     z-index: 9999999;
 
-    ${tw`flex items-center rounded-xl bg-neutral-100/30 dark:bg-neutral-700/30 backdrop-blur-md border border-neutral-100 dark:border-neutral-700/30 shadow-md`};
+    ${tw`flex items-center rounded-xl bg-neutral-50/80 dark:bg-neutral-800/80 backdrop-blur-md border border-neutral-50/80 dark:border-neutral-700/80 shadow-md`};
   }
 
   .Toastify__toast-icon {
