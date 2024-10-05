@@ -12,8 +12,10 @@ export const TrackWrapper = styled(motion.div)`
   min-height: ${TRACK_CARD_HEIGHT}px;
   align-items: center;
   overflow: "hidden";
-  will-change: "transform";
+  outline: none;
   cursor: pointer;
+
+  will-change: "transform";
 `;
 
 export const TrackMotion = styled(motion.div)<{ $focused: boolean }>`

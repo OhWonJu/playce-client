@@ -31,6 +31,7 @@ import {
   TrackWrapper,
 } from "./TrackCard.styles";
 import { TrackToast } from "../Toastify";
+import { Trash } from "../icons";
 
 interface TrackCardProps {
   data: Track;
@@ -230,7 +231,9 @@ const TrackCard = ({
           style={{ opacity: btnOpacity }}
           onClick={handleDeleteBtn}
         >
-          <span className="text-white font-bold">Delete</span>
+          <span className="text-white">
+            <Trash />
+          </span>
         </TrackDeleteButton>
       ) : null}
     </TrackWrapper>
