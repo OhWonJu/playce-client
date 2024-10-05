@@ -43,7 +43,7 @@ const Waveform = () => {
         cursorWidth: 0,
         dragToSeek: true,
         media: video.current,
-        backend: "MediaElement",
+        backend: "WebAudio",
         peaks: [currentTrack.peaks],
       });
 

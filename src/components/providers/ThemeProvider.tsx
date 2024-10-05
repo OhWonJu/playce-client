@@ -2,15 +2,22 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import React, { useEffect, useMemo } from "react";
 
 const ThemeProvider = () => {
-  const [localTheme, _] = useLocalStorage("theme");
+  const [localTheme, setLocalTheme] = useLocalStorage("theme");
 
   const themeMode = useMemo((): string => {
-    if (localTheme) return localTheme;
-    else
-      return window.matchMedia("(prefers-color-scheme: dark)").matches
+    if (localTheme) {
+      return localTheme;
+    } else {
+      const theme = window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
+
+      setLocalTheme(theme);
+      return theme;
+    }
   }, [localTheme]);
+
+  console.log(themeMode);
 
   useEffect(() => {
     document.getElementsByTagName("html")[0].classList.remove("light", "dark");
