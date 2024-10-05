@@ -30,23 +30,23 @@ const Waveform = () => {
 
   // CREATE WAVE FORM ============================== //
   useEffect(() => {
-    if (waveformRef.current) {
-      wavesurfer.current = WaveSurfer.create({
-        container: waveformRef.current,
-        // progressColor: getComputedStyle(
-        //   document.documentElement,
-        // ).getPropertyValue("--primary"), // 개선 필요
-        progressColor: theme === "light" ? "#212121" : "#fbfbf9",
-        barHeight: 0.75,
-        barWidth: 3,
-        barRadius: 5,
-        cursorWidth: 0,
-        dragToSeek: true,
-        media: video.current,
-        backend: "WebAudio",
-        peaks: [currentTrack.peaks],
-      });
+    wavesurfer.current = WaveSurfer.create({
+      container: waveformRef.current,
+      // progressColor: getComputedStyle(
+      //   document.documentElement,
+      // ).getPropertyValue("--primary"), // 개선 필요
+      progressColor: theme === "light" ? "#212121" : "#fbfbf9",
+      barHeight: 0.75,
+      barWidth: 3,
+      barRadius: 5,
+      cursorWidth: 0,
+      dragToSeek: true,
+      media: video.current,
+      backend: "WebAudio",
+      peaks: [currentTrack.peaks],
+    });
 
+    if (waveformRef.current) {
       const hls = new Hls();
       hls.loadSource(currentTrack.trackURL);
       hls.attachMedia(video.current);

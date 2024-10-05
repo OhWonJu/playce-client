@@ -17,8 +17,6 @@ const ThemeProvider = () => {
     }
   }, [localTheme]);
 
-  console.log(themeMode);
-
   useEffect(() => {
     document.getElementsByTagName("html")[0].classList.remove("light", "dark");
     document.getElementsByTagName("html")[0].classList.add(themeMode);
