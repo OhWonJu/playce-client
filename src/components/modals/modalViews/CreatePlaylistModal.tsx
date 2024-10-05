@@ -118,6 +118,7 @@ const CreatePlaylistModal = () => {
         variant="outline"
         onClick={form.handleSubmit(onSubmit)}
         disabled={isLoading}
+        loading={isLoading}
         useRipple
       >
         <span className="pt-[2px] text-center content-center">만들기</span>

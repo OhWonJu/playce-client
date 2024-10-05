@@ -23,7 +23,10 @@ export const getkakoPayReady = async ({
   totalAmount: number;
   vatAmount?: number;
   textFreeAmount?: number;
-}) => {
+}): Promise<{
+  next_redirect_pc_url: string;
+  tid: string;
+}> => {
   try {
     if (albumIds.length !== quantities.length)
       throw new Error("상품 정보에 이상이 있습니다.");

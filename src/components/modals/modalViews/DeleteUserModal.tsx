@@ -33,7 +33,7 @@ const DeleteUserModal = () => {
     },
   });
 
-  const { mutate: deleteUser } = useMutation({
+  const { mutate: deleteUser, isPending } = useMutation({
     mutationFn: async () => await deleteUserMutate(),
     onSuccess: () => {
       setExpiredAt("");
@@ -77,6 +77,7 @@ const DeleteUserModal = () => {
         useRipple
         disabled={form.watch("policy") !== "탈퇴 약관 동의"}
         onClick={deleteUser}
+        loading={isPending}
       >
         <span className="pt-[2px] text-center content-center">확인</span>
       </Button>

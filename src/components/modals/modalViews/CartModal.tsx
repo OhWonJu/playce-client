@@ -9,6 +9,8 @@ import { Button } from "@/components/buttons";
 import { ProductCard } from "@/components/cards";
 
 import ModalLayout from "../ModalLayout";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 const CreatePlaylistModal = () => {
   const onClose = useModal(state => state.onClose);
@@ -46,7 +48,10 @@ const CreatePlaylistModal = () => {
   //   },
   // });
 
-  const onBuyClick = async () => {
+  const kakaoPayReady = async (): Promise<{
+    next_redirect_pc_url: string;
+    tid: string;
+  }> => {
     let itemName = _.take(Object.entries(items), 1)[0][1].product.albumName;
 
     totalItems > 1 && (itemName = itemName + ` 외 ${totalItems - 1}건`);
@@ -59,22 +64,32 @@ const CreatePlaylistModal = () => {
       quantity: totalItems,
     });
 
-    if (next_redirect_pc_url) {
-      setOrderToken(tid);
-      window.location = next_redirect_pc_url;
-    } else {
-      // 에러 처리
-    }
+    return { next_redirect_pc_url, tid };
   };
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: async () => await kakaoPayReady(),
+    onSuccess: data => {
+      const { next_redirect_pc_url, tid } = data;
+
+      if (next_redirect_pc_url) {
+        setOrderToken(tid);
+        window.location = next_redirect_pc_url as string & Location;
+      }
+    },
+    onError: () =>
+      toast.error("결제 요청에 문제가 발생했습니다. 다시 시도해주세요."),
+  });
 
   const footerContent = (
     <Button
       variant="ghost"
       width={"100%"}
       size="lg"
-      disabled={totalItems < 1}
+      disabled={totalItems < 1 || isPending}
+      loading={isPending}
       className="w-full"
-      onClick={onBuyClick}
+      onClick={mutate}
     >
       <span>{totalPrice.toLocaleString("ko-KR")}원 • 구매하기</span>
     </Button>
