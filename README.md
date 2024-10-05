@@ -49,7 +49,7 @@ FrontEnd
 
 # Deploy
 
-[PLAYCE 체험하기](https://playce-client-mvp1.vercel.app/)
+[PLAYCE 체험하기](https://www.playce.kr/)
 powered by Vercel, Railway
 
 <br />
