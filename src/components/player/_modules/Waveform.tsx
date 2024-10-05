@@ -4,8 +4,11 @@ import Hls from "hls.js";
 import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
 import usePlayTimeStore from "@/stores/usePlayTimeStore";
 import { usePlayerControl } from "@/stores/usePlayerControl";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const Waveform = () => {
+  const [theme, _] = useLocalStorage("theme");
+
   const { displayPlayer } = usePlayerToggle();
   const {
     play,
@@ -30,9 +33,10 @@ const Waveform = () => {
     if (waveformRef.current) {
       wavesurfer.current = WaveSurfer.create({
         container: waveformRef.current,
-        progressColor: getComputedStyle(
-          document.documentElement,
-        ).getPropertyValue("--primary"), // 개선 필요
+        // progressColor: getComputedStyle(
+        //   document.documentElement,
+        // ).getPropertyValue("--primary"), // 개선 필요
+        progressColor: theme === "light" ? "#212121" : "#fbfbf9",
         barHeight: 0.75,
         barWidth: 3,
         barRadius: 5,
