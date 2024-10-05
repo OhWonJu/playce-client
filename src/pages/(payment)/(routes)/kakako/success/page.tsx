@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
@@ -13,6 +13,8 @@ import { Button } from "@/components";
 import { cofirmKakaoPayPayment } from "@/api/payment";
 
 const KakaoPaymentSuccessPage = () => {
+  const isInit = useRef(true);
+
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { initCart, orderToken, setOrderToken } = useCartStore();
@@ -37,7 +39,11 @@ const KakaoPaymentSuccessPage = () => {
 
   useEffect(() => {
     if (!orderToken) return;
-    mutate();
+
+    if (isInit.current) {
+      isInit.current = false;
+      mutate();
+    }
   }, []);
 
   return (
