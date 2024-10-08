@@ -20,6 +20,13 @@ import { Input } from "@/components/ui/input";
 import Button from "@/components/buttons/Button";
 import GoogleAuthButton from "@/pages/(root)/_components/GoogleAuthButton";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 const formSchema = z.object({
   email: z.string().email(),
   password: z
@@ -66,51 +73,61 @@ const LoginModal = () => {
     <div className="flex flex-col w-full">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="flex flex-row justify-between text-base text-primary">
-                    Email
-                    <FormMessage className="text-xs" />
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      // disabled={isLoading}
-                      disabled
-                      placeholder=""
-                      {...field}
-                      className="bg-neutral-300/50 border-0 focus-visible:ring-1 focus-visible:ring-offset-0"
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="flex flex-row justify-between text-base text-primary">
-                    Password
-                    <FormMessage className="text-xs" />
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      // disabled={isLoading}
-                      disabled
-                      placeholder=""
-                      type="password"
-                      {...field}
-                      className="bg-neutral-300/50 border-0 focus-visible:ring-1  focus-visible:ring-offset-0 placeholder:text-xs"
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger className="w-full" type="button">
+                <div className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="flex flex-row justify-between text-base text-primary">
+                          Email
+                          <FormMessage className="text-xs" />
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            // disabled={isLoading}
+                            disabled
+                            placeholder=""
+                            {...field}
+                            className="bg-neutral-300/50 border-0 focus-visible:ring-1 focus-visible:ring-offset-0"
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="flex flex-row justify-between text-base text-primary">
+                          Password
+                          <FormMessage className="text-xs" />
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            // disabled={isLoading}
+                            disabled
+                            placeholder=""
+                            type="password"
+                            {...field}
+                            className="bg-neutral-300/50 border-0 focus-visible:ring-1  focus-visible:ring-offset-0 placeholder:text-xs"
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent side="bottom">
+                <p>현재 구글 인증만 제공됩니다.</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+
           <Button
             variant="flat"
             type="submit"
@@ -123,7 +140,9 @@ const LoginModal = () => {
           </Button>
         </form>
       </Form>
+
       <IntersectionLabel label="PLAYCE 간편 인증하기" className="mt-12" />
+
       <section className="__SNS_LOGIN__ flex flex-col mt-4 space-y-4">
         <GoogleAuthButton />
       </section>

@@ -1,9 +1,11 @@
 import { lazy, Suspense } from "react";
 import { useModal } from "@/stores/useModalStore";
 
-const LoginModal = lazy(
-  () => import("@/components/modals/modalViews/LoginModal"),
-);
+import { LoginModal } from "../modals/modalViews";
+
+// const LoginModal = lazy(
+//   () => import("@/components/modals/modalViews/LoginModal"),
+// );
 const PlaylistModal = lazy(
   () => import("@/components/modals/modalViews/PlaylistModal"),
 );

@@ -68,7 +68,6 @@ const HomePage = () => {
 
   return (
     <PlayableContainer ref={ref} className="pb-14 space-y-20">
-      {/* <Heading title={`반가워요 ${nickName}님`} align="center" /> */}
       {isLogin && (
         <>
           <MusicList
@@ -81,18 +80,27 @@ const HomePage = () => {
             title="나의 앨범"
             renderer={myAlbumsRenderer}
             exceptionGuide="가지고 있는 앨범이 없어요. 멋진 앨범들을 구경해 볼까요?"
-            exceptionAction={() => navigate("/explore")}
+            // exceptionAction={() => navigate("/explore")}
+            // Explore 페이지 개발 전 임시 기능 //
+            exceptionAction={() => {
+              const target = document.getElementById("recommended");
+
+              target.scrollIntoView({
+                behavior: "smooth",
+              });
+            }}
             hasMoreAction={() => navigate("/cabinet/albums")}
           />
           <MyPlayListSection myPlayList={summaryData.myPlayList} />
         </>
       )}
       <MusicList
+        id="recommended"
         title="추천 앨범"
         renderer={recommendedAlbumsRenderer}
         exceptionGuide={`작업중`}
       />
-      <MusicList title="최신 앨범" exceptionGuide={`작업중`} />
+      {/* <MusicList title="최신 앨범" exceptionGuide={`작업중`} /> */}
     </PlayableContainer>
   );
 };
