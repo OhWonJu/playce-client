@@ -11,6 +11,7 @@ interface MusicListProps {
   singleLine?: boolean;
   renderer?: () => JSX.Element[] | undefined;
   className?: string;
+  id?: string;
 }
 
 export const MusicList = ({
@@ -22,6 +23,7 @@ export const MusicList = ({
   singleLine = false,
   renderer,
   className,
+  id,
 }: MusicListProps) => {
   const listRef = useRef<HTMLDivElement>(null);
   const isGrabbing = useHorizontalScroll(listRef);
@@ -42,7 +44,7 @@ export const MusicList = ({
   // }, []);
 
   return (
-    <section className={cn("flex flex-col w-full", className)}>
+    <section id={id} className={cn("flex flex-col w-full", className)}>
       <div className="flex flex-row w-full justify-between items-center mb-4">
         <strong className="text-3xl sm:text-4xl font-bold">{title}</strong>
         {hasMore && (
