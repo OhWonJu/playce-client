@@ -30,9 +30,9 @@ const MySidebar = () => {
   const { mutate: logOut, isPending } = useMutation({
     mutationFn: async () => await logOutMutate(),
     onSuccess: () => {
-      setExpiredAt("");
       navigate("/");
       navigate(0);
+      setExpiredAt("");
     },
   });
 
@@ -87,9 +87,7 @@ const MySidebar = () => {
         className="justify-start items-center gap-x-2 hover:bg-accent"
       >
         <span>나의 장바구니 </span>
-        <span className="text-xs text-primary-foreground">
-          {totalItems}개
-        </span>
+        <span className="text-xs text-primary-foreground">{totalItems}개</span>
       </Button>
       <hr />
 
