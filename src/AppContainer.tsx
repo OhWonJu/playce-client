@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
@@ -61,7 +61,7 @@ const AppContainer = () => {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const prepare = async () => {
       try {
         await preload();
@@ -74,7 +74,7 @@ const AppContainer = () => {
     prepare();
   }, [isLogin, flag]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (queueData) {
       setQueue(
         queueData.tracks,

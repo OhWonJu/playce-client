@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 
@@ -70,7 +70,7 @@ const PolicyListSection = ({ setPolicyConfirm }: PolicyListSectionProps) => {
   //   setWindowView,
   // } = useWindowStore();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (policyCheck.slice(0, -1).every(isTrue => isTrue))
       setPolicyConfirm(true);
     else setPolicyConfirm(false);

@@ -180,7 +180,7 @@ const PlayerMobileView = () => {
                     </div>
                     <div className="flex items-center">
                       <PlayButton className="w-[48px] h-[48px] p-[13px]" />
-                      <ForwardButton className="flex-1" isForward={true} />
+                      <ForwardButton className="w-[48px] h-[48px] p-[13px]" isForward={true} />
                     </div>
                   </PlayerMicroCtlr>
                 </AlbumArea>

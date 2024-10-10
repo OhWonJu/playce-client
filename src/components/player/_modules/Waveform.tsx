@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useLayoutEffect, useRef } from "react";
 import WaveSurfer from "wavesurfer.js";
 import Hls from "hls.js";
 import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
@@ -29,7 +29,7 @@ const Waveform = () => {
   const prevSec = useRef(0);
 
   // CREATE WAVE FORM ============================== //
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (waveformRef.current) {
       wavesurfer.current = WaveSurfer.create({
         container: waveformRef.current,
@@ -113,7 +113,7 @@ const Waveform = () => {
     } else setPlay(false);
   }, [currentTrack, playList, repeatMode]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (wavesurfer.current) {
       wavesurfer.current.on("finish", handleFinish);
     }
@@ -148,7 +148,7 @@ const Waveform = () => {
     prevOriginTrackListIdRef.current = originTrackListId;
   }, [originTrackListId, forwardTrigger]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (wavesurfer.current) {
       handleForwardTrigger();
     }
@@ -162,7 +162,7 @@ const Waveform = () => {
     } else await wavesurfer.current.pause();
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // load 되기 전 handlePlay() 실행을 막기 위해
     if (wavesurfer.current && wavesurfer.current.getDuration() > 0) {
       handlePlay();
