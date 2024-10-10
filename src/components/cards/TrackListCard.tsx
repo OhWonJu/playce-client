@@ -54,12 +54,12 @@ const TrackListCard = ({ index, data, isOwn }: TrackListCardProps) => {
     >
       {/* COL-1 */}
       <div className="w-[45px] h-full grid place-items-center mr-4">
-        <span className="font-semibold">{index + 1}.</span>
+        <span className="font-bold">{index + 1}.</span>
       </div>
       {/* COL-2 */}
       <div className="flex flex-col">
-        <span className="font-semibold truncate">{data.trackTitle}</span>
-        <span className="font-semibold text-xs text-primary-foreground truncate">
+        <span className="font-bold truncate">{data.trackTitle}</span>
+        <span className="font-medium text-xs text-primary-foreground truncate">
           {data.artistName} • {convertTime(data.trackTime, "string")}
         </span>
       </div>

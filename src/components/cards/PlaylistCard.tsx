@@ -75,7 +75,7 @@ const PlaylistCard = ({
             size === "md" && "flex-col space-y-1 items-start",
           )}
         >
-          <span className="font-semibold truncate">{data.playListName}</span>
+          <span className="font-bold truncate">{data.playListName}</span>
           <span className="font-medium text-primary-foreground truncate">
             {data.count}곡
           </span>
