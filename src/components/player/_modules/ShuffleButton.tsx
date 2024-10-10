@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 
 import { cn } from "@/lib/utils";
 import { usePlayerControl } from "@/stores/usePlayerControl";
@@ -13,7 +13,7 @@ const ShuffleButton = () => {
 
   const prevSuffleState = useRef(shuffle);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (prevSuffleState.current && shuffle) return;
     prevSuffleState.current = shuffle;
     doShuffle(originTrackList);
