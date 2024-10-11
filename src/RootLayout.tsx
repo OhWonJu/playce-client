@@ -17,10 +17,14 @@ import ViewModeProvider from "./components/providers/ViewModeProvider";
 import SidebarProvider from "./components/providers/SidebarProvider";
 import Navigator from "./components/Navigator/Navigator";
 import { Player } from "./components";
-import { StyledToastContainer } from "./components/Toastify";
+// import { StyledToastContainer } from "./components/Toastify";
 
 const PlayerBottomSheet = lazy(
   () => import("./components/playerBottomSheet/PlayerBottomSheet"),
+);
+
+const StyledToastContainer = lazy(
+  () => import("./components/Toastify/Toaster"),
 );
 
 const NON_PLAYABLE_PATHS = ["/", "/join"];
@@ -80,7 +84,9 @@ const RootLayout = ({ children }: PropsWithChildren) => {
       <ModalProvider />
       <SidebarProvider />
       <Page children={children} />
-      <StyledToastContainer />
+      <Suspense>
+        <StyledToastContainer />
+      </Suspense>
     </>
   );
 };

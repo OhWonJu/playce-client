@@ -24,13 +24,13 @@ const ButtonGroup = ({ pathName, navigate }: ButtonGroupProps) => {
         onClick={() => navigate("/home")}
         title="home"
       >
-        <a>
+        <i>
           {pathName === "home" ? (
             <HomeFill className="w-7 h-7 fill-primary" />
           ) : (
             <Home className="w-7 h-7 stroke-primary" />
           )}
-        </a>
+        </i>
       </Button>
       <Button
         variant="plain"
@@ -39,13 +39,13 @@ const ButtonGroup = ({ pathName, navigate }: ButtonGroupProps) => {
         onClick={() => navigate("/explore")}
         title="explore"
       >
-        <a>
+        <i>
           {pathName === "explore" ? (
             <ExploreFill className="w-7 h-7 fill-primary" />
           ) : (
             <Explore className="w-7 h-7 stroke-primary" />
           )}
-        </a>
+        </i>
       </Button>
       <Button
         variant="plain"
@@ -53,9 +53,9 @@ const ButtonGroup = ({ pathName, navigate }: ButtonGroupProps) => {
         className="rounded-full h-full aspect-square"
         title="search"
       >
-        <a>
+        <i>
           <Search className="w-7 h-7 stroke-primary" />
-        </a>
+        </i>
       </Button>
     </>
   );
