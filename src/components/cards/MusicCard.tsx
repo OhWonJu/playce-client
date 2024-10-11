@@ -10,6 +10,7 @@ interface MusicCardProps {
   size?: "sm" | "md" | "lg";
   clickBlocking?: boolean;
   playable?: boolean;
+  useLazy?: boolean;
   playAction?: () => void;
   onClick?: () => void;
   [key: string]: any;
@@ -26,6 +27,7 @@ const MusicCard = ({
   imageUrl,
   size = "sm",
   clickBlocking,
+  useLazy = true,
   onClick,
   playable,
   playAction,
@@ -72,7 +74,8 @@ const MusicCard = ({
             alt="albumArt"
             imageUrl={imageUrl}
             width={IMAGE_SIZE[size]}
-            lazy
+            height={IMAGE_SIZE[size]}
+            lazy={useLazy}
           />
         )}
 
@@ -84,7 +87,8 @@ const MusicCard = ({
                 alt="albumArt"
                 imageUrl={url}
                 width={IMAGE_SIZE[size] / 2}
-                lazy
+                height={IMAGE_SIZE[size] / 2}
+                lazy={useLazy}
               />
             ))}
           </div>
@@ -93,6 +97,7 @@ const MusicCard = ({
           <span
             role="button"
             onClick={event => handlePlayClick(event)}
+            title="play"
             className="absolute flex items-center justify-center bottom-2 right-2 p-1 bg-neutral-100/80 hover:bg-neutral-100 shadow-md rounded-full"
           >
             <Play className="pl-[3px]" />

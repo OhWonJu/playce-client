@@ -23,7 +23,7 @@ const ShuffleButton = () => {
     <Button
       variant="plain"
       useRipple
-      className="p-2 rounded-full"
+      className="p-2 aspect-square rounded-full"
       onClick={() => setShuffle(!shuffle)}
     >
       <Shuffle

@@ -31,7 +31,7 @@ const ProductCard = ({ item }: ProductCardProps) => {
           <span className="text-sm text-primary-foreground font-medium pb-1">
             {item.product.artist.artistName}
           </span>
-          <span className="text-sm font-semibold">
+          <span className="text-sm font-bold">
             {item.product.price.toLocaleString("ko-KR")}원
           </span>
         </div>

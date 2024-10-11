@@ -218,7 +218,7 @@ const TrackCard = ({
           />
         </ArtWrapper>
         <section className="flex flex-col">
-          <span className="font-semibold text-base line-clamp-1">
+          <span className="font-bold text-base line-clamp-1">
             {data.trackTitle}
           </span>
           <span className="font-medium text-xs line-clamp-1">

@@ -20,7 +20,7 @@ const PlaylistTrackList = ({
   className,
 }: PlaylistTrackListProps) => {
   return (
-    <ul className={cn("flex flex-col w-full space-y-2", className)}>
+    <div className={cn("flex flex-col w-full space-y-2", className)}>
       {tracks.map((track, index) => (
         <TrackCard
           //@ts-ignore
@@ -32,7 +32,7 @@ const PlaylistTrackList = ({
           index={index}
         />
       ))}
-    </ul>
+    </div>
   );
 };
 

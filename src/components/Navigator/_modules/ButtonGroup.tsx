@@ -22,37 +22,40 @@ const ButtonGroup = ({ pathName, navigate }: ButtonGroupProps) => {
         useRipple
         className="rounded-full h-full aspect-square"
         onClick={() => navigate("/home")}
+        title="home"
       >
-        <a aria-label="to-home">
+        <i>
           {pathName === "home" ? (
             <HomeFill className="w-7 h-7 fill-primary" />
           ) : (
             <Home className="w-7 h-7 stroke-primary" />
           )}
-        </a>
+        </i>
       </Button>
       <Button
         variant="plain"
         useRipple
         className="rounded-full h-full aspect-square"
         onClick={() => navigate("/explore")}
+        title="explore"
       >
-        <a varia-label="to-explore">
+        <i>
           {pathName === "explore" ? (
             <ExploreFill className="w-7 h-7 fill-primary" />
           ) : (
             <Explore className="w-7 h-7 stroke-primary" />
           )}
-        </a>
+        </i>
       </Button>
       <Button
         variant="plain"
         useRipple
         className="rounded-full h-full aspect-square"
+        title="search"
       >
-        <a varia-label="open-search">
+        <i>
           <Search className="w-7 h-7 stroke-primary" />
-        </a>
+        </i>
       </Button>
     </>
   );
