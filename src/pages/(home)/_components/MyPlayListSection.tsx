@@ -59,6 +59,7 @@ const MyPlayListSection = ({ myPlayList }: MyPlayListSectionProps) => {
             `/cabinet/playlists/${playlist.playListName}?playlistId=${playlist.id}`,
           )
         }
+        useLazy={false}
         playable
         playAction={() => {
           const prevData = queryClient.getQueryData(
