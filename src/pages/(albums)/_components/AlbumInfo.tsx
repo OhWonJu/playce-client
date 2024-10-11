@@ -44,21 +44,21 @@ const AlbumInfo = ({
     <AlbumInfoBox>
       <span className="font-extrabold text-3xl">{albumName}</span>
       <span className="font-bold">{artistName}</span>
-      <a className="text-zinc-400 font-medium text-sm">
+      <p className="text-zinc-400 font-medium text-sm">
         {albumType && `${albumType} • `}
         {releasedAt && `${format(releasedAt, DATE_FORMAT)}`}
-      </a>
+      </p>
       {genres && (
-        <a className="text-zinc-400 font-medium text-sm">
+        <p className="text-zinc-400 font-medium text-sm">
           {genresContent.join(" • ")}
-        </a>
+        </p>
       )}
       <div className="flex space-x-2">
-        <a className="text-zinc-400 font-medium text-sm">
+        <p className="text-zinc-400 font-medium text-sm">
           {tracks && `${tracks?.length}곡 • ${Math.round(totalTimes / 60)}분`}
           {songCount && `${songCount}곡`}
           {totalPlayTime && ` • ${convertTime(totalPlayTime, "number")[0]}분`}
-        </a>
+        </p>
       </div>
     </AlbumInfoBox>
   );
