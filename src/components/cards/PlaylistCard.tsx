@@ -34,6 +34,7 @@ const PlaylistCard = ({
         variant="plain"
         onClick={() => onClick(data.id, data.playListName)}
         useRipple
+        title="playlist"
         className="h-full flex w-full flex-row justify-start items-center space-x-3 p-0"
       >
         {/* COL-1 */}
@@ -87,6 +88,7 @@ const PlaylistCard = ({
         variant="plain"
         size="icon"
         useRipple
+        title="utility"
         className="absolute right-0"
       >
         <DotMenu className="w-[14px] h-[14px]" />

@@ -71,6 +71,7 @@ const TrackListCard = ({ index, data, isOwn }: TrackListCardProps) => {
             useRipple
             size="icon"
             onClick={handleQueueAddActionClick}
+            title="queuePlay"
             className="relative p-2 rounded-full"
           >
             <QueueList className="w-4 h-4" />
@@ -83,6 +84,7 @@ const TrackListCard = ({ index, data, isOwn }: TrackListCardProps) => {
             useRipple
             size="icon"
             onClick={handlePlaylistAddActionClick}
+             title="utility"
             className="p-2 rounded-full"
           >
             <DotMenu className="w-4 h-4" />
