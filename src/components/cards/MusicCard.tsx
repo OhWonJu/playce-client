@@ -10,6 +10,7 @@ interface MusicCardProps {
   size?: "sm" | "md" | "lg";
   clickBlocking?: boolean;
   playable?: boolean;
+  usePriority?: boolean;
   useLazy?: boolean;
   playAction?: () => void;
   onClick?: () => void;
@@ -27,6 +28,7 @@ const MusicCard = ({
   imageUrl,
   size = "sm",
   clickBlocking,
+  usePriority = false,
   useLazy = true,
   onClick,
   playable,
@@ -75,6 +77,7 @@ const MusicCard = ({
             imageUrl={imageUrl}
             width={IMAGE_SIZE[size]}
             height={IMAGE_SIZE[size]}
+            priority={usePriority}
             lazy={useLazy}
           />
         )}

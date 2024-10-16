@@ -40,6 +40,7 @@ const QueueCard = ({}: { key: string }) => {
         queueThumbNail.length === 4 ? queueThumbNail : queueThumbNail[0]
       }
       size="md"
+      usePriority={true}
       useLazy={false}
       playable
       playAction={queueClickHandler}

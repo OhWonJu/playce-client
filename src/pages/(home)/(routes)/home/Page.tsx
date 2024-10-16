@@ -43,6 +43,7 @@ const HomePage = () => {
         title={album.albumName}
         imageUrl={album.albumArtURL}
         subTitle={album.artist.artistName}
+        usePriority={true}
         useLazy={false}
         onClick={() =>
           navigate(`/albums/${album.albumName}?albumId=${album.id}`)

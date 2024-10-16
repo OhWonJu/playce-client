@@ -46,7 +46,7 @@ const Avatar = ({
             src={imageUrl}
             alt="avatar"
             width={"100%"}
-            style={{ height: "auto", objectFit: "cover" }}
+            style={{ width: "100%", height: "auto", objectFit: "cover" }}
             draggable={false}
             onClick={onClick}
           />

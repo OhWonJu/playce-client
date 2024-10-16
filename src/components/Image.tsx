@@ -2,6 +2,7 @@ interface ImageProps {
   imageUrl: string;
   alt: string;
   width?: string | number;
+  priority?: boolean;
   lazy?: boolean;
   className?: string;
   [key: string]: any;
@@ -13,6 +14,7 @@ const Image = ({
   imageUrl,
   alt,
   width,
+  priority = false,
   lazy = false,
   className,
   ...rest
@@ -39,6 +41,7 @@ const Image = ({
       alt={alt}
       width={width}
       className={className}
+      fetchPriority={priority ? "high" : "auto"}
       loading={lazy ? "lazy" : undefined}
       draggable={false}
       {...options}
