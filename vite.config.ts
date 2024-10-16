@@ -22,9 +22,32 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id: string) {
-          if (id.includes("node_modules")) {
-            const moduleName = id.split("node_modules/").pop()?.split("/")[0];
-            return `vendor/${moduleName}`;
+          // if (id.includes("node_modules")) {
+          //   const moduleName = id.split("node_modules/").pop()?.split("/")[0];
+          //   return `vendor/${moduleName}`;
+          // }
+
+          if (id.includes("date-fns")) {
+            return "vender/date-fns";
+          }
+          if (id.includes("lodash")) {
+            return "vender/lodash";
+          }
+          if (id.includes("hls")) {
+            return "vender/hls";
+          }
+          if (id.includes("crypto-js")) {
+            return "vender/cryto-js";
+          }
+          if (id.includes("framer-motion")) {
+            return "vender/framer-motion";
+          }
+          if (
+            id.includes("node_modules/react/") ||
+            id.includes("node_modules/react-dom/") ||
+            id.includes("node_modules/react-router")
+          ) {
+            return "vender/react";
           }
         },
       },

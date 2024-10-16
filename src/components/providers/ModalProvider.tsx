@@ -3,9 +3,6 @@ import { useModal } from "@/stores/useModalStore";
 
 import { LoginModal } from "../modals/modalViews";
 
-// const LoginModal = lazy(
-//   () => import("@/components/modals/modalViews/LoginModal"),
-// );
 const PlaylistModal = lazy(
   () => import("@/components/modals/modalViews/PlaylistModal"),
 );
