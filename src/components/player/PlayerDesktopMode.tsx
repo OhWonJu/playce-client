@@ -29,7 +29,7 @@ const PlayerDesktopMode = () => {
 
   return (
     <div
-      className="__WRAPPER__ fixed right-0 flex flex-col shadow-inner border border-neutral-100 dark:border-neutral-800"
+      className="__WRAPPER__ fixed right-0 flex flex-col shadow-inner border border-r-0 border-neutral-200/50 dark:border-neutral-700/50"
       style={{
         width: DESKTOP_PLAYER_WIDTH,
         minHeight: 667,
