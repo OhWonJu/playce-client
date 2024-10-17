@@ -12,7 +12,7 @@ import ModalLayout from "../ModalLayout";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-const CreatePlaylistModal = () => {
+const CartModal = () => {
   const onClose = useModal(state => state.onClose);
   const { items, totalItems, setOrderToken } = useCartStore();
 
@@ -107,4 +107,4 @@ const CreatePlaylistModal = () => {
   );
 };
 
-export default CreatePlaylistModal;
+export default CartModal;
