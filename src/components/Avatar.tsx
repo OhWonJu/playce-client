@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 
 import { cn } from "@/lib/utils";
 import { useModal } from "@/stores/useModalStore";
@@ -23,6 +23,10 @@ const Avatar = ({
   const { isLogin } = useAuthStore();
   const openModal = useModal(state => state.onOpen);
 
+  const clickHandler = useCallback(() => {
+    isLogin ? onClick() : openModal("login");
+  }, [isLogin]);
+
   return (
     <div
       className={cn(
@@ -41,20 +45,20 @@ const Avatar = ({
           className,
         )}
       >
-        {isLogin && imageUrl ? (
+        {imageUrl ? (
           <img
             src={imageUrl}
             alt="avatar"
             width={"100%"}
             style={{ width: "100%", height: "auto", objectFit: "cover" }}
             draggable={false}
-            onClick={onClick}
+            onClick={clickHandler}
           />
         ) : (
           <div
             role="button"
             className="w-full h-full bg-primary-foreground flex items-center justify-center"
-            onClick={() => openModal("login")}
+            onClick={clickHandler}
           >
             <Profile className="w-4 h-4 fill-secondary" />
           </div>
