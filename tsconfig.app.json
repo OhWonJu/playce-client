@@ -35,5 +35,5 @@
     "resolveJsonModule": true,
     "incremental": true
   },
-  "include": ["src", "types", "**/*.ts", "**/*.tsx"]
+  "include": ["src", "types", "**/*.ts", "**/*.tsx", "cypress"]
 }

@@ -3,7 +3,6 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
-import cypress from "eslint-plugin-cypress";
 
 export default tseslint.config(
   { ignores: ["dist"] },
@@ -22,7 +21,7 @@ export default tseslint.config(
     plugins: {
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
-      cypress: cypress,
+      cypress,
     },
     rules: {
       "react/no-unescaped-entities": "off",
