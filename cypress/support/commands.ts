@@ -36,4 +36,11 @@
 //   }
 // }
 
-import 'cypress-react-selector';
+import "cypress-react-selector";
+
+Cypress.Commands.add(
+  "getDataTest",
+  (dataTestSelector: string, option?: string) => {
+    return cy.get(`[data-test="${dataTestSelector}"] ${option ? option : ""}`);
+  },
+);
