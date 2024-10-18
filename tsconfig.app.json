@@ -6,6 +6,7 @@
     "module": "ESNext",
     "composite": true,
     "skipLibCheck": true,
+    "types": ["node", "cypress", "cypress-react-selector"],
 
     "baseUrl": ".",
     "paths": {
