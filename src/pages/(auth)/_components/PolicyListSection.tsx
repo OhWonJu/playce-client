@@ -117,6 +117,7 @@ const PolicyListSection = ({ setPolicyConfirm }: PolicyListSectionProps) => {
     <section className="w-full mt-16">
       <AllPolicyCheckArea>
         <Button
+          data-test="accept-all"
           id="checkAll"
           variant="ghost"
           size="icon"
@@ -148,7 +149,10 @@ const PolicyListSection = ({ setPolicyConfirm }: PolicyListSectionProps) => {
             <li key={index}>
               <PolicyItem>
                 {/* Accept Polciy */}
-                <button onClick={() => togglePolicyAccept(index)}>
+                <button
+                  data-test={`accept-${index}`}
+                  onClick={() => togglePolicyAccept(index)}
+                >
                   <div className="flex flex-row space-x-4">
                     <Check
                       className={cn(

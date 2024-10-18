@@ -24,7 +24,12 @@ const RootPage = () => {
       </section>
 
       <section className="__BUTTON_GROUP__ flex-1 flex flex-col w-[90%] gap-y-4 justify-center pt-20">
-        <Button variant="flat" size="lg" onClick={() => onOpen("login")}>
+        <Button
+          data-test="login-button"
+          variant="flat"
+          size="lg"
+          onClick={() => onOpen("login")}
+        >
           <span>PLAYCE 시작하기</span>
         </Button>
         <Button

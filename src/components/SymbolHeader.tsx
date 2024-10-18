@@ -13,8 +13,8 @@ const SymbolHeader = ({
 }: SymbolHeaderProps) => {
   return (
     <>
-      <Symbol>{title}</Symbol>
-      <ServiceDescription>{description}</ServiceDescription>
+      <Symbol data-test="symbol-header">{title}</Symbol>
+      <ServiceDescription data-test="symbol-description">{description}</ServiceDescription>
     </>
   );
 };

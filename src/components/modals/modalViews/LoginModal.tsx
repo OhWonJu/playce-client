@@ -70,7 +70,7 @@ const LoginModal = () => {
   };
 
   const bodyContent = (
-    <div className="flex flex-col w-full">
+    <div data-test="login-modal-body" className="flex flex-col w-full">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <TooltipProvider>

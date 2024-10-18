@@ -40,9 +40,12 @@ const formSchema = z
       .string()
       .min(8, { message: "비밀번호는 최소 8자 이상이어야 합니다." })
       .max(11, { message: "비밀번호는 최대 11자 이하이어야 합니다." })
-      .regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%]).+$/, {
-        message: "비밀번호는 숫자, 영문 대소문자, !@#$%를 포함해야 합니다.",
-      }),
+      .regex(
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%])[A-Za-z0-9!@#$%]+$/,
+        {
+          message: "비밀번호는 숫자, 영문 대소문자, !@#$%를 포함해야 합니다.",
+        },
+      ),
     passwordCheck: z.string(),
     email: z.string().email({ message: "유효한 이메일 주소를 입력하세요." }),
   })
@@ -131,10 +134,14 @@ const JoinPage = () => {
                   <FormItem>
                     <FormLabel className="flex flex-row justify-between text-base text-primary">
                       UserName
-                      <FormMessage className="text-xs" />
+                      <FormMessage
+                        data-test="username-message"
+                        className="text-xs"
+                      />
                     </FormLabel>
                     <FormControl>
                       <Input
+                        data-test="username-input"
                         disabled={isLoading}
                         placeholder="영문, 한글, 숫자 조합 2~11자"
                         {...field}
@@ -151,10 +158,14 @@ const JoinPage = () => {
                   <FormItem>
                     <FormLabel className="flex flex-row justify-between text-base text-primary">
                       Password
-                      <FormMessage className="text-xs" />
+                      <FormMessage
+                        data-test="password-message"
+                        className="text-xs"
+                      />
                     </FormLabel>
                     <FormControl>
                       <Input
+                        data-test="password-input"
                         disabled={isLoading}
                         placeholder="영문 대소문자, 숫자, 특수문자(!@#$%) 8~11자"
                         type="password"
@@ -172,10 +183,14 @@ const JoinPage = () => {
                   <FormItem>
                     <FormLabel className="flex flex-row justify-between text-base text-primary">
                       Password Check
-                      <FormMessage className="text-xs" />
+                      <FormMessage
+                        data-test="password-check-message"
+                        className="text-xs"
+                      />
                     </FormLabel>
                     <FormControl>
                       <Input
+                        data-test="password-check-input"
                         disabled={isLoading}
                         placeholder="비밀번호 확인"
                         type="password"
@@ -192,10 +207,15 @@ const JoinPage = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="flex flex-row justify-between text-base text-primary">
-                      Email <FormMessage className="text-xs" />
+                      Email
+                      <FormMessage
+                        data-test="email-message"
+                        className="text-xs"
+                      />
                     </FormLabel>
                     <FormControl>
                       <Input
+                        data-test="email-input"
                         disabled={!!email || isLoading}
                         placeholder=""
                         {...field}
@@ -213,6 +233,7 @@ const JoinPage = () => {
       <PolicyListSection setPolicyConfirm={setPolicyConfirm} />
 
       <Button
+        data-test="submit-button"
         variant="flat"
         size="lg"
         disabled={!policyConfirm || isLoading}

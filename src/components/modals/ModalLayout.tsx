@@ -84,33 +84,31 @@ const ModalLayout = ({
   if (!isOpen) return null;
 
   return (
-    <>
-      <ModalOverlay ref={ref} role="dialog">
-        <ModalCotainer
-          className={cn(
-            "duration-300 transform-gpu",
-            showModal ? "opacity-100" : "opacity-0",
-            showModal && mode === "slide" && "translate-y-0",
-            !showModal && mode === "slide" && "translate-y-full",
-            containerClassName,
-          )}
-        >
-          <ModalHeader>
-            <span className="text-lg font-semibold">{title}</span>
-            <button
-              onClick={handleClose}
-              className="p-1 border-0 hover:opacity-70 transition absolute right-4"
-            >
-              <Cross className="w-6 h-6" strokeWidth={2} />
-            </button>
-          </ModalHeader>
+    <ModalOverlay ref={ref} role="dialog">
+      <ModalCotainer
+        className={cn(
+          "duration-300 transform-gpu",
+          showModal ? "opacity-100" : "opacity-0",
+          showModal && mode === "slide" && "translate-y-0",
+          !showModal && mode === "slide" && "translate-y-full",
+          containerClassName,
+        )}
+      >
+        <ModalHeader data-test="modal-header">
+          <span className="text-lg font-semibold">{title}</span>
+          <button
+            onClick={handleClose}
+            className="p-1 border-0 hover:opacity-70 transition absolute right-4"
+          >
+            <Cross className="w-6 h-6" strokeWidth={2} />
+          </button>
+        </ModalHeader>
 
-          <ModalContent>{body}</ModalContent>
+        <ModalContent>{body}</ModalContent>
 
-          <ModalFooter>{footer}</ModalFooter>
-        </ModalCotainer>
-      </ModalOverlay>
-    </>
+        <ModalFooter>{footer}</ModalFooter>
+      </ModalCotainer>
+    </ModalOverlay>
   );
 };
 
