@@ -63,6 +63,8 @@ export const useHorizontalScroll = (
 
       document.removeEventListener("mousemove", mouseMoveHandler);
       document.removeEventListener("mouseup", mouseUpHandler);
+
+      cancelAnimationFrame(frame.current);
     };
 
     const eventHandler = ref.current;
@@ -71,7 +73,7 @@ export const useHorizontalScroll = (
 
     return () => {
       eventHandler?.removeEventListener("mousedown", mouseDownHandler);
-      cancelAnimationFrame(frame.current);
+      // cancelAnimationFrame(frame.current);
     };
   }, [isGrabbing, ref, sensitive]);
 
