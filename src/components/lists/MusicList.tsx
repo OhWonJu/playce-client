@@ -1,5 +1,6 @@
+import React, { useMemo, useRef } from "react";
+
 import { cn } from "@/lib/utils";
-import React, { useRef } from "react";
 import { useHorizontalScroll } from "@/hooks/useHorizontalScroll";
 
 interface MusicListProps {
@@ -28,7 +29,7 @@ export const MusicList = ({
   const listRef = useRef<HTMLDivElement>(null);
   const isGrabbing = useHorizontalScroll(listRef);
 
-  const RenderedItems = renderer?.();
+  const RenderedItems = useMemo(() => renderer?.(), []);
 
   const handleItemClick = () => {
     if (isGrabbing) {
@@ -72,10 +73,16 @@ export const MusicList = ({
             </span>
           </div>
         )}
-        {RenderedItems?.map(item =>
-          React.cloneElement(item, {
+        {/* isGrabbing 일 때 막을 씌우는 형태는? 아이템들의 props 가 변하지 않아도 됨.. */}
+        {RenderedItems}
+        {/* RenderedItem must have ClickBlocking props */}
+        {/* {RenderedItems?.map(item => {
+          return React.cloneElement(item, {
             clickBlocking: isGrabbing,
-          }),
+          });
+        })} */}
+        {isGrabbing && (
+          <div className="fixed top-0 left-0 w-full h-full bg-transparent" />
         )}
       </div>
     </section>
