@@ -22,6 +22,7 @@ const TabComponent = ({
 }: TabComponentProps) => {
   return (
     <Tabs
+      data-test="tabs"
       className={cn(
         "relative w-full h-full flex justify-between items-center",
         className,
