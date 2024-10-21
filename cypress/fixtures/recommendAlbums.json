@@ -1,0 +1,21 @@
+[
+  {
+    "id": "test-album",
+    "albumCode": "ta-01",
+    "albumName": "Mock album",
+    "albumArtURL": "",
+    "albumType": "Regular",
+    "albumInfo": "",
+    "tracks": [],
+    "genres": [],
+    "artist": {
+      "id": "mock-artist",
+      "artistInfo": "just mocking",
+      "artistName": "Mock artist"
+    },
+    "price": 10000,
+    "createdAt": "2024-09-13T03:50:35.291Z",
+    "updatedAt": "2024-09-18T08:23:16.740Z",
+    "releasedAt": "2013-04-16T00:00:00.000Z"
+  }
+]

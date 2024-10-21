@@ -9,3 +9,8 @@ export const useAuthStore = create<AuthStore>(set => ({
   isLogin: undefined,
   setIsLogin: flag => set({ isLogin: flag }),
 }));
+
+if (window.Cypress) {
+  //@ts-ignore
+  window.Storage["useAuthStore"] = useAuthStore;
+}

@@ -1,0 +1,12 @@
+{
+  "queue": {
+    "id": "test-queue",
+    "queueThumbNail": [],
+    "songCount": 0,
+    "totalPlayTime": 0,
+    "tracks": [],
+    "userId": "test"
+  },
+  "myAlbums": [],
+  "myPlayList": []
+}

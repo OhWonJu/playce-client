@@ -14,7 +14,7 @@ interface UseMeStoreProps extends CurrentUserProps {
   initMe: () => void;
 }
 
-const useMeStore = create<UseMeStoreProps>((set) => ({
+const useMeStore = create<UseMeStoreProps>(set => ({
   id: undefined,
   nickName: undefined,
   image: undefined,
@@ -39,3 +39,8 @@ const useMeStore = create<UseMeStoreProps>((set) => ({
 }));
 
 export default useMeStore;
+
+if (window.Cypress) {
+  //@ts-ignore
+  window.Storage["useMeStore"] = useMeStore;
+}

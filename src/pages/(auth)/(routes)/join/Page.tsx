@@ -205,7 +205,7 @@ const JoinPage = () => {
                 control={form.control}
                 name="email"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem data-test="email-group">
                     <FormLabel className="flex flex-row justify-between text-base text-primary">
                       Email
                       <FormMessage

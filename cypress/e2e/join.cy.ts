@@ -169,7 +169,7 @@ describe("Join Page test", () => {
         );
       });
 
-      it("Email 입력", () => {
+      it.only("Email 입력", () => {
         cy.getDataTest("email-input").type("@test@mail.com");
         cy.getDataTest("submit-button").click();
         cy.getDataTest("email-message").should(
@@ -186,12 +186,16 @@ describe("Join Page test", () => {
         );
         cy.getDataTest("email-input").clear();
 
-        cy.getDataTest("email-input").type("test@mailcom");
+        cy.getDataTest("email-group").within(() => {
+          cy.get("input").type("test@mailcom");
+        });
         cy.getDataTest("submit-button").click();
-        cy.getDataTest("email-message").should(
-          "contain.text",
-          "유효한 이메일 주소를 입력하세요.",
-        );
+        cy.getDataTest("email-group").within(() => {
+          cy.get("p").should(
+            "contain.text",
+            "유효한 이메일 주소를 입력하세요.",
+          );
+        });
         cy.getDataTest("email-input").clear();
 
         cy.getDataTest("email-input").type("test@mail.com");
