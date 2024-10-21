@@ -47,7 +47,7 @@ const KakaoPaymentSuccessPage = () => {
   }, []);
 
   return (
-    <PlayableContainer className="flex flex-col h-screen justify-center items-center space-y-4">
+    <PlayableContainer className="flex flex-col h-[100dvh] justify-center items-center space-y-4">
       카카오페이 결제가 완료되었습니다.
       <Button variant="link" onClick={() => navigate("/home")}>
         홈으로 가기

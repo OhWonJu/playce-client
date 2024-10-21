@@ -29,7 +29,7 @@ export const MusicList = ({
   const listRef = useRef<HTMLDivElement>(null);
   const isGrabbing = useHorizontalScroll(listRef);
 
-  const RenderedItems = useMemo(() => renderer?.(), []);
+  const RenderedItems = useMemo(() => renderer?.(), [renderer]);
 
   const handleItemClick = () => {
     if (isGrabbing) {
@@ -82,7 +82,7 @@ export const MusicList = ({
           });
         })} */}
         {isGrabbing && (
-          <div className="fixed top-0 left-0 w-full h-full bg-transparent" />
+          <div className="fixed top-0 left-0 w-full h-full bg-transparent\" />
         )}
       </div>
     </section>

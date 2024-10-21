@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useRef } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useInView } from "framer-motion";
 
 import { usersQueryKeys } from "@/api/users";

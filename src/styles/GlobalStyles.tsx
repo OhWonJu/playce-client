@@ -43,7 +43,7 @@ export const PlayableContainer = styled.main`
   padding-top: ${NAV_HEIGHT * 2}px;
   padding-bottom: ${NAV_HEIGHT * 2 + PLAYER_HEADER_HEIGHT}px;
 
-  ${tw`flex flex-col max-h-full overflow-scroll scrollbar-hide`}/* ${tw`flex flex-col`} */
+  ${tw`flex flex-col max-h-full overflow-scroll scrollbar-hide`}
 `;
 
 export default GlobalStyles;

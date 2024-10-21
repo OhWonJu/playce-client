@@ -1,14 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { usePlayerControl } from "@/stores/usePlayerControl";
+
+import { Track } from "@/types";
+
+import { GetSummaryResponse } from "@/api/users";
+import { getTracksByPlaylist, playlistsQueryKeys } from "@/api/playlist";
+
+
+import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useModal } from "@/stores/useModalStore";
 
 import { MusicCard, MusicList } from "@/components";
-import { GetSummaryResponse } from "@/api/users";
-import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
-import { usePlayerControl } from "@/stores/usePlayerControl";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { getTracksByPlaylist, playlistsQueryKeys } from "@/api/playlist";
-import { Track } from "@/types";
-import { useModal } from "@/stores/useModalStore";
-import { useNavigate } from "react-router";
 
 interface MyPlayListSectionProps {
   myPlayList: GetSummaryResponse["myPlayList"];

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";

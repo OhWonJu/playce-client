@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query"
+;
 import { _PUT } from "@/api/rootAPI";
+
+import { useModal } from "@/stores/useModalStore";
+
 import { Button } from "@/components";
 import SymbolHeader from "@/components/SymbolHeader";
-import { useModal } from "@/stores/useModalStore";
-import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router";
 
 const RootPage = () => {
   const navigate = useNavigate();

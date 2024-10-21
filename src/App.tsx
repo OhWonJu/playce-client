@@ -1,5 +1,5 @@
-import { Routes, Route } from "react-router-dom";
 import { Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import { alternativeRoutes, privateRoutes, publicRoutes } from "./routes";
 import PrivateRoute from "./PrivateRoute";
