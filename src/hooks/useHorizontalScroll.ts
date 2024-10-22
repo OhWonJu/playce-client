@@ -15,6 +15,8 @@ export const useHorizontalScroll = (
       event.stopPropagation();
 
       if (!ref.current) return;
+      // non-Scrollable 
+      if (ref.current.scrollWidth === ref.current.clientWidth) return;
 
       ref.current.style.cursor = "grabbing";
       ref.current.style.userSelect = "none";
@@ -46,8 +48,6 @@ export const useHorizontalScroll = (
 
     const mouseUpHandler = (event: MouseEvent) => {
       event.stopPropagation();
-
-      // console.log("UP");
 
       if (!ref.current) return;
 
