@@ -31,11 +31,11 @@ export const MusicList = ({
 
   const RenderedItems = useMemo(() => renderer?.(), [renderer]);
 
-  const handleItemClick = () => {
-    if (isGrabbing) {
-      return;
-    }
-  };
+  // const handleItemClick = () => {
+  //   if (isGrabbing) {
+  //     return;
+  //   }
+  // };
 
   // TODO Intersection opserver image lazy loading
   // useEffect(() => {
@@ -60,7 +60,7 @@ export const MusicList = ({
       </div>
       <div
         ref={listRef}
-        onClick={handleItemClick}
+        // onClick={handleItemClick}
         className={cn(
           "flex content-start w-full max-h-[400px] overflow-x-scroll scrollbar-hide gap-x-3 gap-y-4",
           singleLine ? "flex-row" : "flex-col flex-wrap",
@@ -82,7 +82,7 @@ export const MusicList = ({
           });
         })} */}
         {isGrabbing && (
-          <div className="fixed top-0 left-0 w-full h-full bg-transparent\" />
+          <div className="fixed top-0 left-0 w-full h-full bg-transparent" />
         )}
       </div>
     </section>

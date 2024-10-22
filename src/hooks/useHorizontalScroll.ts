@@ -15,7 +15,7 @@ export const useHorizontalScroll = (
       event.stopPropagation();
 
       if (!ref.current) return;
-      // non-Scrollable 
+      // non-Scrollable
       if (ref.current.scrollWidth === ref.current.clientWidth) return;
 
       ref.current.style.cursor = "grabbing";
