@@ -30,57 +30,91 @@ const Waveform = () => {
 
   // CREATE WAVE FORM ============================== //
   useLayoutEffect(() => {
-    if (waveformRef.current) {
-      wavesurfer.current = WaveSurfer.create({
-        container: waveformRef.current,
-        // progressColor: getComputedStyle(
-        //   document.documentElement,
-        // ).getPropertyValue("--primary"), // 개선 필요
-        progressColor: theme === "light" ? "#212121" : "#fbfbf9",
-        barHeight: 0.75,
-        barWidth: 3,
-        barRadius: 5,
-        cursorWidth: 0,
-        dragToSeek: true,
-        media: video.current,
-        backend: "WebAudio",
-        peaks: [currentTrack.peaks],
+    if (!waveformRef.current) return;
+
+    wavesurfer.current = WaveSurfer.create({
+      container: waveformRef.current,
+      // progressColor: getComputedStyle(
+      //   document.documentElement,
+      // ).getPropertyValue("--primary"), // 개선 필요
+      progressColor: theme === "light" ? "#212121" : "#fbfbf9",
+      barHeight: 0.75,
+      barWidth: 3,
+      barRadius: 5,
+      cursorWidth: 0,
+      dragToSeek: true,
+      media: video.current,
+      backend: "WebAudio",
+      peaks: [currentTrack.peaks],
+    });
+
+    const hls = new Hls();
+    hls.loadSource(currentTrack.trackURL);
+    hls.attachMedia(video.current);
+
+    hls.on(Hls.Events.MANIFEST_PARSED, function () {
+      setTotalTime(currentTrack.trackTime);
+
+      if (play) {
+        wavesurfer.current.play();
+      }
+    });
+
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: currentTrack.trackTitle,
+        artist: currentTrack.artistName,
+        album: currentTrack.albumName,
+        artwork: [
+          {
+            src: currentTrack.albumArtURL,
+            sizes: "200x200",
+            type: "image/webp",
+          },
+        ],
       });
 
-      const hls = new Hls();
-      hls.loadSource(currentTrack.trackURL);
-      hls.attachMedia(video.current);
-
-      hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        setTotalTime(currentTrack.trackTime);
-
-        if (play) {
-          video.current.play();
-          wavesurfer.current.play();
-        }
-
-        wavesurfer.current.on("seeking", (currentTime: number) => {
-          setPlayTime(currentTime);
-        });
-
-        wavesurfer.current.on("timeupdate", (currentTime: number) => {
-          const currentSec = Math.floor(currentTime);
-
-          if (prevSec.current !== currentSec) {
-            prevSec.current = currentSec;
-            setPlayTime(currentTime);
-          }
-        });
+      navigator.mediaSession.setPositionState({
+        duration: currentTrack.trackTime,
+        playbackRate: video.current.playbackRate,
+        position: video.current.currentTime,
       });
-
-      return () => {
-        if (wavesurfer.current) {
-          // WaveSurfer 인스턴스 파기
-          wavesurfer.current.unAll();
-          wavesurfer.current.destroy();
-        }
-      };
     }
+
+    const syncPositionState = (playTime: number) => {
+      if ("mediaSession" in navigator) {
+        navigator.mediaSession.setPositionState({
+          duration: currentTrack.trackTime,
+          playbackRate: video.current.playbackRate,
+          position:
+            playTime > currentTrack.trackTime
+              ? currentTrack.trackTime
+              : playTime,
+        });
+      }
+    };
+
+    wavesurfer.current.on("seeking", (currentTime: number) => {
+      setPlayTime(currentTime);
+    });
+
+    wavesurfer.current.on("timeupdate", (currentTime: number) => {
+      const currentSec = Math.floor(currentTime);
+
+      if (prevSec.current !== currentSec) {
+        prevSec.current = currentSec;
+        setPlayTime(currentTime);
+        syncPositionState(currentTime);
+      }
+    });
+
+    return () => {
+      if (wavesurfer.current) {
+        // WaveSurfer 인스턴스 파기
+        wavesurfer.current.unAll();
+        wavesurfer.current.destroy();
+      }
+    };
   }, [currentTrack, waveformRef.current, video.current, displayPlayer]);
   // ============================== CREATE WAVE FORM //
 
@@ -109,19 +143,16 @@ const Waveform = () => {
 
     if (!stopLast) {
       setCurrentTrack(playList[nextIdx]);
-      wavesurfer.current?.play();
     } else setPlay(false);
   }, [currentTrack, playList, repeatMode]);
 
   useLayoutEffect(() => {
-    if (wavesurfer.current) {
-      wavesurfer.current.on("finish", handleFinish);
-    }
+    if (!wavesurfer.current) return;
+
+    wavesurfer.current.on("finish", handleFinish);
 
     return () => {
-      if (wavesurfer.current) {
-        wavesurfer.current.un("finish", handleFinish);
-      }
+      wavesurfer.current.un("finish", handleFinish);
     };
   }, [wavesurfer.current, handleFinish]);
   // ==================================== 음원 재생 완료 처리 //
@@ -157,9 +188,14 @@ const Waveform = () => {
 
   // 재생/정지 처리 ======================================================== //
   const handlePlay = async () => {
-    if (play) {
+    if (!wavesurfer.current) return;
+
+    const isPlaying = wavesurfer.current.isPlaying();
+    if (play && !isPlaying) {
       await wavesurfer.current.play();
-    } else await wavesurfer.current.pause();
+    } else if (!play && isPlaying) {
+      await wavesurfer.current.pause();
+    }
   };
 
   useLayoutEffect(() => {

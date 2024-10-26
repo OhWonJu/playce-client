@@ -112,14 +112,14 @@ const MySidebar = () => {
   const footerContent = (
     <div className="flex flex-col w-full space-y-4">
       <Button variant="outline" onClick={logOut} disabled={isPending}>
-        로그아웃
+        <span>로그아웃</span>
       </Button>
       <Button
         variant="plain"
         onClick={() => onOpen("deleteUser")}
-        className="bg-primary-foreground hover:bg-red-500 text-white"
+        className="bg-neutral-300 dark:bg-neutral-700 hover:bg-red-500 dark:hover:bg-red-500 text-neutral-50 dark:text-neutral-400 hover:text-white dark:hover:text-white"
       >
-        탈퇴
+        <span>탈퇴</span>
       </Button>
     </div>
   );
