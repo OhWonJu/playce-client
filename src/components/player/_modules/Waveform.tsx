@@ -67,7 +67,7 @@ const Waveform = () => {
         album: currentTrack.albumName,
         artwork: [
           {
-            src: currentTrack.albumArtURL,
+            src: currentTrack.albumArtURL + "_200w.webp",
             sizes: "200x200",
             type: "image/webp",
           },
