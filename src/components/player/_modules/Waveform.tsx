@@ -71,6 +71,16 @@ const Waveform = () => {
             sizes: "200x200",
             type: "image/webp",
           },
+          {
+            src: currentTrack.albumArtURL + "_400w.webp",
+            sizes: "400x400",
+            type: "image/webp",
+          },
+          {
+            src: currentTrack.albumArtURL + "_800w.webp",
+            sizes: "800x800",
+            type: "image/webp",
+          },
         ],
       });
 
