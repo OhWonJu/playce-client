@@ -58,7 +58,6 @@ export function getCurrentUser(flag: boolean | undefined) {
     queryKey: usersQueryKeys.currentUser,
     queryFn: async () => _GET<CurrentUserResponse>("/users/me"),
     enabled: flag,
-    retry: 3,
     staleTime: 0,
     refetchOnWindowFocus: false,
   });

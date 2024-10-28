@@ -87,13 +87,7 @@ const AppContainer = () => {
   if (connectChecking || isLoading) return null;
 
   if (isError) {
-    // TODO : 서버 연결이 불가능하다는 안내 출력
-    console.log("SERVER CONNECT FAILED");
-    return (
-      <div className="w-screen h-[100dvh] grid content-center text-center">
-        서버와의 연결에 실패했습니다.
-      </div>
-    );
+    throw new Error("Network Error");
   }
 
   return (

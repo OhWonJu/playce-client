@@ -81,9 +81,13 @@ export const MusicList = ({
             clickBlocking: isGrabbing,
           });
         })} */}
-        {isGrabbing && (
-          <div className="fixed top-0 left-0 w-full h-full bg-transparent" />
-        )}
+
+        <div
+          className={cn(
+            "fixed top-0 left-0 w-full h-full bg-transparent",
+            !isGrabbing && "hidden",
+          )}
+        />
       </div>
     </section>
   );

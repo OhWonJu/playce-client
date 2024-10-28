@@ -5,7 +5,7 @@ import axios, {
 } from "axios";
 
 import { MutationResponse } from "./axiosInstance.types";
-import { ERROR_CODE } from "../errorCode";
+import { ERROR_CODE, ErrorCode } from "../errorCode";
 
 const { VITE_SERVER_BASE_URL, VITE_CLIENT_BASE_URL } = import.meta.env;
 
@@ -27,17 +27,20 @@ export const onError = (error: AxiosError) => {
   const response = error.response as AxiosResponse;
 
   if (response?.data) {
-    console.error(response.data);
     // TODO : 에러 코드 매핑 작업
     // return {
     //   ok: false,
     //   error: "로그인 문제",
     //   errorCode: response.data.message === "Unauthorized" ? "401" : undefined,
     // };
-    return Promise.reject(response.data);
+    // return Promise.reject(response.data);
+    throw new Error(
+      (response.data.statusCode as ErrorCode) ||
+        (response.data.errorCode as ErrorCode),
+    );
   }
 
-  return Promise.reject(error);
+  throw error;
 };
 
 export const onRequest = async (config: InternalAxiosRequestConfig) => {
@@ -60,7 +63,8 @@ export const onRequest = async (config: InternalAxiosRequestConfig) => {
       // 리프레시 토큰 요청 실패 시 처리
       window.location.href = `${VITE_CLIENT_BASE_URL}/?error=true`;
       localStorage.setItem("playce_expired_at", "");
-      return Promise.reject(error);
+      throw error;
+      // return Promise.reject(error);
     }
   }
 
