@@ -15,11 +15,11 @@ export const PlayerBody = styled(motion.div)`
 export const AlbumArea = styled.div`
   height: 32%;
 
-  @media screen and (min-height: 550px) {
+  @media screen and (min-height: 580px) {
     height: 42%;
   }
 
-  @media screen and (min-height: 750px) {
+  @media screen and (min-height: 700px) {
     height: 52%;
   }
 
