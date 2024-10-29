@@ -62,7 +62,7 @@ export const MusicList = ({
         ref={listRef}
         // onClick={handleItemClick}
         className={cn(
-          "flex content-start w-full max-h-[400px] overflow-x-scroll scrollbar-hide gap-x-3 gap-y-4",
+          "relative flex content-start w-full max-h-[400px] overflow-x-scroll scrollbar-hide gap-x-3 gap-y-4",
           singleLine ? "flex-row" : "flex-col flex-wrap",
         )}
       >
@@ -84,9 +84,10 @@ export const MusicList = ({
 
         <div
           className={cn(
-            "fixed top-0 left-0 w-full h-full bg-transparent",
+            "absolute top-0 left-0 h-full bg-transparent",
             !isGrabbing && "hidden",
           )}
+          style={{ width: listRef.current?.scrollWidth }}
         />
       </div>
     </section>
