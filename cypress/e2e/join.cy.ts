@@ -3,7 +3,7 @@ describe("Join Page test", () => {
     cy.visit("/join");
   });
 
-  describe("약관 동의 조건 테스트", () => {
+  context("약관 동의 조건 테스트", () => {
     beforeEach(() => {
       cy.getDataTest("submit-button").should("be.disabled");
       cy.getDataTest("accept-all").click();
@@ -41,12 +41,12 @@ describe("Join Page test", () => {
     });
   });
 
-  describe("Form 입력", () => {
+  context("Form 입력", () => {
     beforeEach(() => {
       cy.getDataTest("accept-all").click();
     });
 
-    describe("UserName 입력", () => {
+    context("UserName 입력", () => {
       it("User Name 입력 - 2글자 미만", () => {
         cy.getDataTest("username-input").type("T");
 
@@ -93,7 +93,7 @@ describe("Join Page test", () => {
       });
     });
 
-    describe("Password 입력", () => {
+    context("Password 입력", () => {
       it("Password 입력 - 8글자 미만", () => {
         cy.getDataTest("password-input").type("test");
 
@@ -160,7 +160,7 @@ describe("Join Page test", () => {
       });
     });
 
-    describe("Email 입력", () => {
+    context("Email 입력", () => {
       it("Email 미 입력", () => {
         cy.getDataTest("submit-button").click();
         cy.getDataTest("email-message").should(
