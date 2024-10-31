@@ -9,7 +9,6 @@ export const Flat = styled.button<any>`
 export const Plain = styled.button<any>``;
 
 export const Ghost = styled.button<any>`
-  color: ${props => props.theme.text_primary_color};
   display: flex;
   justify-content: center;
   align-items: center;

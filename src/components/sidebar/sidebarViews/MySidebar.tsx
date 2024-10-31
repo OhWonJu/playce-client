@@ -8,16 +8,18 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useSidebar } from "@/stores/useSidebarStore";
 import useMeStore from "@/stores/useMeStore";
 import { useModal } from "@/stores/useModalStore";
+import { useCartStore } from "@/stores/useCartStore";
 
 import Avatar from "@/components/Avatar";
 import { Moon, Sun } from "@/components/icons";
 import { Button, ToggleButton } from "@/components/buttons";
+import { useThemeStore } from "@/components/providers/ThemeProvider";
 
 import SidebarLayout from "../SidebarLayout";
-import { useCartStore } from "@/stores/useCartStore";
 
 const MySidebar = () => {
-  const [theme, setTheme] = useLocalStorage("theme");
+  const theme = useThemeStore(state => state.theme);
+  const toggleTheme = useThemeStore(state => state.toggleTheme);
   const [_, setExpiredAt] = useLocalStorage("playce_expired_at");
 
   const navigate = useNavigate();
@@ -100,8 +102,8 @@ const MySidebar = () => {
             <Sun className="w-5 h-5" />
           )}
           <ToggleButton
-            onFunc={() => setTheme("dark")}
-            offFunc={() => setTheme("light")}
+            onFunc={() => toggleTheme()}
+            offFunc={() => toggleTheme()}
             initToggleState={theme === "light" ? false : true}
           />
         </div>

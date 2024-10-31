@@ -95,11 +95,12 @@ const AppContainer = () => {
       <BrowserRouter>
         <HelmetProvider>
           <HelmetHeader />
-          <ThemeProvider />
-          <GlobalStyles />
-          <RootLayout>
-            <App />
-          </RootLayout>
+          <ThemeProvider>
+            <GlobalStyles />
+            <RootLayout>
+              <App />
+            </RootLayout>
+          </ThemeProvider>
         </HelmetProvider>
       </BrowserRouter>
     </>

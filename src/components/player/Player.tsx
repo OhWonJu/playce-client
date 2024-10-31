@@ -3,9 +3,9 @@ import React, { lazy, Suspense, useEffect } from "react";
 import useViewModeStore from "@/stores/useViewMode";
 import MainSheetProgressStore from "@/stores/mainSheetProgress";
 import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 import { KeyEventControler } from "./_modules";
+import { useThemeStore } from "../providers/ThemeProvider";
 
 const PlayerDesktopMode = lazy(() => import("./PlayerDesktopMode"));
 const PlayerMobileView = lazy(() => import("./PlayerMobileMode"));
@@ -14,7 +14,7 @@ const PlayerBottomSheet = lazy(
 );
 
 const Player = () => {
-  const [theme, _] = useLocalStorage("theme");
+  const theme = useThemeStore(state => state.theme);
   const { viewMode } = useViewModeStore();
   const { setProgress } = MainSheetProgressStore();
   const displayPlayer = usePlayerToggle(state => state.displayPlayer);

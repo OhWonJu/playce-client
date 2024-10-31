@@ -1,13 +1,15 @@
 import { useCallback, useLayoutEffect, useRef } from "react";
 import WaveSurfer from "wavesurfer.js";
 import Hls from "hls.js";
+
 import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
 import usePlayTimeStore from "@/stores/usePlayTimeStore";
 import { usePlayerControl } from "@/stores/usePlayerControl";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
+
+import { useThemeStore } from "@/components/providers/ThemeProvider";
 
 const Waveform = () => {
-  const [theme, _] = useLocalStorage("theme");
+  const theme = useThemeStore(state => state.theme);
 
   const { displayPlayer } = usePlayerToggle();
   const {
