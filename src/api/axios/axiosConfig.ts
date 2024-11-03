@@ -5,9 +5,18 @@ import axios, {
 } from "axios";
 
 import { MutationResponse } from "./axiosInstance.types";
-import { ERROR_CODE, ErrorCode } from "../errorCode";
+import { ERROR_CODE } from "../errorCode";
 
 const { VITE_SERVER_BASE_URL, VITE_CLIENT_BASE_URL } = import.meta.env;
+
+class CustomError extends Error {
+  errorCode: string;
+
+  constructor(message: string, errorCode: string) {
+    super(message);
+    this.errorCode = errorCode;
+  }
+}
 
 export const axiosConfig = {
   baseURL: VITE_SERVER_BASE_URL,
@@ -20,6 +29,10 @@ export const axiosConfig = {
 };
 
 export const onResponse = (response: AxiosResponse): AxiosResponse => {
+  if (response.data.errorCode) {
+    throw new CustomError(response.data.error, response.data.errorCode);
+  }
+
   return response.data;
 };
 
@@ -27,17 +40,7 @@ export const onError = (error: AxiosError) => {
   const response = error.response as AxiosResponse;
 
   if (response?.data) {
-    // TODO : 에러 코드 매핑 작업
-    // return {
-    //   ok: false,
-    //   error: "로그인 문제",
-    //   errorCode: response.data.message === "Unauthorized" ? "401" : undefined,
-    // };
-    // return Promise.reject(response.data);
-    throw new Error(
-      (response.data.statusCode as ErrorCode) ||
-        (response.data.errorCode as ErrorCode),
-    );
+    throw new CustomError(response.data.message, response.data.statusCode);
   }
 
   throw error;
