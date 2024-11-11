@@ -15,8 +15,8 @@ const PlayerBottomSheet = lazy(
 
 const Player = () => {
   const theme = useThemeStore(state => state.theme);
-  const { viewMode } = useViewModeStore();
-  const { setProgress } = MainSheetProgressStore();
+  const viewMode = useViewModeStore(state => state.viewMode);
+  const setProgress = MainSheetProgressStore(state => state.setProgress);
   const displayPlayer = usePlayerToggle(state => state.displayPlayer);
 
   useEffect(() => {
