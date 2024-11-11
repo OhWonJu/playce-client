@@ -22,7 +22,7 @@ const StyledToastContainer = lazy(
   () => import("./components/Toastify/Toaster"),
 );
 
-const NON_PLAYABLE_PATHS = ["/", "/join"]; // same condition for navigator 
+const NON_PLAYABLE_PATHS = ["/", "/join"]; // same condition for navigator
 
 const Page = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();

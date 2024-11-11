@@ -1,6 +1,9 @@
 import { lazy } from "react";
-import { RouteProps } from "react-router";
+import { createBrowserRouter } from "react-router-dom";
 
+import AppContainer from "./AppContainer";
+import PrivateRoute from "./PrivateRoute";
+import AlternativeRoute from "./AlternativeRoute";
 import RootPage from "./pages/(root)/Page";
 import HomePage from "./pages/(home)/(routes)/home/Page";
 import OAuthCallbackPage from "./pages/(auth)/(routes)/callback/page";
@@ -43,84 +46,90 @@ const KakaoPaymentFailPage = lazy(
 const AccessDenied = lazy(() => import("./pages/AccessDenied"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-type CustomRouteProps = RouteProps & {
-  path: string;
-  element: React.ReactElement;
-};
+const router = createBrowserRouter([
+  {
+    element: <AppContainer />,
+    children: [
+      {
+        element: <PrivateRoute />,
+        children: [
+          {
+            path: "/cabinet",
+            element: <CabinetPage />,
+          },
+          {
+            path: "/cabinet/albums",
+            element: <CabinetAlbumsPage />,
+          },
+          {
+            path: "/cabinet/playlists",
+            element: <CabinetPlayListsPage />,
+          },
+          {
+            path: "/cabinet/playlists/:playlistName",
+            element: <CabinetPlayListIdPage />,
+          },
+          {
+            path: "/cabinet/queue",
+            element: <CabinetQueuePage />,
+          },
+        ],
+      },
+      {
+        element: <AlternativeRoute />,
+        children: [
+          {
+            path: "/",
+            element: <RootPage />,
+          },
+          {
+            path: "/join",
+            element: <JoinPage />,
+          },
+          {
+            path: "/oauth/callback",
+            element: <OAuthCallbackPage />,
+          },
+        ],
+      },
+      {
+        path: "/home",
+        element: <HomePage />,
+      },
+      {
+        path: "/explore",
+        element: <ExplorePage />,
+      },
+      {
+        path: "/albums/:albumName",
+        element: <AlbumIdPage />,
+      },
+      {
+        path: "/profile/:userId",
+        element: <UserIdPage />,
+      },
+      {
+        path: "/payment/kakao/success",
+        element: <KakaoPaymentSuccessPage />,
+      },
+      {
+        path: "/payment/kakao/cancel",
+        element: <KakaoPaymentCancelPage />,
+      },
+      {
+        path: "/payment/kakao/fail",
+        element: <KakaoPaymentFailPage />,
+      },
+      {
+        path: "/access-denied",
+        element: <AccessDenied />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
+  },
+]);
 
-export const privateRoutes: CustomRouteProps[] = [
-  {
-    path: "/cabinet",
-    element: <CabinetPage />,
-  },
-  {
-    path: "/cabinet/albums",
-    element: <CabinetAlbumsPage />,
-  },
-  {
-    path: "/cabinet/playlists",
-    element: <CabinetPlayListsPage />,
-  },
-  {
-    path: "/cabinet/playlists/:playlistName",
-    element: <CabinetPlayListIdPage />,
-  },
-  {
-    path: "/cabinet/queue",
-    element: <CabinetQueuePage />,
-  },
-];
-
-export const alternativeRoutes: CustomRouteProps[] = [
-  {
-    path: "/",
-    element: <RootPage />,
-  },
-  {
-    path: "/join",
-    element: <JoinPage />,
-  },
-  {
-    path: "/oauth/callback",
-    element: <OAuthCallbackPage />,
-  },
-];
-
-export const publicRoutes: CustomRouteProps[] = [
-  {
-    path: "/home",
-    element: <HomePage />,
-  },
-  {
-    path: "/explore",
-    element: <ExplorePage />,
-  },
-  {
-    path: "/albums/:albumName",
-    element: <AlbumIdPage />,
-  },
-  {
-    path: "/profile/:userId",
-    element: <UserIdPage />,
-  },
-  {
-    path: "/payment/kakao/success",
-    element: <KakaoPaymentSuccessPage />,
-  },
-  {
-    path: "/payment/kakao/cancel",
-    element: <KakaoPaymentCancelPage />,
-  },
-  {
-    path: "/payment/kakao/fail",
-    element: <KakaoPaymentFailPage />,
-  },
-  {
-    path: "/access-denied",
-    element: <AccessDenied />,
-  },
-  {
-    path: "*",
-    element: <NotFound />,
-  },
-];
+export default router;
