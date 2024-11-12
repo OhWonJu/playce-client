@@ -4,14 +4,14 @@ import React from "react";
 const HomeLoading = () => {
   return (
     <>
-      {new Array(4).fill(null).map((_, index) => {
+      {new Array(3).fill(null).map((_, index) => {
         return (
           <section key={`section-${index}`} className="flex flex-col w-full">
             <div className="__TITLE__ mb-4">
               <Skeleton className="h-[2.75rem] w-[150px]" />
             </div>
             <div className="__ITEM_WRAPPER__ flex w-full max-h-[400px] overflow-hidden gap-x-3 mb-[1rem]">
-              {new Array(20).fill(null).map((_, index1) => {
+              {new Array(4).fill(null).map((_, index1) => {
                 return (
                   <div
                     key={`${index}-${index1}-item1`}
@@ -27,7 +27,7 @@ const HomeLoading = () => {
               })}
             </div>
             <div className="__ITEM_WRAPPER__ flex w-full max-h-[400px] overflow-hidden gap-x-3 gap-y-4">
-              {new Array(20).fill(null).map((_, index2) => {
+              {new Array(4).fill(null).map((_, index2) => {
                 return (
                   <div
                     key={`${index}-${index2}-item2`}
