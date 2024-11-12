@@ -11,7 +11,7 @@ interface PlayerMarqueeProps {
   title: string;
 }
 
-const PlayerMarquee: React.FC<PlayerMarqueeProps> = ({ title }) => {
+const PlayerMarquee = ({ title }: PlayerMarqueeProps) => {
   const containerRef: MutableRefObject<HTMLDivElement> = useRef();
   const titleRef: MutableRefObject<HTMLDivElement> = useRef();
 
