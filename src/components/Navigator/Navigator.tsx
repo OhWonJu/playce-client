@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 import useViewModeStore from "@/stores/useViewMode";
 import useMeStore from "@/stores/useMeStore";

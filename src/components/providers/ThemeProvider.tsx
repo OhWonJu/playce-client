@@ -1,28 +1,68 @@
-import { useLocalStorage } from "@/hooks/useLocalStorage";
-import React, { useEffect, useMemo } from "react";
+import React, {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { createStore, StoreApi, useStore } from "zustand";
 
-const ThemeProvider = () => {
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+
+type ThemeStore = {
+  theme: "dark" | "light";
+  toggleTheme: () => void;
+};
+
+export const ThemeContext = createContext<StoreApi<ThemeStore> | undefined>(
+  undefined,
+);
+
+const ThemeProvider = ({ children }: PropsWithChildren) => {
   const [localTheme, setLocalTheme] = useLocalStorage("theme");
 
-  const themeMode = useMemo((): string => {
-    if (localTheme) {
-      return localTheme;
-    } else {
-      const theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+  const [themeStore] = useState(() =>
+    createStore<ThemeStore>((set, get) => ({
+      theme: localTheme
+        ? (localTheme as "dark" | "light")
+        : window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
-        : "light";
+        : "light",
 
-      setLocalTheme(theme);
-      return theme;
-    }
-  }, [localTheme]);
+      toggleTheme: () => {
+        const { theme } = get();
+
+        theme === "dark" ? setLocalTheme("light") : setLocalTheme("dark");
+
+        return set({
+          theme: theme === "dark" ? "light" : "dark",
+        });
+      },
+    })),
+  );
 
   useEffect(() => {
     document.getElementsByTagName("html")[0].classList.remove("light", "dark");
-    document.getElementsByTagName("html")[0].classList.add(themeMode);
-  }, [themeMode]);
+    document
+      .getElementsByTagName("html")[0]
+      .classList.add(themeStore.getState().theme);
+  }, [themeStore.getState().theme]);
 
-  return <></>;
+  return (
+    <>
+      <ThemeContext.Provider value={themeStore}>
+        {children}
+      </ThemeContext.Provider>
+    </>
+  );
 };
+
+export function useThemeStore<T>(selector: (state: ThemeStore) => T) {
+  const context = useContext(ThemeContext);
+
+  if (!context) throw new Error("ThemeContext.Provider is missing");
+
+  return useStore(context, selector);
+}
 
 export default ThemeProvider;

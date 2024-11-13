@@ -1,31 +1,22 @@
-import { useLayoutEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { Suspense } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
+import { ErrorBoundary } from "react-error-boundary";
 
-import { getCurrentUser, getQueue } from "@/api/users";
 import { _GET } from "@/api/rootAPI";
-
-import { useAuthStore } from "@/stores/useAuthStore";
-import useMeStore from "@/stores/useMeStore";
-import { useQueue } from "./stores/useQueue";
-import { useLocalStorage } from "./hooks/useLocalStorage";
 
 import GlobalStyles from "@/styles/GlobalStyles";
 import "@/styles/tailwind.css";
 
-import App from "./App";
 import RootLayout from "./RootLayout";
 import ThemeProvider from "./components/providers/ThemeProvider";
 import { HelmetHeader } from "./components";
+import AuthProvider from "./components/providers/AuthProvider";
+import ErrorFallback from "./errors/ErrorFallback";
 
 const AppContainer = () => {
-  const [expiresAt, setExpiresAt] = useLocalStorage("playce_expired_at");
-
-  const { isLogin, setIsLogin } = useAuthStore();
-  const { initMe, setMe } = useMeStore();
-
-  const setQueue = useQueue(state => state.setQueue);
+  const location = useLocation();
 
   const {
     data: connectCheck,
@@ -37,77 +28,43 @@ const AppContainer = () => {
     refetchOnMount: true,
     refetchOnReconnect: true,
     refetchOnWindowFocus: true,
+    throwOnError: false,
   });
 
-  const flag = !!expiresAt && !!connectCheck;
-
-  const { refetch, isLoading } = useQuery(getCurrentUser(!!flag));
-  const { data: queueData } = useQuery(getQueue(isLogin));
-
-  const preload = async () => {
-    if (flag) {
-      const currentUser = (await refetch()).data ?? null;
-
-      if (!currentUser) {
-        initMe();
-        setIsLogin(false);
-        setExpiresAt("");
-      } else {
-        setMe(currentUser);
-        setIsLogin(true);
-      }
-    } else {
-      setIsLogin(false);
-    }
-  };
-
-  useLayoutEffect(() => {
-    const prepare = async () => {
-      try {
-        await preload();
-      } catch (e) {
-        console.warn("PRELOAD_ERROR", e);
-      } finally {
-        sessionStorage.clear();
-      }
-    };
-    prepare();
-  }, [isLogin, flag]);
-
-  useLayoutEffect(() => {
-    if (queueData) {
-      setQueue(
-        queueData.tracks,
-        queueData.totalPlayTime,
-        queueData.queueThumbNail,
-      );
-    }
-  }, [queueData]);
-
-  if (connectChecking || isLoading) return null;
+  if (connectChecking) return null;
 
   if (isError) {
-    // TODO : 서버 연결이 불가능하다는 안내 출력
-    console.log("SERVER CONNECT FAILED");
     return (
-      <div className="w-screen h-screen grid content-center text-center">
-        서버와의 연결에 실패했습니다.
-      </div>
+      <section className="flex flex-col justify-center items-center mx-auto h-[100dvh]">
+        <p>서버와의 연결에 실패했습니다.</p>
+        <p>네트워크 연결 상태를 확인해주세요.</p>
+        <p>이용에 불편을 드려 죄송합니다.</p>
+      </section>
     );
   }
 
   return (
     <>
-      <BrowserRouter>
-        <HelmetProvider>
-          <HelmetHeader />
-          <ThemeProvider />
+      <HelmetProvider>
+        <HelmetHeader />
+        <ThemeProvider>
           <GlobalStyles />
           <RootLayout>
-            <App />
+            <ErrorBoundary
+              fallbackRender={fallbackProps => (
+                <ErrorFallback {...fallbackProps} />
+              )}
+              resetKeys={[location.pathname]}
+            >
+              <AuthProvider connectCheck={connectCheck}>
+                <Suspense>
+                  <Outlet />
+                </Suspense>
+              </AuthProvider>
+            </ErrorBoundary>
           </RootLayout>
-        </HelmetProvider>
-      </BrowserRouter>
+        </ThemeProvider>
+      </HelmetProvider>
     </>
   );
 };

@@ -1,5 +1,6 @@
+import React, { useMemo, useRef } from "react";
+
 import { cn } from "@/lib/utils";
-import React, { useRef } from "react";
 import { useHorizontalScroll } from "@/hooks/useHorizontalScroll";
 
 interface MusicListProps {
@@ -28,13 +29,13 @@ export const MusicList = ({
   const listRef = useRef<HTMLDivElement>(null);
   const isGrabbing = useHorizontalScroll(listRef);
 
-  const RenderedItems = renderer?.();
+  const RenderedItems = useMemo(() => renderer?.(), [renderer]);
 
-  const handleItemClick = () => {
-    if (isGrabbing) {
-      return;
-    }
-  };
+  // const handleItemClick = () => {
+  //   if (isGrabbing) {
+  //     return;
+  //   }
+  // };
 
   // TODO Intersection opserver image lazy loading
   // useEffect(() => {
@@ -59,9 +60,9 @@ export const MusicList = ({
       </div>
       <div
         ref={listRef}
-        onClick={handleItemClick}
+        // onClick={handleItemClick}
         className={cn(
-          "flex content-start w-full max-h-[400px] overflow-x-scroll scrollbar-hide gap-x-3 gap-y-4",
+          "relative flex content-start w-full max-h-[400px] overflow-x-scroll scrollbar-hide gap-x-3 gap-y-4",
           singleLine ? "flex-row" : "flex-col flex-wrap",
         )}
       >
@@ -72,11 +73,22 @@ export const MusicList = ({
             </span>
           </div>
         )}
-        {RenderedItems?.map(item =>
-          React.cloneElement(item, {
+        {/* isGrabbing 일 때 막을 씌우는 형태는? 아이템들의 props 가 변하지 않아도 됨.. */}
+        {RenderedItems}
+        {/* RenderedItem must have ClickBlocking props */}
+        {/* {RenderedItems?.map(item => {
+          return React.cloneElement(item, {
             clickBlocking: isGrabbing,
-          }),
-        )}
+          });
+        })} */}
+
+        <div
+          className={cn(
+            "absolute top-0 left-0 h-full bg-transparent",
+            !isGrabbing && "hidden",
+          )}
+          style={{ width: listRef.current?.scrollWidth }}
+        />
       </div>
     </section>
   );

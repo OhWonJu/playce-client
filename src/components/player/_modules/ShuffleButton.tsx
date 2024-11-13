@@ -8,8 +8,10 @@ import { Shuffle } from "@/components/icons";
 
 const ShuffleButton = () => {
   // 리랜더링시 셔플이 다시되는 현상 발생
-  const { shuffle, setShuffle, doShuffle, originTrackList } =
-    usePlayerControl();
+  const shuffle = usePlayerControl(state => state.shuffle);
+  const setShuffle = usePlayerControl(state => state.setShuffle);
+  const doShuffle = usePlayerControl(state => state.doShuffle);
+  const originTrackList = usePlayerControl(state => state.originTrackList);
 
   const prevSuffleState = useRef(shuffle);
 

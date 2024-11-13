@@ -9,7 +9,6 @@ export const Flat = styled.button<any>`
 export const Plain = styled.button<any>``;
 
 export const Ghost = styled.button<any>`
-  color: ${props => props.theme.text_primary_color};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,10 +31,8 @@ export const Link = styled.button<any>`
 
 export const Disabled = styled.button`
   border-width: 0px;
-  background-color: var(--primary-foreground);
-  background-color: ${props => props.theme.gray_primary};
 
-  ${tw`text-white border border-transparent`}
+  ${tw`text-neutral-50 dark:text-neutral-400 border border-transparent bg-neutral-300 dark:bg-neutral-700`}
 `;
 
 export const RippleEffect = styled.span`

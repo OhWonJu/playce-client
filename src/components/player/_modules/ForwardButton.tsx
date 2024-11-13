@@ -16,8 +16,10 @@ const ForwardButton = ({
   isForward: boolean;
   className?: string;
 }) => {
-  const { currentTrack, playList, setCurrentTrack, setForwardTrigger } =
-    usePlayerControl();
+  const currentTrack = usePlayerControl(state => state.currentTrack);
+  const playList = usePlayerControl(state => state.playList);
+  const setCurrentTrack = usePlayerControl(state => state.setCurrentTrack);
+  const setForwardTrigger = usePlayerControl(state => state.setForwardTrigger);
 
   const getPlayTime = usePlayTimeStore(state => state.getPlayTime);
   const setPlayTime = usePlayTimeStore(state => state.setPlayTime);

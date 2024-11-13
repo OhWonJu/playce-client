@@ -1,13 +1,12 @@
 import React, { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { convertTime } from "@/lib/utils";
 import { usePlayerToggle } from "@/stores/usePlayerToggleStore";
 import { usePlayerControl } from "@/stores/usePlayerControl";
-
 import { useQueue } from "@/stores/useQueue";
 
 import { MusicCard } from "@/components";
-import { useNavigate } from "react-router";
 
 const QueueCard = ({}: { key: string }) => {
   const navigate = useNavigate();

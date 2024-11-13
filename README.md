@@ -50,7 +50,7 @@ FrontEnd
 # Deploy
 
 [PLAYCE 체험하기](https://www.playce.kr/)
-powered by Vercel, Railway
+powered by AWS Amplify, EC2
 
 <br />
 <br />

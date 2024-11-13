@@ -9,6 +9,15 @@ import { ERROR_CODE } from "../errorCode";
 
 const { VITE_SERVER_BASE_URL, VITE_CLIENT_BASE_URL } = import.meta.env;
 
+class CustomError extends Error {
+  errorCode: string;
+
+  constructor(message: string, errorCode: string) {
+    super(message);
+    this.errorCode = errorCode;
+  }
+}
+
 export const axiosConfig = {
   baseURL: VITE_SERVER_BASE_URL,
   timeout: 30000,
@@ -20,6 +29,10 @@ export const axiosConfig = {
 };
 
 export const onResponse = (response: AxiosResponse): AxiosResponse => {
+  if (response.data.errorCode) {
+    throw new CustomError(response.data.error, response.data.errorCode);
+  }
+
   return response.data;
 };
 
@@ -27,17 +40,10 @@ export const onError = (error: AxiosError) => {
   const response = error.response as AxiosResponse;
 
   if (response?.data) {
-    console.error(response.data);
-    // TODO : 에러 코드 매핑 작업
-    // return {
-    //   ok: false,
-    //   error: "로그인 문제",
-    //   errorCode: response.data.message === "Unauthorized" ? "401" : undefined,
-    // };
-    return Promise.reject(response.data);
+    throw new CustomError(response.data.message, response.data.statusCode);
   }
 
-  return Promise.reject(error);
+  throw error;
 };
 
 export const onRequest = async (config: InternalAxiosRequestConfig) => {
@@ -60,7 +66,8 @@ export const onRequest = async (config: InternalAxiosRequestConfig) => {
       // 리프레시 토큰 요청 실패 시 처리
       window.location.href = `${VITE_CLIENT_BASE_URL}/?error=true`;
       localStorage.setItem("playce_expired_at", "");
-      return Promise.reject(error);
+      throw error;
+      // return Promise.reject(error);
     }
   }
 

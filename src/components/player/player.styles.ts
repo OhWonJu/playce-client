@@ -13,7 +13,17 @@ export const PlayerBody = styled(motion.div)`
 `;
 
 export const AlbumArea = styled.div`
-  ${tw`flex w-full h-[52%] overflow-hidden`}
+  height: 32%;
+
+  @media screen and (min-height: 580px) {
+    height: 42%;
+  }
+
+  @media screen and (min-height: 700px) {
+    height: 52%;
+  }
+
+  ${tw`flex w-full overflow-hidden`}
 `;
 
 export const Album = styled(motion.div)<any>`

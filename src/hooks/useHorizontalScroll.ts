@@ -15,6 +15,8 @@ export const useHorizontalScroll = (
       event.stopPropagation();
 
       if (!ref.current) return;
+      // non-Scrollable
+      if (ref.current.scrollWidth === ref.current.clientWidth) return;
 
       ref.current.style.cursor = "grabbing";
       ref.current.style.userSelect = "none";
@@ -47,8 +49,6 @@ export const useHorizontalScroll = (
     const mouseUpHandler = (event: MouseEvent) => {
       event.stopPropagation();
 
-      // console.log("UP");
-
       if (!ref.current) return;
 
       if (currentGrabbingState.current) {
@@ -63,6 +63,8 @@ export const useHorizontalScroll = (
 
       document.removeEventListener("mousemove", mouseMoveHandler);
       document.removeEventListener("mouseup", mouseUpHandler);
+
+      cancelAnimationFrame(frame.current);
     };
 
     const eventHandler = ref.current;
@@ -71,7 +73,7 @@ export const useHorizontalScroll = (
 
     return () => {
       eventHandler?.removeEventListener("mousedown", mouseDownHandler);
-      cancelAnimationFrame(frame.current);
+      // cancelAnimationFrame(frame.current);
     };
   }, [isGrabbing, ref, sensitive]);
 

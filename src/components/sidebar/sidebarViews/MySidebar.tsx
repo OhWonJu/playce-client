@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
 import { logOutMutate } from "@/api/users";
@@ -8,16 +8,18 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useSidebar } from "@/stores/useSidebarStore";
 import useMeStore from "@/stores/useMeStore";
 import { useModal } from "@/stores/useModalStore";
+import { useCartStore } from "@/stores/useCartStore";
 
 import Avatar from "@/components/Avatar";
 import { Moon, Sun } from "@/components/icons";
 import { Button, ToggleButton } from "@/components/buttons";
+import { useThemeStore } from "@/components/providers/ThemeProvider";
 
 import SidebarLayout from "../SidebarLayout";
-import { useCartStore } from "@/stores/useCartStore";
 
 const MySidebar = () => {
-  const [theme, setTheme] = useLocalStorage("theme");
+  const theme = useThemeStore(state => state.theme);
+  const toggleTheme = useThemeStore(state => state.toggleTheme);
   const [_, setExpiredAt] = useLocalStorage("playce_expired_at");
 
   const navigate = useNavigate();
@@ -100,8 +102,8 @@ const MySidebar = () => {
             <Sun className="w-5 h-5" />
           )}
           <ToggleButton
-            onFunc={() => setTheme("dark")}
-            offFunc={() => setTheme("light")}
+            onFunc={() => toggleTheme()}
+            offFunc={() => toggleTheme()}
             initToggleState={theme === "light" ? false : true}
           />
         </div>
@@ -112,14 +114,14 @@ const MySidebar = () => {
   const footerContent = (
     <div className="flex flex-col w-full space-y-4">
       <Button variant="outline" onClick={logOut} disabled={isPending}>
-        로그아웃
+        <span>로그아웃</span>
       </Button>
       <Button
         variant="plain"
         onClick={() => onOpen("deleteUser")}
-        className="bg-primary-foreground hover:bg-red-500 text-white"
+        className="bg-neutral-300 dark:bg-neutral-700 hover:bg-red-500 dark:hover:bg-red-500 text-neutral-50 dark:text-neutral-400 hover:text-white dark:hover:text-white"
       >
-        탈퇴
+        <span>탈퇴</span>
       </Button>
     </div>
   );
