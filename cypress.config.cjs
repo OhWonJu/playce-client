@@ -9,7 +9,7 @@ module.exports = defineConfig({
     },
   },
   e2e: {
-    baseUrl: "http://localhost:5173",
+    baseUrl: process.env.VITE_CLIENT_BASE_URL,
     setupNodeEvents() {},
     specPattern: "cypress/e2e/**/*.cy.{js,ts,jsx,tsx}",
     excludeSpecPattern: ["**/__snapshots__/*", "**/__image_snapshots__/*"],
