@@ -29,17 +29,17 @@ describe("인증/인가 route 처리 테스트", () => {
     cy.location("pathname").should("include", "/oauth/callback");
   });
 
-  it.only("인증 유저의 인가가 필요한 페이지 접근", () => {
-    cy.intercept("http://localhost:4000/users/queue", {
+  it("인증 유저의 인가가 필요한 페이지 접근", () => {
+    cy.intercept(`${Cypress.env("server_base_url")}/users/queue`, {
       fixture: "user-queue.json",
     });
-    cy.intercept("http://localhost:4000/users/me", {
+    cy.intercept(`${Cypress.env("server_base_url")}/users/me`, {
       fixture: "user-me.json",
     });
-    cy.intercept("http://localhost:4000/users/summary", {
+    cy.intercept(`${Cypress.env("server_base_url")}/users/summary`, {
       fixture: "user-summary.json",
     });
-    cy.intercept("http://localhost:4000/albums/recommend", {
+    cy.intercept(`${Cypress.env("server_base_url")}/albums/recommend`, {
       fixture: "recommendAlbums.json",
     });
 

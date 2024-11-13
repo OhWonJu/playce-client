@@ -169,7 +169,7 @@ describe("Join Page test", () => {
         );
       });
 
-      it.only("Email 입력", () => {
+      it("Email 입력", () => {
         cy.getDataTest("email-input").type("@test@mail.com");
         cy.getDataTest("submit-button").click();
         cy.getDataTest("email-message").should(

@@ -4,6 +4,7 @@ module.exports = defineConfig({
   video: false,
   screenshotOnRunFailure: false,
   env: {
+    server_base_url: process.env.VITE_SERVER_BASE_URL,
     "cypress-react-selector": {
       root: "#__cy_root",
     },
