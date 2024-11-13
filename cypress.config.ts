@@ -1,6 +1,6 @@
 import { defineConfig } from "cypress";
 
-module.exports = defineConfig({
+export default defineConfig({
   video: false,
   screenshotOnRunFailure: false,
   env: {
