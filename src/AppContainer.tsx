@@ -1,28 +1,23 @@
-import { Suspense } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
-import { ErrorBoundary } from "react-error-boundary";
 
 import { _GET } from "@/api/rootAPI";
 
 import GlobalStyles from "@/styles/GlobalStyles";
 import "@/styles/tailwind.css";
 
-import RootLayout from "./RootLayout";
+import App from "./App";
 import ThemeProvider from "./components/providers/ThemeProvider";
-import { HelmetHeader } from "./components";
-import AuthProvider from "./components/providers/AuthProvider";
-import ErrorFallback from "./errors/ErrorFallback";
+import ViewModeProvider from "./components/providers/ViewModeProvider";
+import { Player } from "./components";
+
+const StyledToastContainer = lazy(
+  () => import("./components/Toastify/Toaster"),
+);
 
 const AppContainer = () => {
-  const location = useLocation();
-
-  const {
-    data: connectCheck,
-    isLoading: connectChecking,
-    isError,
-  } = useQuery({
+  const { isLoading: connectChecking, isError } = useQuery({
     queryKey: ["connect"],
     queryFn: async () => await _GET("/"),
     refetchOnMount: true,
@@ -46,23 +41,14 @@ const AppContainer = () => {
   return (
     <>
       <HelmetProvider>
-        <HelmetHeader />
         <ThemeProvider>
           <GlobalStyles />
-          <RootLayout>
-            <ErrorBoundary
-              fallbackRender={fallbackProps => (
-                <ErrorFallback {...fallbackProps} />
-              )}
-              resetKeys={[location.pathname]}
-            >
-              <AuthProvider connectCheck={connectCheck}>
-                <Suspense>
-                  <Outlet />
-                </Suspense>
-              </AuthProvider>
-            </ErrorBoundary>
-          </RootLayout>
+          <ViewModeProvider />
+          <Player />
+          <Suspense>
+            <StyledToastContainer />
+          </Suspense>
+          <App />
         </ThemeProvider>
       </HelmetProvider>
     </>

@@ -1,5 +1,6 @@
-import { lazy, PropsWithChildren, Suspense, useMemo } from "react";
-import { useLocation } from "react-router";
+import { Suspense, useMemo } from "react";
+import { Outlet, useLocation } from "react-router-dom";
+import { ErrorBoundary } from "react-error-boundary";
 import styled, { css } from "styled-components";
 import tw from "twin.macro";
 
@@ -12,19 +13,17 @@ import {
 import useViewModeStore from "./stores/useViewMode";
 import { usePlayerToggle } from "./stores/usePlayerToggleStore";
 
-import ModalProvider from "./components/providers/ModalProvider";
-import ViewModeProvider from "./components/providers/ViewModeProvider";
-import SidebarProvider from "./components/providers/SidebarProvider";
 import Navigator from "./components/Navigator/Navigator";
-import { Player } from "./components";
+import AuthProvider from "./components/providers/AuthProvider";
+import ModalProvider from "./components/providers/ModalProvider";
+import SidebarProvider from "./components/providers/SidebarProvider";
+import { HelmetHeader } from "./components";
 
-const StyledToastContainer = lazy(
-  () => import("./components/Toastify/Toaster"),
-);
+import ErrorFallback from "./errors/ErrorFallback";
 
 const NON_PLAYABLE_PATHS = ["/", "/join"]; // same condition for navigator
 
-const Page = ({ children }: { children: React.ReactNode }) => {
+const RootLayout = () => {
   const location = useLocation();
   const { viewMode } = useViewModeStore();
   const closePlayer = usePlayerToggle(state => state.onClose);
@@ -41,43 +40,42 @@ const Page = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      {viewMode !== "INIT" && (
-        <>
-          {isPlayablePaths && (
-            <Navigator pathName={location.pathname.split("/")[1]} />
+      <HelmetHeader />
+      <ErrorBoundary
+        fallbackRender={fallbackProps => <ErrorFallback {...fallbackProps} />}
+        resetKeys={[location.pathname]}
+      >
+        <ModalProvider />
+        <SidebarProvider />
+        <AuthProvider>
+          {viewMode !== "INIT" && (
+            <>
+              {isPlayablePaths && (
+                <Navigator pathName={location.pathname.split("/")[1]} />
+              )}
+              {isPlayablePaths ? (
+                <PlayableLayout
+                  id="root-layout"
+                  $isDesktop={viewMode === "DESKTOP" ? true : false}
+                >
+                  <Suspense>
+                    <Outlet />
+                  </Suspense>
+                </PlayableLayout>
+              ) : (
+                <NonPlayableLayout
+                  id="root-layout"
+                  $isDesktop={viewMode === "DESKTOP" ? true : false}
+                >
+                  <Suspense>
+                    <Outlet />
+                  </Suspense>
+                </NonPlayableLayout>
+              )}
+            </>
           )}
-          {isPlayablePaths ? (
-            <PlayableLayout
-              id="root-layout"
-              $isDesktop={viewMode === "DESKTOP" ? true : false}
-            >
-              {children}
-            </PlayableLayout>
-          ) : (
-            <NonPlayableLayout
-              id="root-layout"
-              $isDesktop={viewMode === "DESKTOP" ? true : false}
-            >
-              {children}
-            </NonPlayableLayout>
-          )}
-        </>
-      )}
-    </>
-  );
-};
-
-const RootLayout = ({ children }: PropsWithChildren) => {
-  return (
-    <>
-      <ViewModeProvider />
-      <Player />
-      <ModalProvider />
-      <SidebarProvider />
-      <Page children={children} />
-      <Suspense>
-        <StyledToastContainer />
-      </Suspense>
+        </AuthProvider>
+      </ErrorBoundary>
     </>
   );
 };

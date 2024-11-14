@@ -5,16 +5,15 @@ import { getCurrentUser, getQueue } from "@/api/users";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useAuthStore } from "@/stores/useAuthStore";
 import useMeStore from "@/stores/useMeStore";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-const AuthProvider = ({
-  connectCheck,
-  children,
-}: PropsWithChildren<{ connectCheck: any }>) => {
+const AuthProvider = ({ children }: PropsWithChildren<{}>) => {
   const [expiresAt, setExpiresAt] = useLocalStorage("playce_expired_at");
   const { isLogin, setIsLogin } = useAuthStore();
   const { initMe, setMe } = useMeStore();
   const setQueue = useQueue(state => state.setQueue);
+
+  const connectCheck = useQueryClient().getQueryData(["connect"]);
 
   const flag = useMemo(
     () => !!expiresAt && !!connectCheck,

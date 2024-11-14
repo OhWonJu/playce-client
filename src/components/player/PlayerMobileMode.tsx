@@ -129,7 +129,10 @@ const PlayerMobileView = () => {
         // }
         style={{ zIndex: PLAYER_MOBILE_Z }}
       >
-        <Sheet.Container isMain={true} className="shadow-top border-t border-neutral-200/50 dark:border-neutral-700">
+        <Sheet.Container
+          isMain={true}
+          className="shadow-top border-t border-neutral-200/50 dark:border-neutral-700"
+        >
           <Sheet.Content isMain={true} style={{ maxHeight: "90%" }}>
             <div
               id="player-container"
@@ -180,7 +183,10 @@ const PlayerMobileView = () => {
                     </div>
                     <div className="flex items-center">
                       <PlayButton className="w-[48px] h-[48px] p-[13px]" />
-                      <ForwardButton className="w-[48px] h-[48px] p-[13px]" isForward={true} />
+                      <ForwardButton
+                        className="w-[48px] h-[48px] p-[13px]"
+                        isForward={true}
+                      />
                     </div>
                   </PlayerMicroCtlr>
                 </AlbumArea>

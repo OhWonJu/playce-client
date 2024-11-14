@@ -1,12 +1,12 @@
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-import AppContainer from "./AppContainer";
 import PrivateRoute from "./PrivateRoute";
 import AlternativeRoute from "./AlternativeRoute";
 import RootPage from "./pages/(root)/Page";
 import HomePage from "./pages/(home)/(routes)/home/Page";
 import OAuthCallbackPage from "./pages/(auth)/(routes)/callback/page";
+import RootLayout from "./RootLayout";
 
 const UserIdPage = lazy(
   () => import("./pages/(profile)/(routes)/[userId]/Page"),
@@ -48,7 +48,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 const router = createBrowserRouter([
   {
-    element: <AppContainer />,
+    element: <RootLayout />,
     children: [
       {
         element: <PrivateRoute />,
