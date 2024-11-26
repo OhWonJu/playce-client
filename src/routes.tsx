@@ -18,19 +18,22 @@ const JoinPage = lazy(() => import("./pages/(auth)/(routes)/join/Page"));
 const ExplorePage = lazy(
   () => import("./pages/(explore)/(routes)/explore/Page"),
 );
-const CabinetPage = lazy(() => import("./pages/(cabinet)/(routes)/page"));
+const CabinetPage = lazy(
+  () => import("./pages/(cabinet)/(routes)/cabinet/page"),
+);
 const CabinetAlbumsPage = lazy(
-  () => import("./pages/(cabinet)/(routes)/albums/Page"),
+  () => import("./pages/(cabinet)/(routes)/cabinet/albums/Page"),
 );
 const CabinetPlayListsPage = lazy(
-  () => import("./pages/(cabinet)/(routes)/playlists/Page"),
+  () => import("./pages/(cabinet)/(routes)/cabinet/playlists/Page"),
 );
 const CabinetPlayListIdPage = lazy(
-  () => import("./pages/(cabinet)/(routes)/playlists/[playlistId]/page"),
+  () =>
+    import("./pages/(cabinet)/(routes)/cabinet/playlists/[playlistId]/page"),
 );
 
 const CabinetQueuePage = lazy(
-  () => import("./pages/(cabinet)/(routes)/queue/Page"),
+  () => import("./pages/(cabinet)/(routes)/cabinet/queue/Page"),
 );
 
 const KakaoPaymentSuccessPage = lazy(
