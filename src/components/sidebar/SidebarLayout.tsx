@@ -21,6 +21,7 @@ import {
   SidebarFooter,
   SidebarHeader,
 } from "./sidebar.styles";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 
 interface SidebarLayoutProps {
   title?: string;
@@ -131,6 +132,8 @@ const SidebarLayout = ({
       setTimeout(() => setIsResetting(false), DURATION);
     }
   };
+
+  useOutsideClick(showSidebar, sidebarRef, handleClose);
 
   useEffect(() => {
     setShowSidebar(isOpen);

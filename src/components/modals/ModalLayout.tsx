@@ -14,6 +14,7 @@ import {
   ModalContent,
   ModalFooter,
 } from "./ModalLayout.styles";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 
 interface ModalLayoutProps {
   title?: string;
@@ -40,6 +41,7 @@ const ModalLayout = ({
   const [showModal, setShowModal] = useState(false);
 
   const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const containerRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const currentPath = useRef(location.pathname);
 
   const handleClose = useCallback(() => {
@@ -59,6 +61,8 @@ const ModalLayout = ({
     },
     [onClose],
   );
+
+  useOutsideClick(showModal, containerRef, onClose);
 
   useEffect(() => {
     setShowModal(isOpen);
@@ -87,6 +91,7 @@ const ModalLayout = ({
     <>
       <ModalOverlay ref={ref} role="dialog">
         <ModalCotainer
+          ref={containerRef}
           className={cn(
             "duration-300 transform-gpu",
             showModal ? "opacity-100" : "opacity-0",
