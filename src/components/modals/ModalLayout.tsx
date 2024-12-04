@@ -62,7 +62,7 @@ const ModalLayout = ({
     [onClose],
   );
 
-  useOutsideClick(showModal, containerRef, onClose);
+  useOutsideClick(showModal, containerRef, handleClose);
 
   useEffect(() => {
     setShowModal(isOpen);
@@ -75,6 +75,7 @@ const ModalLayout = ({
       disableBodyScroll(modal, { reserveScrollBarGap: false });
       window.addEventListener("keydown", handleKey);
     }
+
     return () => {
       clearAllBodyScrollLocks();
       window.removeEventListener("keydown", handleKey);

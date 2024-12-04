@@ -16,3 +16,4 @@ export { Player } from "./player";
 export { Tab, TabSection } from "./Tab";
 export { InitialLoader } from "./loaders";
 export { default as HelmetHeader } from "./HelmetHeader";
+export { RippleEffect } from "./RippleEffect";

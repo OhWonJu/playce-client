@@ -9,17 +9,10 @@ import { mergeRefs } from "react-merge-refs";
 
 import { cn } from "@/lib/utils";
 
+import { RippleEffect } from "../RippleEffect";
 import LoadingDots from "../LoadingDots/LoadingDots";
-import {
-  Flat,
-  Plain,
-  Ghost,
-  Link,
-  Outline,
-  Disabled,
-  RippleEffect,
-} from "./Button.styles";
-import rippleStyle from "./Button.module.css";
+
+import { Flat, Plain, Ghost, Link, Outline, Disabled } from "./Button.styles";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
@@ -66,43 +59,17 @@ const Button = forwardRef((props: ButtonProps, buttonRef) => {
 
   const ButtonWrapper = ButtonType[loading || disabled ? "disabled" : variant];
   const ref = useRef<typeof ButtonWrapper>(null);
-  const rippleRef = useRef<HTMLSpanElement>(null);
-
-  const createRipple = (event: MouseEvent<HTMLButtonElement>) => {
-    const button = event.currentTarget;
-    const circle = document.createElement("span");
-    const diameter = Math.max(button.clientWidth, button.clientHeight);
-    const radius = diameter / 2;
-
-    circle.style.width = `${diameter}px`;
-    circle.style.height = `${diameter}px`;
-    circle.style.left = `${
-      event.clientX - button.getBoundingClientRect().left - radius
-    }px`;
-    circle.style.top = `${
-      event.clientY - button.getBoundingClientRect().top - radius
-    }px`;
-
-    circle.classList.add(rippleStyle.ripple);
-
-    const existingRipple = button.querySelector(`.${rippleStyle.ripple}`);
-
-    if (existingRipple) {
-      existingRipple.remove();
-    }
-
-    rippleRef.current?.appendChild(circle);
-  };
+  const rippleRef = useRef(null);
 
   const handleClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
       event.preventDefault();
 
-      createRipple(event);
+      rippleRef.current.createRipple(event);
       onClick?.();
     },
-    [onClick],
+    [rippleRef.current, onClick],
   );
 
   return (
@@ -134,9 +101,7 @@ const Button = forwardRef((props: ButtonProps, buttonRef) => {
       ) : (
         <>{children}</>
       )}
-      {useRipple && !loading && !disabled && (
-        <RippleEffect ref={rippleRef} className="ripple" />
-      )}
+      {useRipple && !loading && !disabled && <RippleEffect ref={rippleRef} />}
     </ButtonWrapper>
   );
 });

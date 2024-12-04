@@ -34,9 +34,3 @@ export const Disabled = styled.button`
 
   ${tw`text-neutral-50 dark:text-neutral-400 border border-transparent bg-neutral-300 dark:bg-neutral-700`}
 `;
-
-export const RippleEffect = styled.span`
-  span {
-    background-color: var(--puls);
-  }
-`;
