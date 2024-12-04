@@ -11,7 +11,7 @@ export const TrackWrapper = styled(motion.div)`
   height: ${TRACK_CARD_HEIGHT}px;
   min-height: ${TRACK_CARD_HEIGHT}px;
   align-items: center;
-  overflow: "hidden";
+  overflow: hidden;
   outline: none;
   cursor: pointer;
 

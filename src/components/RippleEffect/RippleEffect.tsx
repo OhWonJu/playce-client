@@ -12,7 +12,7 @@ interface RippleEffectProps {
 }
 
 export type RippleRef = {
-  createRipple: (event: MouseEvent<HTMLElement>) => void;
+  createRipple: (event: MouseEvent) => void;
 };
 
 const RippleEffect = forwardRef(({ rippleColor }: RippleEffectProps, ref) => {
@@ -23,6 +23,7 @@ const RippleEffect = forwardRef(({ rippleColor }: RippleEffectProps, ref) => {
     () => {
       return {
         createRipple(event: MouseEvent<HTMLElement>) {
+          console.log(event.currentTarget);
           const button = event.currentTarget;
           const circle = document.createElement("i");
           const diameter = Math.max(button.clientWidth, button.clientHeight);

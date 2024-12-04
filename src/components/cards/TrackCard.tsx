@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { MouseEvent, useEffect, useRef } from "react";
 import {
   PanInfo,
   useAnimate,
@@ -158,10 +158,12 @@ const TrackCard = ({
     dragStarted.current = false;
   }
 
-  function handleClick(event: React.MouseEvent) {
+  function handleClick(event: MouseEvent<HTMLDivElement>) {
     event.preventDefault();
     event.stopPropagation();
-    if (!dragStarted.current) onClick();
+    if (!dragStarted.current) {
+      onClick();
+    }
   }
 
   function handleDeleteBtn() {

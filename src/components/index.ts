@@ -17,3 +17,5 @@ export { Tab, TabSection } from "./Tab";
 export { InitialLoader } from "./loaders";
 export { default as HelmetHeader } from "./HelmetHeader";
 export { RippleEffect } from "./RippleEffect";
+
+export type { RippleRef } from "./RippleEffect";
