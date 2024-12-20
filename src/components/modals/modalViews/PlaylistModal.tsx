@@ -33,7 +33,7 @@ const PlaylistModal = () => {
   });
 
   const { id } = useMeStore(); // 모달 data.id 대체 필요F
-  const { onClose, onOpen, data } = useModal();
+  const { isOpen, onClose, onOpen, data } = useModal();
   const { displayPlayer, onOpen: onPlayerOpen } = usePlayerToggle();
   const currentPlaylistId = usePlayerControl(state => state.originTrackListId);
   const handlePlayListClick = usePlayerControl(
@@ -199,6 +199,7 @@ const PlaylistModal = () => {
       title={!!data ? "플레이리스트에 곡 추가" : "플레이리스트"}
       body={bodyContent}
       footer={footerContent}
+      isOpen={isOpen}
       onClose={onClose}
       // disabled={isLoading}
       containerClassName="w-full sm:w-[420px] h-full"

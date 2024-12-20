@@ -42,6 +42,7 @@ const LoginModal = () => {
   }
 
   const navigate = useNavigate();
+  const isOpen = useModal(state => state.isOpen);
   const onClose = useModal(state => state.onClose);
 
   const form = useForm({
@@ -170,6 +171,7 @@ const LoginModal = () => {
     <ModalLayout
       title="PLAYCE 시작하기"
       body={bodyContent}
+      isOpen={isOpen}
       onClose={handleClose}
       disabled={isLoading}
       containerClassName="w-full sm:w-[420px] h-full"

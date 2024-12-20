@@ -34,7 +34,7 @@ const formSchema = z.object({
 
 const CreatePlaylistModal = () => {
   const { id } = useMeStore();
-  const { onOpen, onClose, data } = useModal();
+  const { isOpen, onOpen, onClose, data } = useModal();
   const { setInputMode } = InputModeStore();
 
   const form = useForm({
@@ -131,6 +131,7 @@ const CreatePlaylistModal = () => {
       title={"새 플레이리스트"}
       body={bodyContent}
       footer={footerContent}
+      isOpen={isOpen}
       onClose={onClose}
       // disabled={isLoading}
       containerClassName="w-[90%] sm:w-[420px] "

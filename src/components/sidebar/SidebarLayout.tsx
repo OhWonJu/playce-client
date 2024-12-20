@@ -10,7 +10,6 @@ import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
 
 import { cn } from "@/lib/utils";
 
-import { useSidebar } from "@/stores/useSidebarStore";
 import useViewModeStore from "@/stores/useViewMode";
 
 import { ChevronLeft, ChevronRight } from "../icons";
@@ -29,6 +28,7 @@ interface SidebarLayoutProps {
   footer?: React.ReactElement;
   disabled?: boolean;
   resizeable?: boolean;
+  isOpen: boolean;
   onClose: () => void;
   containerClassName?: string;
   align?: "left" | "right";
@@ -41,13 +41,13 @@ const SidebarLayout = ({
   footer,
   title,
   disabled,
+  isOpen,
   onClose,
   resizeable = true,
   containerClassName,
   align = "left",
 }: SidebarLayoutProps) => {
   const location = useLocation();
-  const isOpen = useSidebar(state => state.isOpen);
   const viewMode = useViewModeStore(state => state.viewMode);
 
   const [showSidebar, setShowSidebar] = useState(false);

@@ -23,6 +23,7 @@ const MySidebar = () => {
   const [_, setExpiredAt] = useLocalStorage("playce_expired_at");
 
   const navigate = useNavigate();
+  const isOpen = useSidebar(state => state.isOpen);
   const onClose = useSidebar(state => state.onClose);
   const onOpen = useModal(state => state.onOpen);
 
@@ -130,6 +131,7 @@ const MySidebar = () => {
     <SidebarLayout
       title=""
       align="right"
+      isOpen={isOpen}
       onClose={() => onClose()}
       body={bodyContent}
       footer={footerContent}

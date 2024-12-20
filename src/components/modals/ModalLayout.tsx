@@ -3,7 +3,6 @@ import { useLocation } from "react-router";
 import { disableBodyScroll, clearAllBodyScrollLocks } from "body-scroll-lock";
 
 import { cn } from "@/lib/utils";
-import { useModal } from "@/stores/useModalStore";
 
 import { Cross } from "@/components/icons";
 
@@ -21,6 +20,7 @@ interface ModalLayoutProps {
   body?: React.ReactElement;
   footer?: React.ReactElement;
   disabled?: boolean;
+  isOpen: boolean;
   onClose: () => void;
   containerClassName?: string;
   mode?: "slide" | "fade";
@@ -31,12 +31,12 @@ const ModalLayout = ({
   footer,
   title,
   disabled,
+  isOpen,
   onClose,
   containerClassName,
   mode = "fade",
 }: ModalLayoutProps) => {
   const location = useLocation();
-  const isOpen = useModal(state => state.isOpen);
 
   const [showModal, setShowModal] = useState(false);
 

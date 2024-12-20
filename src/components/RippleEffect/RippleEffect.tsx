@@ -23,7 +23,6 @@ const RippleEffect = forwardRef(({ rippleColor }: RippleEffectProps, ref) => {
     () => {
       return {
         createRipple(event: MouseEvent<HTMLElement>) {
-          console.log(event.currentTarget);
           const button = event.currentTarget;
           const circle = document.createElement("i");
           const diameter = Math.max(button.clientWidth, button.clientHeight);
@@ -56,7 +55,7 @@ const RippleEffect = forwardRef(({ rippleColor }: RippleEffectProps, ref) => {
     [rippleContainerRef],
   );
 
-  return <span ref={rippleContainerRef} className="ripple bg-red-200" />;
+  return <span ref={rippleContainerRef} className="ripple" />;
 });
 
 export default RippleEffect;

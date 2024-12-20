@@ -9,7 +9,7 @@ import { mergeRefs } from "react-merge-refs";
 
 import { cn } from "@/lib/utils";
 
-import { RippleEffect } from "../RippleEffect";
+import { RippleEffect, RippleRef } from "../RippleEffect";
 import LoadingDots from "../LoadingDots/LoadingDots";
 
 import { Flat, Plain, Ghost, Link, Outline, Disabled } from "./Button.styles";
@@ -59,7 +59,7 @@ const Button = forwardRef((props: ButtonProps, buttonRef) => {
 
   const ButtonWrapper = ButtonType[loading || disabled ? "disabled" : variant];
   const ref = useRef<typeof ButtonWrapper>(null);
-  const rippleRef = useRef(null);
+  const rippleRef = useRef<RippleRef>(null);
 
   const handleClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {

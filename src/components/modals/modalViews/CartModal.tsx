@@ -1,3 +1,5 @@
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 import * as _ from "lodash";
 
 import { getkakoPayReady } from "@/lib/getKakaoPayReady";
@@ -9,10 +11,9 @@ import { Button } from "@/components/buttons";
 import { ProductCard } from "@/components/cards";
 
 import ModalLayout from "../ModalLayout";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
 
 const CartModal = () => {
+  const isOpen = useModal(state => state.isOpen);
   const onClose = useModal(state => state.onClose);
   const { items, totalItems, setOrderToken } = useCartStore();
 
@@ -100,6 +101,7 @@ const CartModal = () => {
       title={"나의 장바구니"}
       body={bodyContent}
       footer={footerContent}
+      isOpen={isOpen}
       onClose={onClose}
       mode="slide"
       containerClassName="w-full sm:w-[420px] h-full"

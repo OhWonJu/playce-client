@@ -24,7 +24,7 @@ const DeleteUserModal = () => {
   const [_, setExpiredAt] = useLocalStorage("playce_expired_at");
 
   const navigate = useNavigate();
-  const { onClose } = useModal();
+  const { isOpen, onClose } = useModal();
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -89,6 +89,7 @@ const DeleteUserModal = () => {
       title={"PLAYCE 회원 탈퇴"}
       body={bodyContent}
       footer={footerContent}
+      isOpen={isOpen}
       onClose={onClose}
       // disabled={isLoading}
       containerClassName="w-[90%] sm:w-[420px] "
