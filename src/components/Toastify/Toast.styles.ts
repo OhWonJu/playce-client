@@ -3,6 +3,17 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export const Container = styled(ToastContainer)`
+  max-width: 90% !important;
+  transform: translateX(-50%) !important;
+  left: 50% !important;
+  margin-bottom: 2rem !important;
+
+  @media screen and (min-width: 640px) {
+    margin-bottom: 0px !important;
+  }
+
+  ${tw`gap-y-4`};
+
   .Toastify__toast {
     font-size: 16px;
     padding: 0px 10px 0px 10px;

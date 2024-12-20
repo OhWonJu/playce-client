@@ -12,7 +12,6 @@ export default function Toaster() {
       closeOnClick
       rtl={false}
       closeButton={false}
-      className="max-w-[90%] -translate-x-1/2 left-1/2 mb-6 sm:mb-0 space-y-4"
       // theme="light"
     />
   );
