@@ -84,10 +84,10 @@ export default RootLayout;
 
 const PlayableLayout = styled.div<{ $isDesktop: boolean }>`
   position: relative;
-  width: 100vw;
-  max-width: 100vw;
-  min-height: 100vh;
-  max-height: 100vh;
+  width: 100dvw;
+  max-width: 100dvw;
+  min-height: 100dvh;
+  max-height: 100dvh;
   display: flex;
   flex-direction: column;
 
@@ -110,7 +110,7 @@ const PlayableLayout = styled.div<{ $isDesktop: boolean }>`
     }
   }}
 
-  ${tw`transition`} /* ${tw`transition overflow-y-scroll`} */
+  ${tw`transition overflow-scroll scrollbar-hide`} /* ${tw`transition overflow-y-scroll`} */
 `;
 
 const NonPlayableLayout = styled.div<{ $isDesktop: boolean }>`
@@ -124,5 +124,5 @@ const NonPlayableLayout = styled.div<{ $isDesktop: boolean }>`
   padding-bottom: ${NAV_HEIGHT}px;
 
   ${tw`lg:max-w-[800px] xl:max-w-[1000px] 2xl:max-w-[1200px]`}
-  ${tw`pl-4 pr-4 md:pl-5 md:pr-5 mx-auto transition`}
+  ${tw`pl-4 pr-4 md:pl-5 md:pr-5 mx-auto transition overflow-scroll scrollbar-hide`}
 `;
