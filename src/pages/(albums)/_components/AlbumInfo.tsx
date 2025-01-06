@@ -42,9 +42,9 @@ const AlbumInfo = ({
 
   return (
     <AlbumInfoBox>
-      <span className="font-extrabold text-3xl">{albumName}</span>
+      <span className="font-bold text-3xl">{albumName}</span>
       <span className="font-bold">{artistName}</span>
-      <p className="text-primary-foreground text-sm font-medium">
+      <p className="text-primary-foreground text-sm">
         {albumType && `${albumType} • `}
         {releasedAt && `${format(releasedAt, DATE_FORMAT)}`}
       </p>

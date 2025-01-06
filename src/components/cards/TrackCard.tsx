@@ -223,9 +223,7 @@ const TrackCard = ({
           <span className="font-bold text-base line-clamp-1">
             {data.trackTitle}
           </span>
-          <span className="font-semibold text-xs line-clamp-1">
-            {data.artistName}
-          </span>
+          <span className="text-xs line-clamp-1">{data.artistName}</span>
         </section>
       </TrackMotion>
       {trackListType !== "ALBUM" ? (

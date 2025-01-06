@@ -77,7 +77,7 @@ const PlaylistCard = ({
           )}
         >
           <span className="font-bold truncate">{data.playListName}</span>
-          <span className="font-semibold text-primary-foreground truncate">
+          <span className="text-primary-foreground truncate">
             {data.count}곡
           </span>
         </div>

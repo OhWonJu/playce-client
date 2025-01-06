@@ -28,10 +28,10 @@ const ProductCard = ({ item }: ProductCardProps) => {
         />
         <div className="flex flex-col">
           <span className="font-bold">{item.product.albumName}</span>
-          <span className="text-sm text-primary-foreground font-medium pb-1">
+          <span className="text-sm text-primary-foreground pb-1">
             {item.product.artist.artistName}
           </span>
-          <span className="text-sm font-bold">
+          <span className="text-sm font-semibold">
             {item.product.price.toLocaleString("ko-KR")}원
           </span>
         </div>

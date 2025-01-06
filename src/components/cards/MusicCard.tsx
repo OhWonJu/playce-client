@@ -128,7 +128,7 @@ const MusicCard = ({
         {subTitle && (
           <span
             className={cn(
-              "font-semibold text-sm",
+              "text-sm",
               size !== "lg" && "text-primary-foreground truncate",
               size === "lg" && "text-lg",
             )}
