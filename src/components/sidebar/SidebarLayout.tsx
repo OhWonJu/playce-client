@@ -20,6 +20,7 @@ import {
   SidebarFooter,
   SidebarHeader,
 } from "./sidebar.styles";
+import { useGobackBlocking } from "@/hooks/useGobackBlocking";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 
 interface SidebarLayoutProps {
@@ -67,7 +68,7 @@ const SidebarLayout = ({
     }
   };
 
-  const handleClose = useCallback(() => {
+  const handleSidebarClose = useCallback(() => {
     if (disabled) return;
 
     collapse();
@@ -78,7 +79,7 @@ const SidebarLayout = ({
   const handleKey = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        return handleClose();
+        return handleSidebarClose();
       }
     },
     [onClose],
@@ -133,7 +134,7 @@ const SidebarLayout = ({
     }
   };
 
-  useOutsideClick(showSidebar, sidebarRef, handleClose);
+  useOutsideClick(showSidebar, sidebarRef, handleSidebarClose);
 
   useEffect(() => {
     setShowSidebar(isOpen);
@@ -158,8 +159,10 @@ const SidebarLayout = ({
   }, [viewMode]);
 
   useEffect(() => {
-    if (currentPath.current !== location.pathname) handleClose();
+    if (currentPath.current !== location.pathname) handleSidebarClose();
   }, [currentPath.current, location.pathname]);
+
+  useGobackBlocking(handleSidebarClose);
 
   if (!isOpen) return null;
 
@@ -183,7 +186,7 @@ const SidebarLayout = ({
       <SidebarHeader>
         <span className="text-lg font-semibold">{title}</span>
         <button
-          onClick={handleClose}
+          onClick={handleSidebarClose}
           className={cn(
             "absolute p-1 border-0 hover:opacity-70 transition",
             align === "left" && "left-4",
@@ -200,15 +203,17 @@ const SidebarLayout = ({
 
       <SidebarContent>
         {body}
-        <div
-          onMouseDown={handleMouseDown}
-          onClick={resetWidth}
-          className={cn(
-            "opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 top-0",
-            align === "left" && "right-0",
-            align === "right" && "left-0",
-          )}
-        />
+        {resizeable && (
+          <div
+            onMouseDown={handleMouseDown}
+            onClick={resetWidth}
+            className={cn(
+              "opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 top-0",
+              align === "left" && "right-0",
+              align === "right" && "left-0",
+            )}
+          />
+        )}
       </SidebarContent>
 
       <SidebarFooter>{footer}</SidebarFooter>

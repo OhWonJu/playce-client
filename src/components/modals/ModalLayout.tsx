@@ -14,6 +14,7 @@ import {
   ModalFooter,
 } from "./ModalLayout.styles";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
+import { useGobackBlocking } from "@/hooks/useGobackBlocking";
 
 interface ModalLayoutProps {
   title?: string;
@@ -44,7 +45,7 @@ const ModalLayout = ({
   const containerRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const currentPath = useRef(location.pathname);
 
-  const handleClose = useCallback(() => {
+  const handleModalClose = useCallback(() => {
     if (disabled) return;
 
     setShowModal(false);
@@ -56,13 +57,13 @@ const ModalLayout = ({
   const handleKey = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        return handleClose();
+        return handleModalClose();
       }
     },
     [onClose],
   );
 
-  useOutsideClick(showModal, containerRef, handleClose);
+  useOutsideClick(showModal, containerRef, handleModalClose);
 
   useEffect(() => {
     setShowModal(isOpen);
@@ -83,8 +84,10 @@ const ModalLayout = ({
   }, [handleKey]);
 
   useEffect(() => {
-    if (currentPath.current !== location.pathname) handleClose();
+    if (currentPath.current !== location.pathname) handleModalClose();
   }, [currentPath.current, location.pathname]);
+
+  useGobackBlocking(handleModalClose);
 
   if (!isOpen) return null;
 
@@ -104,7 +107,7 @@ const ModalLayout = ({
           <ModalHeader>
             <span className="text-lg font-semibold">{title}</span>
             <button
-              onClick={handleClose}
+              onClick={handleModalClose}
               className="p-1 border-0 hover:opacity-70 transition absolute right-4"
             >
               <Cross className="w-6 h-6" strokeWidth={2} />

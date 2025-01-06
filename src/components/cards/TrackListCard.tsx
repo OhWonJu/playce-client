@@ -59,7 +59,7 @@ const TrackListCard = ({ index, data, isOwn }: TrackListCardProps) => {
       {/* COL-2 */}
       <div className="flex flex-col">
         <span className="font-bold truncate">{data.trackTitle}</span>
-        <span className="font-medium text-xs text-primary-foreground truncate">
+        <span className="font-semibold text-xs text-primary-foreground truncate">
           {data.artistName} • {convertTime(data.trackTime, "string")}
         </span>
       </div>
@@ -84,7 +84,7 @@ const TrackListCard = ({ index, data, isOwn }: TrackListCardProps) => {
             useRipple
             size="icon"
             onClick={handlePlaylistAddActionClick}
-             title="utility"
+            title="utility"
             className="p-2 rounded-full"
           >
             <DotMenu className="w-4 h-4" />

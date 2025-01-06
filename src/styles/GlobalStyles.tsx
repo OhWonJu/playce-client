@@ -1,12 +1,16 @@
 import styled, { createGlobalStyle, css } from "styled-components";
 import tw, { GlobalStyles as BaseStyles } from "twin.macro";
 
+import "./pretendard.css";
+
 import { NAV_HEIGHT, PLAYER_HEADER_HEIGHT } from "@/constants/uiSizes";
 
 const Styles = css`
-  html {
-    font-family: "Noto Sans Korean", "Helvetica Neue", sans-serif;
-    font-display: swap;
+  body {
+    font-family: "Pretendard Variable", Pretendard, -apple-system,
+      BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+      "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -25,6 +29,7 @@ const Styles = css`
     background-color: var(--background);
     color: var(--primary);
     user-select: none;
+    font-weight: 500;
   }
 `;
 
@@ -43,7 +48,7 @@ export const PlayableContainer = styled.main`
   padding-top: ${NAV_HEIGHT * 2}px;
   padding-bottom: ${NAV_HEIGHT * 2 + PLAYER_HEADER_HEIGHT}px;
 
-  ${tw`flex flex-col max-h-full`}
+  ${tw`flex flex-col`}
 `;
 
 export default GlobalStyles;

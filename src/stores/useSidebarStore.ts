@@ -1,4 +1,3 @@
-import { Track } from "@/types";
 import { create } from "zustand";
 
 export type SidebarType = "my" | "setting";

@@ -23,8 +23,10 @@ const MySidebar = () => {
   const [_, setExpiredAt] = useLocalStorage("playce_expired_at");
 
   const navigate = useNavigate();
+
   const isOpen = useSidebar(state => state.isOpen);
   const onClose = useSidebar(state => state.onClose);
+
   const onOpen = useModal(state => state.onOpen);
 
   const { image, nickName } = useMeStore();
@@ -38,6 +40,11 @@ const MySidebar = () => {
       setExpiredAt("");
     },
   });
+
+  const cartClickHandler = () => {
+    onClose();
+    setTimeout(() => onOpen("cart"), 10);
+  };
 
   const bodyContent = (
     <div className="w-full flex flex-col space-y-4">
@@ -86,7 +93,7 @@ const MySidebar = () => {
 
       <Button
         variant="plain"
-        onClick={() => onOpen("cart")}
+        onClick={cartClickHandler}
         className="justify-start items-center gap-x-2 hover:bg-accent"
       >
         <span>나의 장바구니 </span>
@@ -132,7 +139,7 @@ const MySidebar = () => {
       title=""
       align="right"
       isOpen={isOpen}
-      onClose={() => onClose()}
+      onClose={onClose}
       body={bodyContent}
       footer={footerContent}
     />

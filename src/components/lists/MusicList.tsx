@@ -52,7 +52,7 @@ export const MusicList = ({
           <span
             role="button"
             onClick={hasMoreAction}
-            className="text-primary-foreground font-semibold text-sm p-1"
+            className="text-primary-foreground text-sm p-1"
           >
             더보기
           </span>
