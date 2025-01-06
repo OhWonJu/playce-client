@@ -50,18 +50,16 @@ const CreatePlaylistModal = () => {
     mutationFn: async (data: CreatePlaylistRequest) =>
       await createNewPlaylist(data),
     onSuccess: () => {
-      console.log("SUCCESS");
       form.reset();
       queryClient.invalidateQueries({
         queryKey: playlistsQueryKeys.playlists(id),
       });
       onClose();
       if (data.createPlayListData.fromPlaylist) {
-        onOpen("playlist");
+        setTimeout(() => onOpen("playlist"), 10);
       }
     },
     onError: () => {
-      console.log("FAILED");
       form.reset();
     },
   });

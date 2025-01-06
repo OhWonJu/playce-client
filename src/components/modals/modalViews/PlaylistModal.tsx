@@ -144,11 +144,15 @@ const PlaylistModal = () => {
 
   const handleCreateClick = () => {
     onClose();
-    onOpen("createPlaylist", {
-      createPlayListData: {
-        fromPlaylist: true,
-      },
-    });
+    setTimeout(
+      () =>
+        onOpen("createPlaylist", {
+          createPlayListData: {
+            fromPlaylist: true,
+          },
+        }),
+      10,
+    );
   };
 
   const bodyContent = (
